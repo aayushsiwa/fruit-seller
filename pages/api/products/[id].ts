@@ -23,7 +23,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     }
 
     if (req.method === "PUT") {
-        const { name, price, description, image_id, category, quantity, discount, is_seasonal } = req.body;
+        const { name, price, description, image, category, quantity, discount, is_seasonal } = req.body;
 
         if (!name || !price || !category || quantity == null) {
             return res.status(400).json({ error: "Missing required fields" });
@@ -35,7 +35,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
                 name,
                 price,
                 description,
-                image_id,
+                image,
                 category,
                 quantity,
                 discount: discount || 0,

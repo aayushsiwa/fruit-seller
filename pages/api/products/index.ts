@@ -1,31 +1,17 @@
 import { NextApiRequest, NextApiResponse } from "next";
 import { getServerSession } from "next-auth/next";
 import { supabase } from "@/lib/supabase";
-import Nextauth from "../auth/[...nextauth]";
-
-type SessionUser = {
-    role?: string;
-};
-
-type Session = {
-    user?: SessionUser;
-};
+import { authOptions } from "../auth/[...nextauth]";
+import { SessionUser } from "@/types";
 
 export default async function handler(
     req: NextApiRequest,
     res: NextApiResponse
 ) {
-    const session = (await getServerSession(
-        req,
-        res,
-        Nextauth.authOptions
-    )) as Session;
+    const session = (await getServerSession(req, res, authOptions)) as SessionUser;
 
-    // console.log("Unauthorized access attempt:", session?.user);
-    // GET all or featured products
     if (req.method === "GET") {
         const { featured, category, sort, related, search } = req.query;
-        console.log("Search query:", search);
         let query = supabase.from("fruitsellerproducts").select("*");
 
         if (featured) {
@@ -42,15 +28,12 @@ export default async function handler(
             }
         }
         if (search) {
-            // console.log("Search query:", search);
-            // query = query.ilike("name", `%${search}%`);
-            // handle search for name, category, and description
-            query = query.or(`name.ilike.%${search}%, category.ilike.%${search}%, description.ilike.%${search}%`);
-            // console.log("Search query:", query);
+            query = query.or(
+                `name.ilike.%${search}%, category.ilike.%${search}%, description.ilike.%${search}%`
+            );
         }
 
         if (related && typeof related === "string") {
-            // Fetch the related product to get its category
             const { data: relatedProduct, error: relatedError } = await supabase
                 .from("fruitsellerproducts")
                 .select("category")
@@ -58,18 +41,11 @@ export default async function handler(
                 .single();
 
             if (relatedError || !relatedProduct) {
-                console.log(
-                    "Related product not found:",
-                    related,
-                    relatedError
-                );
                 return res
                     .status(400)
                     .json({ error: "Related product not found" });
             }
 
-            console.log("Related product ID:", related);
-            console.log("Related product category:", relatedProduct.category);
             query = query.eq("category", relatedProduct.category);
             query = query.not("id", "eq", related);
         }
@@ -80,17 +56,14 @@ export default async function handler(
             console.error("Supabase GET error:", error);
             return res.status(500).json({ error: "Failed to fetch products" });
         }
-        console.log("Fetched products:", data.length);
         return res.status(200).json(data);
     }
 
-    // POST new product (admin or seller only)
     if (req.method === "POST") {
         if (
             !session ||
-            !["admin", "seller"].includes(session.user?.role || "")
+            !["admin", "seller"].includes(session.user.role || "")
         ) {
-            console.log("Unauthorized access attempt:", session?.user);
             return res.status(403).json({ error: "Unauthorized" });
         }
 
@@ -98,7 +71,7 @@ export default async function handler(
             name,
             price,
             description,
-            image_id,
+            image,
             category,
             quantity,
             discount,
@@ -115,7 +88,7 @@ export default async function handler(
                 name,
                 price,
                 description,
-                image_id,
+                image,
                 category,
                 quantity,
                 discount: discount || 0,
@@ -131,7 +104,6 @@ export default async function handler(
         return res.status(201).json(data);
     }
 
-    // PUT update product (admin or seller only)
     if (req.method === "PUT") {
         if (
             !session ||
@@ -145,7 +117,7 @@ export default async function handler(
             name,
             price,
             description,
-            image_id,
+            image,
             category,
             quantity,
             discount,
@@ -162,7 +134,7 @@ export default async function handler(
                 name,
                 price,
                 description,
-                image_id,
+                image,
                 category,
                 quantity,
                 discount: discount || 0,

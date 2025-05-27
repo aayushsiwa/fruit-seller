@@ -1,12 +1,3 @@
-// import { encode } from 'next-auth/jwt';
-
-
-// export const generateJWT = (email: string, role: string) =>
-//   encode({ email, role }, process.env.JWT_SECRET!, { expiresIn: '7d' })
-//   // jwt.sign({ email, role }, process.env.JWT_SECRET!, { expiresIn: '7d' });
-
-// export const verifyJWT = (token: string) => jwt.verify(token, process.env.JWT_SECRET!);
-
 import bcrypt from "bcryptjs";
 import { encode, decode } from "next-auth/jwt";
 
@@ -30,6 +21,5 @@ export const verifyJWT = async (token: string) => {
         token,
         secret: JWT_SECRET,
     });
-    // decoded is like { email, role, iat, exp } inside `decoded.token`
     return decoded?.token ?? null;
 };

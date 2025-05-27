@@ -1,4 +1,3 @@
-// pages/api/orders/[orderId].ts
 import type { NextApiRequest, NextApiResponse } from "next";
 import { getSession } from "next-auth/react";
 import { supabase } from "@/lib/supabase";
@@ -9,7 +8,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     }
 
     const session = await getSession({ req });
-    if (!session || !session.user.id) {
+    if (!session || !session.user) {
         return res.status(401).json({ error: "Unauthorized" });
     }
 
@@ -20,7 +19,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
             .from("orders")
             .select("*")
             .eq("id", orderId)
-            .eq("user_id", session.user.id)
+            .eq("user_email", session.user.email)
             .single();
 
         if (error || !order) {

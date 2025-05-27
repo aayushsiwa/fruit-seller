@@ -9,46 +9,22 @@ import {
     IconButton,
     TextField,
 } from "@mui/material";
-import { useRouter } from "next/router";
-import { useCart } from "../contexts/CartContext";
 import { FiShoppingCart, FiPlus, FiMinus } from "react-icons/fi";
-import { ItemType } from "@/types/types";
+import { ItemType } from "@/types";
 import { motion } from "framer-motion";
+import { currency, defaultImage } from "@/config";
+import useProductCard from "@/hooks/useProductCard";
 
 const ProductCard = ({ product }: { product: ItemType }) => {
-    const router = useRouter();
-    const { cart, addToCart, updateQuantity, removeFromCart } = useCart();
-    const cartItem = cart.find((item) => item.product_id === product.id);
-    const cartQuantity = cartItem ? cartItem.quantity : 0;
-
-    // Debug logs
-    // console.log("ProductCard - Product ID:", product.id);
-    // console.log("ProductCard - Cart Item:", cartItem);
-    // console.log("ProductCard - Cart Quantity:", cartQuantity);
-
-    const discountedPrice = product.discount
-        ? product.price * (1 - product.discount / 100)
-        : null;
-
-    const isOutOfStock = product.quantity === 0;
-
-    const handleAddToCart = (e: React.MouseEvent) => {
-        e.stopPropagation();
-        addToCart(product, 1);
-    };
-
-    const handleQuantityChange = (e: React.MouseEvent, newQuantity: number) => {
-        e.stopPropagation();
-        if (newQuantity <= 0) {
-            removeFromCart(product.id);
-        } else if (newQuantity <= product.quantity) {
-            updateQuantity(product.id, newQuantity, product.quantity);
-        }
-    };
-
-    const handleViewDetails = () => {
-        router.push(`/products/${product.id}`);
-    };
+    const {
+        isOutOfStock,
+        handleAddToCart,
+        handleQuantityChange,
+        handleViewDetails,
+        handleInputChange,
+        cartQuantity,
+        discountedPrice,
+    } = useProductCard(product);
 
     return (
         <Card
@@ -59,8 +35,6 @@ const ProductCard = ({ product }: { product: ItemType }) => {
                 flexDirection: "column",
                 justifyContent: "space-between",
                 transition: "transform 0.2s, box-shadow 0.2s",
-                // opacity: isOutOfStock ? 0.6 : 1,
-                // filter: isOutOfStock ? "grayscale(50%)" : "none",
                 "&:hover": {
                     transform: isOutOfStock ? "none" : "translateY(-4px)",
                     boxShadow: isOutOfStock
@@ -78,8 +52,9 @@ const ProductCard = ({ product }: { product: ItemType }) => {
             <CardMedia
                 component="img"
                 height="160"
-                image={product.image || "/placeholder-fruit.jpg"}
+                image={product.image || defaultImage}
                 alt={product.name}
+                loading="lazy"
                 sx={{ objectFit: "cover" }}
             />
 
@@ -95,7 +70,7 @@ const ProductCard = ({ product }: { product: ItemType }) => {
                         variant="h6"
                         fontWeight={600}
                         noWrap
-                        title={product.name} // tooltip on hover
+                        title={product.name}
                         sx={{
                             overflow: "hidden",
                             textOverflow: "ellipsis",
@@ -120,24 +95,26 @@ const ProductCard = ({ product }: { product: ItemType }) => {
                         sx={{
                             display: "flex",
                             flexDirection: "column",
-                            // gap: 1,
                             alignItems: "start",
                         }}
                     >
                         <Typography variant="h6" color="green" fontWeight={700}>
-                            Rs. {discountedPrice.toFixed(2)}
+                            {currency}
+                            {discountedPrice.toFixed(2)}
                         </Typography>
                         <Typography
                             variant="body2"
                             color="text.secondary"
                             sx={{ textDecoration: "line-through" }}
                         >
-                            Rs. {product.price.toFixed(2)}
+                            {currency}
+                            {product.price.toFixed(2)}
                         </Typography>
                     </Box>
                 ) : (
                     <Typography variant="h6" fontWeight={700}>
-                        Rs. {product.price.toFixed(2)}
+                        {currency}
+                        {product.price.toFixed(2)}
                     </Typography>
                 )}
 
@@ -151,7 +128,7 @@ const ProductCard = ({ product }: { product: ItemType }) => {
                         WebkitLineClamp: 2,
                         WebkitBoxOrient: "vertical",
                         overflow: "hidden",
-                        minHeight: 40, // ensures space even if short
+                        minHeight: 40,
                     }}
                 >
                     {product.description}
@@ -185,25 +162,10 @@ const ProductCard = ({ product }: { product: ItemType }) => {
                             <FiMinus />
                         </IconButton>
                         <TextField
+                            onClick={(e) => e.stopPropagation()}
                             value={cartQuantity}
                             onChange={(e) => {
-                                e.stopPropagation();
-                                const value = Number.parseInt(e.target.value);
-                                if (
-                                    !isNaN(value) &&
-                                    value >= 0 &&
-                                    value <= product.quantity
-                                ) {
-                                    if (value === 0) {
-                                        removeFromCart(product.id);
-                                    } else {
-                                        updateQuantity(
-                                            product.id,
-                                            value,
-                                            product.quantity
-                                        );
-                                    }
-                                }
+                                handleInputChange(e);
                             }}
                             inputProps={{
                                 min: 0,

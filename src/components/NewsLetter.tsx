@@ -10,41 +10,16 @@ import {
 } from "@mui/material";
 import { FiMail } from "react-icons/fi";
 import { motion } from "framer-motion";
-import { Formik, Form, Field, ErrorMessage } from "formik";
-import * as Yup from "yup";
+import { Formik, Form, Field, FieldProps } from "formik";
+import { NewsletterSchema } from "@/lib/validation/newsletterSchema";
+import useNewsletter from "@/hooks/useNewsletter";
 
-// Validation schema using Yup
-const NewsletterSchema = Yup.object().shape({
-    email: Yup.string()
-        .email("Please enter a valid email address")
-        .required("Email is required"),
-});
-
-const Newsletter = () => {
-    const [newsletterStatus, setNewsletterStatus] = React.useState<null | "success" | "error">(null);
-
-    const handleNewsletterSubmit = async (
-        values: { email: string },
-        { setSubmitting, resetForm }: { setSubmitting: (isSubmitting: boolean) => void; resetForm: () => void }
-    ) => {
-        try {
-            // Here you would typically make an API call to subscribe the user
-            // For demonstration, we'll simulate a successful submission
-            await new Promise((resolve) => setTimeout(resolve, 1000));
-
-            setNewsletterStatus("success");
-            resetForm();
-        } catch (error) {
-            console.error("Error submitting newsletter subscription:", error);
-            setNewsletterStatus("error");
-        } finally {
-            setSubmitting(false);
-        }
-    };
+export default function Newsletter() {
+    const { newsletterStatus, handleNewsletterSubmit } = useNewsletter();
 
     return (
         <Grid>
-            <Container >
+            <Container>
                 <Box
                     sx={{
                         textAlign: "center",
@@ -87,7 +62,7 @@ const Newsletter = () => {
                         validationSchema={NewsletterSchema}
                         onSubmit={handleNewsletterSubmit}
                     >
-                        {({ isSubmitting }) => (
+                        {({ isSubmitting, errors, touched }) => (
                             <Form>
                                 <Box
                                     sx={{
@@ -97,36 +72,28 @@ const Newsletter = () => {
                                         mx: "auto",
                                         flexDirection: {
                                             xs: "column",
-                                            // sm: "row",
+                                            sm: "row",
                                         },
-                                        alignItems: "center",
+                                        alignItems: {
+                                            xs: "stretch",
+                                            sm: "center",
+                                        },
                                         justifyContent: "center",
                                     }}
                                 >
                                     <Box
                                         sx={{
                                             width: "100%",
-                                            display: "flex",
-                                            gap: 2,
-                                            maxWidth: 500,
-                                            mx: "auto",
-                                            flexDirection: {
-                                                xs: "column",
-                                                sm: "row",
-                                            },
-                                            alignItems: "center",
-                                            justifyContent: "center",
+                                            position: "relative",
                                         }}
                                     >
                                         <Field name="email">
-                                            {({ field }: import('formik').FieldProps) => (
+                                            {({ field }: FieldProps) => (
                                                 <TextField
                                                     {...field}
                                                     variant="outlined"
                                                     placeholder="Enter your email"
                                                     fullWidth
-                                                    // error={Boolean(errors.email && touched.email)}
-                                                    // helperText={touched.email && errors.email}
                                                     sx={{
                                                         bgcolor: "white",
                                                         borderRadius: 1,
@@ -147,67 +114,75 @@ const Newsletter = () => {
                                                             />
                                                         ),
                                                     }}
+                                                    error={
+                                                        touched.email &&
+                                                        !!errors.email
+                                                    }
                                                 />
                                             )}
                                         </Field>
-                                        <motion.div
-                                            whileHover={{ scale: 1.05 }}
-                                            whileTap={{ scale: 0.95 }}
-                                        >
-                                            <Button
-                                                variant="contained"
-                                                color="secondary"
-                                                type="submit"
-                                                disabled={isSubmitting}
-                                                sx={{ px: 4, py: 1.5 }}
-                                            >
-                                                {isSubmitting
-                                                    ? "Submitting..."
-                                                    : "Subscribe"}
-                                            </Button>
-                                        </motion.div>
-                                    </Box>
-
-                                    <ErrorMessage name="email">
-                                        {(msg) => (
-                                            <Typography
-                                                variant="body2"
-                                                // color="error"
+                                        {touched.email && errors.email && (
+                                            <Alert
+                                                severity="error"
                                                 sx={{
                                                     mt: 1,
-                                                    color: "white",
-                                                    textAlign: "left",
+                                                    bgcolor:
+                                                        "rgba(255, 235, 238, 0.9)",
+                                                    color: "error.main",
+                                                    borderRadius: 1,
+                                                    py: 0.5,
+                                                    fontSize: "0.875rem",
                                                 }}
                                             >
-                                                {msg}
-                                            </Typography>
+                                                {errors.email}
+                                            </Alert>
                                         )}
-                                    </ErrorMessage>
+                                    </Box>
+                                    <motion.div
+                                        whileHover={{ scale: 1.05 }}
+                                        whileTap={{ scale: 0.95 }}
+                                    >
+                                        <Button
+                                            variant="contained"
+                                            color="secondary"
+                                            type="submit"
+                                            disabled={isSubmitting}
+                                            sx={{
+                                                px: 4,
+                                                py: 1.5,
+                                                minWidth: {
+                                                    xs: "100%",
+                                                    sm: "auto",
+                                                },
+                                            }}
+                                        >
+                                            {isSubmitting
+                                                ? "Submitting..."
+                                                : "Subscribe"}
+                                        </Button>
+                                    </motion.div>
                                 </Box>
                             </Form>
                         )}
                     </Formik>
 
-                    {newsletterStatus === "success" && (
+                    {newsletterStatus && (
                         <Alert
-                            severity="success"
-                            sx={{ mt: 2, maxWidth: 500, mx: "auto" }}
+                            severity={newsletterStatus}
+                            sx={{
+                                mt: 2,
+                                maxWidth: 500,
+                                mx: "auto",
+                                borderRadius: 1,
+                            }}
                         >
-                            Thank you for subscribing!
-                        </Alert>
-                    )}
-                    {newsletterStatus === "error" && (
-                        <Alert
-                            severity="error"
-                            sx={{ mt: 2, maxWidth: 500, mx: "auto" }}
-                        >
-                            Failed to subscribe. Please try again.
+                            {newsletterStatus === "success"
+                                ? "Thank you for subscribing!"
+                                : "Failed to subscribe. Please try again."}
                         </Alert>
                     )}
                 </Box>
             </Container>
         </Grid>
     );
-};
-
-export default Newsletter;
+}

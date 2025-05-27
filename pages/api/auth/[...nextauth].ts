@@ -1,28 +1,20 @@
-// pages/api/auth/[...nextauth].ts
 import NextAuth from "next-auth";
 import GoogleProvider from "next-auth/providers/google";
 import CredentialsProvider from "next-auth/providers/credentials";
 import { supabase } from "@/lib/supabase";
 import { comparePassword } from "@/lib/auth";
-// import { Session, User } from "@/types/types";
+import type { AuthOptions } from "next-auth";
 
-import type { DefaultSession } from "next-auth";
-
-declare module "next-auth" {
-  interface Session {
-    user: DefaultSession["user"] & {
-      id?: string;
-      role?: string;
-      cart_id?: string;
-    };
-  }
-}
-
-export default NextAuth({
+export const authOptions: AuthOptions = {
     providers: [
         GoogleProvider({
             clientId: process.env.GOOGLE_CLIENT_ID!,
             clientSecret: process.env.GOOGLE_CLIENT_SECRET!,
+            authorization: {
+                params: {
+                    scope: "openid email profile",
+                },
+            },
         }),
         CredentialsProvider({
             name: "Credentials",
@@ -32,6 +24,7 @@ export default NextAuth({
             },
             async authorize(credentials) {
                 if (!credentials?.email || !credentials?.password) {
+                    console.log("Missing credentials");
                     return null;
                 }
 
@@ -43,6 +36,7 @@ export default NextAuth({
                         .single();
 
                     if (error || !user) {
+                        console.log("User not found or query error:", error);
                         return null;
                     }
 
@@ -52,50 +46,40 @@ export default NextAuth({
                     );
 
                     if (!isValid) {
+                        console.log("Invalid password");
                         return null;
                     }
 
-                    // Return user without password
                     const safeUser = { ...user };
                     delete safeUser.password;
                     return safeUser;
                 } catch (error) {
-                    console.error("Login error:", error);
+                    console.error("Authorize error:", error);
                     return null;
                 }
             },
         }),
     ],
+
     callbacks: {
         async signIn({ user, account }) {
             try {
-                // For Google authentication
                 if (account?.provider === "google") {
-                    // First check if user already exists in our DB
+                    console.log("Google Sign-In: Checking user", user.email);
                     const { data: existingUser, error } = await supabase
                         .from("fruitsellerusers")
                         .select("*")
                         .eq("email", user.email!)
                         .single();
 
-                    // Error could be "No rows found" which is fine for new users
-                    const userExists = !error && existingUser;
+                    if (error && error.code !== "PGRST116") {
+                        console.error("Supabase query error:", error);
+                        return false;
+                    }
 
-                    // If user doesn't exist in our DB, create them
+                    const userExists = !!existingUser;
+
                     if (!userExists) {
-                        // Create a new empty cart
-                        const { data: cart, error: cartError } = await supabase
-                            .from("carts")
-                            .insert({})
-                            .select()
-                            .single();
-
-                        if (cartError) {
-                            console.error("Failed to create cart:", cartError);
-                            return false;
-                        }
-
-                        // Create new user in Supabase
                         const { error: userError } = await supabase
                             .from("fruitsellerusers")
                             .insert({
@@ -105,19 +89,14 @@ export default NextAuth({
                                     user.name?.split(" ").slice(1).join(" ") ||
                                     "",
                                 role: "buyer",
-                                cart_id: cart.id,
-                                oauth_provider: "google",
-                                oauth_id: user.id,
+                                provider: "google",
+                                provider_id: user.id,
                             });
 
                         if (userError) {
                             console.error("Failed to create user:", userError);
                             return false;
                         }
-
-                        console.log(
-                            "Created new user in Supabase from Google auth"
-                        );
                     }
                 }
                 return true;
@@ -128,17 +107,17 @@ export default NextAuth({
         },
 
         async jwt({ token, user, account }) {
-            // Initial sign in
             if (user && account) {
-                // After successful authentication, fetch user data from Supabase
-                // to ensure we have the latest user data including the Supabase ID
-                const { data: supabaseUser } = await supabase
+                console.log("JWT callback: Fetching user", user.email);
+                const { data: supabaseUser, error } = await supabase
                     .from("fruitsellerusers")
                     .select("*")
                     .eq("email", user.email!)
                     .single();
 
-                if (supabaseUser) {
+                if (error) {
+                    console.error("JWT callback error:", error);
+                } else if (supabaseUser) {
                     token.id = supabaseUser.id;
                     token.role = supabaseUser.role;
                     token.cart_id = supabaseUser.cart_id;
@@ -152,20 +131,59 @@ export default NextAuth({
 
         async session({ session, token }) {
             if (token && session.user) {
-                // Add custom fields from JWT token to session
-                session.user.id = token.id as string;
                 session.user.role = token.role as string;
                 session.user.cart_id = token.cart_id as string;
             }
             return session;
         },
     },
+
     pages: {
         signIn: "/login",
+        error: "/auth/error",
     },
+
     session: {
         strategy: "jwt",
         maxAge: 7 * 24 * 60 * 60, // 7 days
     },
+
     secret: process.env.NEXTAUTH_SECRET,
-});
+
+    debug: process.env.NODE_ENV === "development",
+
+    cookies: {
+        state: {
+            name: `next-auth.state`,
+            options: {
+                httpOnly: true,
+                sameSite: "lax",
+                path: "/",
+                secure: process.env.NODE_ENV === "production",
+                maxAge: 15 * 60,
+            },
+        },
+        callbackUrl: {
+            name: `next-auth.callback-url`,
+            options: {
+                httpOnly: true,
+                sameSite: "lax",
+                path: "/",
+                secure: process.env.NODE_ENV === "production",
+                maxAge: 15 * 60,
+            },
+        },
+        csrfToken: {
+            name: `next-auth.csrf-token`,
+            options: {
+                httpOnly: true,
+                sameSite: "lax",
+                path: "/",
+                secure: process.env.NODE_ENV === "production",
+                maxAge: 15 * 60,
+            },
+        },
+    },
+};
+
+export default NextAuth(authOptions);

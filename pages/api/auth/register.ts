@@ -11,14 +11,13 @@ export default async function handler(
     return res.status(405).json({ message: 'Method Not Allowed' });
   }
 
-  const { email, password, first_name, last_name, role } = req.body;
+  const { email, password, firstName, lastName, role } = req.body;
 
-  if (!email || !password || !first_name || !last_name) {
+  if (!email || !password || !firstName || !lastName) {
     return res.status(400).json({ message: 'Missing required fields' });
   }
 
   try {
-    // Check if user already exists
     const { data: existing, error: existingError } = await supabase
       .from('fruitsellerusers')
       .select('email')
@@ -33,29 +32,16 @@ export default async function handler(
       return res.status(500).json({ message: 'Error checking user', details: existingError });
     }
 
-    // Hash password
     const hashed = await hashPassword(password);
 
-    // Create a new empty cart
-    // const { data: cart, error: cartError } = await supabase
-    //   .from('carts')
-    //   .insert({})
-    //   .select()
-    //   .single();
-
-    // if (cartError) {
-    //   return res.status(500).json({ message: 'Failed to create cart', cartError });
-    // }
-
-    // Create user
     const { error: insertError } = await supabase
       .from('fruitsellerusers')
       .insert({
         email,
         password: hashed,
-        first_name,
-        last_name,
-        role: role || 'buyer', // Default to 'buyer' if no role is provided
+        first_name:firstName,
+        last_name:lastName,
+        role: role || 'buyer',
       });
 
     if (insertError) {
@@ -64,7 +50,7 @@ export default async function handler(
 
     const token = await generateJWT(email, role);
     
-    return res.status(201).json({ success: true, token: token, user: { email, first_name, last_name, role: role || "buyer" } });
+    return res.status(201).json({ success: true, token: token, user: { email, firstName, lastName, role: role || "buyer" } });
 
     
   } catch (error) {

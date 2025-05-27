@@ -11,10 +11,9 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         return res.status(401).json({ message: "Unauthorized: Please log in" });
     }
 
-    // Handle GET request (get cart)
     if (req.method === "GET") {
         if (!userId) {
-            return res.status(200).json([]); // Guest users get empty cart (handled client-side)
+            return res.status(200).json([]);
         }
 
         const { data, error } = await supabase
@@ -35,7 +34,6 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         return res.status(200).json(cart);
     }
 
-    // Handle POST request (add item to cart)
     if (req.method === "POST") {
         const { product_id, quantity } = req.body;
 
@@ -43,7 +41,6 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
             return res.status(400).json({ error: "Invalid product ID or quantity" });
         }
 
-        // Verify product exists and has sufficient stock
         const { data: product, error: productError } = await supabase
             .from("fruitsellerproducts")
             .select("quantity")
@@ -57,7 +54,6 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
             return res.status(400).json({ error: "Insufficient stock" });
         }
 
-        // Check if item already exists in cart
         const { data: existingItem, error: fetchError } = await supabase
             .from("cart_items")
             .select("*")
@@ -103,7 +99,6 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         }
     }
 
-    // Handle PUT request (update item quantity)
     if (req.method === "PUT") {
         const { product_id, quantity } = req.body;
 
@@ -111,7 +106,6 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
             return res.status(400).json({ error: "Invalid product ID or quantity" });
         }
 
-        // Verify product exists and has sufficient stock
         const { data: product, error: productError } = await supabase
             .from("fruitsellerproducts")
             .select("quantity")
@@ -140,7 +134,6 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         return res.status(200).json(data);
     }
 
-    // Handle DELETE request (remove item from cart)
     if (req.method === "DELETE") {
         const { product_id } = req.query;
 
