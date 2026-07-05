@@ -16,7 +16,8 @@ import {
     Chip,
 } from "@mui/material";
 import { FiPlus, FiEdit2, FiTrash2 } from "react-icons/fi";
-import { ItemType, ProductsTabProps } from "@/types";
+import { ItemType, ProductsTabProps } from "@/types/index";
+import { currency } from "@/constants";
 
 const ProductsTab: React.FC<ProductsTabProps> = ({
     products,
@@ -128,7 +129,8 @@ const ProductsTab: React.FC<ProductsTabProps> = ({
                                             {product.category}
                                         </TableCell>
                                         <TableCell align="right">
-                                            ${product.price.toFixed(2)}
+                                            {currency}
+                                            {product.price.toFixed(2)}
                                         </TableCell>
                                         <TableCell align="center">
                                             <Chip

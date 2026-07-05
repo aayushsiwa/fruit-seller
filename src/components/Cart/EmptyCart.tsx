@@ -1,7 +1,7 @@
 import { Box, Typography, Button } from "@mui/material";
 import { FiShoppingCart } from "react-icons/fi";
 import { motion } from "framer-motion";
-import { EmptyCartProps } from "@/types";
+import { EmptyCartProps } from "@/types/index";
 
 export const EmptyCart: React.FC<EmptyCartProps> = ({
     handleContinueShopping,

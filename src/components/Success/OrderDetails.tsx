@@ -1,8 +1,8 @@
 import { Box, Typography, Divider, Paper } from "@mui/material";
 import Image from "next/image";
 import { motion } from "framer-motion";
-import { OrderDetailsProps, CartItem } from "@/types";
-import { currency, defaultImage } from "@/config";
+import { OrderDetailsProps, CartItem } from "@/types/index";
+import { currency, defaultImage } from "@/constants/index";
 
 export const OrderDetails: React.FC<OrderDetailsProps> = ({
     order,

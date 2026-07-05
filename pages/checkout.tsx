@@ -5,9 +5,11 @@ import { useCheckout } from "@/hooks/useCheckout";
 import { OrderSummary } from "@/src/components/Checkout/OrderSummary";
 import { EmptyCheckout } from "@/src/components/Checkout/EmptyCheckout";
 import { LoadingScreen } from "@/src/components/LoadingScreen";
+import { useCheckoutStyles } from "./checkout.styles";
 
 export default function Checkout() {
     const router = useRouter();
+    const classes = useCheckoutStyles();
     const {
         cart,
         products,
@@ -31,11 +33,11 @@ export default function Checkout() {
 
     return (
         <Container maxWidth="lg">
-            <Box sx={{ py: 4 }}>
+            <Box className={classes.root}>
                 <Typography
                     variant="h4"
                     gutterBottom
-                    sx={{ fontWeight: 600, mb: 4 }}
+                    className={classes.title}
                     component={motion.div}
                     initial={{ opacity: 0, y: -20 }}
                     animate={{ opacity: 1, y: 0 }}
@@ -47,18 +49,18 @@ export default function Checkout() {
                 {cart.length === 0 ? (
                     <EmptyCheckout />
                 ) : isLoadingProducts ? (
-                    <Box sx={{ textAlign: "center", py: 8 }}>
+                    <Box className={classes.loadingBox}>
                         <Typography>Loading products...</Typography>
                     </Box>
                 ) : hasError ? (
-                    <Box sx={{ textAlign: "center", py: 8 }}>
+                    <Box className={classes.errorText}>
                         <Typography color="error">
                             Failed to load some product details. Please try
                             again.
                         </Typography>
                     </Box>
                 ) : (
-                    <Box sx={{ maxWidth: 600, mx: "auto" }}>
+                    <Box className={classes.summaryBox}>
                         <OrderSummary
                             cart={cart}
                             products={products}

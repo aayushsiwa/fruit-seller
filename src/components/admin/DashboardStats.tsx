@@ -2,7 +2,7 @@ import React from "react";
 import { Grid, Card, CardContent, Typography, Box } from "@mui/material";
 import { FiPackage, FiUsers, FiShoppingBag } from "react-icons/fi";
 import { FaIndianRupeeSign } from "react-icons/fa6";
-import { Order, DashboardStatsProps } from "@/types";
+import { Order, DashboardStatsProps } from "@/types/index";
 
 const DashboardStats: React.FC<DashboardStatsProps> = ({
     products,

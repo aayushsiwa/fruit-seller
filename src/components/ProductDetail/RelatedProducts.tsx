@@ -1,7 +1,7 @@
 import { Box, Typography } from "@mui/material";
 import { motion, AnimatePresence } from "framer-motion";
 import ProductCard from "@/src/components/ProductCard";
-import { RelatedProductsProps } from "@/types";
+import { RelatedProductsProps } from "@/types/index";
 
 export const RelatedProducts: React.FC<RelatedProductsProps> = ({
     relatedProducts,

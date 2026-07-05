@@ -1,6 +1,6 @@
 import React, { createContext, useContext, useState } from "react";
 import { Snackbar, Alert } from "@mui/material";
-import { SnackbarContextType, SnackbarSeverity } from "@/types";
+import { SnackbarContextType, SnackbarSeverity } from "@/types/index";
 
 const SnackbarContext = createContext<SnackbarContextType | undefined>(
     undefined

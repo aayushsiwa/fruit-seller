@@ -3,7 +3,7 @@ import { ThemeProvider } from "@mui/material/styles";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import CssBaseline from "@mui/material/CssBaseline";
 import { theme, darkTheme } from "@/src/theme";
-import { ThemeSwitchContextType } from "@/types";
+import { ThemeSwitchContextType } from "@/types/index";
 
 const ThemeSwitchContext = createContext<ThemeSwitchContextType>({
     isDarkMode: false,

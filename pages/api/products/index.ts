@@ -2,7 +2,7 @@ import { NextApiRequest, NextApiResponse } from "next";
 import { getServerSession } from "next-auth/next";
 import { supabase } from "@/lib/supabase";
 import { authOptions } from "../auth/[...nextauth]";
-import { SessionUser } from "@/types";
+import { SessionUser } from "@/types/index";
 
 export default async function handler(
     req: NextApiRequest,

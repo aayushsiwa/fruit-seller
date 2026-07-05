@@ -11,7 +11,7 @@ import {
     Select,
     MenuItem,
 } from "@mui/material";
-import { OrderDialogProps } from "@/types";
+import { OrderDialogProps } from "@/types/index";
 
 const OrderDialog: React.FC<OrderDialogProps> = ({
     open,

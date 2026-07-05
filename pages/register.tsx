@@ -18,8 +18,10 @@ import Link from "next/link";
 import { FiEye, FiEyeOff } from "react-icons/fi";
 import { TbBrandGoogle } from "react-icons/tb";
 import useRegister from "@/hooks/useRegister";
+import { useRegisterStyles } from "./register.styles";
 
 export default function Register() {
+    const classes = useRegisterStyles();
     const {
         formik,
         showPassword,
@@ -31,14 +33,14 @@ export default function Register() {
 
     return (
         <Container maxWidth="sm">
-            <Box sx={{ my: 4 }}>
-                <Paper elevation={3} sx={{ p: 4, borderRadius: 2 }}>
-                    <Box sx={{ textAlign: "center", mb: 4 }}>
+            <Box className={classes.box}>
+                <Paper elevation={3} className={classes.paper}>
+                    <Box className={classes.welcomeBox}>
                         <Typography
                             variant="h4"
                             component="h1"
                             gutterBottom
-                            sx={{ fontWeight: 700 }}
+                            className={classes.title}
                         >
                             Create an Account
                         </Typography>
@@ -251,14 +253,14 @@ export default function Register() {
                         </Grid>
                     </form>
 
-                    <Box sx={{ mt: 3, textAlign: "center" }}>
+                    <Box className={classes.signInBox}>
                         <Typography variant="body2">
                             Already have an account?{" "}
                             <Link href="/login" passHref>
                                 <MuiLink
                                     variant="body2"
                                     underline="hover"
-                                    sx={{ fontWeight: 600 }}
+                                    className={classes.signInLink}
                                     aria-label="Sign in"
                                 >
                                     Sign in
@@ -267,23 +269,19 @@ export default function Register() {
                         </Typography>
                     </Box>
 
-                    <Divider sx={{ my: 3 }}>
+                    <Divider className={classes.divider}>
                         <Typography variant="body2" color="text.secondary">
                             OR
                         </Typography>
                     </Divider>
 
                     <Box
-                        sx={{
-                            display: "flex",
-                            justifyContent: "center",
-                            gap: 2,
-                        }}
+                        className={classes.googleButtonBox}
                     >
                         <Button
                             variant="outlined"
                             startIcon={<TbBrandGoogle />}
-                            sx={{ flex: 1 }}
+                            className={classes.googleButton}
                             onClick={handleGoogleSignIn}
                             disabled={isGoogleLoading}
                             aria-label="Sign in with Google"

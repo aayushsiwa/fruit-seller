@@ -1,7 +1,7 @@
 import React from "react";
 import { render } from "@testing-library/react";
 import ProductCard from "@/src/components/ProductCard";
-import { ItemType } from "@/types";
+import { ItemType } from "@/types/index";
 
 jest.mock("next/router", () => ({
   useRouter: () => ({

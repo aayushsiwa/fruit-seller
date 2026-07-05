@@ -5,8 +5,9 @@ import { useAuth } from "@/src/contexts/AuthContext";
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { useFormik } from "formik";
+import { UseLoginReturn } from "@/types/index";
 
-const useLogin = () => {
+const useLogin = (): UseLoginReturn => {
     const router = useRouter();
     const { data: session, status } = useSession();
     const [showPassword, setShowPassword] = useState(false);

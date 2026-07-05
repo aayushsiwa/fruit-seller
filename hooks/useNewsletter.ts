@@ -1,6 +1,7 @@
+import { UseNewsletterReturn } from "@/types/index";
 import { useState } from "react";
 
-const useNewsletter = () => {
+const useNewsletter = (): UseNewsletterReturn => {
     const [newsletterStatus, setNewsletterStatus] = useState<
         "success" | "error" | null
     >(null);

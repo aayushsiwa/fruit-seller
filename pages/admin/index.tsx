@@ -9,7 +9,7 @@ import {
 } from "@mui/material";
 import { useTheme } from "@mui/material/styles";
 import { useRouter } from "next/router";
-import { TabValue } from "@/types";
+import { TabValue } from "@/types/index";
 import { useAdminData } from "@/hooks/useAdminData";
 import { useAdminActions } from "@/hooks/useAdminActions";
 import { useAdminDialogs } from "@/hooks/useAdminDialogs";
@@ -24,18 +24,20 @@ import UserDialog from "@/src/components/admin/dialogs/UserDialog";
 import OrderDialog from "@/src/components/admin/dialogs/OrderDialog";
 import ConfirmDeleteDialog from "@/src/components/admin/dialogs/ConfirmDeleteDialog";
 import { useAuth } from "@/src/contexts/AuthContext";
+import useStyles from "./index.styles";
 
-const styles = {
-    headerBox: { mb: 4 },
-    title: { fontWeight: 600 },
-    subtitle: { color: "text.secondary" },
-    error: { mt: 2 },
-    tabsBox: { mb: 3 },
-    tabs: { borderBottom: 1, borderColor: "divider" },
-};
+// const classes = {
+//     headerBox: { mb: 4 },
+//     title: { fontWeight: 600 },
+//     subtitle: { color: "text.secondary" },
+//     error: { mt: 2 },
+//     tabsBox: { mb: 3 },
+//     tabs: { borderBottom: 1, borderColor: "divider" },
+// };
 
 export default function AdminDashboard() {
     const router = useRouter();
+    const classes = useStyles();
     const theme = useTheme();
     const isMobile = useMediaQuery(theme.breakpoints.down("md"));
     const { activeTab, searchQuery, setSearchQuery, handleTabChange } =
@@ -124,20 +126,20 @@ export default function AdminDashboard() {
 
     return (
         <Container maxWidth="lg">
-            <Box sx={styles.headerBox}>
+            <Box className={classes.headerBox}>
                 <Typography
                     variant="h4"
                     component="h1"
                     gutterBottom
-                    sx={styles.title}
+                    className={classes.title}
                 >
                     Admin Dashboard
                 </Typography>
-                <Typography variant="body1" sx={styles.subtitle}>
+                <Typography variant="body1" className={classes.subtitle}>
                     Manage your products, users, and orders
                 </Typography>
                 {error && (
-                    <Typography color="error" sx={styles.error}>
+                    <Typography color="error" className={classes.error}>
                         {error}
                     </Typography>
                 )}
@@ -152,13 +154,13 @@ export default function AdminDashboard() {
                 isLoadingOrders={isLoadingOrders}
             />
 
-            <Box sx={styles.tabsBox}>
+            <Box className={classes.tabsBox}>
                 <Tabs
                     value={activeTab}
                     onChange={handleTabChange}
                     variant={isMobile ? "scrollable" : "standard"}
                     scrollButtons={isMobile}
-                    sx={styles.tabs}
+                    className={classes.tabs}
                 >
                     <Tab label="Products" />
                     <Tab label="Users" />

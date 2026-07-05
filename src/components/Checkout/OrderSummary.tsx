@@ -8,8 +8,8 @@ import {
 } from "@mui/material";
 import Image from "next/image";
 import { motion } from "framer-motion";
-import { OrderSummaryProps } from "@/types";
-import { currency, defaultImage } from "@/config";
+import { OrderSummaryProps } from "@/types/index";
+import { currency, defaultImage } from "@/constants/index";
 
 export const OrderSummary: React.FC<OrderSummaryProps> = ({
     cart,

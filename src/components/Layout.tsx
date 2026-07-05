@@ -3,7 +3,7 @@ import { Container, Box } from "@mui/material";
 import Navbar from "@/src/components/Navbar/index";
 import Footer from "@/src/components/Footer";
 import { useAuth } from "@/src/contexts/AuthContext";
-import { LayoutProps } from "@/types";
+import { LayoutProps } from "@/types/index";
 import { LoadingScreen } from "@/src/components/LoadingScreen";
 
 const Layout: React.FC<LayoutProps> = ({ children }) => {

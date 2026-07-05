@@ -1,4 +1,5 @@
-import { ItemType, User } from "@/types";
+import axios from "axios";
+import { ItemType, User,Order } from "@/types/index";
 
 export const saveProduct = async (
     productData: Partial<ItemType>,
@@ -81,4 +82,29 @@ export const updateOrderStatus = async (id: string, status: string) => {
     }
 
     return response.json();
+};
+
+
+export const fetchProducts = async (): Promise<ItemType[]> => {
+  const response = await axios.get("/api/products");
+  if (response.status !== 200) {
+    throw new Error(`Failed to fetch products: ${response.statusText}`);
+  }
+  return response.data;
+};
+
+export const fetchUsers = async (): Promise<User[]> => {
+  const response = await axios.get("/api/admin/users");
+  if (response.status !== 200) {
+    throw new Error(`Failed to fetch users: ${response.statusText}`);
+  }
+  return response.data;
+};
+
+export const fetchOrders = async (): Promise<Order[]> => {
+  const response = await axios.get("/api/admin/orders");
+  if (response.status !== 200) {
+    throw new Error(`Failed to fetch orders: ${response.statusText}`);
+  }
+  return response.data;
 };

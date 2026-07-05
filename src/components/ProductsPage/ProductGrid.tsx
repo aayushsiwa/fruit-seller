@@ -1,6 +1,6 @@
 import { Box, Typography, Button, Grid, CircularProgress } from "@mui/material";
 import ProductCard from "@/src/components/ProductCard";
-import { ProductGridProps } from "@/types";
+import { ProductGridProps } from "@/types/index";
 
 export const ProductGrid: React.FC<ProductGridProps> = ({
     filteredProducts,

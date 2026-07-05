@@ -8,7 +8,7 @@ import {
   CardContent,
 } from "@mui/material";
 import { motion } from "framer-motion";
-import { benefits } from "@/config";
+import { benefits } from "@/constants/home";
 
 export const BenefitsSection: React.FC = () => {
   return (

@@ -1,8 +1,15 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { ItemType, User } from "@/types";
-import { saveProduct, deleteProduct, saveUser, deleteUser, updateOrderStatus } from "@/pages/api/adminApi";
+import { ItemType, User } from "@/types/index";
+import { UseAdminMutationsReturn } from "@/types/admin";
+import {
+    saveProduct,
+    deleteProduct,
+    saveUser,
+    deleteUser,
+    updateOrderStatus,
+} from "@/pages/api/adminApi";
 
-export const useAdminMutations = () => {
+export const useAdminMutations = (): UseAdminMutationsReturn => {
     const queryClient = useQueryClient();
 
     const saveProductMutation = useMutation({

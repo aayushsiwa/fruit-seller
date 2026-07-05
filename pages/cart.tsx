@@ -6,104 +6,101 @@ import { CartItems } from "@/src/components/Cart/CartItems";
 import { OrderSummary } from "@/src/components/Cart/OrderSummary";
 import { EmptyCart } from "@/src/components/Cart/EmptyCart";
 import { LoadingScreen } from "@/src/components/LoadingScreen";
+import useStyles from "./cart.styles";
 
 export default function Cart() {
-  const {
-    cart,
-    products,
-    isLoading,
-    isLoadingProducts,
-    hasError,
-    handleQuantityChange,
-    handleRemoveItem,
-    handleContinueShopping,
-    handleCheckout,
-    getCartTotal,
-    clearCart,
-  } = useCartPage();
+    const MotionButton = motion(Button);
+    const classes = useStyles();
 
-  if (isLoading) {
-    return <LoadingScreen />;
-  }
+    const {
+        cart,
+        products,
+        isLoading,
+        isLoadingProducts,
+        hasError,
+        handleQuantityChange,
+        handleRemoveItem,
+        handleContinueShopping,
+        handleCheckout,
+        getCartTotal,
+        clearCart,
+    } = useCartPage();
 
-  return (
-    <Container maxWidth="lg">
-      <Box sx={{ mb: 4, mt: 2 }}>
-        <Typography
-          variant="h4"
-          component="h1"
-          gutterBottom
-          sx={{ fontWeight: 600 }}
-        >
-          Your Cart
-        </Typography>
-        <Typography variant="body1" color="text.secondary">
-          Review your items and proceed to checkout
-        </Typography>
-      </Box>
+    if (isLoading) {
+        return <LoadingScreen />;
+    }
 
-      {cart.length === 0 ? (
-        <EmptyCart handleContinueShopping={handleContinueShopping} />
-      ) : (
-        <Box
-          sx={{
-            display: "flex",
-            flexDirection: { xs: "column", md: "row" },
-            gap: 4,
-          }}
-        >
-          <Box sx={{ width: { xs: "100%", md: "65%" } }}>
-            <CartItems
-              cart={cart}
-              products={products}
-              handleQuantityChange={handleQuantityChange}
-              handleRemoveItem={handleRemoveItem}
-              isLoadingProducts={isLoadingProducts}
-              hasError={hasError}
-            />
-            <Box
-              sx={{
-                display: "flex",
-                justifyContent: "space-between",
-                mt: 3,
-                flexWrap: "wrap",
-                gap: 2,
-              }}
-            >
-              <Button
-                variant="outlined"
-                startIcon={<FiArrowLeft />}
-                onClick={handleContinueShopping}
-                component={motion.div}
-                whileHover={{ scale: 1.05 }}
-              >
-                Continue Shopping
-              </Button>
-              <Button
-                variant="outlined"
-                color="error"
-                onClick={clearCart}
-                component={motion.div}
-                whileHover={{ scale: 1.05 }}
-              >
-                Clear Cart
-              </Button>
+    return (
+        <Container maxWidth="lg">
+            <Box className={classes.headerBox}>
+                <Typography
+                    variant="h4"
+                    component="h1"
+                    gutterBottom
+                >
+                    Your Cart
+                </Typography>
+                <Typography variant="body1" color="text.secondary">
+                    Review your items and proceed to checkout
+                </Typography>
             </Box>
-          </Box>
-          <Box sx={{ width: { xs: "100%", md: "30%" } }}>
-            <OrderSummary
-              cart={cart}
-              products={products}
-              getCartTotal={getCartTotal}
-              handleCheckout={handleCheckout}
-              handlePayNow={handleCheckout}
-              processing={isLoadingProducts}
-              hasError={hasError}
-              disabled={isLoadingProducts || hasError || cart.length === 0}
-            />
-          </Box>
-        </Box>
-      )}
-    </Container>
-  );
+
+            {cart.length === 0 ? (
+                <EmptyCart handleContinueShopping={handleContinueShopping} />
+            ) : (
+                <Box
+                    className={classes.flexContainer}
+                >
+                    <Box className={classes.cartBox}>
+                        <CartItems
+                            cart={cart}
+                            products={products}
+                            handleQuantityChange={handleQuantityChange}
+                            handleRemoveItem={handleRemoveItem}
+                            isLoadingProducts={isLoadingProducts}
+                            hasError={hasError}
+                        />
+                        <Box
+                            className={classes.buttonsWrapper}
+                        >
+                            <MotionButton
+                                variant="outlined"
+                                startIcon={<FiArrowLeft />}
+                                onClick={handleContinueShopping}
+                                whileHover={{ scale: 1.05 }}
+                            >
+                                Continue Shopping
+                            </MotionButton>
+
+                            <Button
+                                variant="outlined"
+                                color="error"
+                                onClick={clearCart}
+                                component={motion.div}
+                                whileHover={{ scale: 1.05 }}
+                            >
+                                Clear Cart
+                            </Button>
+                        </Box>
+                    </Box>
+                    <Box className={classes.summaryBox}>
+                        <OrderSummary
+                            cart={cart}
+                            products={products}
+                            getCartTotal={getCartTotal}
+                            handleCheckout={handleCheckout}
+                            handlePayNow={handleCheckout}
+                            processing={isLoadingProducts}
+                            hasError={hasError}
+                            disabled={
+                                isLoadingProducts ||
+                                hasError ||
+                                cart.length === 0
+                            }
+                        />
+                    </Box>
+                </Box>
+            )}
+        </Container>
+    );
 }

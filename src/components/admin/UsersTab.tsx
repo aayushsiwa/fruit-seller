@@ -15,7 +15,7 @@ import {
     Chip,
 } from "@mui/material";
 import { FiPlus, FiEdit2, FiTrash2 } from "react-icons/fi";
-import { User, UsersTabProps } from "@/types";
+import { User, UsersTabProps } from "@/types/index";
 
 const UsersTab: React.FC<UsersTabProps> = ({
     users,

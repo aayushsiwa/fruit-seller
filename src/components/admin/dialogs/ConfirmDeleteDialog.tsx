@@ -7,7 +7,7 @@ import {
     DialogActions,
     Button,
 } from "@mui/material";
-import { ItemType, User, ConfirmDeleteDialogProps } from "@/types";
+import { ItemType, User, ConfirmDeleteDialogProps } from "@/types/index";
 
 const ConfirmDeleteDialog: React.FC<ConfirmDeleteDialogProps> = ({
     open,

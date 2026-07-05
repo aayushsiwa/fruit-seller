@@ -1,6 +1,6 @@
 import { Box, Typography, Chip } from "@mui/material";
 import { FiX } from "react-icons/fi";
-import { FilterChipsProps } from "@/types";
+import { FilterChipsProps } from "@/types/index";
 
 export const FilterChips: React.FC<FilterChipsProps> = ({
     getFilterSummary,

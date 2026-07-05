@@ -1,6 +1,6 @@
 import { Box, Typography, Button } from "@mui/material";
 import { motion } from "framer-motion";
-import { ErrorMessageProps } from "@/types";
+import { ErrorMessageProps } from "@/types/index";
 
 export const ErrorMessage: React.FC<ErrorMessageProps> = ({
     message,

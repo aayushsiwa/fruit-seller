@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import axios from "axios";
-import { Order, CartItem, ItemType } from "@/types";
+import { Order, CartItem, ItemType, UseSuccessReturn } from "@/types/index";
 
-export const useSuccess = () => {
+export const useSuccess = (): UseSuccessReturn => {
     const router = useRouter();
     const { orderId } = router.query;
     const [order, setOrder] = useState<Order | null>(null);

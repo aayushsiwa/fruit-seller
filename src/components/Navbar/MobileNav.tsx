@@ -1,7 +1,7 @@
 import React from "react";
 import { IconButton, Button, Box } from "@mui/material";
 import { FiMenu } from "react-icons/fi";
-import { MobileNavProps } from "@/types";
+import { MobileNavProps } from "@/types/index";
 
 export const MobileNav: React.FC<MobileNavProps> = ({
     user,

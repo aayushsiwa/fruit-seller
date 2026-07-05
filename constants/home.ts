@@ -1,22 +1,3 @@
-export const currency = "₹";
-export const defaultImage =
-    "https://images.pexels.com/photos/5946103/pexels-photo-5946103.jpeg?auto=compress&cs=tinysrgb&w=80";
-
-export const categories = [
-    "all",
-    "Berries",
-    "Citrus",
-    "Tropical",
-    "Stone Fruits",
-];
-
-export const sortOptions = [
-    { value: "none", label: "Default" },
-    { value: "discounted", label: "Discounted" },
-    { value: "new", label: "New Arrivals" },
-    { value: "seasonal", label: "Seasonal" },
-];
-
 export const heroSlides = [
     {
         title: "Fresh Fruits Delivered to Your Door",
@@ -67,5 +48,3 @@ export const benefits = [
         image: "https://images.pexels.com/photos/7564196/pexels-photo-7564196.jpeg?auto=compress&cs=tinysrgb&w=600",
     },
 ];
-
-export const paymentMethods = ["Visa", "Mastercard", "PayPal", "Apple Pay"];

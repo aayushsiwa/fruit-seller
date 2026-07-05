@@ -1,6 +1,6 @@
 import { Breadcrumbs, Link, Typography } from "@mui/material";
 import { motion } from "framer-motion";
-import { BreadcrumbsNavProps } from "@/types";
+import { BreadcrumbsNavProps } from "@/types/index";
 
 export const BreadcrumbsNav: React.FC<BreadcrumbsNavProps> = ({
     productName,

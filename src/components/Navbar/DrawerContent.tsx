@@ -24,7 +24,7 @@ import {
 } from "react-icons/fi";
 import { signIn } from "next-auth/react";
 import { Badge } from "@mui/material";
-import { DrawerContentProps } from "@/types";
+import { DrawerContentProps } from "@/types/index";
 
 export const DrawerContent: React.FC<DrawerContentProps> = ({
     user,

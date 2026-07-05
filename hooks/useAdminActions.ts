@@ -1,8 +1,14 @@
-import { useCallback } from "react";
+import { useCallback, useMemo } from "react";
 import { UseMutationResult } from "@tanstack/react-query";
+import { useFormik } from "formik";
 import { useSnackbar } from "@/src/contexts/SnackBarContext";
-import { AdminActionsProps, ItemType, User } from "@/types";
-import { validateProductData, validateUserData } from "@/lib/validation/admin";
+import {
+    AdminActionsProps,
+    UseAdminActionsReturn,
+} from "@/types/admin";
+import { ItemType, User } from "@/types/index";
+import { productSchema, userSchema } from "@/lib/validation/admin";
+
 
 export const useAdminActions = ({
     saveProductMutation,
@@ -21,7 +27,7 @@ export const useAdminActions = ({
     handleCloseUserDeleteDialog,
     handleCloseOrderDialog,
     setError,
-}: AdminActionsProps) => {
+}: AdminActionsProps): UseAdminActionsReturn => {
     const { showSnackbar } = useSnackbar();
 
     const handleMutation = useCallback(
@@ -29,12 +35,14 @@ export const useAdminActions = ({
             mutation: UseMutationResult<TData, Error, TVariables, unknown>,
             data: TVariables,
             closeDialog: () => void,
-            successMessage: string
+            successMessage: string,
+            resetForm?: () => void
         ) => {
             try {
                 await mutation.mutateAsync(data);
                 showSnackbar(successMessage, "success");
                 closeDialog();
+                resetForm?.();
             } catch (err) {
                 const errorMessage =
                     err instanceof Error ? err.message : "An error occurred";
@@ -45,53 +53,75 @@ export const useAdminActions = ({
         [setError, showSnackbar]
     );
 
-    const handleSaveProduct = useCallback(
-        async (event: React.FormEvent<HTMLFormElement>) => {
-            event.preventDefault();
-            const formData = new FormData(event.currentTarget);
-
+    const productFormik = useFormik({
+        initialValues: {
+            name: isEditProduct ? selectedProduct?.name || "" : "",
+            price: isEditProduct ? selectedProduct?.price || 0 : 0,
+            description: isEditProduct
+                ? selectedProduct?.description || ""
+                : "",
+            discount: isEditProduct ? selectedProduct?.discount || 0 : 0,
+            isSeasonal: isEditProduct
+                ? selectedProduct?.isSeasonal || false
+                : false,
+            category: isEditProduct ? selectedProduct?.category || "" : "",
+            quantity: isEditProduct ? selectedProduct?.quantity || 0 : 0,
+            image: isEditProduct ? selectedProduct?.image || "" : "",
+        },
+        validationSchema: productSchema,
+        enableReinitialize: true,
+        onSubmit: async (values) => {
             const productData: Partial<ItemType> = {
-                name: formData.get("name") as string,
-                price: Number(formData.get("price")),
-                description: formData.get("description") as string,
-                discount: Number(formData.get("discount")) || 0,
-                isSeasonal: formData.get("is_seasonal") === "true",
-                category: formData.get("category") as string,
-                quantity: Number(formData.get("quantity")),
-                image: (formData.get("image") as string) || undefined,
+                ...values,
+                image: values.image || undefined,
             };
-
-            const validation = validateProductData(productData);
-            if (!validation.isValid) {
-                setError(validation.error ?? null);
-                showSnackbar(validation.error!, "error");
-                return;
-            }
+            console.log("productData", productData);
 
             await handleMutation(
                 saveProductMutation,
-                { productData, isEdit: isEditProduct, id: selectedProduct.id },
+                { productData, isEdit: isEditProduct, id: selectedProduct?.id },
                 handleCloseProductDialog,
                 isEditProduct
                     ? "Product updated successfully"
-                    : "Product added successfully"
+                    : "Product added successfully",
+                productFormik.resetForm
             );
         },
-        [
-            handleMutation,
-            saveProductMutation,
-            isEditProduct,
-            selectedProduct.id,
-            handleCloseProductDialog,
-            setError,
-            showSnackbar,
-        ]
-    );
+    });
+
+    const userFormik = useFormik({
+        initialValues: {
+            firstName: isEditUser ? selectedUser?.firstName || "" : "",
+            lastName: isEditUser ? selectedUser?.lastName || "" : "",
+            email: isEditUser ? selectedUser?.email || "" : "",
+            role: isEditUser ? selectedUser?.role || "" : "",
+        },
+        validationSchema: userSchema,
+        enableReinitialize: true,
+        onSubmit: async (values) => {
+            const userData: Partial<
+                Pick<User, "firstName" | "lastName" | "email" | "role">
+            > = {
+                ...values,
+            };
+
+            await handleMutation(
+                saveUserMutation,
+                { userData, isEdit: isEditUser, id: selectedUser?.id },
+                handleCloseUserDialog,
+                isEditUser
+                    ? "User updated successfully"
+                    : "User added successfully",
+                userFormik.resetForm
+            );
+        },
+    });
 
     const handleDeleteProduct = useCallback(async () => {
-        if (!selectedProduct.id) {
-            setError("No product selected");
-            showSnackbar("No product selected", "error");
+        if (!selectedProduct?.id) {
+            const error = "No product selected";
+            setError(error);
+            showSnackbar(error, "error");
             return;
         }
 
@@ -102,7 +132,7 @@ export const useAdminActions = ({
             "Product deleted successfully"
         );
     }, [
-        selectedProduct.id,
+        selectedProduct?.id,
         handleMutation,
         deleteProductMutation,
         handleCloseDeleteDialog,
@@ -110,49 +140,11 @@ export const useAdminActions = ({
         showSnackbar,
     ]);
 
-    const handleSaveUser = useCallback(
-        async (event: React.FormEvent<HTMLFormElement>) => {
-            event.preventDefault();
-            const formData = new FormData(event.currentTarget);
-
-            const userData: Partial<User> = {
-                firstName: formData.get("firstName") as string,
-                lastName: formData.get("lastName") as string,
-                email: formData.get("email") as string,
-                role: formData.get("role") as string,
-            };
-
-            const validation = validateUserData(userData);
-            if (!validation.isValid) {
-                setError(validation.error ?? null);
-                showSnackbar(validation.error!, "error");
-                return;
-            }
-
-            await handleMutation(
-                saveUserMutation,
-                { userData, isEdit: isEditUser, id: selectedUser.id },
-                handleCloseUserDialog,
-                isEditUser
-                    ? "User updated successfully"
-                    : "User added successfully"
-            );
-        },
-        [
-            handleMutation,
-            saveUserMutation,
-            isEditUser,
-            selectedUser.id,
-            handleCloseUserDialog,
-            setError,
-            showSnackbar,
-        ]
-    );
-
     const handleDeleteUser = useCallback(async () => {
-        if (!selectedUser.id) {
-            setError("No user selected");
-            showSnackbar("No user selected", "error");
+        if (!selectedUser?.id) {
+            const error = "No user selected";
+            setError(error);
+            showSnackbar(error, "error");
             return;
         }
 
@@ -163,7 +155,7 @@ export const useAdminActions = ({
             "User deleted successfully"
         );
     }, [
-        selectedUser.id,
+        selectedUser?.id,
         handleMutation,
         deleteUserMutation,
         handleCloseUserDeleteDialog,
@@ -173,9 +165,10 @@ export const useAdminActions = ({
 
     const handleUpdateOrderStatus = useCallback(
         async (status: string) => {
-            if (!selectedOrder.id) {
-                setError("No order selected");
-                showSnackbar("No order selected", "error");
+            if (!selectedOrder?.id) {
+                const error = "No order selected";
+                setError(error);
+                showSnackbar(error, "error");
                 return;
             }
 
@@ -187,7 +180,7 @@ export const useAdminActions = ({
             );
         },
         [
-            selectedOrder.id,
+            selectedOrder?.id,
             handleMutation,
             updateOrderMutation,
             handleCloseOrderDialog,
@@ -196,11 +189,24 @@ export const useAdminActions = ({
         ]
     );
 
-    return {
-        handleSaveProduct,
-        handleDeleteProduct,
-        handleSaveUser,
-        handleDeleteUser,
-        handleUpdateOrderStatus,
-    };
+    return useMemo(
+        () => ({
+            handleSaveProduct: async () => {
+                await productFormik.handleSubmit();
+            },
+            handleDeleteProduct,
+            handleSaveUser: async () => {
+                await userFormik.handleSubmit();
+            },
+            handleDeleteUser,
+            handleUpdateOrderStatus,
+        }),
+        [
+            productFormik,
+            userFormik,
+            handleDeleteProduct,
+            handleDeleteUser,
+            handleUpdateOrderStatus,
+        ]
+    );
 };

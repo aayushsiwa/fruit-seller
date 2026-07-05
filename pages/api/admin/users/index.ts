@@ -2,7 +2,7 @@ import { getServerSession } from "next-auth/next";
 import { supabase } from "@/lib/supabase";
 import { authOptions } from "../../auth/[...nextauth]";
 import type { NextApiRequest, NextApiResponse } from "next";
-import type { SessionUser } from "@/types";
+import type { SessionUser } from "@/types/index";
 
 export default async function handler(
     req: NextApiRequest,
@@ -51,7 +51,7 @@ export default async function handler(
                 typeof session.user.role === "string" ? session.user.role : ""
             )
         ) {
-            return res.status(403).json({ error: "Unauthorized" });
+            return res.status(401).json({ error: "Unauthorized" });
         }
 
         const { firstName, lastName, email, role } = req.body;

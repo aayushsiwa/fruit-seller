@@ -1,6 +1,12 @@
 import { UseMutationResult } from "@tanstack/react-query";
 import { DefaultSession } from "next-auth";
 import { useRouter } from "next/router";
+import { SnackbarCloseReason } from "@mui/material";
+import { MouseEvent, ChangeEvent } from "react";
+import { categories, sortOptions } from "@/constants/productsPage";
+import { FormikProps } from "formik";
+import { Session } from "next-auth";
+import { loginInitialValues } from "@/lib/validation/loginSchema"; // alias this if needed
 
 export interface ItemType {
     id: string;
@@ -340,36 +346,168 @@ export interface ThemeSwitchContextType {
     toggleTheme: () => void;
 }
 
-export interface AdminActionsProps {
-  saveProductMutation: UseMutationResult<
-    ItemType,
-    Error,
-    { productData: Partial<ItemType>; isEdit: boolean; id?: string },
-    unknown
-  >;
-  deleteProductMutation: UseMutationResult<void, Error, string, unknown>;
-  saveUserMutation: UseMutationResult<
-    User,
-    Error,
-    { userData: Partial<User>; isEdit: boolean; id?: string },
-    unknown
-  >;
-  deleteUserMutation: UseMutationResult<void, Error, string, unknown>;
-  updateOrderMutation: UseMutationResult<
-    Order,
-    Error,
-    { id: string; status: string },
-    unknown
-  >;
-  selectedProduct: Partial<ItemType>;
-  selectedUser: Partial<User>;
-  selectedOrder: Partial<Order>;
-  isEditProduct: boolean;
-  isEditUser: boolean;
-  handleCloseProductDialog: () => void;
-  handleCloseDeleteDialog: () => void;
-  handleCloseUserDialog: () => void;
-  handleCloseUserDeleteDialog: () => void;
-  handleCloseOrderDialog: () => void;
-  setError: (error: string | null) => void;
+
+export interface UseProductDetailReturn {
+    product: ItemType | undefined;
+    isLoadingProduct: boolean;
+    relatedProducts: ItemType[] | undefined;
+    cartQuantity: number;
+    error: string | null;
+    setError: React.Dispatch<React.SetStateAction<string | null>>;
+    snackbar: {
+        open: boolean;
+        message: string;
+        severity: "success" | "error";
+    };
+    handleCloseSnackbar: (
+        event?: React.SyntheticEvent | Event,
+        reason?: SnackbarCloseReason
+    ) => void;
+    handleAddToCart: () => void;
+    handleQuantityChange: (newQuantity: number) => void;
+    handleShare: () => void;
+    isMobile: boolean;
 }
+
+export type UseProductCardReturn = {
+    cartQuantity: number;
+    discountedPrice: number | null;
+    isOutOfStock: boolean;
+    handleAddToCart: (e: MouseEvent) => void;
+    handleQuantityChange: (e: MouseEvent, newQuantity: number) => void;
+    handleViewDetails: () => void;
+    handleInputChange: (
+        e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+    ) => void;
+};
+
+export type UseProductsPageReturn = {
+    products: ItemType[];
+    filteredProducts: ItemType[];
+    priceRange: [number, number];
+    setPriceRange: React.Dispatch<React.SetStateAction<[number, number]>>;
+    minPrice: number;
+    maxPrice: number;
+    sortOption: string;
+    setSortOption: React.Dispatch<React.SetStateAction<string>>;
+    category: string;
+    setCategory: React.Dispatch<React.SetStateAction<string>>;
+    inStockOnly: boolean;
+    setInStockOnly: React.Dispatch<React.SetStateAction<boolean>>;
+    openFilterDialog: boolean;
+    setOpenFilterDialog: React.Dispatch<React.SetStateAction<boolean>>;
+    isLoading: boolean;
+    error: string | null;
+    handleResetFilters: () => void;
+    getFilterSummary: () => string[];
+    categories: typeof categories;
+    sortOptions: typeof sortOptions;
+};
+
+export type SignupFormValues = {
+    firstName: string;
+    lastName: string;
+    email: string;
+    password: string;
+    confirmPassword: string;
+    agreeTerms: boolean;
+};
+
+export type UseRegisterReturn = {
+    register: (data: RegisterData) => Promise<void>;
+    isLoading: boolean;
+    isGoogleLoading: boolean;
+    showPassword: boolean;
+    handleClickShowPassword: () => void;
+    handleGoogleSignIn: () => Promise<void>;
+    formik: FormikProps<
+        RegisterData & { confirmPassword: string; agreeTerms: boolean }
+    >;
+    registerMutation: UseMutationResult<void, Error, RegisterData>;
+};
+
+export type UseSuccessReturn = {
+    order: Order | null;
+    products: (ItemType | undefined)[];
+    isLoading: boolean;
+    error: string | null;
+    handleContinueShopping: () => void;
+};
+
+export type UseNewsletterReturn = {
+    newsletterStatus: "success" | "error" | null;
+    handleNewsletterSubmit: (
+        values: { email: string },
+        helpers: {
+            setSubmitting: (isSubmitting: boolean) => void;
+            resetForm: () => void;
+        }
+    ) => Promise<void>;
+};
+
+export type UseNavbarReturn = {
+    user: Session["user"] | undefined;
+    router: ReturnType<typeof useRouter>;
+    isScrolled: boolean;
+    anchorEl: HTMLButtonElement | null;
+    drawerOpen: boolean;
+    searchQuery: string;
+    getCartItemCount: () => number;
+    isAdmin: boolean;
+    setSearchQuery: (query: string) => void;
+    handleProfileMenuOpen: (e: React.MouseEvent<HTMLButtonElement>) => void;
+    handleMenuClose: () => void;
+    handleDrawerToggle: () => void;
+    handleLogout: () => void;
+    handleSearch: (e: React.KeyboardEvent<HTMLInputElement>) => void;
+    handleNavigation: (path: string) => void;
+};
+
+export type UseLoginReturn = {
+    formik: FormikProps<typeof loginInitialValues>;
+    showPassword: boolean;
+    handleClickShowPassword: () => void;
+    handleGoogleSignIn: () => Promise<void>;
+    isLoading: boolean;
+};
+
+export type UseHomePageReturn = {
+    router: ReturnType<typeof useRouter>;
+    currentSlide: number;
+    setCurrentSlide: React.Dispatch<React.SetStateAction<number>>;
+    featuredProducts: ItemType[];
+    isLoading: boolean;
+    error: unknown;
+};
+
+export type UseCheckoutReturn = {
+    cart: CartItem[];
+    products: ItemType[];
+    isLoading: boolean;
+    isLoadingProducts: boolean;
+    hasError: boolean;
+    processing: boolean;
+    handlePayNow: () => Promise<void>;
+    status: "loading" | "authenticated" | "unauthenticated";
+    getCartTotal: (products: ItemType[]) => number;
+};
+
+export type UseCartPageReturn = {
+    cart: CartItem[];
+    products: (ItemType | undefined)[];
+    isLoadingProducts: boolean;
+    hasError: boolean;
+    cartLoading: boolean;
+    isLoading: boolean;
+    handleQuantityChange: (
+        id: string,
+        newQuantity: number,
+        maxQuantity: number
+    ) => void;
+    handleRemoveItem: (id: string) => void;
+    handleContinueShopping: () => void;
+    handleCheckout: () => void;
+    getCartTotal: (products: ItemType[]) => number;
+    clearCart: () => void;
+};
+

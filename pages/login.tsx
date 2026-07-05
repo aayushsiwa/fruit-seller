@@ -15,8 +15,10 @@ import Link from "next/link";
 import { FiEye, FiEyeOff } from "react-icons/fi";
 import { TbBrandGoogle } from "react-icons/tb";
 import useLogin from "@/hooks/useLogin";
+import { useLoginStyles } from "./login.styles";
 
 export default function Login() {
+    const classes = useLoginStyles();
     const {
         formik,
         showPassword,
@@ -28,7 +30,7 @@ export default function Login() {
     if (isLoading) {
         return (
             <Container maxWidth="sm">
-                <Box sx={{ my: 4, textAlign: "center" }}>
+                <Box className={classes.loadingBox}>
                     <Typography>Loading...</Typography>
                 </Box>
             </Container>
@@ -37,14 +39,14 @@ export default function Login() {
 
     return (
         <Container maxWidth="sm">
-            <Box sx={{ my: 4 }}>
-                <Paper elevation={3} sx={{ p: 4, borderRadius: 2 }}>
-                    <Box sx={{ textAlign: "center", mb: 4 }}>
+            <Box className={classes.container}>
+                <Paper elevation={3} className={classes.paper}>
+                    <Box className={classes.welcomeBox}>
                         <Typography
                             variant="h4"
                             component="h1"
                             gutterBottom
-                            sx={{ fontWeight: 700 }}
+                            className={classes.title}
                         >
                             Welcome Back
                         </Typography>
@@ -116,12 +118,7 @@ export default function Login() {
                             </Grid>
 
                             <Grid item xs={12}>
-                                <Box
-                                    sx={{
-                                        display: "flex",
-                                        justifyContent: "flex-end",
-                                    }}
-                                >
+                                <Box className={classes.forgotPasswordBox}>
                                     <Link href="/forgot-password" passHref>
                                         <MuiLink
                                             variant="body2"
@@ -150,14 +147,14 @@ export default function Login() {
                         </Grid>
                     </form>
 
-                    <Box sx={{ mt: 3, textAlign: "center" }}>
+                    <Box className={classes.signUpBox}>
                         <Typography variant="body2">
                             Don&apos;t have an account?{" "}
                             <Link href="/register" passHref>
                                 <MuiLink
                                     variant="body2"
                                     underline="hover"
-                                    sx={{ fontWeight: 600 }}
+                                    className={classes.signUpLink}
                                 >
                                     Sign up
                                 </MuiLink>
@@ -165,13 +162,13 @@ export default function Login() {
                         </Typography>
                     </Box>
 
-                    <Divider sx={{ my: 3 }}>
+                    <Divider className={classes.divider}>
                         <Typography variant="body2" color="text.secondary">
                             OR
                         </Typography>
                     </Divider>
 
-                    <Box sx={{ display: "flex", justifyContent: "center" }}>
+                    <Box className={classes.googleButtonBox}>
                         <Button
                             variant="outlined"
                             startIcon={<TbBrandGoogle />}

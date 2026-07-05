@@ -3,7 +3,7 @@ import { Grid, Box, Typography, Button, CircularProgress } from "@mui/material";
 import { motion } from "framer-motion";
 import { FiArrowRight } from "react-icons/fi";
 import ProductCard from "@/src/components/ProductCard";
-import { ItemType, FeaturedSectionProps } from "@/types";
+import { ItemType, FeaturedSectionProps } from "@/types/index";
 import { useRouter } from "next/router";
 
 export const FeaturedSection: React.FC<FeaturedSectionProps> = ({

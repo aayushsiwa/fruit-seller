@@ -1,9 +1,10 @@
 import { useRouter } from "next/router";
 import { useCart } from "@/src/contexts/CartContext";
-import { ItemType } from "@/types";
+import { ItemType } from "@/types/index";
 import { MouseEvent } from "react";
+import { UseProductCardReturn } from "@/types/index";
 
-const useProductCard = (product: ItemType) => {
+const useProductCard = (product: ItemType): UseProductCardReturn => {
     const router = useRouter();
     const { cart, addToCart, updateQuantity, removeFromCart } = useCart();
 
