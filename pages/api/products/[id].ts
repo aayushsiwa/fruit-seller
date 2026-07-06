@@ -3,6 +3,7 @@ import { getServerSession } from "next-auth/next";
 import { supabase } from "@/lib/supabase";
 import { authOptions } from "../auth/[...nextauth]";
 import { SessionUser } from "@/types/index";
+import { validateProductData } from "@/lib/validation/admin";
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
     const id = req.query.id as string;
@@ -35,8 +36,11 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     if (req.method === "PUT") {
         const { name, price, description, image, category, quantity, discount, is_seasonal } = req.body;
 
-        if (!name || !price || !category || quantity == null) {
-            return res.status(400).json({ error: "Missing required fields" });
+        const validation = validateProductData({
+            name, price, description, category, quantity,
+        });
+        if (!validation.isValid) {
+            return res.status(400).json({ error: validation.error });
         }
 
         const { data, error } = await supabase
