@@ -26,15 +26,6 @@ import ConfirmDeleteDialog from "@/src/components/admin/dialogs/ConfirmDeleteDia
 import { useAuth } from "@/src/contexts/AuthContext";
 import useStyles from "./index.styles";
 
-// const classes = {
-//     headerBox: { mb: 4 },
-//     title: { fontWeight: 600 },
-//     subtitle: { color: "text.secondary" },
-//     error: { mt: 2 },
-//     tabsBox: { mb: 3 },
-//     tabs: { borderBottom: 1, borderColor: "divider" },
-// };
-
 export default function AdminDashboard() {
     const router = useRouter();
     const classes = useStyles();

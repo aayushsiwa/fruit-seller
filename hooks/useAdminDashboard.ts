@@ -1,5 +1,6 @@
 import { useState, useCallback } from "react";
-import { TabValue, UseAdminDashboardReturn } from "@/types/index";
+import { TabValue } from "@/types/index";
+import { UseAdminDashboardReturn } from "@/types/admin";
 
 export const useAdminDashboard = (): UseAdminDashboardReturn => {
     const [activeTab, setActiveTab] = useState<TabValue>(TabValue.PRODUCTS);

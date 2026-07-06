@@ -14,9 +14,9 @@ export default function Home() {
         <Grid sx={{ display: "flex", flexDirection: "column", gap: "4rem" }}>
             <HeroSection currentSlide={currentSlide} />
             <FeaturedSection
-                featuredProducts={featuredProducts}
+                featuredProducts={featuredProducts ?? []}
                 isLoading={isLoading}
-                error={error ? error.message : null}
+                error={error instanceof Error ? error.message : null}
             />
             <BenefitsSection />
             <CTASection />

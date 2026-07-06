@@ -6,7 +6,7 @@ import { MouseEvent, ChangeEvent } from "react";
 import { categories, sortOptions } from "@/constants/productsPage";
 import { FormikProps } from "formik";
 import { Session } from "next-auth";
-import { loginInitialValues } from "@/lib/validation/loginSchema"; // alias this if needed
+import { loginInitialValues } from "@/lib/validation/loginSchema";
 
 export interface ItemType {
     id: string;
@@ -489,7 +489,7 @@ export type UseCheckoutReturn = {
     processing: boolean;
     handlePayNow: () => Promise<void>;
     status: "loading" | "authenticated" | "unauthenticated";
-    getCartTotal: (products: ItemType[]) => number;
+    getCartTotal: (products: (ItemType | undefined)[]) => number;
 };
 
 export type UseCartPageReturn = {
@@ -507,7 +507,7 @@ export type UseCartPageReturn = {
     handleRemoveItem: (id: string) => void;
     handleContinueShopping: () => void;
     handleCheckout: () => void;
-    getCartTotal: (products: ItemType[]) => number;
+    getCartTotal: (products: (ItemType | undefined)[]) => number;
     clearCart: () => void;
 };
 

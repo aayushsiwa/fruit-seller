@@ -1,7 +1,6 @@
 import { ItemType, User, Order } from "@/types/index";
 import { UseMutationResult } from "@tanstack/react-query";
 import { TabValue } from "@/types/index";
-import { FormikProps } from "formik";
 
 export type ProductFormValues = Partial<ItemType>;
 export type UserFormValues = Partial<User>;
@@ -52,21 +51,24 @@ export interface AdminActionsProps {
 
 export type UseAdminMutationsReturn = {
     saveProductMutation: UseMutationResult<
-        unknown,
+        ItemType,
         Error,
-        { productData: Partial<ItemType>; isEdit: boolean; id?: string }
+        { productData: Partial<ItemType>; isEdit: boolean; id?: string },
+        unknown
     >;
-    deleteProductMutation: UseMutationResult<unknown, Error, string>;
+    deleteProductMutation: UseMutationResult<void, Error, string, unknown>;
     saveUserMutation: UseMutationResult<
-        unknown,
+        User,
         Error,
-        { userData: Partial<User>; isEdit: boolean; id?: string }
+        { userData: Partial<User>; isEdit: boolean; id?: string },
+        unknown
     >;
-    deleteUserMutation: UseMutationResult<unknown, Error, string>;
+    deleteUserMutation: UseMutationResult<void, Error, string, unknown>;
     updateOrderMutation: UseMutationResult<
-        unknown,
+        Order,
         Error,
-        { id: string; status: string }
+        { id: string; status: string },
+        unknown
     >;
 };
 
@@ -104,8 +106,6 @@ export interface UseAdminDataReturn {
   isLoadingUsers: boolean;
   isLoadingOrders: boolean;
   productsError: unknown;
-  // productFormik: FormikProps<ProductFormValues>;
-  // userFormik: FormikProps<UserFormValues>;
   usersError: unknown;
   ordersError: unknown;
 }

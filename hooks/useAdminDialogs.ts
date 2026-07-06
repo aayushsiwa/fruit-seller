@@ -1,5 +1,6 @@
 import { useState } from "react";
-import { ItemType, User, Order, UseAdminDialogsReturn } from "@/types/index";
+import { ItemType, User, Order } from "@/types/index";
+import { UseAdminDialogsReturn } from "@/types/admin";
 
 export const useAdminDialogs = (): UseAdminDialogsReturn => {
     const [openProductDialog, setOpenProductDialog] = useState(false);

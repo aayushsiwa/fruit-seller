@@ -1,13 +1,12 @@
 import { useCallback, useMemo } from "react";
 import { UseMutationResult } from "@tanstack/react-query";
-import { useFormik } from "formik";
 import { useSnackbar } from "@/src/contexts/SnackBarContext";
 import {
     AdminActionsProps,
     UseAdminActionsReturn,
 } from "@/types/admin";
 import { ItemType, User } from "@/types/index";
-import { productSchema, userSchema } from "@/lib/validation/admin";
+import { validateProductData, validateUserData } from "@/lib/validation/admin";
 
 
 export const useAdminActions = ({
@@ -36,13 +35,11 @@ export const useAdminActions = ({
             data: TVariables,
             closeDialog: () => void,
             successMessage: string,
-            resetForm?: () => void
         ) => {
             try {
                 await mutation.mutateAsync(data);
                 showSnackbar(successMessage, "success");
                 closeDialog();
-                resetForm?.();
             } catch (err) {
                 const errorMessage =
                     err instanceof Error ? err.message : "An error occurred";
@@ -53,29 +50,27 @@ export const useAdminActions = ({
         [setError, showSnackbar]
     );
 
-    const productFormik = useFormik({
-        initialValues: {
-            name: isEditProduct ? selectedProduct?.name || "" : "",
-            price: isEditProduct ? selectedProduct?.price || 0 : 0,
-            description: isEditProduct
-                ? selectedProduct?.description || ""
-                : "",
-            discount: isEditProduct ? selectedProduct?.discount || 0 : 0,
-            isSeasonal: isEditProduct
-                ? selectedProduct?.isSeasonal || false
-                : false,
-            category: isEditProduct ? selectedProduct?.category || "" : "",
-            quantity: isEditProduct ? selectedProduct?.quantity || 0 : 0,
-            image: isEditProduct ? selectedProduct?.image || "" : "",
-        },
-        validationSchema: productSchema,
-        enableReinitialize: true,
-        onSubmit: async (values) => {
+    const handleSaveProduct = useCallback(
+        async (event: React.FormEvent<HTMLFormElement>) => {
+            event.preventDefault();
+            const formData = new FormData(event.currentTarget);
             const productData: Partial<ItemType> = {
-                ...values,
-                image: values.image || undefined,
+                name: formData.get("name") as string,
+                price: parseFloat(formData.get("price") as string),
+                description: formData.get("description") as string,
+                discount: parseInt(formData.get("discount") as string, 10) || 0,
+                isSeasonal: formData.get("isSeasonal") === "true",
+                category: formData.get("category") as string,
+                quantity: parseInt(formData.get("quantity") as string, 10) || 0,
+                image: (formData.get("image") as string) || undefined,
             };
-            console.log("productData", productData);
+
+            const { isValid, error } = validateProductData(productData);
+            if (!isValid) {
+                setError(error || "Validation failed");
+                showSnackbar(error || "Validation failed", "error");
+                return;
+            }
 
             await handleMutation(
                 saveProductMutation,
@@ -84,26 +79,38 @@ export const useAdminActions = ({
                 isEditProduct
                     ? "Product updated successfully"
                     : "Product added successfully",
-                productFormik.resetForm
             );
         },
-    });
+        [
+            saveProductMutation,
+            isEditProduct,
+            selectedProduct?.id,
+            handleCloseProductDialog,
+            handleMutation,
+            setError,
+            showSnackbar,
+        ]
+    );
 
-    const userFormik = useFormik({
-        initialValues: {
-            firstName: isEditUser ? selectedUser?.firstName || "" : "",
-            lastName: isEditUser ? selectedUser?.lastName || "" : "",
-            email: isEditUser ? selectedUser?.email || "" : "",
-            role: isEditUser ? selectedUser?.role || "" : "",
-        },
-        validationSchema: userSchema,
-        enableReinitialize: true,
-        onSubmit: async (values) => {
+    const handleSaveUser = useCallback(
+        async (event: React.FormEvent<HTMLFormElement>) => {
+            event.preventDefault();
+            const formData = new FormData(event.currentTarget);
             const userData: Partial<
                 Pick<User, "firstName" | "lastName" | "email" | "role">
             > = {
-                ...values,
+                firstName: formData.get("firstName") as string,
+                lastName: formData.get("lastName") as string,
+                email: formData.get("email") as string,
+                role: formData.get("role") as string,
             };
+
+            const { isValid, error } = validateUserData(userData);
+            if (!isValid) {
+                setError(error || "Validation failed");
+                showSnackbar(error || "Validation failed", "error");
+                return;
+            }
 
             await handleMutation(
                 saveUserMutation,
@@ -112,10 +119,18 @@ export const useAdminActions = ({
                 isEditUser
                     ? "User updated successfully"
                     : "User added successfully",
-                userFormik.resetForm
             );
         },
-    });
+        [
+            saveUserMutation,
+            isEditUser,
+            selectedUser?.id,
+            handleCloseUserDialog,
+            handleMutation,
+            setError,
+            showSnackbar,
+        ]
+    );
 
     const handleDeleteProduct = useCallback(async () => {
         if (!selectedProduct?.id) {
@@ -191,20 +206,16 @@ export const useAdminActions = ({
 
     return useMemo(
         () => ({
-            handleSaveProduct: async () => {
-                await productFormik.handleSubmit();
-            },
+            handleSaveProduct,
             handleDeleteProduct,
-            handleSaveUser: async () => {
-                await userFormik.handleSubmit();
-            },
+            handleSaveUser,
             handleDeleteUser,
             handleUpdateOrderStatus,
         }),
         [
-            productFormik,
-            userFormik,
+            handleSaveProduct,
             handleDeleteProduct,
+            handleSaveUser,
             handleDeleteUser,
             handleUpdateOrderStatus,
         ]
