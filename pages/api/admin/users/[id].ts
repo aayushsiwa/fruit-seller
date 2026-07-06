@@ -3,6 +3,7 @@ import { supabase } from "@/lib/supabase";
 import {authOptions} from "../../auth/[...nextauth]";
 import type { NextApiRequest, NextApiResponse } from "next";
 import type { SessionUser } from "@/types/index";
+import { validateUserData } from "@/lib/validation/admin";
 
 export default async function handler(
     req: NextApiRequest,
@@ -27,6 +28,13 @@ export default async function handler(
 
     if (req.method === "PUT") {
         const { firstName, lastName, email, role } = req.body;
+
+        if (firstName || lastName || email || role) {
+            const validation = validateUserData({ firstName, lastName, email, role });
+            if (!validation.isValid) {
+                return res.status(400).json({ error: validation.error });
+            }
+        }
 
         const updateData = {
             first_name: firstName,

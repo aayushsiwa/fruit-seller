@@ -3,6 +3,7 @@ import { getServerSession } from "next-auth/next";
 import { supabase } from "@/lib/supabase";
 import { authOptions } from "../auth/[...nextauth]";
 import { SessionUser } from "@/types/index";
+import { validateProductData } from "@/lib/validation/admin";
 
 export default async function handler(
     req: NextApiRequest,
@@ -78,8 +79,11 @@ export default async function handler(
             is_seasonal,
         } = req.body;
 
-        if (!name || !price || !category || quantity == null) {
-            return res.status(400).json({ error: "Missing required fields" });
+        const validation = validateProductData({
+            name, price, description, category, quantity,
+        });
+        if (!validation.isValid) {
+            return res.status(400).json({ error: validation.error });
         }
 
         const { data, error } = await supabase
@@ -126,6 +130,15 @@ export default async function handler(
 
         if (!id) {
             return res.status(400).json({ error: "Missing product ID" });
+        }
+
+        if (name || price || description || category || quantity != null) {
+            const validation = validateProductData({
+                name, price, description, category, quantity,
+            });
+            if (!validation.isValid) {
+                return res.status(400).json({ error: validation.error });
+            }
         }
 
         const { data, error } = await supabase

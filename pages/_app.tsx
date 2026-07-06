@@ -5,6 +5,7 @@ import { SnackbarProvider } from "@/src/contexts/SnackBarContext";
 import { AuthProvider } from "@/src/contexts/AuthContext";
 import { CartProvider } from "@/src/contexts/CartContext";
 import Layout from "@/src/components/Layout";
+import ErrorBoundary from "@/src/components/ErrorBoundary";
 import type { AppProps } from "next/app";
 import { ThemeSwitchProvider } from "@/src/ThemeProvider";
 
@@ -28,7 +29,9 @@ export default function App(props: AppProps) {
                             <CartProvider>
                                 <ThemeSwitchProvider>
                                     <Layout>
-                                        <Component {...pageProps} />
+                                        <ErrorBoundary>
+                                            <Component {...pageProps} />
+                                        </ErrorBoundary>
                                     </Layout>
                                 </ThemeSwitchProvider>
                             </CartProvider>
