@@ -12,7 +12,7 @@ import {
     Select,
     MenuItem,
 } from "@mui/material";
-import { ProductDialogProps } from "@/types";
+import { ProductDialogProps } from "@/types/index";
 
 const ProductDialog: React.FC<ProductDialogProps> = ({
     open,

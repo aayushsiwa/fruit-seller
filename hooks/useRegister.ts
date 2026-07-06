@@ -3,7 +3,7 @@ import { useMutation } from "@tanstack/react-query";
 import { useRouter } from "next/navigation";
 import { useSnackbar } from "@/src/contexts/SnackBarContext";
 import { useAuth } from "@/src/contexts/AuthContext";
-import { RegisterData } from "@/types";
+import { RegisterData, UseRegisterReturn } from "@/types/index";
 import { useFormik } from "formik";
 import {
     registerInitialValues,
@@ -11,7 +11,7 @@ import {
 } from "@/lib/validation/registerSchema";
 import { signIn } from "next-auth/react";
 
-const useRegister = () => {
+const useRegister = ():UseRegisterReturn => {
     const router = useRouter();
     const { showSnackbar } = useSnackbar();
     const { register, login } = useAuth();

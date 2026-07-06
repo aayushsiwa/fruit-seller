@@ -13,7 +13,7 @@ import {
     Divider,
 } from "@mui/material";
 import { useTheme } from "@mui/material/styles";
-import { FilterOptionsProps } from "@/types";
+import { FilterOptionsProps } from "@/types/index";
 
 export const FilterOptions: React.FC<FilterOptionsProps> = ({
     priceRange,

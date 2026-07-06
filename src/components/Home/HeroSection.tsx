@@ -6,9 +6,9 @@ import {
   Button,
 } from "@mui/material";
 import { motion, AnimatePresence } from "framer-motion";
-import { heroSlides } from "@/config";
+import { heroSlides } from "@/constants/home";
 import { useRouter } from "next/router";
-import { HeroSectionProps } from "@/types";
+import { HeroSectionProps } from "@/types/index";
 
 export const HeroSection: React.FC<HeroSectionProps> = ({ currentSlide }) => {
   const router = useRouter();

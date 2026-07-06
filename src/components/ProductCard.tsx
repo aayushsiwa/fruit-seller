@@ -10,9 +10,9 @@ import {
     TextField,
 } from "@mui/material";
 import { FiShoppingCart, FiPlus, FiMinus } from "react-icons/fi";
-import { ItemType } from "@/types";
+import { ItemType } from "@/types/index";
 import { motion } from "framer-motion";
-import { currency, defaultImage } from "@/config";
+import { currency, defaultImage } from "@/constants/index";
 import useProductCard from "@/hooks/useProductCard";
 
 const ProductCard = ({ product }: { product: ItemType }) => {

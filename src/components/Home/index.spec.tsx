@@ -3,7 +3,7 @@ import Home from "@/pages/index";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import * as nextRouter from "next/router";
 import userEvent from "@testing-library/user-event";
-import { ItemType } from "@/types";
+import { ItemType } from "@/types/index";
 import axios from "axios";
 
 jest.mock("axios");

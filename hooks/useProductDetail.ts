@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { useRouter } from "next/router";
 import { useCart } from "@/src/contexts/CartContext";
-import { ItemType } from "@/types";
+import { ItemType, UseProductDetailReturn } from "@/types/index";
 import axios from "axios";
 
 const fetchProductDetails = async (id: string) => {
@@ -21,7 +21,7 @@ const fetchRelatedProducts = async (id: string) => {
     return response.data;
 };
 
-export const useProductDetail = () => {
+export const useProductDetail = (): UseProductDetailReturn => {
     const router = useRouter();
     const { id } = router.query;
     const { cart, addToCart, updateQuantity, removeFromCart } = useCart();

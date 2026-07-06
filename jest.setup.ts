@@ -3,7 +3,6 @@ import fetchMock from 'jest-fetch-mock';
 
 fetchMock.enableMocks();
 
-// Mock console.error globally
 beforeEach(() => {
     jest.spyOn(console, "error").mockImplementation(() => {});
 });
@@ -17,7 +16,6 @@ global.IntersectionObserver = class IntersectionObserver {
     rootMargin: string = '';
     thresholds: ReadonlyArray<number> = [];
 
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     constructor(_: IntersectionObserverCallback, __?: IntersectionObserverInit) {}
     observe() {}
     disconnect() {}

@@ -13,7 +13,7 @@ import {
 import { FiShoppingCart, FiUser, FiSearch } from "react-icons/fi";
 import { Badge } from "@mui/material";
 import { useTheme } from "@mui/material/styles";
-import { DesktopNavProps } from "@/types";
+import { DesktopNavProps } from "@/types/index";
 
 export const DesktopNav: React.FC<DesktopNavProps> = ({
     user,

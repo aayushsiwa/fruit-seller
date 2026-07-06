@@ -10,8 +10,8 @@ import {
 import { motion } from "framer-motion";
 import Image from "next/image";
 import { FiShoppingCart, FiPlus, FiMinus, FiShare2 } from "react-icons/fi";
-import { ProductInfoProps } from "@/types";
-import { currency, defaultImage } from "@/config";
+import { ProductInfoProps } from "@/types/index";
+import { currency, defaultImage } from "@/constants/index";
 
 export const ProductInfo: React.FC<ProductInfoProps> = ({
     product,

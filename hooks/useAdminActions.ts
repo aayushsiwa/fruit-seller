@@ -1,8 +1,13 @@
-import { useCallback } from "react";
+import { useCallback, useMemo } from "react";
 import { UseMutationResult } from "@tanstack/react-query";
 import { useSnackbar } from "@/src/contexts/SnackBarContext";
-import { AdminActionsProps, ItemType, User } from "@/types";
+import {
+    AdminActionsProps,
+    UseAdminActionsReturn,
+} from "@/types/admin";
+import { ItemType, User } from "@/types/index";
 import { validateProductData, validateUserData } from "@/lib/validation/admin";
+
 
 export const useAdminActions = ({
     saveProductMutation,
@@ -21,7 +26,7 @@ export const useAdminActions = ({
     handleCloseUserDeleteDialog,
     handleCloseOrderDialog,
     setError,
-}: AdminActionsProps) => {
+}: AdminActionsProps): UseAdminActionsReturn => {
     const { showSnackbar } = useSnackbar();
 
     const handleMutation = useCallback(
@@ -29,7 +34,7 @@ export const useAdminActions = ({
             mutation: UseMutationResult<TData, Error, TVariables, unknown>,
             data: TVariables,
             closeDialog: () => void,
-            successMessage: string
+            successMessage: string,
         ) => {
             try {
                 await mutation.mutateAsync(data);
@@ -49,49 +54,89 @@ export const useAdminActions = ({
         async (event: React.FormEvent<HTMLFormElement>) => {
             event.preventDefault();
             const formData = new FormData(event.currentTarget);
-
             const productData: Partial<ItemType> = {
                 name: formData.get("name") as string,
-                price: Number(formData.get("price")),
+                price: parseFloat(formData.get("price") as string),
                 description: formData.get("description") as string,
-                discount: Number(formData.get("discount")) || 0,
-                isSeasonal: formData.get("is_seasonal") === "true",
+                discount: parseInt(formData.get("discount") as string, 10) || 0,
+                isSeasonal: formData.get("isSeasonal") === "true",
                 category: formData.get("category") as string,
-                quantity: Number(formData.get("quantity")),
+                quantity: parseInt(formData.get("quantity") as string, 10) || 0,
                 image: (formData.get("image") as string) || undefined,
             };
 
-            const validation = validateProductData(productData);
-            if (!validation.isValid) {
-                setError(validation.error ?? null);
-                showSnackbar(validation.error!, "error");
+            const { isValid, error } = validateProductData(productData);
+            if (!isValid) {
+                setError(error || "Validation failed");
+                showSnackbar(error || "Validation failed", "error");
                 return;
             }
 
             await handleMutation(
                 saveProductMutation,
-                { productData, isEdit: isEditProduct, id: selectedProduct.id },
+                { productData, isEdit: isEditProduct, id: selectedProduct?.id },
                 handleCloseProductDialog,
                 isEditProduct
                     ? "Product updated successfully"
-                    : "Product added successfully"
+                    : "Product added successfully",
             );
         },
         [
-            handleMutation,
             saveProductMutation,
             isEditProduct,
-            selectedProduct.id,
+            selectedProduct?.id,
             handleCloseProductDialog,
+            handleMutation,
+            setError,
+            showSnackbar,
+        ]
+    );
+
+    const handleSaveUser = useCallback(
+        async (event: React.FormEvent<HTMLFormElement>) => {
+            event.preventDefault();
+            const formData = new FormData(event.currentTarget);
+            const userData: Partial<
+                Pick<User, "firstName" | "lastName" | "email" | "role">
+            > = {
+                firstName: formData.get("firstName") as string,
+                lastName: formData.get("lastName") as string,
+                email: formData.get("email") as string,
+                role: formData.get("role") as string,
+            };
+
+            const { isValid, error } = validateUserData(userData);
+            if (!isValid) {
+                setError(error || "Validation failed");
+                showSnackbar(error || "Validation failed", "error");
+                return;
+            }
+
+            await handleMutation(
+                saveUserMutation,
+                { userData, isEdit: isEditUser, id: selectedUser?.id },
+                handleCloseUserDialog,
+                isEditUser
+                    ? "User updated successfully"
+                    : "User added successfully",
+            );
+        },
+        [
+            saveUserMutation,
+            isEditUser,
+            selectedUser?.id,
+            handleCloseUserDialog,
+            handleMutation,
             setError,
             showSnackbar,
         ]
     );
 
     const handleDeleteProduct = useCallback(async () => {
-        if (!selectedProduct.id) {
-            setError("No product selected");
-            showSnackbar("No product selected", "error");
+        if (!selectedProduct?.id) {
+            const error = "No product selected";
+            setError(error);
+            showSnackbar(error, "error");
             return;
         }
 
@@ -102,7 +147,7 @@ export const useAdminActions = ({
             "Product deleted successfully"
         );
     }, [
-        selectedProduct.id,
+        selectedProduct?.id,
         handleMutation,
         deleteProductMutation,
         handleCloseDeleteDialog,
@@ -110,49 +155,11 @@ export const useAdminActions = ({
         showSnackbar,
     ]);
 
-    const handleSaveUser = useCallback(
-        async (event: React.FormEvent<HTMLFormElement>) => {
-            event.preventDefault();
-            const formData = new FormData(event.currentTarget);
-
-            const userData: Partial<User> = {
-                firstName: formData.get("firstName") as string,
-                lastName: formData.get("lastName") as string,
-                email: formData.get("email") as string,
-                role: formData.get("role") as string,
-            };
-
-            const validation = validateUserData(userData);
-            if (!validation.isValid) {
-                setError(validation.error ?? null);
-                showSnackbar(validation.error!, "error");
-                return;
-            }
-
-            await handleMutation(
-                saveUserMutation,
-                { userData, isEdit: isEditUser, id: selectedUser.id },
-                handleCloseUserDialog,
-                isEditUser
-                    ? "User updated successfully"
-                    : "User added successfully"
-            );
-        },
-        [
-            handleMutation,
-            saveUserMutation,
-            isEditUser,
-            selectedUser.id,
-            handleCloseUserDialog,
-            setError,
-            showSnackbar,
-        ]
-    );
-
     const handleDeleteUser = useCallback(async () => {
-        if (!selectedUser.id) {
-            setError("No user selected");
-            showSnackbar("No user selected", "error");
+        if (!selectedUser?.id) {
+            const error = "No user selected";
+            setError(error);
+            showSnackbar(error, "error");
             return;
         }
 
@@ -163,7 +170,7 @@ export const useAdminActions = ({
             "User deleted successfully"
         );
     }, [
-        selectedUser.id,
+        selectedUser?.id,
         handleMutation,
         deleteUserMutation,
         handleCloseUserDeleteDialog,
@@ -173,9 +180,10 @@ export const useAdminActions = ({
 
     const handleUpdateOrderStatus = useCallback(
         async (status: string) => {
-            if (!selectedOrder.id) {
-                setError("No order selected");
-                showSnackbar("No order selected", "error");
+            if (!selectedOrder?.id) {
+                const error = "No order selected";
+                setError(error);
+                showSnackbar(error, "error");
                 return;
             }
 
@@ -187,7 +195,7 @@ export const useAdminActions = ({
             );
         },
         [
-            selectedOrder.id,
+            selectedOrder?.id,
             handleMutation,
             updateOrderMutation,
             handleCloseOrderDialog,
@@ -196,11 +204,20 @@ export const useAdminActions = ({
         ]
     );
 
-    return {
-        handleSaveProduct,
-        handleDeleteProduct,
-        handleSaveUser,
-        handleDeleteUser,
-        handleUpdateOrderStatus,
-    };
+    return useMemo(
+        () => ({
+            handleSaveProduct,
+            handleDeleteProduct,
+            handleSaveUser,
+            handleDeleteUser,
+            handleUpdateOrderStatus,
+        }),
+        [
+            handleSaveProduct,
+            handleDeleteProduct,
+            handleSaveUser,
+            handleDeleteUser,
+            handleUpdateOrderStatus,
+        ]
+    );
 };

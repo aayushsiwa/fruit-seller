@@ -2,8 +2,8 @@ import { Box, Typography, IconButton, TextField } from "@mui/material";
 import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
 import { FiTrash2, FiPlus, FiMinus } from "react-icons/fi";
-import { CartItemsProps } from "@/types";
-import { currency, defaultImage } from "@/config";
+import { CartItemsProps } from "@/types/index";
+import { currency, defaultImage } from "@/constants";
 
 export const CartItems: React.FC<CartItemsProps> = ({
     cart,

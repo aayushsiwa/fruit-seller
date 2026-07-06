@@ -1,10 +1,11 @@
-import { ItemType, User } from "@/types";
+import axios from "axios";
+import { ItemType, User,Order } from "@/types/index";
 
 export const saveProduct = async (
     productData: Partial<ItemType>,
     isEdit: boolean,
     id?: string
-) => {
+): Promise<ItemType> => {
     const method = isEdit ? "PUT" : "POST";
     const url = isEdit ? `/api/products/${id}` : "/api/products";
 
@@ -22,7 +23,7 @@ export const saveProduct = async (
     return response.json();
 };
 
-export const deleteProduct = async (id: string) => {
+export const deleteProduct = async (id: string): Promise<void> => {
     const response = await fetch(`/api/products/${id}`, {
         method: "DELETE",
     });
@@ -31,14 +32,14 @@ export const deleteProduct = async (id: string) => {
         throw new Error("Failed to delete product");
     }
 
-    return response.json();
+    await response.json();
 };
 
 export const saveUser = async (
     userData: Partial<User>,
     isEdit: boolean,
     id?: string
-) => {
+): Promise<User> => {
     const method = isEdit ? "PUT" : "POST";
     const url = isEdit ? `/api/admin/users/${id}` : "/api/admin/users";
 
@@ -57,7 +58,7 @@ export const saveUser = async (
     return response.json();
 };
 
-export const deleteUser = async (id: string) => {
+export const deleteUser = async (id: string): Promise<void> => {
     const response = await fetch(`/api/admin/users/${id}`, {
         method: "DELETE",
     });
@@ -66,10 +67,10 @@ export const deleteUser = async (id: string) => {
         throw new Error("Failed to delete user");
     }
 
-    return response.json();
+    await response.json();
 };
 
-export const updateOrderStatus = async (id: string, status: string) => {
+export const updateOrderStatus = async (id: string, status: string): Promise<Order> => {
     const response = await fetch(`/api/admin/orders/${id}`, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
@@ -81,4 +82,29 @@ export const updateOrderStatus = async (id: string, status: string) => {
     }
 
     return response.json();
+};
+
+
+export const fetchProducts = async (): Promise<ItemType[]> => {
+  const response = await axios.get("/api/products");
+  if (response.status !== 200) {
+    throw new Error(`Failed to fetch products: ${response.statusText}`);
+  }
+  return response.data;
+};
+
+export const fetchUsers = async (): Promise<User[]> => {
+  const response = await axios.get("/api/admin/users");
+  if (response.status !== 200) {
+    throw new Error(`Failed to fetch users: ${response.statusText}`);
+  }
+  return response.data;
+};
+
+export const fetchOrders = async (): Promise<Order[]> => {
+  const response = await axios.get("/api/admin/orders");
+  if (response.status !== 200) {
+    throw new Error(`Failed to fetch orders: ${response.statusText}`);
+  }
+  return response.data;
 };

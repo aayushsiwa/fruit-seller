@@ -9,8 +9,8 @@ import {
 } from "@mui/material";
 import { motion } from "framer-motion";
 import { FiShoppingCart } from "react-icons/fi";
-import { OrderSummaryProps } from "@/types";
-import { currency, paymentMethods } from "@/config";
+import { OrderSummaryProps } from "@/types/index";
+import { currency, paymentMethods } from "@/constants/index";
 
 export const OrderSummary: React.FC<OrderSummaryProps> = ({
     products,

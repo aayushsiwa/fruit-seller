@@ -1,5 +1,5 @@
 import { createContext, useState, useContext, useEffect } from "react";
-import { CartContextType, LayoutProps, ItemType, LocalCartItem } from "@/types";
+import { CartContextType, LayoutProps, ItemType, LocalCartItem } from "@/types/index";
 import { useSnackbar } from "@/src/contexts/SnackBarContext";
 import axios from "axios";
 

@@ -5,7 +5,7 @@ import {
   signOut as nextAuthSignOut,
 } from "next-auth/react";
 import { useMutation } from "@tanstack/react-query";
-import { RegisterData, AuthContextType } from "@/types";
+import { RegisterData, AuthContextType } from "@/types/index";
 import axios from "axios";
 
 export const AuthContext = React.createContext<AuthContextType>({

@@ -13,7 +13,7 @@ import {
     Chip,
 } from "@mui/material";
 import { FiEdit2 } from "react-icons/fi";
-import { Order, OrdersTabProps } from "@/types";
+import { Order, OrdersTabProps } from "@/types/index";
 
 const OrdersTab: React.FC<OrdersTabProps> = ({
     orders,

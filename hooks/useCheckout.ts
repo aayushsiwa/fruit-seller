@@ -3,7 +3,7 @@ import { useQueries } from "@tanstack/react-query";
 import { useRouter } from "next/router";
 import { useCart } from "@/src/contexts/CartContext";
 import { useSession } from "next-auth/react";
-import { ItemType } from "@/types";
+import { ItemType, UseCheckoutReturn } from "@/types/index";
 import axios from "axios";
 
 const fetchProductDetails = async (id: string) => {
@@ -22,7 +22,7 @@ const fetchProductDetails = async (id: string) => {
     }
 };
 
-export const useCheckout = () => {
+export const useCheckout = (): UseCheckoutReturn => {
     const { data: session, status } = useSession();
     const router = useRouter();
     const {

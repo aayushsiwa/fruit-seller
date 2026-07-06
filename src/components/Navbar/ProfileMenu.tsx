@@ -10,7 +10,7 @@ import {
     Fade,
 } from "@mui/material";
 import { FiUser, FiHeart, FiPackage, FiShield, FiLogOut } from "react-icons/fi";
-import { ProfileMenuProps } from "@/types";
+import { ProfileMenuProps } from "@/types/index";
 
 export const ProfileMenu: React.FC<ProfileMenuProps> = ({
     user,

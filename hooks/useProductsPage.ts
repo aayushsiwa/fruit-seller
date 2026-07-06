@@ -1,7 +1,8 @@
 import { useState, useEffect } from "react";
 import { useQuery } from "@tanstack/react-query";
-import { ItemType } from "@/types";
-import { categories, sortOptions, currency } from "@/config";
+import { ItemType, UseProductsPageReturn } from "@/types/index";
+import {currency } from "@/constants/index";
+import { categories, sortOptions } from "@/constants/productsPage";
 import axios from "axios";
 
 const fetchProducts = async (): Promise<ItemType[]> => {
@@ -10,7 +11,7 @@ const fetchProducts = async (): Promise<ItemType[]> => {
     return response.data;
 };
 
-export const useProductsPage = () => {
+export const useProductsPage = (): UseProductsPageReturn => {
     const [products, setProducts] = useState<ItemType[]>([]);
     const [filteredProducts, setFilteredProducts] = useState<ItemType[]>([]);
     const [priceRange, setPriceRange] = useState<[number, number]>([0, 100]);
@@ -129,7 +130,7 @@ export const useProductsPage = () => {
         openFilterDialog,
         setOpenFilterDialog,
         isLoading,
-        error,
+        error: error ? (typeof error === "string" ? error : error.message) : null,
         handleResetFilters,
         getFilterSummary,
         categories,
