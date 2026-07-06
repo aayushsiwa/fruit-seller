@@ -3,7 +3,6 @@ import nextJest from "next/jest";
 const createJestConfig = nextJest({ dir: "./" });
 
 const customJestConfig = {
-  setupFiles: ["<rootDir>/jest.polyfill.cjs"],
   setupFilesAfterEnv: ["<rootDir>/jest.setup.ts"],
   testEnvironment: "jsdom",
   moduleNameMapper: {
