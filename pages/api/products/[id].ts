@@ -1,5 +1,8 @@
 import { NextApiRequest, NextApiResponse } from "next";
+import { getServerSession } from "next-auth/next";
 import { supabase } from "@/lib/supabase";
+import { authOptions } from "../auth/[...nextauth]";
+import { SessionUser } from "@/types/index";
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
     const id = req.query.id as string;
@@ -20,6 +23,13 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
             return res.status(404).json({ error: "Product not found" });
         }
         return res.status(200).json(data);
+    }
+
+    if (req.method === "PUT" || req.method === "DELETE") {
+        const session = (await getServerSession(req, res, authOptions)) as SessionUser;
+        if (!session || !["admin", "seller"].includes(session.user.role || "")) {
+            return res.status(403).json({ error: "Unauthorized" });
+        }
     }
 
     if (req.method === "PUT") {
