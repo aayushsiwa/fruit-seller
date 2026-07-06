@@ -3,75 +3,120 @@ import { getServerSession } from "next-auth/next";
 import { supabase } from "@/lib/supabase";
 import { CartItem } from "@/types/index";
 import Nextauth from "../auth/[...nextauth]";
+import crypto from "crypto";
 
-export default async function handler(req: NextApiRequest, res: NextApiResponse) {
-    if (req.method !== "POST") {
-        return res.status(405).json({ error: "Method not allowed" });
+export default async function handler(
+  req: NextApiRequest,
+  res: NextApiResponse,
+) {
+  if (req.method !== "POST") {
+    return res.status(405).json({ error: "Method not allowed" });
+  }
+
+  const session = (await getServerSession(req, res, Nextauth.authOptions)) as {
+    user?: { email?: string };
+  } | null;
+  if (!session || !session.user || !session.user.email) {
+    return res.status(401).json({ error: "Unauthorized" });
+  }
+
+  const {
+    cart,
+    total,
+    razorpay_payment_id,
+    razorpay_order_id,
+    razorpay_signature,
+  }: {
+    cart: CartItem[];
+    total: number;
+    razorpay_payment_id: string;
+    razorpay_order_id: string;
+    razorpay_signature: string;
+  } = req.body;
+
+  if (!cart || !Array.isArray(cart) || cart.length === 0 || !total) {
+    return res.status(400).json({ error: "Invalid cart or total" });
+  }
+
+  if (!razorpay_payment_id || !razorpay_order_id || !razorpay_signature) {
+    return res.status(400).json({ error: "Missing payment verification data" });
+  }
+
+  const body = razorpay_order_id + "|" + razorpay_payment_id;
+  const expectedSignature = crypto
+    .createHmac("sha256", process.env.RAZORPAY_KEY_SECRET!)
+    .update(body)
+    .digest("hex");
+
+  if (expectedSignature !== razorpay_signature) {
+    return res.status(400).json({ error: "Payment verification failed" });
+  }
+
+  try {
+    const ids = cart.map((item) => item.id);
+    const { data: products, error: fetchError } = await supabase
+      .from("fruitsellerproducts")
+      .select("*")
+      .in("id", ids);
+
+    if (fetchError || !products) {
+      return res.status(500).json({ error: "Failed to fetch products" });
     }
 
-    const session = await getServerSession(req, res, Nextauth.authOptions) as { user?: { email?: string } } | null;
-    if (!session || !session.user || !session.user.email) {
-        return res.status(401).json({ error: "Unauthorized" });
+    for (const item of cart) {
+      const product = products.find((p) => p.id === item.id);
+      if (!product) {
+        return res.status(400).json({ error: `Product ${item.id} not found` });
+      }
+      if (product.quantity < item.quantity) {
+        return res
+          .status(400)
+          .json({ error: `Insufficient stock for ${product.name}` });
+      }
     }
 
-    const { cart, total }: { cart: CartItem[]; total: number } = req.body;
+    for (const item of cart) {
+      const product = products.find((p) => p.id === item.id)!;
+      const newQuantity = product.quantity - item.quantity;
+      const { error: updateError } = await supabase
+        .from("fruitsellerproducts")
+        .update({ quantity: newQuantity })
+        .eq("id", item.id);
 
-    if (!cart || !Array.isArray(cart) || cart.length === 0 || !total) {
-        return res.status(400).json({ error: "Invalid cart or total" });
+      if (updateError) {
+        return res
+          .status(500)
+          .json({ error: `Failed to update stock for ${product.name}` });
+      }
     }
 
-    try {
-        const ids = cart.map((item) => item.id);
-        const { data: products, error: fetchError } = await supabase
-            .from("fruitsellerproducts")
-            .select("*")
-            .in("id", ids);
+    const { data: order, error: orderError } = await supabase
+      .from("orders")
+      .insert({
+        user_email: session.user.email,
+        items: cart,
+        total,
+        created_at: new Date().toISOString(),
+        payment_id: razorpay_payment_id,
+        razorpay_order_id,
+      })
+      .select()
+      .single();
 
-        if (fetchError || !products) {
-            return res.status(500).json({ error: "Failed to fetch products" });
-        }
-
-        for (const item of cart) {
-            const product = products.find((p) => p.id === item.id);
-            if (!product) {
-                return res.status(400).json({ error: `Product ${item.id} not found` });
-            }
-            if (product.quantity < item.quantity) {
-                return res.status(400).json({ error: `Insufficient stock for ${product.name}` });
-            }
-        }
-
-        for (const item of cart) {
-            const product = products.find((p) => p.id === item.id)!;
-            const newQuantity = product.quantity - item.quantity;
-            const { error: updateError } = await supabase
-                .from("fruitsellerproducts")
-                .update({ quantity: newQuantity })
-                .eq("id", item.id);
-
-            if (updateError) {
-                return res.status(500).json({ error: `Failed to update stock for ${product.name}` });
-            }
-        }
-
-        const { data: order, error: orderError } = await supabase
-            .from("orders")
-            .insert({
-                user_email: session.user.email,
-                items: cart,
-                total,
-                created_at: new Date().toISOString(),
-            })
-            .select()
-            .single();
-
-        if (orderError || !order) {
-            return res.status(500).json({ error: "Failed to create order" });
-        }
-
-        return res.status(200).json({ order });
-    } catch (error) {
-        console.error("Order creation error:", error);
-        return res.status(500).json({ error: "Internal server error" });
+    if (orderError) {
+      console.error("Order insert error:", orderError);
+      return res.status(500).json({
+        error: "Failed to create order",
+        details: orderError.message,
+      });
     }
+    if (!order) {
+      return res.status(500).json({ error: "Order creation returned no data" });
+    }
+
+    return res.status(200).json({ order });
+  } catch (error) {
+    console.error("Order creation error:", error);
+    return res.status(500).json({ error: "Internal server error" });
+  }
 }
