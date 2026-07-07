@@ -1,43 +1,47 @@
-import type { NextApiRequest, NextApiResponse } from "next";
-import { getServerSession } from "next-auth/next";
-import { supabase } from "@/lib/supabase";
-import { authOptions } from "../../auth/[...nextauth]";
-import { SessionUser } from "@/types/index";
+import { supabase } from '@/lib/supabase';
+import { SessionUser } from '@/types/index';
+import type { NextApiRequest, NextApiResponse } from 'next';
+import { getServerSession } from 'next-auth/next';
 
-export default async function handler(req: NextApiRequest, res: NextApiResponse) {
-    const session = (await getServerSession(
-        req,
-        res,
-        authOptions,
-    )) as SessionUser;
+import { authOptions } from '../../auth/[...nextauth]';
 
-    if (
-        !session ||
-        !["admin"].includes(
-            typeof session.user.role === "string" ? session.user.role : "",
-        )
-    ) {
-        return res.status(403).json({ error: "Unauthorized" });
-    }
+export default async function handler(
+  req: NextApiRequest,
+  res: NextApiResponse
+) {
+  const session = (await getServerSession(
+    req,
+    res,
+    authOptions
+  )) as SessionUser;
 
-    if (req.method !== "GET") {
-        return res.status(405).json({ error: "Method not allowed" });
-    }
+  if (
+    !session ||
+    !['admin'].includes(
+      typeof session.user.role === 'string' ? session.user.role : ''
+    )
+  ) {
+    return res.status(403).json({ error: 'Unauthorized' });
+  }
 
-    const { data, error } = await supabase
-        .from("orders")
-        .select("*")
-        .order("created_at", { ascending: false });
+  if (req.method !== 'GET') {
+    return res.status(405).json({ error: 'Method not allowed' });
+  }
 
-    if (error) return res.status(500).json({ error: error.message });
+  const { data, error } = await supabase
+    .from('orders')
+    .select('*')
+    .order('created_at', { ascending: false });
 
-    const orders = (data ?? []).map((order: Record<string, unknown>) => ({
-        ...order,
-        userName: order.user_email,
-        items: order.items,
-        status: (order.status as string) || "Processing",
-        createdAt: order.created_at,
-    }));
+  if (error) return res.status(500).json({ error: error.message });
 
-    return res.status(200).json(orders);
+  const orders = (data ?? []).map((order: Record<string, unknown>) => ({
+    ...order,
+    userName: order.user_email,
+    items: order.items,
+    status: (order.status as string) || 'Processing',
+    createdAt: order.created_at,
+  }));
+
+  return res.status(200).json(orders);
 }

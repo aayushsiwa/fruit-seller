@@ -1,24 +1,21 @@
-import { useCallback, useMemo } from "react";
-import { UseMutationResult } from "@tanstack/react-query";
-import { useSnackbar } from "@/src/contexts/SnackBarContext";
-import { ItemType, User, OrderStatus } from "@/types/index";
-import {
-  AdminActionsProps,
-  UseAdminActionsReturn,
-} from "@/types/admin";
-import { validateProductData, validateUserData } from "@/lib/validation/admin";
+import { validateProductData, validateUserData } from '@/lib/validation/admin';
+import { useSnackbar } from '@/src/contexts/SnackBarContext';
+import { AdminActionsProps, UseAdminActionsReturn } from '@/types/admin';
+import { ItemType, OrderStatus, User } from '@/types/index';
+import { UseMutationResult } from '@tanstack/react-query';
+import { useCallback, useMemo } from 'react';
 
-const STATUS_ORDER: OrderStatus[] = ["Processing", "Shipped", "Delivered"];
+const STATUS_ORDER: OrderStatus[] = ['Processing', 'Shipped', 'Delivered'];
 
 function validateTransition(
   current: OrderStatus,
-  next: OrderStatus,
+  next: OrderStatus
 ): string | null {
   if (current === next) return null;
-  if (current === "Delivered" || current === "Cancelled") {
+  if (current === 'Delivered' || current === 'Cancelled') {
     return `Cannot change status from "${current}" — it is a terminal state`;
   }
-  if (next === "Processing") return "Cannot revert to Processing";
+  if (next === 'Processing') return 'Cannot revert to Processing';
   const currentIdx = STATUS_ORDER.indexOf(current);
   const nextIdx = STATUS_ORDER.indexOf(next);
   if (nextIdx >= 0 && nextIdx <= currentIdx) {
@@ -55,20 +52,20 @@ const useAdminActions = ({
       mutation: UseMutationResult<TData, Error, TVariables, unknown>,
       data: TVariables,
       closeDialog: () => void,
-      successMessage: string,
+      successMessage: string
     ) => {
       try {
         await mutation.mutateAsync(data);
-        showSnackbar(successMessage, "success");
+        showSnackbar(successMessage, 'success');
         closeDialog();
       } catch (err) {
         const errorMessage =
-          err instanceof Error ? err.message : "An error occurred";
+          err instanceof Error ? err.message : 'An error occurred';
         setError(errorMessage);
-        showSnackbar(errorMessage, "error");
+        showSnackbar(errorMessage, 'error');
       }
     },
-    [setError, showSnackbar],
+    [setError, showSnackbar]
   );
 
   const handleSaveProduct = useCallback(
@@ -76,20 +73,20 @@ const useAdminActions = ({
       event.preventDefault();
       const formData = new FormData(event.currentTarget);
       const productData: Partial<ItemType> = {
-        name: formData.get("name") as string,
-        price: parseFloat(formData.get("price") as string),
-        description: formData.get("description") as string,
-        discount: parseInt(formData.get("discount") as string, 10) || 0,
-        isSeasonal: formData.get("isSeasonal") === "true",
-        category: formData.get("category") as string,
-        quantity: parseInt(formData.get("quantity") as string, 10) || 0,
-        image: (formData.get("image") as string) || undefined,
+        name: formData.get('name') as string,
+        price: parseFloat(formData.get('price') as string),
+        description: formData.get('description') as string,
+        discount: parseInt(formData.get('discount') as string, 10) || 0,
+        isSeasonal: formData.get('isSeasonal') === 'true',
+        category: formData.get('category') as string,
+        quantity: parseInt(formData.get('quantity') as string, 10) || 0,
+        image: (formData.get('image') as string) || undefined,
       };
 
       const { isValid, error } = validateProductData(productData);
       if (!isValid) {
-        setError(error || "Validation failed");
-        showSnackbar(error || "Validation failed", "error");
+        setError(error || 'Validation failed');
+        showSnackbar(error || 'Validation failed', 'error');
         return;
       }
 
@@ -98,8 +95,8 @@ const useAdminActions = ({
         { productData, isEdit: isEditProduct, id: selectedProduct?.id },
         handleCloseProductDialog,
         isEditProduct
-          ? "Product updated successfully"
-          : "Product added successfully",
+          ? 'Product updated successfully'
+          : 'Product added successfully'
       );
     },
     [
@@ -110,7 +107,7 @@ const useAdminActions = ({
       handleMutation,
       setError,
       showSnackbar,
-    ],
+    ]
   );
 
   const handleSaveUser = useCallback(
@@ -118,18 +115,18 @@ const useAdminActions = ({
       event.preventDefault();
       const formData = new FormData(event.currentTarget);
       const userData: Partial<
-        Pick<User, "firstName" | "lastName" | "email" | "role">
+        Pick<User, 'firstName' | 'lastName' | 'email' | 'role'>
       > = {
-        firstName: formData.get("firstName") as string,
-        lastName: formData.get("lastName") as string,
-        email: formData.get("email") as string,
-        role: formData.get("role") as string,
+        firstName: formData.get('firstName') as string,
+        lastName: formData.get('lastName') as string,
+        email: formData.get('email') as string,
+        role: formData.get('role') as string,
       };
 
       const { isValid, error } = validateUserData(userData);
       if (!isValid) {
-        setError(error || "Validation failed");
-        showSnackbar(error || "Validation failed", "error");
+        setError(error || 'Validation failed');
+        showSnackbar(error || 'Validation failed', 'error');
         return;
       }
 
@@ -137,7 +134,7 @@ const useAdminActions = ({
         saveUserMutation,
         { userData, isEdit: isEditUser, id: selectedUser?.id },
         handleCloseUserDialog,
-        isEditUser ? "User updated successfully" : "User added successfully",
+        isEditUser ? 'User updated successfully' : 'User added successfully'
       );
     },
     [
@@ -148,14 +145,14 @@ const useAdminActions = ({
       handleMutation,
       setError,
       showSnackbar,
-    ],
+    ]
   );
 
   const handleDeleteProduct = useCallback(async () => {
     if (!selectedProduct?.id) {
-      const error = "No product selected";
+      const error = 'No product selected';
       setError(error);
-      showSnackbar(error, "error");
+      showSnackbar(error, 'error');
       return;
     }
 
@@ -163,7 +160,7 @@ const useAdminActions = ({
       deleteProductMutation,
       selectedProduct.id,
       handleCloseDeleteDialog,
-      "Product deleted successfully",
+      'Product deleted successfully'
     );
   }, [
     selectedProduct?.id,
@@ -176,9 +173,9 @@ const useAdminActions = ({
 
   const handleDeleteUser = useCallback(async () => {
     if (!selectedUser?.id) {
-      const error = "No user selected";
+      const error = 'No user selected';
       setError(error);
-      showSnackbar(error, "error");
+      showSnackbar(error, 'error');
       return;
     }
 
@@ -186,7 +183,7 @@ const useAdminActions = ({
       deleteUserMutation,
       selectedUser.id,
       handleCloseUserDeleteDialog,
-      "User deleted successfully",
+      'User deleted successfully'
     );
   }, [
     selectedUser?.id,
@@ -201,29 +198,29 @@ const useAdminActions = ({
     async (status: OrderStatus) => {
       const currentStatus = selectedOrder?.status as OrderStatus | undefined;
       if (!currentStatus) {
-        const error = "No order status available";
+        const error = 'No order status available';
         setError(error);
-        showSnackbar(error, "error");
+        showSnackbar(error, 'error');
         return;
       }
 
       const validationError = validateTransition(currentStatus, status);
       if (validationError) {
         setError(validationError);
-        showSnackbar(validationError, "error");
+        showSnackbar(validationError, 'error');
         return;
       }
 
       handleOpenConfirmDialog(status);
     },
-    [selectedOrder?.status, setError, showSnackbar, handleOpenConfirmDialog],
+    [selectedOrder?.status, setError, showSnackbar, handleOpenConfirmDialog]
   );
 
   const handleConfirmOrderStatus = useCallback(async () => {
     if (!selectedOrder?.id) {
-      const error = "No order selected";
+      const error = 'No order selected';
       setError(error);
-      showSnackbar(error, "error");
+      showSnackbar(error, 'error');
       return;
     }
 
@@ -233,15 +230,15 @@ const useAdminActions = ({
       {
         id: selectedOrder.id.toString(),
         status: confirmStatus,
-        shipped_at: confirmStatus === "Shipped" ? now : undefined,
-        delivered_at: confirmStatus === "Delivered" ? now : undefined,
-        cancelled_at: confirmStatus === "Cancelled" ? now : undefined,
+        shipped_at: confirmStatus === 'Shipped' ? now : undefined,
+        delivered_at: confirmStatus === 'Delivered' ? now : undefined,
+        cancelled_at: confirmStatus === 'Cancelled' ? now : undefined,
       },
       () => {
         handleCloseConfirmDialog();
         handleCloseOrderDialog();
       },
-      "Order status updated successfully",
+      'Order status updated successfully'
     );
   }, [
     selectedOrder?.id,
@@ -270,7 +267,7 @@ const useAdminActions = ({
       handleDeleteUser,
       handleUpdateOrderStatus,
       handleConfirmOrderStatus,
-    ],
+    ]
   );
 };
 

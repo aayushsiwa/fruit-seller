@@ -1,11 +1,12 @@
-import { Container, Typography, Button } from "@mui/material";
-import { FiCheckCircle } from "react-icons/fi";
-import { motion } from "framer-motion";
-import { useSuccess } from "./Success.hooks";
-import { OrderDetails } from "@/src/components/Success/OrderDetails";
-import { LoadingScreen } from "@/src/components/LoadingScreen";
-import { ErrorMessage } from "@/src/components/Success/ErrorMessage";
-import { useSuccessStyles } from "./Success.styles";
+import { LoadingScreen } from '@/src/components/LoadingScreen';
+import { ErrorMessage } from '@/src/components/Success/ErrorMessage';
+import { OrderDetails } from '@/src/components/Success/OrderDetails';
+import { Button, Container, Typography } from '@mui/material';
+import { motion } from 'framer-motion';
+import { FiCheckCircle } from 'react-icons/fi';
+
+import { useSuccess } from './Success.hooks';
+import { useSuccessStyles } from './Success.styles';
 
 export default function Success() {
   const classes = useSuccessStyles();

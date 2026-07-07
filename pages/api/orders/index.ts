@@ -1,27 +1,28 @@
-import type { NextApiRequest, NextApiResponse } from "next";
-import { getServerSession } from "next-auth/next";
-import { supabase } from "@/lib/supabase";
-import { CartItem } from "@/types/index";
-import Nextauth from "../auth/[...nextauth]";
-import crypto from "crypto";
+import { supabase } from '@/lib/supabase';
+import { CartItem } from '@/types/index';
+import crypto from 'crypto';
+import type { NextApiRequest, NextApiResponse } from 'next';
+import { getServerSession } from 'next-auth/next';
+
+import Nextauth from '../auth/[...nextauth]';
 
 export default async function handler(
   req: NextApiRequest,
-  res: NextApiResponse,
+  res: NextApiResponse
 ) {
   const session = (await getServerSession(req, res, Nextauth.authOptions)) as {
     user?: { email?: string };
   } | null;
   if (!session || !session.user || !session.user.email) {
-    return res.status(401).json({ error: "Unauthorized" });
+    return res.status(401).json({ error: 'Unauthorized' });
   }
 
-  if (req.method === "GET") {
+  if (req.method === 'GET') {
     const { data, error } = await supabase
-      .from("orders")
-      .select("*")
-      .eq("user_email", session.user.email)
-      .order("created_at", { ascending: false });
+      .from('orders')
+      .select('*')
+      .eq('user_email', session.user.email)
+      .order('created_at', { ascending: false });
 
     if (error) {
       return res.status(500).json({ error: error.message });
@@ -36,8 +37,8 @@ export default async function handler(
     return res.status(200).json(orders);
   }
 
-  if (req.method !== "POST") {
-    return res.status(405).json({ error: "Method not allowed" });
+  if (req.method !== 'POST') {
+    return res.status(405).json({ error: 'Method not allowed' });
   }
 
   const {
@@ -55,32 +56,32 @@ export default async function handler(
   } = req.body;
 
   if (!cart || !Array.isArray(cart) || cart.length === 0 || !total) {
-    return res.status(400).json({ error: "Invalid cart or total" });
+    return res.status(400).json({ error: 'Invalid cart or total' });
   }
 
   if (!razorpay_payment_id || !razorpay_order_id || !razorpay_signature) {
-    return res.status(400).json({ error: "Missing payment verification data" });
+    return res.status(400).json({ error: 'Missing payment verification data' });
   }
 
-  const body = razorpay_order_id + "|" + razorpay_payment_id;
+  const body = razorpay_order_id + '|' + razorpay_payment_id;
   const expectedSignature = crypto
-    .createHmac("sha256", process.env.RAZORPAY_KEY_SECRET!)
+    .createHmac('sha256', process.env.RAZORPAY_KEY_SECRET!)
     .update(body)
-    .digest("hex");
+    .digest('hex');
 
   if (expectedSignature !== razorpay_signature) {
-    return res.status(400).json({ error: "Payment verification failed" });
+    return res.status(400).json({ error: 'Payment verification failed' });
   }
 
   try {
     const ids = cart.map((item) => item.id);
     const { data: products, error: fetchError } = await supabase
-      .from("fruitsellerproducts")
-      .select("*")
-      .in("id", ids);
+      .from('fruitsellerproducts')
+      .select('*')
+      .in('id', ids);
 
     if (fetchError || !products) {
-      return res.status(500).json({ error: "Failed to fetch products" });
+      return res.status(500).json({ error: 'Failed to fetch products' });
     }
 
     for (const item of cart) {
@@ -99,9 +100,9 @@ export default async function handler(
       const product = products.find((p) => p.id === item.id)!;
       const newQuantity = product.quantity - item.quantity;
       const { error: updateError } = await supabase
-        .from("fruitsellerproducts")
+        .from('fruitsellerproducts')
         .update({ quantity: newQuantity })
-        .eq("id", item.id);
+        .eq('id', item.id);
 
       if (updateError) {
         return res
@@ -111,7 +112,7 @@ export default async function handler(
     }
 
     const { data: order, error: orderError } = await supabase
-      .from("orders")
+      .from('orders')
       .insert({
         user_email: session.user.email,
         items: cart,
@@ -124,19 +125,19 @@ export default async function handler(
       .single();
 
     if (orderError) {
-      console.error("Order insert error:", orderError);
+      console.error('Order insert error:', orderError);
       return res.status(500).json({
-        error: "Failed to create order",
+        error: 'Failed to create order',
         details: orderError.message,
       });
     }
     if (!order) {
-      return res.status(500).json({ error: "Order creation returned no data" });
+      return res.status(500).json({ error: 'Order creation returned no data' });
     }
 
     return res.status(200).json({ order });
   } catch (error) {
-    console.error("Order creation error:", error);
-    return res.status(500).json({ error: "Internal server error" });
+    console.error('Order creation error:', error);
+    return res.status(500).json({ error: 'Internal server error' });
   }
 }

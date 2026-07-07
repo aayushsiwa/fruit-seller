@@ -1,29 +1,29 @@
-import React from "react";
+import { useThemeSwitch } from '@/src/ThemeProvider';
+import { theme } from '@/src/theme';
+import { ProfileMenuProps } from '@/types/index';
 import {
+  Avatar,
+  Box,
+  Divider,
+  Fade,
+  ListItemIcon,
   Menu,
   MenuItem,
-  Box,
-  Avatar,
   Typography,
-  Divider,
-  ListItemIcon,
-  Fade,
-} from "@mui/material";
+} from '@mui/material';
+import React from 'react';
 import {
-  FiUser,
+  FiChevronDown,
+  FiChevronRight,
   FiHeart,
+  FiLogOut,
+  FiMonitor,
+  FiMoon,
   FiPackage,
   FiShield,
-  FiLogOut,
   FiSun,
-  FiMoon,
-  FiMonitor,
-  FiChevronRight,
-  FiChevronDown,
-} from "react-icons/fi";
-import { ProfileMenuProps } from "@/types/index";
-import { useThemeSwitch } from "@/src/ThemeProvider";
-import { theme } from "@/src/theme";
+  FiUser,
+} from 'react-icons/fi';
 
 export const ProfileMenu: React.FC<ProfileMenuProps> = ({
   user,
@@ -60,8 +60,8 @@ export const ProfileMenu: React.FC<ProfileMenuProps> = ({
         onClose={handleParentClose}
         TransitionComponent={Fade}
         anchorOrigin={{
-          vertical: "bottom",
-          horizontal: "right",
+          vertical: 'bottom',
+          horizontal: 'right',
         }}
         PaperProps={{
           elevation: 3,
@@ -69,18 +69,18 @@ export const ProfileMenu: React.FC<ProfileMenuProps> = ({
             borderRadius: 2,
             minWidth: 220,
             mt: 1,
-            overflow: "visible",
-            filter: "drop-shadow(0px 2px 8px rgba(0,0,0,0.15))",
-            "&:before": {
+            overflow: 'visible',
+            filter: 'drop-shadow(0px 2px 8px rgba(0,0,0,0.15))',
+            '&:before': {
               content: '""',
-              display: "block",
-              position: "absolute",
+              display: 'block',
+              position: 'absolute',
               top: 0,
               right: 14,
               width: 10,
               height: 10,
-              bgcolor: "background.paper",
-              transform: "translateY(-50%) rotate(45deg)",
+              bgcolor: 'background.paper',
+              transform: 'translateY(-50%) rotate(45deg)',
               zIndex: 0,
             },
           },
@@ -92,19 +92,19 @@ export const ProfileMenu: React.FC<ProfileMenuProps> = ({
               sx={{
                 px: 2,
                 py: 1.5,
-                display: "flex",
-                alignItems: "center",
+                display: 'flex',
+                alignItems: 'center',
                 borderBottom: (theme) => `1px solid ${theme.palette.divider}`,
               }}
             >
               <Avatar
-                src={user.image || ""}
-                alt={user.name || "User"}
+                src={user.image || ''}
+                alt={user.name || 'User'}
                 sx={{ width: 32, height: 32, mr: 1.5 }}
               />
               <Box>
-                <Typography variant="subtitle2" sx={{ fontWeight: "bold" }}>
-                  {user.name || "User"}
+                <Typography variant="subtitle2" sx={{ fontWeight: 'bold' }}>
+                  {user.name || 'User'}
                 </Typography>
                 <Typography variant="caption" color="text.secondary">
                   {user.email}
@@ -115,7 +115,7 @@ export const ProfileMenu: React.FC<ProfileMenuProps> = ({
             <MenuItem
               onClick={() => {
                 handleParentClose();
-                handleNavigation("/profile");
+                handleNavigation('/profile');
               }}
               sx={{ py: 1.5 }}
             >
@@ -127,7 +127,7 @@ export const ProfileMenu: React.FC<ProfileMenuProps> = ({
             <MenuItem
               onClick={() => {
                 handleParentClose();
-                handleNavigation("/favorites");
+                handleNavigation('/favorites');
               }}
               sx={{ py: 1.5 }}
             >
@@ -139,7 +139,7 @@ export const ProfileMenu: React.FC<ProfileMenuProps> = ({
             <MenuItem
               onClick={() => {
                 handleParentClose();
-                handleNavigation("/orders");
+                handleNavigation('/orders');
               }}
               sx={{ py: 1.5 }}
             >
@@ -152,7 +152,7 @@ export const ProfileMenu: React.FC<ProfileMenuProps> = ({
               <MenuItem
                 onClick={() => {
                   handleParentClose();
-                  handleNavigation("/admin");
+                  handleNavigation('/admin');
                 }}
                 sx={{ py: 1.5 }}
               >
@@ -175,7 +175,7 @@ export const ProfileMenu: React.FC<ProfileMenuProps> = ({
             <MenuItem
               onClick={() => {
                 handleParentClose();
-                handleNavigation("/login");
+                handleNavigation('/login');
               }}
               sx={{ py: 1.5 }}
             >
@@ -184,7 +184,7 @@ export const ProfileMenu: React.FC<ProfileMenuProps> = ({
             <MenuItem
               onClick={() => {
                 handleParentClose();
-                handleNavigation("/register");
+                handleNavigation('/register');
               }}
               sx={{ py: 1.5, color: theme.palette.primary.main }}
             >
@@ -197,13 +197,13 @@ export const ProfileMenu: React.FC<ProfileMenuProps> = ({
 
         <MenuItem
           onClick={handleThemeMenuOpen}
-          sx={{ py: 1.5, display: "flex", justifyContent: "space-between" }}
+          sx={{ py: 1.5, display: 'flex', justifyContent: 'space-between' }}
         >
-          <Box sx={{ display: "flex", alignItems: "center" }}>
+          <Box sx={{ display: 'flex', alignItems: 'center' }}>
             <ListItemIcon>
-              {themeMode === "light" && <FiSun size={18} />}
-              {themeMode === "dark" && <FiMoon size={18} />}
-              {themeMode === "system" && <FiMonitor size={18} />}
+              {themeMode === 'light' && <FiSun size={18} />}
+              {themeMode === 'dark' && <FiMoon size={18} />}
+              {themeMode === 'system' && <FiMonitor size={18} />}
             </ListItemIcon>
             Theme
           </Box>
@@ -223,8 +223,8 @@ export const ProfileMenu: React.FC<ProfileMenuProps> = ({
         onClose={handleThemeMenuClose}
         TransitionComponent={Fade}
         anchorOrigin={{
-          vertical: "bottom",
-          horizontal: "right",
+          vertical: 'bottom',
+          horizontal: 'right',
         }}
         PaperProps={{
           elevation: 3,
@@ -232,14 +232,14 @@ export const ProfileMenu: React.FC<ProfileMenuProps> = ({
             borderRadius: 2,
             minWidth: 120,
             ml: 0.5,
-            filter: "drop-shadow(0px 2px 8px rgba(0,0,0,0.15))",
+            filter: 'drop-shadow(0px 2px 8px rgba(0,0,0,0.15))',
           },
         }}
       >
         <MenuItem
-          selected={themeMode === "light"}
+          selected={themeMode === 'light'}
           onClick={() => {
-            setThemeMode("light");
+            setThemeMode('light');
             handleParentClose();
           }}
           sx={{ py: 1 }}
@@ -250,9 +250,9 @@ export const ProfileMenu: React.FC<ProfileMenuProps> = ({
           Light
         </MenuItem>
         <MenuItem
-          selected={themeMode === "dark"}
+          selected={themeMode === 'dark'}
           onClick={() => {
-            setThemeMode("dark");
+            setThemeMode('dark');
             handleParentClose();
           }}
           sx={{ py: 1 }}
@@ -263,9 +263,9 @@ export const ProfileMenu: React.FC<ProfileMenuProps> = ({
           Dark
         </MenuItem>
         <MenuItem
-          selected={themeMode === "system"}
+          selected={themeMode === 'system'}
           onClick={() => {
-            setThemeMode("system");
+            setThemeMode('system');
             handleParentClose();
           }}
           sx={{ py: 1 }}

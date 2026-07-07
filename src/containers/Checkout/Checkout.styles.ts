@@ -1,4 +1,4 @@
-import { makeStyles } from "@mui/styles";
+import { makeStyles } from '@mui/styles';
 
 export const useCheckoutStyles = makeStyles({
   root: {
@@ -10,16 +10,16 @@ export const useCheckoutStyles = makeStyles({
     marginBottom: 32,
   },
   loadingBox: {
-    textAlign: "center",
+    textAlign: 'center',
     paddingTop: 64,
     paddingBottom: 64,
   },
   errorText: {
-    color: "#f44336",
+    color: '#f44336',
   },
   summaryBox: {
     maxWidth: 600,
-    marginLeft: "auto",
-    marginRight: "auto",
+    marginLeft: 'auto',
+    marginRight: 'auto',
   },
 });

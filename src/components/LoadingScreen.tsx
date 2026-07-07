@@ -1,17 +1,17 @@
-import { Box, CircularProgress, Typography } from "@mui/material";
-import { motion } from "framer-motion";
+import { Box, CircularProgress, Typography } from '@mui/material';
+import { motion } from 'framer-motion';
 
 export const LoadingScreen: React.FC = () => {
   return (
     <Box
       sx={{
-        display: "flex",
-        flexDirection: "column",
-        justifyContent: "center",
-        alignItems: "center",
-        height: "100vh",
-        bgcolor: "primary.light",
-        textAlign: "center",
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'center',
+        alignItems: 'center',
+        height: '100vh',
+        bgcolor: 'primary.light',
+        textAlign: 'center',
         px: { xs: 2, sm: 4 },
       }}
       component={motion.div}
@@ -21,12 +21,12 @@ export const LoadingScreen: React.FC = () => {
     >
       <motion.div
         animate={{ scale: [1, 1.2, 1] }}
-        transition={{ repeat: Infinity, duration: 1.5, ease: "easeInOut" }}
+        transition={{ repeat: Infinity, duration: 1.5, ease: 'easeInOut' }}
       >
         <CircularProgress
           size={60}
           thickness={4}
-          sx={{ color: "primary.main" }}
+          sx={{ color: 'primary.main' }}
           aria-label="Loading fresh fruits"
         />
       </motion.div>
@@ -34,9 +34,9 @@ export const LoadingScreen: React.FC = () => {
         variant="h5"
         sx={{
           mt: 3,
-          color: "white",
+          color: 'white',
           fontWeight: 600,
-          fontSize: { xs: "1.25rem", sm: "1.5rem" },
+          fontSize: { xs: '1.25rem', sm: '1.5rem' },
         }}
       >
         Loading Fresh Fruits...
@@ -45,7 +45,7 @@ export const LoadingScreen: React.FC = () => {
         variant="body2"
         sx={{
           mt: 1,
-          color: "white",
+          color: 'white',
           opacity: 0.8,
           maxWidth: 400,
         }}

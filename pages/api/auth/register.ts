@@ -1,10 +1,10 @@
-import { supabase } from '@/lib/supabase';
 import { hashPassword } from '@/lib/auth';
 import { generateJWT } from '@/lib/auth';
+import { supabase } from '@/lib/supabase';
 import { NextApiRequest, NextApiResponse } from 'next';
 
 export default async function handler(
-  req: NextApiRequest, 
+  req: NextApiRequest,
   res: NextApiResponse
 ) {
   if (req.method !== 'POST') {
@@ -29,7 +29,9 @@ export default async function handler(
     }
 
     if (existingError && existingError.code !== 'PGRST116') {
-      return res.status(500).json({ message: 'Error checking user', details: existingError });
+      return res
+        .status(500)
+        .json({ message: 'Error checking user', details: existingError });
     }
 
     const hashed = await hashPassword(password);
@@ -39,23 +41,26 @@ export default async function handler(
       .insert({
         email,
         password: hashed,
-        first_name:firstName,
-        last_name:lastName,
+        first_name: firstName,
+        last_name: lastName,
         role: role || 'buyer',
       });
 
     if (insertError) {
-      return res.status(500).json({ message: 'Failed to create user', insertError });
+      return res
+        .status(500)
+        .json({ message: 'Failed to create user', insertError });
     }
 
     const token = await generateJWT(email, role);
-    
-    return res.status(201).json({ success: true, token: token, user: { email, firstName, lastName, role: role || "buyer" } });
 
-    
+    return res.status(201).json({
+      success: true,
+      token: token,
+      user: { email, firstName, lastName, role: role || 'buyer' },
+    });
   } catch (error) {
     console.error('Registration error:', error);
     return res.status(500).json({ message: 'Internal server error' });
   }
 }
-

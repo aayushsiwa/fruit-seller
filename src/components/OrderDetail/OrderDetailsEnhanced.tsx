@@ -1,26 +1,26 @@
-import { useState, useCallback } from "react";
+import { currency, defaultImage } from '@/constants/index';
+import { CartItem, OrderDetailsProps } from '@/types/index';
 import {
   Box,
-  Typography,
   Divider,
-  Paper,
-  Link,
   IconButton,
-  Tooltip,
-  Stepper,
+  Link,
+  Paper,
   Step,
   StepLabel,
-} from "@mui/material";
-import Image from "next/image";
-import NextLink from "next/link";
-import { FiCopy, FiCheck } from "react-icons/fi";
-import { motion } from "framer-motion";
-import dayjs from "dayjs";
-import relativeTime from "dayjs/plugin/relativeTime";
-import { OrderDetailsProps, CartItem } from "@/types/index";
+  Stepper,
+  Tooltip,
+  Typography,
+} from '@mui/material';
+import dayjs from 'dayjs';
+import relativeTime from 'dayjs/plugin/relativeTime';
+import { motion } from 'framer-motion';
+import Image from 'next/image';
+import NextLink from 'next/link';
+import { useCallback, useState } from 'react';
+import { FiCheck, FiCopy } from 'react-icons/fi';
 
 dayjs.extend(relativeTime);
-import { currency, defaultImage } from "@/constants/index";
 
 function CopyId({ id }: { id: string }) {
   const [copied, setCopied] = useState(false);
@@ -32,11 +32,11 @@ function CopyId({ id }: { id: string }) {
   }, [id]);
 
   return (
-    <Tooltip title={copied ? "Copied!" : "Copy"} placement="top">
+    <Tooltip title={copied ? 'Copied!' : 'Copy'} placement="top">
       <IconButton
         size="small"
         onClick={handleCopy}
-        sx={{ ml: 0.5, verticalAlign: "middle" }}
+        sx={{ ml: 0.5, verticalAlign: 'middle' }}
       >
         <FiCopy size={14} />
       </IconButton>
@@ -44,21 +44,21 @@ function CopyId({ id }: { id: string }) {
   );
 }
 
-const steps = ["Placed", "Shipped", "Delivered"];
+const steps = ['Placed', 'Shipped', 'Delivered'];
 
 function isShipped(status: string): boolean {
-  return status === "Shipped" || status === "Delivered";
+  return status === 'Shipped' || status === 'Delivered';
 }
 
 function isDelivered(status: string): boolean {
-  return status === "Delivered";
+  return status === 'Delivered';
 }
 
 export const OrderDetailsEnhanced: React.FC<OrderDetailsProps> = ({
   order,
   products,
 }) => {
-  const isCancelled = order.status === "Cancelled";
+  const isCancelled = order.status === 'Cancelled';
 
   function stepTooltip(index: number): string {
     const stepDone =
@@ -69,18 +69,18 @@ export const OrderDetailsEnhanced: React.FC<OrderDetailsProps> = ({
       return `Placed ${dayjs(order.createdAt).fromNow()}`;
     }
     if (index === 1) {
-      if (!stepDone) return "Yet to be shipped";
+      if (!stepDone) return 'Yet to be shipped';
       if (order.shipped_at) {
         return `Shipped ${dayjs(order.shipped_at).fromNow()}`;
       }
-      return "Shipped";
+      return 'Shipped';
     }
     if (index === 2) {
-      if (!stepDone) return "Yet to be delivered";
+      if (!stepDone) return 'Yet to be delivered';
       if (order.delivered_at) {
         return `Delivered ${dayjs(order.delivered_at).fromNow()}`;
       }
-      return "Delivered";
+      return 'Delivered';
     }
     return steps[index];
   }
@@ -101,13 +101,13 @@ export const OrderDetailsEnhanced: React.FC<OrderDetailsProps> = ({
   return (
     <Paper
       elevation={3}
-      sx={{ p: 3, borderRadius: 2, maxWidth: 600, mx: "auto", mt: 4 }}
+      sx={{ p: 3, borderRadius: 2, maxWidth: 600, mx: 'auto', mt: 4 }}
       component={motion.div}
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5 }}
     >
-      <Box sx={{ display: "flex", alignItems: "center", mb: 2 }}>
+      <Box sx={{ display: 'flex', alignItems: 'center', mb: 2 }}>
         <Typography variant="h6" sx={{ fontWeight: 600 }}>
           Order #{order.id.slice(0, 8)}
         </Typography>
@@ -129,11 +129,11 @@ export const OrderDetailsEnhanced: React.FC<OrderDetailsProps> = ({
                               sx={{
                                 width: 24,
                                 height: 24,
-                                borderRadius: "50%",
-                                bgcolor: "success.main",
-                                display: "flex",
-                                alignItems: "center",
-                                justifyContent: "center",
+                                borderRadius: '50%',
+                                bgcolor: 'success.main',
+                                display: 'flex',
+                                alignItems: 'center',
+                                justifyContent: 'center',
                               }}
                             >
                               <FiCheck size={14} color="#fff" />
@@ -144,28 +144,28 @@ export const OrderDetailsEnhanced: React.FC<OrderDetailsProps> = ({
                               sx={{
                                 width: 24,
                                 height: 24,
-                                borderRadius: "50%",
-                                border: "2px solid",
-                                borderColor: "grey.300",
-                                display: "flex",
-                                alignItems: "center",
-                                justifyContent: "center",
+                                borderRadius: '50%',
+                                border: '2px solid',
+                                borderColor: 'grey.300',
+                                display: 'flex',
+                                alignItems: 'center',
+                                justifyContent: 'center',
                               }}
                             >
                               <Box
                                 sx={{
                                   width: 6,
                                   height: 6,
-                                  borderRadius: "50%",
-                                  bgcolor: "grey.300",
+                                  borderRadius: '50%',
+                                  bgcolor: 'grey.300',
                                 }}
                               />
                             </Box>
                           )
                     }
                     sx={{
-                      "& .MuiStepLabel-label": {
-                        color: completed ? "text.primary" : "grey.400",
+                      '& .MuiStepLabel-label': {
+                        color: completed ? 'text.primary' : 'grey.400',
                         opacity: completed ? 1 : 0.5,
                       },
                     }}
@@ -182,10 +182,10 @@ export const OrderDetailsEnhanced: React.FC<OrderDetailsProps> = ({
       {isCancelled && (
         <Box
           sx={{
-            textAlign: "center",
+            textAlign: 'center',
             mb: 2,
             p: 1.5,
-            bgcolor: "error.light",
+            bgcolor: 'error.light',
             borderRadius: 1,
           }}
         >
@@ -197,7 +197,7 @@ export const OrderDetailsEnhanced: React.FC<OrderDetailsProps> = ({
       )}
 
       {order.payment_id && (
-        <Box sx={{ display: "flex", alignItems: "center" }}>
+        <Box sx={{ display: 'flex', alignItems: 'center' }}>
           <Typography variant="body2" color="text.secondary">
             Payment ID: <strong>{order.payment_id.slice(0, 16)}...</strong>
           </Typography>
@@ -205,7 +205,7 @@ export const OrderDetailsEnhanced: React.FC<OrderDetailsProps> = ({
         </Box>
       )}
       {order.razorpay_order_id && (
-        <Box sx={{ display: "flex", alignItems: "center" }}>
+        <Box sx={{ display: 'flex', alignItems: 'center' }}>
           <Typography variant="body2" color="text.secondary">
             Razorpay Order ID: <strong>{order.razorpay_order_id}</strong>
           </Typography>
@@ -220,8 +220,8 @@ export const OrderDetailsEnhanced: React.FC<OrderDetailsProps> = ({
       </Typography>
       <Box
         sx={{
-          display: "grid",
-          gridTemplateColumns: { xs: "1fr", md: "1fr" },
+          display: 'grid',
+          gridTemplateColumns: { xs: '1fr', md: '1fr' },
           gap: 2,
         }}
       >
@@ -242,21 +242,21 @@ export const OrderDetailsEnhanced: React.FC<OrderDetailsProps> = ({
                 underline="none"
                 color="inherit"
                 sx={{
-                  display: "block",
+                  display: 'block',
                   p: 2,
                   border: 1,
-                  borderColor: "divider",
+                  borderColor: 'divider',
                   borderRadius: 1,
-                  bgcolor: "background.paper",
-                  cursor: "pointer",
-                  transition: "box-shadow 0.2s",
-                  "&:hover": { boxShadow: 2 },
+                  bgcolor: 'background.paper',
+                  cursor: 'pointer',
+                  transition: 'box-shadow 0.2s',
+                  '&:hover': { boxShadow: 2 },
                 }}
               >
                 <Box
                   sx={{
-                    display: "flex",
-                    alignItems: "center",
+                    display: 'flex',
+                    alignItems: 'center',
                   }}
                 >
                   <Image
@@ -265,7 +265,7 @@ export const OrderDetailsEnhanced: React.FC<OrderDetailsProps> = ({
                     width={60}
                     height={60}
                     style={{
-                      objectFit: "cover",
+                      objectFit: 'cover',
                       borderRadius: 4,
                       marginRight: 16,
                     }}
@@ -295,7 +295,7 @@ export const OrderDetailsEnhanced: React.FC<OrderDetailsProps> = ({
         })}
       </Box>
       <Divider sx={{ my: 2 }} />
-      <Box sx={{ display: "flex", justifyContent: "space-between" }}>
+      <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
         <Typography variant="subtitle1" sx={{ fontWeight: 600 }}>
           Total
         </Typography>

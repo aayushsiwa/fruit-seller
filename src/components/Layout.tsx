@@ -1,10 +1,10 @@
-import React from "react";
-import { Container, Box } from "@mui/material";
-import Navbar from "@/src/components/Navbar/Navbar";
-import Footer from "@/src/components/Footer";
-import { useAuth } from "@/src/contexts/AuthContext";
-import { LayoutProps } from "@/types/index";
-import { LoadingScreen } from "@/src/components/LoadingScreen";
+import Footer from '@/src/components/Footer';
+import { LoadingScreen } from '@/src/components/LoadingScreen';
+import Navbar from '@/src/components/Navbar/Navbar';
+import { useAuth } from '@/src/contexts/AuthContext';
+import { LayoutProps } from '@/types/index';
+import { Box, Container } from '@mui/material';
+import React from 'react';
 
 const Layout: React.FC<LayoutProps> = ({ children }) => {
   const auth = useAuth();
@@ -17,9 +17,9 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
   return (
     <Box
       sx={{
-        display: "flex",
-        flexDirection: "column",
-        minHeight: "100vh",
+        display: 'flex',
+        flexDirection: 'column',
+        minHeight: '100vh',
       }}
     >
       <Navbar />

@@ -1,203 +1,206 @@
-import React from "react";
-import { render, screen } from "@testing-library/react";
-import { renderHook, act, waitFor } from "@testing-library/react";
-import { ThemeProvider, createTheme } from "@mui/material/styles";
-import { ItemType, UseSuccessReturn } from "@/types/index";
+import { ItemType, UseSuccessReturn } from '@/types/index';
+import { ThemeProvider, createTheme } from '@mui/material/styles';
+import { render, screen } from '@testing-library/react';
+import { act, renderHook, waitFor } from '@testing-library/react';
+import axios from 'axios';
+import React from 'react';
 
-jest.mock("framer-motion", () => {
-    const MotionDiv = ({ children, ...props }: { children: React.ReactNode } & Record<string, unknown>) => (
-        <div {...props}>{children}</div>
-    );
-    MotionDiv.displayName = "motion.div";
-    return {
-        motion: {
-            div: MotionDiv,
-        },
-    };
+import Success from './Success';
+import { useSuccess } from './Success.hooks';
+
+jest.mock('framer-motion', () => {
+  const MotionDiv = ({
+    children,
+    ...props
+  }: { children: React.ReactNode } & Record<string, unknown>) => (
+    <div {...props}>{children}</div>
+  );
+  MotionDiv.displayName = 'motion.div';
+  return {
+    motion: {
+      div: MotionDiv,
+    },
+  };
 });
 
 const mockPush = jest.fn();
-const mockQuery: { orderId?: string } = { orderId: "order-1" };
+const mockQuery: { orderId?: string } = { orderId: 'order-1' };
 
-jest.mock("next/router", () => ({
-    useRouter: jest.fn(() => ({
-        query: mockQuery,
-        push: mockPush,
-    })),
+jest.mock('next/router', () => ({
+  useRouter: jest.fn(() => ({
+    query: mockQuery,
+    push: mockPush,
+  })),
 }));
 
-jest.mock("axios");
+jest.mock('axios');
 
-jest.mock("@mui/styles", () => ({
-    makeStyles: jest.fn(() => jest.fn(() => ({}))),
+jest.mock('@mui/styles', () => ({
+  makeStyles: jest.fn(() => jest.fn(() => ({}))),
 }));
 
-jest.mock("react-icons/fi", () => ({
-    FiCheckCircle: (props: Record<string, unknown>) => (
-        <svg data-testid="fi-check-circle" {...props} />
-    ),
+jest.mock('react-icons/fi', () => ({
+  FiCheckCircle: (props: Record<string, unknown>) => (
+    <svg data-testid="fi-check-circle" {...props} />
+  ),
 }));
 
-jest.mock("@/src/components/LoadingScreen", () => ({
-    LoadingScreen: () => <div data-testid="loading-screen">Loading...</div>,
+jest.mock('@/src/components/LoadingScreen', () => ({
+  LoadingScreen: () => <div data-testid="loading-screen">Loading...</div>,
 }));
 
-jest.mock("@/src/components/Success/OrderDetails", () => ({
-    OrderDetails: () => <div data-testid="order-details">Order Details</div>,
+jest.mock('@/src/components/Success/OrderDetails', () => ({
+  OrderDetails: () => <div data-testid="order-details">Order Details</div>,
 }));
 
-jest.mock("@/src/components/Success/ErrorMessage", () => ({
-    ErrorMessage: ({
-        message,
-        onRetry,
-    }: {
-        message: string;
-        onRetry: () => void;
-    }) => (
-        <div data-testid="error-message">
-            {message}
-            <button data-testid="retry-button" onClick={onRetry}>
-                Retry
-            </button>
-        </div>
-    ),
+jest.mock('@/src/components/Success/ErrorMessage', () => ({
+  ErrorMessage: ({
+    message,
+    onRetry,
+  }: {
+    message: string;
+    onRetry: () => void;
+  }) => (
+    <div data-testid="error-message">
+      {message}
+      <button data-testid="retry-button" onClick={onRetry}>
+        Retry
+      </button>
+    </div>
+  ),
 }));
 
-jest.mock("./Success.hooks", () => ({
-    useSuccess: jest.fn(),
+jest.mock('./Success.hooks', () => ({
+  useSuccess: jest.fn(),
 }));
-
-import axios from "axios";
-import { useSuccess } from "./Success.hooks";
-import Success from "./Success";
 
 const theme = createTheme();
 
 const renderWithTheme = (ui: React.ReactElement) =>
-    render(<ThemeProvider theme={theme}>{ui}</ThemeProvider>);
+  render(<ThemeProvider theme={theme}>{ui}</ThemeProvider>);
 
 const mockOrder = {
-    id: "order-1",
-    userName: "John Doe",
-    items: [{ id: "p1", quantity: 2 }],
-    total: 100,
-    createdAt: "2025-06-01T00:00:00Z",
-    status: "Processing" as const,
+  id: 'order-1',
+  userName: 'John Doe',
+  items: [{ id: 'p1', quantity: 2 }],
+  total: 100,
+  createdAt: '2025-06-01T00:00:00Z',
+  status: 'Processing' as const,
 };
 
 const mockProducts: ItemType[] = [
-    {
-        id: "p1",
-        name: "Apple",
-        price: 50,
-        quantity: 10,
-        image: "/apple.jpg",
-        description: "Fresh apple",
-        category: "fruits",
-        discount: 0,
-        isSeasonal: false,
-        createdAt: "2025-01-01T00:00:00Z",
-    },
+  {
+    id: 'p1',
+    name: 'Apple',
+    price: 50,
+    quantity: 10,
+    image: '/apple.jpg',
+    description: 'Fresh apple',
+    category: 'fruits',
+    discount: 0,
+    isSeasonal: false,
+    createdAt: '2025-01-01T00:00:00Z',
+  },
 ];
 
 const defaultHookReturn: UseSuccessReturn = {
-    order: mockOrder,
-    products: mockProducts,
-    isLoading: false,
-    error: null,
-    handleContinueShopping: jest.fn(),
+  order: mockOrder,
+  products: mockProducts,
+  isLoading: false,
+  error: null,
+  handleContinueShopping: jest.fn(),
 };
 
-describe("Success - Hooks", () => {
-    beforeEach(() => {
-        jest.clearAllMocks();
-        mockQuery.orderId = "order-1";
+describe('Success - Hooks', () => {
+  beforeEach(() => {
+    jest.clearAllMocks();
+    mockQuery.orderId = 'order-1';
+  });
+
+  it('should fetch order by orderId from query', async () => {
+    const axiosGet = axios.get as unknown as jest.Mock;
+    axiosGet.mockResolvedValueOnce({ data: mockOrder });
+    axiosGet.mockResolvedValueOnce({ data: mockProducts[0] });
+
+    const realHook = jest.requireActual('./Success.hooks').useSuccess;
+    const { result } = renderHook(() => realHook());
+
+    await waitFor(() => {
+      expect(result.current.order).toEqual(mockOrder);
     });
 
-    it("should fetch order by orderId from query", async () => {
-        const axiosGet = axios.get as unknown as jest.Mock;
-        axiosGet.mockResolvedValueOnce({ data: mockOrder });
-        axiosGet.mockResolvedValueOnce({ data: mockProducts[0] });
+    expect(result.current.isLoading).toBe(false);
+    expect(result.current.error).toBeNull();
+  });
 
-        const realHook = jest.requireActual("./Success.hooks").useSuccess;
-        const { result } = renderHook(() => realHook());
+  it('should handle fetch error', async () => {
+    const axiosGet = axios.get as unknown as jest.Mock;
+    axiosGet.mockRejectedValue(new Error('Network error'));
 
-        await waitFor(() => {
-            expect(result.current.order).toEqual(mockOrder);
-        });
+    const realHook = jest.requireActual('./Success.hooks').useSuccess;
+    const { result } = renderHook(() => realHook());
 
-        expect(result.current.isLoading).toBe(false);
-        expect(result.current.error).toBeNull();
+    await waitFor(() => {
+      expect(result.current.error).toBe('Network error');
     });
 
-    it("should handle fetch error", async () => {
-        const axiosGet = axios.get as unknown as jest.Mock;
-        axiosGet.mockRejectedValue(new Error("Network error"));
+    expect(result.current.order).toBeNull();
+    expect(result.current.isLoading).toBe(false);
+  });
 
-        const realHook = jest.requireActual("./Success.hooks").useSuccess;
-        const { result } = renderHook(() => realHook());
+  it('should navigate on handleContinueShopping', () => {
+    const axiosGet = axios.get as unknown as jest.Mock;
+    axiosGet.mockResolvedValue({ data: mockOrder });
 
-        await waitFor(() => {
-            expect(result.current.error).toBe("Network error");
-        });
+    const realHook = jest.requireActual('./Success.hooks').useSuccess;
+    const { result } = renderHook(() => realHook());
 
-        expect(result.current.order).toBeNull();
-        expect(result.current.isLoading).toBe(false);
+    act(() => {
+      result.current.handleContinueShopping();
     });
 
-    it("should navigate on handleContinueShopping", () => {
-        const axiosGet = axios.get as unknown as jest.Mock;
-        axiosGet.mockResolvedValue({ data: mockOrder });
-
-        const realHook = jest.requireActual("./Success.hooks").useSuccess;
-        const { result } = renderHook(() => realHook());
-
-        act(() => {
-            result.current.handleContinueShopping();
-        });
-
-        expect(mockPush).toHaveBeenCalledWith("/products");
-    });
+    expect(mockPush).toHaveBeenCalledWith('/products');
+  });
 });
 
-describe("Success - UI", () => {
-    beforeEach(() => {
-        jest.clearAllMocks();
+describe('Success - UI', () => {
+  beforeEach(() => {
+    jest.clearAllMocks();
+  });
+
+  it('should render loading state', () => {
+    (useSuccess as jest.Mock).mockReturnValue({
+      ...defaultHookReturn,
+      order: null,
+      products: [],
+      isLoading: true,
+      error: null,
     });
 
-    it("should render loading state", () => {
-        (useSuccess as jest.Mock).mockReturnValue({
-            ...defaultHookReturn,
-            order: null,
-            products: [],
-            isLoading: true,
-            error: null,
-        });
+    renderWithTheme(<Success />);
+    expect(screen.getByTestId('loading-screen')).toBeInTheDocument();
+  });
 
-        renderWithTheme(<Success />);
-        expect(screen.getByTestId("loading-screen")).toBeInTheDocument();
+  it('should render error state', () => {
+    const handleContinueShopping = jest.fn();
+    (useSuccess as jest.Mock).mockReturnValue({
+      ...defaultHookReturn,
+      order: null,
+      products: [],
+      isLoading: false,
+      error: 'Something went wrong',
+      handleContinueShopping,
     });
 
-    it("should render error state", () => {
-        const handleContinueShopping = jest.fn();
-        (useSuccess as jest.Mock).mockReturnValue({
-            ...defaultHookReturn,
-            order: null,
-            products: [],
-            isLoading: false,
-            error: "Something went wrong",
-            handleContinueShopping,
-        });
+    renderWithTheme(<Success />);
+    expect(screen.getByTestId('error-message')).toBeInTheDocument();
+    expect(screen.getByText('Something went wrong')).toBeInTheDocument();
+  });
 
-        renderWithTheme(<Success />);
-        expect(screen.getByTestId("error-message")).toBeInTheDocument();
-        expect(screen.getByText("Something went wrong")).toBeInTheDocument();
-    });
+  it('should match snapshot with order data', () => {
+    (useSuccess as jest.Mock).mockReturnValue(defaultHookReturn);
 
-    it("should match snapshot with order data", () => {
-        (useSuccess as jest.Mock).mockReturnValue(defaultHookReturn);
-
-        const { asFragment } = renderWithTheme(<Success />);
-        expect(asFragment()).toMatchSnapshot();
-    });
+    const { asFragment } = renderWithTheme(<Success />);
+    expect(asFragment()).toMatchSnapshot();
+  });
 });

@@ -1,19 +1,19 @@
-import React from "react";
+import { DesktopNavProps } from '@/types/index';
 import {
+  Avatar,
   Box,
   Button,
   IconButton,
-  Tooltip,
-  Avatar,
+  InputAdornment,
   Paper,
   TextField,
-  InputAdornment,
+  Tooltip,
   alpha,
-} from "@mui/material";
-import { FiShoppingCart, FiUser, FiSearch } from "react-icons/fi";
-import { Badge } from "@mui/material";
-import { useTheme } from "@mui/material/styles";
-import { DesktopNavProps } from "@/types/index";
+} from '@mui/material';
+import { Badge } from '@mui/material';
+import { useTheme } from '@mui/material/styles';
+import React from 'react';
+import { FiSearch, FiShoppingCart, FiUser } from 'react-icons/fi';
 
 export const DesktopNav: React.FC<DesktopNavProps> = ({
   user,
@@ -28,18 +28,18 @@ export const DesktopNav: React.FC<DesktopNavProps> = ({
 
   return (
     <>
-      <Box sx={{ display: "flex", ml: 4 }}>
+      <Box sx={{ display: 'flex', ml: 4 }}>
         <Button
           color="inherit"
-          onClick={() => router.push("/")}
+          onClick={() => router.push('/')}
           sx={{
             mx: 0.5,
             borderRadius: 2,
-            "&:hover": {
+            '&:hover': {
               backgroundColor: alpha(theme.palette.primary.main, 0.08),
             },
-            ...(router.pathname === "/" && {
-              color: "primary.main",
+            ...(router.pathname === '/' && {
+              color: 'primary.main',
               fontWeight: 600,
             }),
           }}
@@ -48,15 +48,15 @@ export const DesktopNav: React.FC<DesktopNavProps> = ({
         </Button>
         <Button
           color="inherit"
-          onClick={() => router.push("/products")}
+          onClick={() => router.push('/products')}
           sx={{
             mx: 0.5,
             borderRadius: 2,
-            "&:hover": {
+            '&:hover': {
               backgroundColor: alpha(theme.palette.primary.main, 0.08),
             },
-            ...(router.pathname === "/products" && {
-              color: "primary.main",
+            ...(router.pathname === '/products' && {
+              color: 'primary.main',
               fontWeight: 600,
             }),
           }}
@@ -68,22 +68,22 @@ export const DesktopNav: React.FC<DesktopNavProps> = ({
       <Box
         sx={{
           flexGrow: 1,
-          display: "flex",
-          justifyContent: "center",
+          display: 'flex',
+          justifyContent: 'center',
           mx: { xs: 1, md: 4 },
         }}
       >
         <Paper
           elevation={0}
           sx={{
-            display: "flex",
-            width: { xs: "100%", sm: "320px", md: "400px" },
+            display: 'flex',
+            width: { xs: '100%', sm: '320px', md: '400px' },
             borderRadius: 2,
-            p: "2px 4px",
-            alignItems: "center",
+            p: '2px 4px',
+            alignItems: 'center',
             border: (theme) => `1px solid ${theme.palette.divider}`,
-            "&:hover": {
-              boxShadow: "0 1px 6px rgba(32, 33, 36, 0.12)",
+            '&:hover': {
+              boxShadow: '0 1px 6px rgba(32, 33, 36, 0.12)',
             },
           }}
         >
@@ -106,15 +106,15 @@ export const DesktopNav: React.FC<DesktopNavProps> = ({
         </Paper>
       </Box>
 
-      <Box sx={{ display: "flex", alignItems: "center" }}>
+      <Box sx={{ display: 'flex', alignItems: 'center' }}>
         <Tooltip title="Shopping Cart">
           <IconButton
             color="inherit"
             aria-label="cart"
-            onClick={() => router.push("/cart")}
+            onClick={() => router.push('/cart')}
             sx={{
               mx: 0.5,
-              "&:hover": {
+              '&:hover': {
                 backgroundColor: alpha(theme.palette.primary.main, 0.08),
               },
             }}
@@ -123,10 +123,10 @@ export const DesktopNav: React.FC<DesktopNavProps> = ({
               badgeContent={getCartItemCount()}
               color="primary"
               sx={{
-                "& .MuiBadge-badge": {
-                  fontSize: "0.65rem",
-                  height: "18px",
-                  minWidth: "18px",
+                '& .MuiBadge-badge': {
+                  fontSize: '0.65rem',
+                  height: '18px',
+                  minWidth: '18px',
                 },
               }}
             >
@@ -145,7 +145,7 @@ export const DesktopNav: React.FC<DesktopNavProps> = ({
             color="inherit"
             sx={{
               ml: 1,
-              "&:hover": {
+              '&:hover': {
                 backgroundColor: alpha(theme.palette.primary.main, 0.08),
               },
             }}
@@ -153,7 +153,7 @@ export const DesktopNav: React.FC<DesktopNavProps> = ({
             {user && user.image ? (
               <Avatar
                 src={user.image}
-                alt={user.name || "User"}
+                alt={user.name || 'User'}
                 sx={{ width: 32, height: 32 }}
               />
             ) : (

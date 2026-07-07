@@ -1,24 +1,24 @@
-import React from "react";
+import { benefits } from '@/constants/home';
 import {
-  Grid,
   Box,
-  Typography,
   Card,
-  CardMedia,
   CardContent,
-} from "@mui/material";
-import { motion } from "framer-motion";
-import { benefits } from "@/constants/home";
+  CardMedia,
+  Grid,
+  Typography,
+} from '@mui/material';
+import { motion } from 'framer-motion';
+import React from 'react';
 
 export const BenefitsSection: React.FC = () => {
   return (
     <Grid>
       <Box
         sx={{
-          display: "flex",
-          flexDirection: { xs: "column", sm: "row" },
-          justifyContent: "space-between",
-          alignItems: "center",
+          display: 'flex',
+          flexDirection: { xs: 'column', sm: 'row' },
+          justifyContent: 'space-between',
+          alignItems: 'center',
           mb: 4,
         }}
       >
@@ -50,11 +50,11 @@ export const BenefitsSection: React.FC = () => {
           >
             <Card
               sx={{
-                height: "100%",
-                boxShadow: "0 4px 20px rgba(0,0,0,0.05)",
+                height: '100%',
+                boxShadow: '0 4px 20px rgba(0,0,0,0.05)',
                 borderRadius: 2,
-                transition: "transform 0.3s",
-                "&:hover": { transform: "translateY(-8px)" },
+                transition: 'transform 0.3s',
+                '&:hover': { transform: 'translateY(-8px)' },
               }}
             >
               <CardMedia
@@ -63,12 +63,12 @@ export const BenefitsSection: React.FC = () => {
                 alt={benefit.title}
                 sx={{
                   height: 150,
-                  objectFit: "cover",
+                  objectFit: 'cover',
                   borderTopLeftRadius: 8,
                   borderTopRightRadius: 8,
                 }}
               />
-              <CardContent sx={{ textAlign: "center", p: 3 }}>
+              <CardContent sx={{ textAlign: 'center', p: 3 }}>
                 <Typography
                   variant="h6"
                   component="h3"

@@ -1,13 +1,13 @@
-import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { ItemType, User, OrderStatus } from "@/types/index";
-import { UseAdminMutationsReturn } from "@/types/admin";
 import {
-  saveProduct,
   deleteProduct,
-  saveUser,
   deleteUser,
+  saveProduct,
+  saveUser,
   updateOrderStatus,
-} from "@/lib/adminApi";
+} from '@/lib/adminApi';
+import { UseAdminMutationsReturn } from '@/types/admin';
+import { ItemType, OrderStatus, User } from '@/types/index';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 
 export const useAdminMutations = (): UseAdminMutationsReturn => {
   const queryClient = useQueryClient();
@@ -23,14 +23,14 @@ export const useAdminMutations = (): UseAdminMutationsReturn => {
       id?: string;
     }) => saveProduct(productData, isEdit, id),
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["adminProducts"] });
+      queryClient.invalidateQueries({ queryKey: ['adminProducts'] });
     },
   });
 
   const deleteProductMutation = useMutation({
     mutationFn: deleteProduct,
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["adminProducts"] });
+      queryClient.invalidateQueries({ queryKey: ['adminProducts'] });
     },
   });
 
@@ -45,14 +45,14 @@ export const useAdminMutations = (): UseAdminMutationsReturn => {
       id?: string;
     }) => saveUser(userData, isEdit, id),
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["adminUsers"] });
+      queryClient.invalidateQueries({ queryKey: ['adminUsers'] });
     },
   });
 
   const deleteUserMutation = useMutation({
     mutationFn: deleteUser,
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["adminUsers"] });
+      queryClient.invalidateQueries({ queryKey: ['adminUsers'] });
     },
   });
 
@@ -71,7 +71,7 @@ export const useAdminMutations = (): UseAdminMutationsReturn => {
       cancelled_at?: string;
     }) => updateOrderStatus(id, status, shipped_at, delivered_at, cancelled_at),
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["adminOrders"] });
+      queryClient.invalidateQueries({ queryKey: ['adminOrders'] });
     },
   });
 

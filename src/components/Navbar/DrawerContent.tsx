@@ -1,37 +1,36 @@
-import React from "react";
+import { useThemeSwitch } from '@/src/ThemeProvider';
+import { DrawerContentProps } from '@/types/index';
 import {
+  Avatar,
   Box,
-  Typography,
+  Collapse,
+  Divider,
   IconButton,
-  TextField,
   InputAdornment,
   List,
   ListItem,
   ListItemButton,
-  ListItemText,
   ListItemIcon,
-  Divider,
-  Avatar,
-  Collapse,
-} from "@mui/material";
+  ListItemText,
+  TextField,
+  Typography,
+} from '@mui/material';
+import { Badge } from '@mui/material';
+import React from 'react';
 import {
-  FiHome,
-  FiPackage,
-  FiShoppingCart,
-  FiShield,
-  FiLogOut,
-  FiSearch,
-  FiX,
-  FiSun,
-  FiMoon,
-  FiMonitor,
   FiChevronDown,
   FiChevronUp,
-} from "react-icons/fi";
-import { signIn } from "next-auth/react";
-import { Badge } from "@mui/material";
-import { useThemeSwitch } from "@/src/ThemeProvider";
-import { DrawerContentProps } from "@/types/index";
+  FiHome,
+  FiLogOut,
+  FiMonitor,
+  FiMoon,
+  FiPackage,
+  FiSearch,
+  FiShield,
+  FiShoppingCart,
+  FiSun,
+  FiX,
+} from 'react-icons/fi';
 
 export const DrawerContent: React.FC<DrawerContentProps> = ({
   user,
@@ -52,9 +51,9 @@ export const DrawerContent: React.FC<DrawerContentProps> = ({
       <Box
         sx={{
           p: 2,
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "space-between",
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'space-between',
           borderBottom: (theme) => `1px solid ${theme.palette.divider}`,
         }}
       >
@@ -70,19 +69,19 @@ export const DrawerContent: React.FC<DrawerContentProps> = ({
         <Box
           sx={{
             p: 2,
-            display: "flex",
-            alignItems: "center",
+            display: 'flex',
+            alignItems: 'center',
             borderBottom: (theme) => `1px solid ${theme.palette.divider}`,
           }}
         >
           <Avatar
-            src={user.image || ""}
-            alt={user.name || "User"}
+            src={user.image || ''}
+            alt={user.name || 'User'}
             sx={{ width: 40, height: 40, mr: 2 }}
           />
           <Box>
-            <Typography variant="subtitle1" sx={{ fontWeight: "bold" }}>
-              {user.name || "User"}
+            <Typography variant="subtitle1" sx={{ fontWeight: 'bold' }}>
+              {user.name || 'User'}
             </Typography>
             <Typography variant="caption" color="text.secondary">
               {user.email}
@@ -113,7 +112,7 @@ export const DrawerContent: React.FC<DrawerContentProps> = ({
       <List sx={{ pt: 0 }}>
         <ListItem disablePadding>
           <ListItemButton
-            onClick={() => handleNavigation("/")}
+            onClick={() => handleNavigation('/')}
             sx={{ py: 1.5 }}
           >
             <ListItemIcon>
@@ -125,7 +124,7 @@ export const DrawerContent: React.FC<DrawerContentProps> = ({
 
         <ListItem disablePadding>
           <ListItemButton
-            onClick={() => handleNavigation("/products")}
+            onClick={() => handleNavigation('/products')}
             sx={{ py: 1.5 }}
           >
             <ListItemIcon>
@@ -137,7 +136,7 @@ export const DrawerContent: React.FC<DrawerContentProps> = ({
 
         <ListItem disablePadding>
           <ListItemButton
-            onClick={() => handleNavigation("/cart")}
+            onClick={() => handleNavigation('/cart')}
             sx={{ py: 1.5 }}
           >
             <ListItemIcon>
@@ -155,9 +154,9 @@ export const DrawerContent: React.FC<DrawerContentProps> = ({
             sx={{ py: 1.5 }}
           >
             <ListItemIcon>
-              {themeMode === "light" && <FiSun size={20} />}
-              {themeMode === "dark" && <FiMoon size={20} />}
-              {themeMode === "system" && <FiMonitor size={20} />}
+              {themeMode === 'light' && <FiSun size={20} />}
+              {themeMode === 'dark' && <FiMoon size={20} />}
+              {themeMode === 'system' && <FiMonitor size={20} />}
             </ListItemIcon>
             <ListItemText primary={`Theme`} />
             {themeCollapseOpen ? <FiChevronUp /> : <FiChevronDown />}
@@ -166,8 +165,8 @@ export const DrawerContent: React.FC<DrawerContentProps> = ({
         <Collapse in={themeCollapseOpen} timeout="auto" unmountOnExit>
           <List component="div" disablePadding sx={{ pl: 4 }}>
             <ListItemButton
-              selected={themeMode === "light"}
-              onClick={() => setThemeMode("light")}
+              selected={themeMode === 'light'}
+              onClick={() => setThemeMode('light')}
               sx={{ py: 1 }}
             >
               <ListItemIcon sx={{ minWidth: 40 }}>
@@ -176,8 +175,8 @@ export const DrawerContent: React.FC<DrawerContentProps> = ({
               <ListItemText primary="Light" />
             </ListItemButton>
             <ListItemButton
-              selected={themeMode === "dark"}
-              onClick={() => setThemeMode("dark")}
+              selected={themeMode === 'dark'}
+              onClick={() => setThemeMode('dark')}
               sx={{ py: 1 }}
             >
               <ListItemIcon sx={{ minWidth: 40 }}>
@@ -186,8 +185,8 @@ export const DrawerContent: React.FC<DrawerContentProps> = ({
               <ListItemText primary="Dark" />
             </ListItemButton>
             <ListItemButton
-              selected={themeMode === "system"}
-              onClick={() => setThemeMode("system")}
+              selected={themeMode === 'system'}
+              onClick={() => setThemeMode('system')}
               sx={{ py: 1 }}
             >
               <ListItemIcon sx={{ minWidth: 40 }}>
@@ -203,7 +202,7 @@ export const DrawerContent: React.FC<DrawerContentProps> = ({
         {isAdmin && (
           <ListItem disablePadding>
             <ListItemButton
-              onClick={() => handleNavigation("/admin")}
+              onClick={() => handleNavigation('/admin')}
               sx={{ py: 1.5 }}
             >
               <ListItemIcon>
