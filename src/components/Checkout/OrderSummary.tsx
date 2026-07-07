@@ -18,10 +18,11 @@ export const OrderSummary: React.FC<OrderSummaryProps> = ({
   handlePayNow,
   processing,
   hasError,
+  shippingCost = 0,
 }) => {
   const subtotal = getCartTotal(products);
   const tax = subtotal * 0.1;
-  const total = subtotal + tax;
+  const total = subtotal + tax + shippingCost;
 
   return (
     <Paper
@@ -106,7 +107,9 @@ export const OrderSummary: React.FC<OrderSummaryProps> = ({
       </Box>
       <Box sx={{ display: 'flex', justifyContent: 'space-between', mb: 1 }}>
         <Typography variant="body2">Shipping</Typography>
-        <Typography variant="body2">{currency}0.00</Typography>
+        <Typography variant="body2">
+          {shippingCost > 0 ? `${currency}${shippingCost.toFixed(2)}` : 'Free'}
+        </Typography>
       </Box>
       <Box sx={{ display: 'flex', justifyContent: 'space-between', mb: 1 }}>
         <Typography variant="body2">Tax (10%)</Typography>

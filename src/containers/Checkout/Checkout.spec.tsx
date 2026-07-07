@@ -1,8 +1,9 @@
 import { useCart } from '@/src/contexts/CartContext';
 import { CartItem, ItemType } from '@/types/index';
-import { useQueries } from '@tanstack/react-query';
+import { useQueries, useQuery } from '@tanstack/react-query';
 import { render, screen } from '@testing-library/react';
 import { renderHook } from '@testing-library/react';
+import axios from 'axios';
 import { useSession } from 'next-auth/react';
 import { useRouter } from 'next/router';
 
@@ -28,7 +29,7 @@ jest.mock('next-auth/react', () => ({
 }));
 jest.mock('@/src/contexts/CartContext', () => ({ useCart: jest.fn() }));
 jest.mock('axios');
-jest.mock('@tanstack/react-query', () => ({ useQueries: jest.fn() }));
+jest.mock('@tanstack/react-query', () => ({ useQueries: jest.fn(), useQuery: jest.fn() }));
 
 jest.mock('./Checkout.styles', () => ({
   __esModule: true,
@@ -83,6 +84,8 @@ function setupDefaultMocks() {
   });
   (useCart as jest.Mock).mockReturnValue(defaultCartCtx);
   (useQueries as jest.Mock).mockReturnValue([]);
+  (useQuery as jest.Mock).mockReturnValue({ data: undefined });
+  (axios.get as jest.Mock).mockResolvedValue({ data: [] });
   jest.clearAllMocks();
   mockPush.mockClear();
 }
