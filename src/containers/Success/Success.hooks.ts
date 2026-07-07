@@ -1,58 +1,19 @@
-import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
-import axios from "axios";
-import { Order, CartItem, ItemType, UseSuccessReturn } from "@/types/index";
+import { useOrderWithProducts } from "@/lib/hooks/useOrderWithProducts";
 
-export const useSuccess = (): UseSuccessReturn => {
-    const router = useRouter();
-    const { orderId } = router.query;
-    const [order, setOrder] = useState<Order | null>(null);
-    const [products, setProducts] = useState<(ItemType | undefined)[]>([]);
-    const [isLoading, setIsLoading] = useState(false);
-    const [error, setError] = useState<string | null>(null);
+export const useSuccess = () => {
+  const router = useRouter();
+  const { order, products, isLoading, error } = useOrderWithProducts();
 
-    useEffect(() => {
-        if (orderId && typeof orderId === "string") {
-            const fetchOrder = async () => {
-                setIsLoading(true);
-                setError(null);
-                try {
-                    const { data } = await axios.get<Order>(
-                        `/api/orders/${orderId}`
-                    );
-                    setOrder(data);
+  const handleContinueShopping = () => {
+    router.push("/products");
+  };
 
-                    const productFetches = data.items.map((item: CartItem) =>
-                        axios
-                            .get<ItemType>(`/api/products/${item.id}`)
-                            .then((res) => res.data)
-                            .catch(() => undefined)
-                    );
-                    const fetchedProducts = await Promise.all(productFetches);
-                    setProducts(fetchedProducts);
-                } catch (err: unknown) {
-                    setError(
-                        err instanceof Error
-                            ? err.message
-                            : "An unknown error occurred"
-                    );
-                } finally {
-                    setIsLoading(false);
-                }
-            };
-            fetchOrder();
-        }
-    }, [orderId]);
-
-    const handleContinueShopping = () => {
-        router.push("/products");
-    };
-
-    return {
-        order,
-        products,
-        isLoading,
-        error,
-        handleContinueShopping,
-    };
+  return {
+    order,
+    products,
+    isLoading,
+    error,
+    handleContinueShopping,
+  };
 };
