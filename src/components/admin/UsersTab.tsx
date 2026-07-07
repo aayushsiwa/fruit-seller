@@ -15,6 +15,7 @@ import {
     Chip,
 } from "@mui/material";
 import { FiPlus, FiEdit2, FiTrash2 } from "react-icons/fi";
+import dayjs from "dayjs";
 import { User, UsersTabProps } from "@/types/index";
 
 const UsersTab: React.FC<UsersTabProps> = ({
@@ -92,9 +93,7 @@ const UsersTab: React.FC<UsersTabProps> = ({
                                         />
                                     </TableCell>
                                     <TableCell>
-                                        {new Date(
-                                            user.createdAt
-                                        ).toLocaleDateString()}
+                                        {dayjs(user.createdAt).format("MMM D, YYYY")}
                                     </TableCell>
                                     <TableCell align="right">
                                         <IconButton

@@ -21,6 +21,7 @@
     "@tanstack/react-query": "5.62.7",
     "axios": "^1.9.0",
     "bcryptjs": "^3.0.2",
+    "dayjs": "^1.11.21",
     "formik": "2.4.6",
     "framer-motion": "^12.12.1",
     "jsonwebtoken": "^9.0.2",

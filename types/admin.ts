@@ -1,4 +1,4 @@
-import { ItemType, User, Order } from "@/types/index";
+import { ItemType, User, Order, OrderStatus } from "@/types/index";
 import { UseMutationResult } from "@tanstack/react-query";
 import { TabValue } from "@/types/index";
 
@@ -12,7 +12,8 @@ export type UseAdminActionsReturn = {
     handleDeleteProduct: () => Promise<void>;
     handleSaveUser: (event: React.FormEvent<HTMLFormElement>) => Promise<void>;
     handleDeleteUser: () => Promise<void>;
-    handleUpdateOrderStatus: (status: string) => Promise<void>;
+    handleUpdateOrderStatus: (status: OrderStatus) => void;
+    handleConfirmOrderStatus: () => Promise<void>;
 };
 
 export interface AdminActionsProps {
@@ -33,7 +34,13 @@ export interface AdminActionsProps {
     updateOrderMutation: UseMutationResult<
         Order,
         Error,
-        { id: string; status: string },
+        {
+            id: string;
+            status: OrderStatus;
+            shipped_at?: string;
+            delivered_at?: string;
+            cancelled_at?: string;
+        },
         unknown
     >;
     selectedProduct: Partial<ItemType>;
@@ -47,6 +54,9 @@ export interface AdminActionsProps {
     handleCloseUserDeleteDialog: () => void;
     handleCloseOrderDialog: () => void;
     setError: (error: string | null) => void;
+    handleOpenConfirmDialog: (status: OrderStatus) => void;
+    handleCloseConfirmDialog: () => void;
+    confirmStatus: OrderStatus;
 }
 
 export type UseAdminMutationsReturn = {
@@ -67,7 +77,13 @@ export type UseAdminMutationsReturn = {
     updateOrderMutation: UseMutationResult<
         Order,
         Error,
-        { id: string; status: string },
+        {
+            id: string;
+            status: OrderStatus;
+            shipped_at?: string;
+            delivered_at?: string;
+            cancelled_at?: string;
+        },
         unknown
     >;
 };
@@ -78,6 +94,8 @@ export type UseAdminDialogsReturn = {
     openUserDialog: boolean;
     openUserDeleteDialog: boolean;
     openOrderDialog: boolean;
+    openConfirmDialog: boolean;
+    confirmStatus: OrderStatus;
     selectedProduct: Partial<ItemType>;
     selectedUser: Partial<User>;
     selectedOrder: Partial<Order>;
@@ -96,6 +114,8 @@ export type UseAdminDialogsReturn = {
     handleCloseUserDeleteDialog: () => void;
     handleOpenOrderDialog: (order: Order) => void;
     handleCloseOrderDialog: () => void;
+    handleOpenConfirmDialog: (status: OrderStatus) => void;
+    handleCloseConfirmDialog: () => void;
 };
 
 export interface UseAdminDataReturn {

@@ -26,7 +26,16 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
             return res.status(404).json({ error: "Order not found" });
         }
 
-        return res.status(200).json(order);
+        return res.status(200).json({
+            ...order,
+            userName: order.user_email,
+            createdAt: order.created_at,
+            shipped_at: order.shipped_at,
+            delivered_at: order.delivered_at,
+            cancelled_at: order.cancelled_at,
+            user_email: undefined,
+            created_at: undefined,
+        });
     } catch (error) {
         console.error("Fetch order error:", error);
         return res.status(500).json({ error: "Internal server error" });
