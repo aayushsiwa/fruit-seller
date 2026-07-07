@@ -1,6 +1,6 @@
 import { useState, useCallback } from "react";
 import { useMutation } from "@tanstack/react-query";
-import { useRouter } from "next/navigation";
+import { useRouter } from "next/router";
 import { useSnackbar } from "@/src/contexts/SnackBarContext";
 import { useAuth } from "@/src/contexts/AuthContext";
 import { RegisterData, UseRegisterReturn } from "@/types/index";

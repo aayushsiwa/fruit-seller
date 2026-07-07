@@ -3,7 +3,7 @@ import { loginInitialValues, loginSchema } from "@/lib/validation/loginSchema";
 import { useSnackbar } from "@/src/contexts/SnackBarContext";
 import { useAuth } from "@/src/contexts/AuthContext";
 import { useState, useEffect } from "react";
-import { useRouter } from "next/navigation";
+import { useRouter } from "next/router";
 import { useFormik } from "formik";
 import { UseLoginReturn } from "@/types/index";
 
