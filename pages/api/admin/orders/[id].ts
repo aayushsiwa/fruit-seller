@@ -3,25 +3,7 @@ import { supabase } from "@/lib/supabase";
 import { authOptions } from "../../auth/[...nextauth]";
 import type { NextApiRequest, NextApiResponse } from "next";
 import { SessionUser, OrderStatus, ORDER_STATUSES } from "@/types/index";
-
-const STATUS_ORDER: OrderStatus[] = ["Processing", "Shipped", "Delivered"];
-
-function isValidTransition(current: OrderStatus, next: OrderStatus): string | null {
-    if (current === next) return null;
-    if (current === "Delivered" || current === "Cancelled") {
-        return `Cannot change status from "${current}" — it is a terminal state`;
-    }
-    if (next === "Processing") {
-        return "Cannot revert to Processing";
-    }
-    if (next === "Shipped") return null;
-    const currentIdx = STATUS_ORDER.indexOf(current);
-    const nextIdx = STATUS_ORDER.indexOf(next);
-    if (nextIdx >= 0 && nextIdx <= currentIdx) {
-        return `Cannot revert from "${current}" to "${next}"`;
-    }
-    return null;
-}
+import { validateTransition } from "@/lib/validation/orders";
 
 export default async function handler(
     req: NextApiRequest,
@@ -66,7 +48,7 @@ export default async function handler(
             return res.status(404).json({ error: "Order not found" });
         }
 
-        const transitionError = isValidTransition(
+        const transitionError = validateTransition(
             currentOrder.status as OrderStatus,
             status as OrderStatus,
         );

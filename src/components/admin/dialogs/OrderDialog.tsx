@@ -13,14 +13,8 @@ import {
     MenuItem,
     TextField,
 } from "@mui/material";
+import { validTargets } from "@/lib/validation/orders";
 import { OrderDialogProps, OrderStatus } from "@/types/index";
-
-function validTargets(current: OrderStatus): OrderStatus[] {
-    if (current === "Delivered" || current === "Cancelled") return [];
-    if (current === "Processing") return ["Shipped", "Delivered", "Cancelled"];
-    if (current === "Shipped") return ["Delivered", "Cancelled"];
-    return [];
-}
 
 const OrderDialog: React.FC<OrderDialogProps> = ({
     open,
