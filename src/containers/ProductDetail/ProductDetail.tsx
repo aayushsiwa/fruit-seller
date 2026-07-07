@@ -6,6 +6,7 @@ import { Alert, Container, Snackbar } from '@mui/material';
 import { useMediaQuery } from '@mui/material';
 import { useTheme } from '@mui/material/styles';
 
+import Head from 'next/head';
 import { useProductDetail } from './ProductDetail.hooks';
 
 export default function ProductDetail() {
@@ -30,8 +31,19 @@ export default function ProductDetail() {
   }
 
   return (
-    <Container maxWidth="lg">
-      <BreadcrumbsNav productName={product.name} />
+    <>
+      <Head>
+        <title>{`${product.name} | Fruit Seller`}</title>
+        <meta name="description" content={product.description || `Buy fresh, premium ${product.name} online at Fruit Seller.`} />
+        <link rel="canonical" href={`https://fruitseller.com/products/${product.id}`} />
+        <meta property="og:title" content={`${product.name} | Fruit Seller`} />
+        <meta property="og:description" content={product.description || `Buy fresh, premium ${product.name} online at Fruit Seller.`} />
+        <meta property="og:url" content={`https://fruitseller.com/products/${product.id}`} />
+        <meta property="og:type" content="product" />
+        {product.image && <meta property="og:image" content={product.image} />}
+      </Head>
+      <Container maxWidth="lg">
+        <BreadcrumbsNav productName={product.name} />
       <ProductInfo
         product={product}
         isMobile={isMobile}
@@ -58,5 +70,6 @@ export default function ProductDetail() {
         </Alert>
       </Snackbar>
     </Container>
+    </>
   );
 }
