@@ -1,12 +1,12 @@
-import { useRouter } from "next/router";
-import { useOrderWithProducts } from "@/lib/hooks/useOrderWithProducts";
+import { useOrderWithProducts } from '@/lib/hooks/useOrderWithProducts';
+import { useRouter } from 'next/router';
 
 export const useSuccess = () => {
   const router = useRouter();
   const { order, products, isLoading, error } = useOrderWithProducts();
 
   const handleContinueShopping = () => {
-    router.push("/products");
+    router.push('/products');
   };
 
   return {

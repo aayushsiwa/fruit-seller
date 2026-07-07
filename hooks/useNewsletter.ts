@@ -1,37 +1,37 @@
-import { UseNewsletterReturn } from "@/types/index";
-import { useState } from "react";
+import { UseNewsletterReturn } from '@/types/index';
+import { useState } from 'react';
 
 const useNewsletter = (): UseNewsletterReturn => {
-    const [newsletterStatus, setNewsletterStatus] = useState<
-        "success" | "error" | null
-    >(null);
+  const [newsletterStatus, setNewsletterStatus] = useState<
+    'success' | 'error' | null
+  >(null);
 
-    const handleNewsletterSubmit = async (
-        values: { email: string },
-        {
-            setSubmitting,
-            resetForm,
-        }: {
-            setSubmitting: (isSubmitting: boolean) => void;
-            resetForm: () => void;
-        }
-    ) => {
-        try {
-            await new Promise((resolve) => setTimeout(resolve, 1000));
-            setNewsletterStatus("success");
-            resetForm();
-        } catch (error) {
-            console.error("Error submitting newsletter subscription:", error);
-            setNewsletterStatus("error");
-        } finally {
-            setSubmitting(false);
-        }
-    };
+  const handleNewsletterSubmit = async (
+    values: { email: string },
+    {
+      setSubmitting,
+      resetForm,
+    }: {
+      setSubmitting: (isSubmitting: boolean) => void;
+      resetForm: () => void;
+    }
+  ) => {
+    try {
+      await new Promise((resolve) => setTimeout(resolve, 1000));
+      setNewsletterStatus('success');
+      resetForm();
+    } catch (error) {
+      console.error('Error submitting newsletter subscription:', error);
+      setNewsletterStatus('error');
+    } finally {
+      setSubmitting(false);
+    }
+  };
 
-    return {
-        newsletterStatus,
-        handleNewsletterSubmit,
-    };
+  return {
+    newsletterStatus,
+    handleNewsletterSubmit,
+  };
 };
 
 export default useNewsletter;

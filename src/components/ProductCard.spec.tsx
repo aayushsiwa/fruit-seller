@@ -1,15 +1,15 @@
-import React from "react";
-import { render } from "@testing-library/react";
-import ProductCard from "@/src/components/ProductCard";
-import { ItemType } from "@/types/index";
+import ProductCard from '@/src/components/ProductCard';
+import { ItemType } from '@/types/index';
+import { render } from '@testing-library/react';
+import React from 'react';
 
-jest.mock("next/router", () => ({
+jest.mock('next/router', () => ({
   useRouter: () => ({
     push: jest.fn(),
   }),
 }));
 
-jest.mock("@/src/contexts/CartContext", () => ({
+jest.mock('@/src/contexts/CartContext', () => ({
   useCart: () => ({
     cart: [],
     addToCart: jest.fn(),
@@ -19,20 +19,20 @@ jest.mock("@/src/contexts/CartContext", () => ({
 }));
 
 const sampleProduct: ItemType = {
-  id: "1",
-  name: "Grapes",
+  id: '1',
+  name: 'Grapes',
   price: 100,
   discount: 10,
   quantity: 20,
-  image: "/grapes.jpg",
-  description: "Fresh Grapes from Nashik.",
-  createdAt: "2025-05-01T00:00:00Z",
-  category: "fruits",
+  image: '/grapes.jpg',
+  description: 'Fresh Grapes from Nashik.',
+  createdAt: '2025-05-01T00:00:00Z',
+  category: 'fruits',
   isSeasonal: true,
 };
 
-describe("ProductCard Snapshot", () => {
-  it("renders correctly and matches snapshot", () => {
+describe('ProductCard Snapshot', () => {
+  it('renders correctly and matches snapshot', () => {
     const { asFragment } = render(<ProductCard product={sampleProduct} />);
     expect(asFragment()).toMatchSnapshot();
   });

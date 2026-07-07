@@ -1,5 +1,5 @@
-import Cart from "@/src/containers/Cart/Cart";
+import Cart from '@/src/containers/Cart/Cart';
 
 export default function CartPage() {
-    return <Cart />;
+  return <Cart />;
 }

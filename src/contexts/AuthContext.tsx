@@ -1,25 +1,25 @@
-import React, { useContext, useState } from "react";
+import { AuthContextType, RegisterData } from '@/types/index';
+import { useMutation } from '@tanstack/react-query';
+import axios from 'axios';
 import {
-  useSession,
   signIn as nextAuthSignIn,
   signOut as nextAuthSignOut,
-} from "next-auth/react";
-import { useMutation } from "@tanstack/react-query";
-import { RegisterData, AuthContextType } from "@/types/index";
-import axios from "axios";
+  useSession,
+} from 'next-auth/react';
+import React, { useContext, useState } from 'react';
 
 export const AuthContext = React.createContext<AuthContextType>({
   user: null,
   loading: false,
   error: null,
   register: async () => {
-    throw new Error("register function not implemented");
+    throw new Error('register function not implemented');
   },
   login: async () => {
-    throw new Error("login function not implemented");
+    throw new Error('login function not implemented');
   },
   logout: async () => {
-    throw new Error("logout function not implemented");
+    throw new Error('logout function not implemented');
   },
   isAdmin: () => false,
 });
@@ -30,17 +30,17 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
   const { data: session, status } = useSession();
   const [error, setError] = useState<string | null>(null);
 
-  const isAdmin = () => session?.user?.role === "admin";
+  const isAdmin = () => session?.user?.role === 'admin';
 
   const registerUser = async (userData: RegisterData) => {
     try {
-      const response = await axios.post("/api/auth/register", userData, {
-        headers: { "Content-Type": "application/json" },
+      const response = await axios.post('/api/auth/register', userData, {
+        headers: { 'Content-Type': 'application/json' },
       });
       return response.data;
     } catch (err) {
       if (err instanceof axios.AxiosError) {
-        setError("Error: " + (err.response?.data?.message || err.message));
+        setError('Error: ' + (err.response?.data?.message || err.message));
         throw err;
       }
     }
@@ -49,7 +49,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
   const { mutateAsync: registerMutation } = useMutation({
     mutationFn: registerUser,
     onError: (error: Error) => {
-      setError("Error: " + error.message);
+      setError('Error: ' + error.message);
     },
   });
 
@@ -65,7 +65,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
   const login = async (email: string, password: string) => {
     setError(null);
     try {
-      const result = await nextAuthSignIn("credentials", {
+      const result = await nextAuthSignIn('credentials', {
         redirect: false,
         email,
         password,
@@ -73,8 +73,8 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
 
       if (result?.error) {
         const errorMessage =
-          result.error.toLowerCase() === "invalid credentials"
-            ? "Invalid credentials"
+          result.error.toLowerCase() === 'invalid credentials'
+            ? 'Invalid credentials'
             : result.error;
         setError(errorMessage);
       }
@@ -82,7 +82,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
       if (err instanceof Error) {
         setError(err.message);
       } else {
-        const fallback = "An unknown error occurred";
+        const fallback = 'An unknown error occurred';
         setError(fallback);
       }
     }
@@ -96,7 +96,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
       if (err instanceof Error) {
         setError(err.message);
       } else {
-        const fallback = "An unknown error occurred";
+        const fallback = 'An unknown error occurred';
         setError(fallback);
         throw new Error(fallback);
       }
@@ -107,7 +107,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
     <AuthContext.Provider
       value={{
         user: session?.user || null,
-        loading: status === "loading",
+        loading: status === 'loading',
         error,
         register,
         login,

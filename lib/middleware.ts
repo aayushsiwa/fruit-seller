@@ -1,4 +1,5 @@
 import { NextApiRequest } from 'next';
+
 import { verifyJWT } from './auth';
 
 export const requireAuth = (req: NextApiRequest) => {

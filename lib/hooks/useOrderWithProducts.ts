@@ -1,7 +1,7 @@
-import { useEffect, useState } from "react";
-import { useRouter } from "next/router";
-import axios from "axios";
-import { Order, CartItem, ItemType } from "@/types/index";
+import { CartItem, ItemType, Order } from '@/types/index';
+import axios from 'axios';
+import { useRouter } from 'next/router';
+import { useEffect, useState } from 'react';
 
 interface UseOrderWithProductsReturn {
   order: Order | null;
@@ -19,7 +19,7 @@ export const useOrderWithProducts = (): UseOrderWithProductsReturn => {
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    if (orderId && typeof orderId === "string") {
+    if (orderId && typeof orderId === 'string') {
       const fetchOrder = async () => {
         setIsLoading(true);
         setError(null);
@@ -36,11 +36,7 @@ export const useOrderWithProducts = (): UseOrderWithProductsReturn => {
           const fetchedProducts = await Promise.all(productFetches);
           setProducts(fetchedProducts);
         } catch (err: unknown) {
-          setError(
-            err instanceof Error
-              ? err.message
-              : "Failed to load order"
-          );
+          setError(err instanceof Error ? err.message : 'Failed to load order');
         } finally {
           setIsLoading(false);
         }

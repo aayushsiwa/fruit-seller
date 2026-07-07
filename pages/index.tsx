@@ -1,5 +1,5 @@
-import Home from "@/src/containers/Home/Home";
+import Home from '@/src/containers/Home/Home';
 
 export default function Index() {
-    return <Home />;
+  return <Home />;
 }

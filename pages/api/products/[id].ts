@@ -1,84 +1,105 @@
-import { NextApiRequest, NextApiResponse } from "next";
-import { getServerSession } from "next-auth/next";
-import { supabase } from "@/lib/supabase";
-import { authOptions } from "../auth/[...nextauth]";
-import { SessionUser } from "@/types/index";
-import { validateProductData } from "@/lib/validation/admin";
+import { supabase } from '@/lib/supabase';
+import { validateProductData } from '@/lib/validation/admin';
+import { SessionUser } from '@/types/index';
+import { NextApiRequest, NextApiResponse } from 'next';
+import { getServerSession } from 'next-auth/next';
 
-export default async function handler(req: NextApiRequest, res: NextApiResponse) {
-    const id = req.query.id as string;
+import { authOptions } from '../auth/[...nextauth]';
 
-    if (!id) {
-        return res.status(400).json({ error: "Product ID is required" });
+export default async function handler(
+  req: NextApiRequest,
+  res: NextApiResponse
+) {
+  const id = req.query.id as string;
+
+  if (!id) {
+    return res.status(400).json({ error: 'Product ID is required' });
+  }
+
+  if (req.method === 'GET') {
+    const { data, error } = await supabase
+      .from('fruitsellerproducts')
+      .select('*')
+      .eq('id', id)
+      .single();
+
+    if (error || !data) {
+      console.error('Supabase GET error:', error);
+      return res.status(404).json({ error: 'Product not found' });
+    }
+    return res.status(200).json(data);
+  }
+
+  if (req.method === 'PUT' || req.method === 'DELETE') {
+    const session = (await getServerSession(
+      req,
+      res,
+      authOptions
+    )) as SessionUser;
+    if (!session || !['admin', 'seller'].includes(session.user.role || '')) {
+      return res.status(403).json({ error: 'Unauthorized' });
+    }
+  }
+
+  if (req.method === 'PUT') {
+    const {
+      name,
+      price,
+      description,
+      image,
+      category,
+      quantity,
+      discount,
+      is_seasonal,
+    } = req.body;
+
+    const validation = validateProductData({
+      name,
+      price,
+      description,
+      category,
+      quantity,
+    });
+    if (!validation.isValid) {
+      return res.status(400).json({ error: validation.error });
     }
 
-    if (req.method === "GET") {
-        const { data, error } = await supabase
-            .from("fruitsellerproducts")
-            .select("*")
-            .eq("id", id)
-            .single();
+    const { data, error } = await supabase
+      .from('fruitsellerproducts')
+      .update({
+        name,
+        price,
+        description,
+        image,
+        category,
+        quantity,
+        discount: discount || 0,
+        is_seasonal: is_seasonal || false,
+      })
+      .eq('id', id)
+      .select()
+      .single();
 
-        if (error || !data) {
-            console.error("Supabase GET error:", error);
-            return res.status(404).json({ error: "Product not found" });
-        }
-        return res.status(200).json(data);
+    if (error || !data) {
+      console.error('Supabase PUT error:', error);
+      return res.status(500).json({ error: 'Failed to update product' });
     }
+    return res.status(200).json(data);
+  }
 
-    if (req.method === "PUT" || req.method === "DELETE") {
-        const session = (await getServerSession(req, res, authOptions)) as SessionUser;
-        if (!session || !["admin", "seller"].includes(session.user.role || "")) {
-            return res.status(403).json({ error: "Unauthorized" });
-        }
+  if (req.method === 'DELETE') {
+    const { error } = await supabase
+      .from('fruitsellerproducts')
+      .delete()
+      .eq('id', id);
+
+    if (error) {
+      console.error('Supabase DELETE error:', error);
+      return res.status(500).json({ error: 'Failed to delete product' });
     }
+    return res.status(200).json({ message: 'Product deleted' });
+  }
 
-    if (req.method === "PUT") {
-        const { name, price, description, image, category, quantity, discount, is_seasonal } = req.body;
-
-        const validation = validateProductData({
-            name, price, description, category, quantity,
-        });
-        if (!validation.isValid) {
-            return res.status(400).json({ error: validation.error });
-        }
-
-        const { data, error } = await supabase
-            .from("fruitsellerproducts")
-            .update({
-                name,
-                price,
-                description,
-                image,
-                category,
-                quantity,
-                discount: discount || 0,
-                is_seasonal: is_seasonal || false,
-            })
-            .eq("id", id)
-            .select()
-            .single();
-
-        if (error || !data) {
-            console.error("Supabase PUT error:", error);
-            return res.status(500).json({ error: "Failed to update product" });
-        }
-        return res.status(200).json(data);
-    }
-
-    if (req.method === "DELETE") {
-        const { error } = await supabase
-            .from("fruitsellerproducts")
-            .delete()
-            .eq("id", id);
-
-        if (error) {
-            console.error("Supabase DELETE error:", error);
-            return res.status(500).json({ error: "Failed to delete product" });
-        }
-        return res.status(200).json({ message: "Product deleted" });
-    }
-
-    res.setHeader("Allow", ["GET", "PUT", "DELETE"]);
-    return res.status(405).json({ error: "Method Not Allowed" });
+  res.setHeader('Allow', ['GET', 'PUT', 'DELETE']);
+  return res.status(405).json({ error: 'Method Not Allowed' });
 }

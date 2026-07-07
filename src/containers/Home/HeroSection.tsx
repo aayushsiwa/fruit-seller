@@ -1,14 +1,9 @@
-import React from "react";
-import {
-  Grid,
-  Container,
-  Typography,
-  Button,
-} from "@mui/material";
-import { motion, AnimatePresence } from "framer-motion";
-import { heroSlides } from "@/constants/home";
-import { useRouter } from "next/router";
-import { HeroSectionProps } from "@/types/index";
+import { heroSlides } from '@/constants/home';
+import { HeroSectionProps } from '@/types/index';
+import { Button, Container, Grid, Typography } from '@mui/material';
+import { AnimatePresence, motion } from 'framer-motion';
+import { useRouter } from 'next/router';
+import React from 'react';
 
 export const HeroSection: React.FC<HeroSectionProps> = ({ currentSlide }) => {
   const router = useRouter();
@@ -16,21 +11,21 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ currentSlide }) => {
   return (
     <Grid
       sx={{
-        position: "relative",
-        minHeight: { xs: "70vh", md: "80vh" },
-        overflow: "hidden",
-        display: "flex",
-        alignItems: "center",
-        "&:after": {
+        position: 'relative',
+        minHeight: { xs: '70vh', md: '80vh' },
+        overflow: 'hidden',
+        display: 'flex',
+        alignItems: 'center',
+        '&:after': {
           content: '""',
-          position: "absolute",
+          position: 'absolute',
           top: 0,
           left: 0,
           right: 0,
           bottom: 0,
           background: {
-            xs: "linear-gradient(180deg, rgba(0,0,0,0.6), rgba(0,0,0,0.4))",
-            md: "linear-gradient(180deg, rgba(0,0,0,0.5), rgba(0,0,0,0.3))",
+            xs: 'linear-gradient(180deg, rgba(0,0,0,0.6), rgba(0,0,0,0.4))',
+            md: 'linear-gradient(180deg, rgba(0,0,0,0.5), rgba(0,0,0,0.3))',
           },
           zIndex: 1,
         },
@@ -44,21 +39,21 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ currentSlide }) => {
           exit={{ opacity: 0 }}
           transition={{ duration: 0.6 }}
           style={{
-            position: "absolute",
+            position: 'absolute',
             top: 0,
             left: 0,
             right: 0,
             bottom: 0,
             backgroundImage: `url(${heroSlides[currentSlide].image})`,
-            backgroundSize: "cover",
-            backgroundPosition: "center",
+            backgroundSize: 'cover',
+            backgroundPosition: 'center',
           }}
         />
       </AnimatePresence>
 
       <Container
         sx={{
-          position: "relative",
+          position: 'relative',
           zIndex: 2,
           px: { xs: 3, sm: 6 },
           py: { xs: 6, md: 10 },
@@ -77,10 +72,10 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ currentSlide }) => {
             sx={{
               fontWeight: 700,
               fontSize: {
-                xs: "clamp(2rem, 6vw, 3rem)",
-                md: "clamp(3rem, 6vw, 4rem)",
+                xs: 'clamp(2rem, 6vw, 3rem)',
+                md: 'clamp(3rem, 6vw, 4rem)',
               },
-              textShadow: "0 4px 8px rgba(0,0,0,0.5)",
+              textShadow: '0 4px 8px rgba(0,0,0,0.5)',
             }}
           >
             {heroSlides[currentSlide].title}
@@ -92,7 +87,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ currentSlide }) => {
               mb: 4,
               maxWidth: 600,
               opacity: 0.95,
-              fontSize: { xs: "1rem", md: "1.25rem" },
+              fontSize: { xs: '1rem', md: '1.25rem' },
             }}
           >
             {heroSlides[currentSlide].subtitle}
@@ -102,8 +97,8 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ currentSlide }) => {
             whileTap={{ scale: 0.95 }}
             style={{
               borderRadius: 8,
-              overflow: "hidden",
-              border: "none",
+              overflow: 'hidden',
+              border: 'none',
             }}
           >
             <Button
@@ -114,8 +109,8 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ currentSlide }) => {
               sx={{
                 px: 4,
                 py: 1.5,
-                fontSize: "1rem",
-                textTransform: "none",
+                fontSize: '1rem',
+                textTransform: 'none',
               }}
             >
               {heroSlides[currentSlide].cta}

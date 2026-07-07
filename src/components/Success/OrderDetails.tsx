@@ -1,8 +1,8 @@
-import { Box, Typography, Divider, Paper } from "@mui/material";
-import Image from "next/image";
-import { motion } from "framer-motion";
-import { OrderDetailsProps, CartItem } from "@/types/index";
-import { currency, defaultImage } from "@/constants/index";
+import { currency, defaultImage } from '@/constants/index';
+import { CartItem, OrderDetailsProps } from '@/types/index';
+import { Box, Divider, Paper, Typography } from '@mui/material';
+import { motion } from 'framer-motion';
+import Image from 'next/image';
 
 export const OrderDetails: React.FC<OrderDetailsProps> = ({
   order,
@@ -11,7 +11,7 @@ export const OrderDetails: React.FC<OrderDetailsProps> = ({
   return (
     <Paper
       elevation={3}
-      sx={{ p: 3, borderRadius: 2, maxWidth: 600, mx: "auto", mt: 4 }}
+      sx={{ p: 3, borderRadius: 2, maxWidth: 600, mx: 'auto', mt: 4 }}
       component={motion.div}
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
@@ -22,8 +22,8 @@ export const OrderDetails: React.FC<OrderDetailsProps> = ({
       </Typography>
       <Box
         sx={{
-          display: "grid",
-          gridTemplateColumns: { xs: "1fr", md: "1fr" },
+          display: 'grid',
+          gridTemplateColumns: { xs: '1fr', md: '1fr' },
           gap: 2,
         }}
       >
@@ -39,23 +39,23 @@ export const OrderDetails: React.FC<OrderDetailsProps> = ({
               sx={{
                 p: 2,
                 border: 1,
-                borderColor: "divider",
+                borderColor: 'divider',
                 borderRadius: 1,
-                bgcolor: "background.paper",
+                bgcolor: 'background.paper',
               }}
               component={motion.div}
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.3, delay: index * 0.1 }}
             >
-              <Box sx={{ display: "flex", alignItems: "center" }}>
+              <Box sx={{ display: 'flex', alignItems: 'center' }}>
                 <Image
                   src={product.image || defaultImage}
                   alt={product.name}
                   width={60}
                   height={60}
                   style={{
-                    objectFit: "cover",
+                    objectFit: 'cover',
                     borderRadius: 4,
                     marginRight: 16,
                   }}
@@ -82,7 +82,7 @@ export const OrderDetails: React.FC<OrderDetailsProps> = ({
         })}
       </Box>
       <Divider sx={{ my: 2 }} />
-      <Box sx={{ display: "flex", justifyContent: "space-between" }}>
+      <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
         <Typography variant="subtitle1" sx={{ fontWeight: 600 }}>
           Total
         </Typography>

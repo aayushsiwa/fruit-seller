@@ -1,14 +1,19 @@
-import { createContext, useState, useContext, useEffect } from "react";
-import { CartContextType, LayoutProps, ItemType, LocalCartItem } from "@/types/index";
-import { useSnackbar } from "@/src/contexts/SnackBarContext";
-import axios from "axios";
+import { useSnackbar } from '@/src/contexts/SnackBarContext';
+import {
+  CartContextType,
+  ItemType,
+  LayoutProps,
+  LocalCartItem,
+} from '@/types/index';
+import axios from 'axios';
+import { createContext, useContext, useEffect, useState } from 'react';
 
 const CartContext = createContext<CartContextType | undefined>(undefined);
 
 export function useCart() {
   const context = useContext(CartContext);
   if (!context) {
-    throw new Error("useCart must be used within a CartProvider");
+    throw new Error('useCart must be used within a CartProvider');
   }
   return context;
 }
@@ -19,13 +24,13 @@ export function CartProvider({ children }: LayoutProps) {
   const { showSnackbar } = useSnackbar();
 
   useEffect(() => {
-    const savedCart = localStorage.getItem("cart");
+    const savedCart = localStorage.getItem('cart');
     if (savedCart) {
       try {
         setCart(JSON.parse(savedCart));
       } catch (error) {
-        console.error("Error parsing cart from localStorage:", error);
-        showSnackbar("Error loading cart.", "error");
+        console.error('Error parsing cart from localStorage:', error);
+        showSnackbar('Error loading cart.', 'error');
       }
     }
     setLoading(false);
@@ -58,17 +63,15 @@ export function CartProvider({ children }: LayoutProps) {
             hasInvalidItems = true;
           }
         } catch {
-          console.log(
-            `Product ${item.id} not found, removing from cart.`
-          );
+          console.log(`Product ${item.id} not found, removing from cart.`);
           hasInvalidItems = true;
         }
       }
       if (hasInvalidItems) {
         setCart(validCart);
         showSnackbar(
-          "Adjusted cart: removed or updated unavailable items.",
-          "warning"
+          'Adjusted cart: removed or updated unavailable items.',
+          'warning'
         );
       }
     };
@@ -81,38 +84,31 @@ export function CartProvider({ children }: LayoutProps) {
 
   useEffect(() => {
     if (!loading) {
-      localStorage.setItem("cart", JSON.stringify(cart));
+      localStorage.setItem('cart', JSON.stringify(cart));
     }
   }, [cart, loading]);
 
   const addToCart = (product: ItemType, quantity: number = 1) => {
     if (quantity < 1 || product.quantity < quantity) {
-      showSnackbar("Invalid quantity or insufficient stock.", "error");
+      showSnackbar('Invalid quantity or insufficient stock.', 'error');
       return;
     }
 
     setCart((prevCart) => {
-      const existingItem = prevCart.find(
-        (item) => item.id === product.id
-      );
+      const existingItem = prevCart.find((item) => item.id === product.id);
 
       if (existingItem) {
         const newQuantity = existingItem.quantity + quantity;
         if (newQuantity > product.quantity) {
-          showSnackbar(
-            "Cannot add: exceeds available stock.",
-            "error"
-          );
+          showSnackbar('Cannot add: exceeds available stock.', 'error');
           return prevCart;
         }
-        showSnackbar(`${product.name} updated in cart.`, "success");
+        showSnackbar(`${product.name} updated in cart.`, 'success');
         return prevCart.map((item) =>
-          item.id === product.id
-            ? { ...item, quantity: newQuantity }
-            : item
+          item.id === product.id ? { ...item, quantity: newQuantity } : item
         );
       } else {
-        showSnackbar(`${product.name} added to cart.`, "success");
+        showSnackbar(`${product.name} added to cart.`, 'success');
         return [...prevCart, { id: product.id, quantity }];
       }
     });
@@ -129,12 +125,12 @@ export function CartProvider({ children }: LayoutProps) {
     }
 
     if (maxQuantity !== undefined && quantity > maxQuantity) {
-      showSnackbar("Cannot update: exceeds available stock.", "error");
+      showSnackbar('Cannot update: exceeds available stock.', 'error');
       return;
     }
 
     setCart((prevCart) => {
-      showSnackbar("Cart updated.", "success");
+      showSnackbar('Cart updated.', 'success');
       return prevCart.map((item) =>
         item.id === id ? { ...item, quantity } : item
       );
@@ -143,14 +139,14 @@ export function CartProvider({ children }: LayoutProps) {
 
   const removeFromCart = (id: string) => {
     setCart((prevCart) => {
-      showSnackbar("Item removed from cart.", "success");
+      showSnackbar('Item removed from cart.', 'success');
       return prevCart.filter((item) => item.id !== id);
     });
   };
 
   const clearCart = () => {
     setCart([]);
-    showSnackbar("Cart cleared.", "success");
+    showSnackbar('Cart cleared.', 'success');
   };
 
   const getCartTotal = (products: (ItemType | undefined)[]) => {
@@ -180,7 +176,5 @@ export function CartProvider({ children }: LayoutProps) {
     showSnackbar,
   };
 
-  return (
-    <CartContext.Provider value={value}>{children}</CartContext.Provider>
-  );
+  return <CartContext.Provider value={value}>{children}</CartContext.Provider>;
 }
