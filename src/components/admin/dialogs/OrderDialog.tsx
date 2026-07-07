@@ -13,9 +13,7 @@ import {
     MenuItem,
     TextField,
 } from "@mui/material";
-import { OrderDialogProps, ORDER_STATUSES, OrderStatus } from "@/types/index";
-
-const STATUS_ORDER: OrderStatus[] = ["Processing", "Shipped", "Delivered"];
+import { OrderDialogProps, OrderStatus } from "@/types/index";
 
 function validTargets(current: OrderStatus): OrderStatus[] {
     if (current === "Delivered" || current === "Cancelled") return [];
@@ -34,7 +32,7 @@ const OrderDialog: React.FC<OrderDialogProps> = ({
 }) => {
     const currentStatus = useMemo(
         () => (order.status as OrderStatus) || "Processing",
-        [open],
+        [order.status],
     );
 
     const targets = useMemo(() => validTargets(currentStatus), [currentStatus]);
