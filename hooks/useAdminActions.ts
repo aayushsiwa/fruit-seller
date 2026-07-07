@@ -1,15 +1,27 @@
 import { useCallback, useMemo } from "react";
 import { UseMutationResult } from "@tanstack/react-query";
 import { useSnackbar } from "@/src/contexts/SnackBarContext";
-import {
-    AdminActionsProps,
-    UseAdminActionsReturn,
-} from "@/types/admin";
-import { ItemType, User } from "@/types/index";
+import { AdminActionsProps, UseAdminActionsReturn } from "@/types/admin";
+import { ItemType, User, OrderStatus, ORDER_STATUSES } from "@/types/index";
 import { validateProductData, validateUserData } from "@/lib/validation/admin";
 
+const STATUS_ORDER: OrderStatus[] = ["Processing", "Shipped", "Delivered"];
 
-export const useAdminActions = ({
+function validateTransition(current: OrderStatus, next: OrderStatus): string | null {
+    if (current === next) return null;
+    if (current === "Delivered" || current === "Cancelled") {
+        return `Cannot change status from "${current}" — it is a terminal state`;
+    }
+    if (next === "Processing") return "Cannot revert to Processing";
+    const currentIdx = STATUS_ORDER.indexOf(current);
+    const nextIdx = STATUS_ORDER.indexOf(next);
+    if (nextIdx >= 0 && nextIdx <= currentIdx) {
+        return `Cannot revert from "${current}" to "${next}"`;
+    }
+    return null;
+}
+
+const useAdminActions = ({
     saveProductMutation,
     deleteProductMutation,
     saveUserMutation,
@@ -26,6 +38,9 @@ export const useAdminActions = ({
     handleCloseUserDeleteDialog,
     handleCloseOrderDialog,
     setError,
+    handleOpenConfirmDialog,
+    handleCloseConfirmDialog,
+    confirmStatus,
 }: AdminActionsProps): UseAdminActionsReturn => {
     const { showSnackbar } = useSnackbar();
 
@@ -47,7 +62,7 @@ export const useAdminActions = ({
                 showSnackbar(errorMessage, "error");
             }
         },
-        [setError, showSnackbar]
+        [setError, showSnackbar],
     );
 
     const handleSaveProduct = useCallback(
@@ -89,7 +104,7 @@ export const useAdminActions = ({
             handleMutation,
             setError,
             showSnackbar,
-        ]
+        ],
     );
 
     const handleSaveUser = useCallback(
@@ -116,9 +131,7 @@ export const useAdminActions = ({
                 saveUserMutation,
                 { userData, isEdit: isEditUser, id: selectedUser?.id },
                 handleCloseUserDialog,
-                isEditUser
-                    ? "User updated successfully"
-                    : "User added successfully",
+                isEditUser ? "User updated successfully" : "User added successfully",
             );
         },
         [
@@ -129,7 +142,7 @@ export const useAdminActions = ({
             handleMutation,
             setError,
             showSnackbar,
-        ]
+        ],
     );
 
     const handleDeleteProduct = useCallback(async () => {
@@ -144,7 +157,7 @@ export const useAdminActions = ({
             deleteProductMutation,
             selectedProduct.id,
             handleCloseDeleteDialog,
-            "Product deleted successfully"
+            "Product deleted successfully",
         );
     }, [
         selectedProduct?.id,
@@ -167,7 +180,7 @@ export const useAdminActions = ({
             deleteUserMutation,
             selectedUser.id,
             handleCloseUserDeleteDialog,
-            "User deleted successfully"
+            "User deleted successfully",
         );
     }, [
         selectedUser?.id,
@@ -179,30 +192,66 @@ export const useAdminActions = ({
     ]);
 
     const handleUpdateOrderStatus = useCallback(
-        async (status: string) => {
-            if (!selectedOrder?.id) {
-                const error = "No order selected";
+        async (status: OrderStatus) => {
+            const currentStatus = selectedOrder?.status as OrderStatus | undefined;
+            if (!currentStatus) {
+                const error = "No order status available";
                 setError(error);
                 showSnackbar(error, "error");
                 return;
             }
 
-            await handleMutation(
-                updateOrderMutation,
-                { id: selectedOrder.id.toString(), status },
-                handleCloseOrderDialog,
-                "Order status updated successfully"
-            );
+            const validationError = validateTransition(currentStatus, status);
+            if (validationError) {
+                setError(validationError);
+                showSnackbar(validationError, "error");
+                return;
+            }
+
+            handleOpenConfirmDialog(status);
         },
         [
-            selectedOrder?.id,
-            handleMutation,
-            updateOrderMutation,
-            handleCloseOrderDialog,
+            selectedOrder?.status,
             setError,
             showSnackbar,
-        ]
+            handleOpenConfirmDialog,
+        ],
     );
+
+    const handleConfirmOrderStatus = useCallback(async () => {
+        if (!selectedOrder?.id) {
+            const error = "No order selected";
+            setError(error);
+            showSnackbar(error, "error");
+            return;
+        }
+
+        const now = new Date().toISOString();
+        await handleMutation(
+            updateOrderMutation,
+            {
+                id: selectedOrder.id.toString(),
+                status: confirmStatus,
+                shipped_at: confirmStatus === "Shipped" ? now : undefined,
+                delivered_at: confirmStatus === "Delivered" ? now : undefined,
+                cancelled_at: confirmStatus === "Cancelled" ? now : undefined,
+            },
+            () => {
+                handleCloseConfirmDialog();
+                handleCloseOrderDialog();
+            },
+            "Order status updated successfully",
+        );
+    }, [
+        selectedOrder?.id,
+        updateOrderMutation,
+        confirmStatus,
+        handleMutation,
+        handleCloseConfirmDialog,
+        handleCloseOrderDialog,
+        setError,
+        showSnackbar,
+    ]);
 
     return useMemo(
         () => ({
@@ -211,6 +260,7 @@ export const useAdminActions = ({
             handleSaveUser,
             handleDeleteUser,
             handleUpdateOrderStatus,
+            handleConfirmOrderStatus,
         }),
         [
             handleSaveProduct,
@@ -218,6 +268,10 @@ export const useAdminActions = ({
             handleSaveUser,
             handleDeleteUser,
             handleUpdateOrderStatus,
-        ]
+            handleConfirmOrderStatus,
+        ],
     );
 };
+
+export { useAdminActions };
+export default useAdminActions;

@@ -32,6 +32,9 @@ describe("useAdminActions - handleSaveUser", () => {
             handleCloseUserDeleteDialog: jest.fn(),
             handleCloseOrderDialog: jest.fn(),
             setError,
+            handleOpenConfirmDialog: jest.fn(),
+            handleCloseConfirmDialog: jest.fn(),
+            confirmStatus: "Processing" as const,
         };
 
         const { result } = renderHook(() =>

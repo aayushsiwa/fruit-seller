@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { ItemType, User, Order } from "@/types/index";
+import { ItemType, User, Order, OrderStatus } from "@/types/index";
 import { UseAdminDialogsReturn } from "@/types/admin";
 
 export const useAdminDialogs = (): UseAdminDialogsReturn => {
@@ -8,6 +8,8 @@ export const useAdminDialogs = (): UseAdminDialogsReturn => {
     const [openUserDialog, setOpenUserDialog] = useState(false);
     const [openUserDeleteDialog, setOpenUserDeleteDialog] = useState(false);
     const [openOrderDialog, setOpenOrderDialog] = useState(false);
+    const [openConfirmDialog, setOpenConfirmDialog] = useState(false);
+    const [confirmStatus, setConfirmStatus] = useState<OrderStatus>("Processing");
     const [selectedProduct, setSelectedProduct] = useState<Partial<ItemType>>(
         {}
     );
@@ -83,12 +85,26 @@ export const useAdminDialogs = (): UseAdminDialogsReturn => {
         setError(null);
     };
 
+    const handleOpenConfirmDialog = (status: OrderStatus) => {
+        setConfirmStatus(status);
+        setOpenConfirmDialog(true);
+        setError(null);
+    };
+
+    const handleCloseConfirmDialog = () => {
+        setOpenConfirmDialog(false);
+        setConfirmStatus("Processing");
+        setError(null);
+    };
+
     return {
         openProductDialog,
         openDeleteDialog,
         openUserDialog,
         openUserDeleteDialog,
         openOrderDialog,
+        openConfirmDialog,
+        confirmStatus,
         selectedProduct,
         selectedUser,
         selectedOrder,
@@ -107,5 +123,7 @@ export const useAdminDialogs = (): UseAdminDialogsReturn => {
         handleCloseUserDeleteDialog,
         handleOpenOrderDialog,
         handleCloseOrderDialog,
+        handleOpenConfirmDialog,
+        handleCloseConfirmDialog,
     };
 };
