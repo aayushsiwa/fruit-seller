@@ -1,4 +1,5 @@
 import React from "react";
+import dayjs from "dayjs";
 import {
     TableContainer,
     Table,
@@ -80,9 +81,7 @@ const OrdersTab: React.FC<OrdersTabProps> = ({
                                     />
                                 </TableCell>
                                 <TableCell>
-                                    {new Date(
-                                        order.createdAt
-                                    ).toLocaleDateString()}
+                                    {dayjs(order.createdAt).format("MMM D, YYYY")}
                                 </TableCell>
                                 <TableCell align="right">
                                     <IconButton
