@@ -6,8 +6,15 @@ import {
   UseMutationResult,
 } from "@tanstack/react-query";
 import { useSnackbar } from "@/src/contexts/SnackBarContext";
-import { ItemType, User, OrderStatus } from "@/types/index";
-import { AdminActionsProps, UseAdminActionsReturn } from "@/types/admin";
+import { ItemType, User, OrderStatus, Order, TabValue } from "@/types/index";
+import {
+  AdminActionsProps,
+  UseAdminActionsReturn,
+  UseAdminDashboardReturn,
+  UseAdminDataReturn,
+  UseAdminDialogsReturn,
+  UseAdminMutationsReturn,
+} from "@/types/admin";
 import { validateProductData, validateUserData } from "@/lib/validation/admin";
 import {
   fetchProducts,
