@@ -1,0 +1,25 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ProductDetail - UI should match snapshot with product data 1`] = `
+<DocumentFragment>
+  <div
+    class="MuiContainer-root MuiContainer-maxWidthLg css-1oqqzyl-MuiContainer-root"
+  >
+    <div
+      data-testid="breadcrumbs-nav"
+    >
+      Apple
+    </div>
+    <div
+      data-testid="product-info"
+    >
+      Product Info
+    </div>
+    <div
+      data-testid="related-products"
+    >
+      1 related product(s)
+    </div>
+  </div>
+</DocumentFragment>
+`;
