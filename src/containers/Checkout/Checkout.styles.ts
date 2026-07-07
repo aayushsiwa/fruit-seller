@@ -18,8 +18,20 @@ export const useCheckoutStyles = makeStyles({
     color: '#f44336',
   },
   summaryBox: {
-    maxWidth: 600,
-    marginLeft: 'auto',
-    marginRight: 'auto',
+    width: '100%',
+  },
+  addressPaper: {
+    padding: 24,
+    borderRadius: 8,
+    marginBottom: 24,
+  },
+  sectionTitle: {
+    fontWeight: 600,
+    marginBottom: 16,
+  },
+  formRow: {
+    display: 'flex',
+    gap: 16,
+    marginBottom: 16,
   },
 });

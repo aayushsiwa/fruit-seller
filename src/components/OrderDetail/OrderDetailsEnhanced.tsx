@@ -213,6 +213,31 @@ export const OrderDetailsEnhanced: React.FC<OrderDetailsProps> = ({
         </Box>
       )}
 
+      {order.shipping_address && (
+        <Box sx={{ mt: 2, textAlign: 'left' }}>
+          <Typography variant="subtitle2" sx={{ fontWeight: 600, mb: 0.5 }}>
+            Shipping Address
+          </Typography>
+          <Typography variant="body2" color="text.secondary">
+            {order.shipping_address.street}
+          </Typography>
+          {order.shipping_address.street2 && (
+            <Typography variant="body2" color="text.secondary">
+              {order.shipping_address.street2}
+            </Typography>
+          )}
+          <Typography variant="body2" color="text.secondary">
+            {order.shipping_address.city}, {order.shipping_address.state} - {order.shipping_address.postal_code}
+          </Typography>
+          <Typography variant="body2" color="text.secondary">
+            {order.shipping_address.country}
+          </Typography>
+          <Typography variant="caption" color="text.secondary" sx={{ display: 'block', mt: 0.5 }}>
+            Phone: {order.shipping_address.phone}
+          </Typography>
+        </Box>
+      )}
+
       <Divider sx={{ my: 2 }} />
 
       <Typography variant="subtitle2" gutterBottom sx={{ fontWeight: 600 }}>

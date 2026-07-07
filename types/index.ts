@@ -47,6 +47,7 @@ export interface Order {
   shipped_at?: string;
   delivered_at?: string;
   cancelled_at?: string;
+  shipping_address?: Address;
 }
 
 export interface User {
@@ -190,6 +191,7 @@ export interface OrderSummaryProps {
   hasError: boolean;
   handleCheckout: () => void;
   disabled?: boolean;
+  shippingCost?: number;
 }
 
 export interface FeaturedSectionProps {
@@ -506,6 +508,17 @@ export type UseHomePageReturn = {
   error: unknown;
 };
 
+export interface Address {
+  id?: string;
+  street: string;
+  street2?: string;
+  city: string;
+  state: string;
+  postal_code: string;
+  country: string;
+  phone: string;
+}
+
 export type UseCheckoutReturn = {
   cart: CartItem[];
   products: ItemType[];
@@ -516,6 +529,15 @@ export type UseCheckoutReturn = {
   handlePayNow: () => Promise<void>;
   status: 'loading' | 'authenticated' | 'unauthenticated';
   getCartTotal: (products: (ItemType | undefined)[]) => number;
+  savedAddresses: Address[];
+  selectedAddressId: string;
+  setSelectedAddressId: (id: string) => void;
+  newAddress: Address;
+  setNewAddress: React.Dispatch<React.SetStateAction<Address>>;
+  saveToProfile: boolean;
+  setSaveToProfile: (save: boolean) => void;
+  shippingCost: number;
+  isAddressAutoFilled: boolean;
 };
 
 export type UseOrdersPageReturn = {

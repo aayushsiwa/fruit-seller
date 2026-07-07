@@ -1,5 +1,5 @@
 import { supabase } from '@/lib/supabase';
-import { CartItem } from '@/types/index';
+import { CartItem, Address } from '@/types/index';
 import crypto from 'crypto';
 import type { NextApiRequest, NextApiResponse } from 'next';
 import { getServerSession } from 'next-auth/next';
@@ -47,16 +47,22 @@ export default async function handler(
     razorpay_payment_id,
     razorpay_order_id,
     razorpay_signature,
+    shipping_address,
   }: {
     cart: CartItem[];
     total: number;
     razorpay_payment_id: string;
     razorpay_order_id: string;
     razorpay_signature: string;
+    shipping_address: Address;
   } = req.body;
 
   if (!cart || !Array.isArray(cart) || cart.length === 0 || !total) {
     return res.status(400).json({ error: 'Invalid cart or total' });
+  }
+
+  if (!shipping_address) {
+    return res.status(400).json({ error: 'Shipping address is required' });
   }
 
   if (!razorpay_payment_id || !razorpay_order_id || !razorpay_signature) {
@@ -120,6 +126,7 @@ export default async function handler(
         created_at: new Date().toISOString(),
         payment_id: razorpay_payment_id,
         razorpay_order_id,
+        shipping_address,
       })
       .select()
       .single();
