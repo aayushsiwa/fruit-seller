@@ -1,5 +1,5 @@
 import axios from "axios";
-import { ItemType, User,Order } from "@/types/index";
+import { ItemType, User, Order, OrderStatus } from "@/types/index";
 
 export const saveProduct = async (
     productData: Partial<ItemType>,
@@ -70,11 +70,22 @@ export const deleteUser = async (id: string): Promise<void> => {
     await response.json();
 };
 
-export const updateOrderStatus = async (id: string, status: string): Promise<Order> => {
+export const updateOrderStatus = async (
+    id: string,
+    status: OrderStatus,
+    shipped_at?: string,
+    delivered_at?: string,
+    cancelled_at?: string,
+): Promise<Order> => {
     const response = await fetch(`/api/admin/orders/${id}`, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ status }),
+        body: JSON.stringify({
+            status,
+            ...(shipped_at && { shipped_at }),
+            ...(delivered_at && { delivered_at }),
+            ...(cancelled_at && { cancelled_at }),
+        }),
     });
 
     if (!response.ok) {

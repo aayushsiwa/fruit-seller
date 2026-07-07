@@ -9,15 +9,35 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse,
 ) {
-  if (req.method !== "POST") {
-    return res.status(405).json({ error: "Method not allowed" });
-  }
-
   const session = (await getServerSession(req, res, Nextauth.authOptions)) as {
     user?: { email?: string };
   } | null;
   if (!session || !session.user || !session.user.email) {
     return res.status(401).json({ error: "Unauthorized" });
+  }
+
+  if (req.method === "GET") {
+    const { data, error } = await supabase
+      .from("orders")
+      .select("*")
+      .eq("user_email", session.user.email)
+      .order("created_at", { ascending: false });
+
+    if (error) {
+      return res.status(500).json({ error: error.message });
+    }
+
+    const orders = (data || []).map((order: Record<string, unknown>) => ({
+      ...order,
+      userName: order.user_email,
+      createdAt: order.created_at,
+    }));
+
+    return res.status(200).json(orders);
+  }
+
+  if (req.method !== "POST") {
+    return res.status(405).json({ error: "Method not allowed" });
   }
 
   const {
