@@ -10,11 +10,7 @@ import {
 import { useTheme } from "@mui/material/styles";
 import { useRouter } from "next/router";
 import { TabValue } from "@/types/index";
-import { useAdminData } from "@/hooks/useAdminData";
-import { useAdminActions } from "@/hooks/useAdminActions";
-import { useAdminDialogs } from "@/hooks/useAdminDialogs";
-import { useAdminMutations } from "@/hooks/useAdminMutations";
-import { useAdminDashboard } from "@/hooks/useAdminDashboard";
+import { useAdminData, useAdminActions, useAdminDialogs, useAdminMutations, useAdminDashboard } from "./Admin.hooks";
 import DashboardStats from "@/src/components/admin/DashboardStats";
 import ProductsTab from "@/src/components/admin/ProductsTab";
 import UsersTab from "@/src/components/admin/UsersTab";
@@ -25,7 +21,7 @@ import OrderDialog from "@/src/components/admin/dialogs/OrderDialog";
 import ConfirmStatusDialog from "@/src/components/admin/dialogs/ConfirmStatusDialog";
 import ConfirmDeleteDialog from "@/src/components/admin/dialogs/ConfirmDeleteDialog";
 import { useAuth } from "@/src/contexts/AuthContext";
-import useStyles from "./styles";
+import useStyles from "./Admin.styles";
 
 export default function AdminDashboard() {
     const router = useRouter();

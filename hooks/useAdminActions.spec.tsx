@@ -1,5 +1,5 @@
 import { renderHook } from "@testing-library/react";
-import { useAdminActions } from "@/hooks/useAdminActions";
+import { useAdminActions } from "@/src/containers/Admin/Admin.hooks";
 import { UseMutationResult } from "@tanstack/react-query";
 import React from "react";
 import { AdminActionsProps } from "@/types/admin";

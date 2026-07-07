@@ -17,8 +17,8 @@ import {
 import Link from "next/link";
 import { FiEye, FiEyeOff } from "react-icons/fi";
 import { TbBrandGoogle } from "react-icons/tb";
-import useRegister from "@/hooks/useRegister";
-import { useRegisterStyles } from "./styles";
+import useRegister from "./Register.hooks";
+import { useRegisterStyles } from "./Register.styles";
 
 export default function Register() {
     const classes = useRegisterStyles();

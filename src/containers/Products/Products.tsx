@@ -2,7 +2,7 @@ import { Grid, Button, Box, Dialog } from "@mui/material";
 import { useMediaQuery } from "@mui/material";
 import { useTheme } from "@mui/material/styles";
 import { FiFilter } from "react-icons/fi";
-import { useProductsPage } from "@/hooks/useProductsPage";
+import { useProductsPage } from "./Products.hooks";
 import { FilterOptions } from "@/src/components/ProductsPage/FilterOptions";
 import { FilterChips } from "@/src/components/ProductsPage/FilterChips";
 import { ProductGrid } from "@/src/components/ProductsPage/ProductGrid";

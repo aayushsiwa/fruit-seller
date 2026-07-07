@@ -1,12 +1,12 @@
 import { Container, Box, Typography, Button } from "@mui/material";
 import { FiArrowLeft } from "react-icons/fi";
 import { motion } from "framer-motion";
-import { useCartPage } from "@/hooks/useCartPage";
+import { useCartPage } from "./Cart.hooks";
 import { CartItems } from "@/src/components/Cart/CartItems";
 import { OrderSummary } from "@/src/components/Cart/OrderSummary";
 import { EmptyCart } from "@/src/components/Cart/EmptyCart";
 import { LoadingScreen } from "@/src/components/LoadingScreen";
-import useStyles from "./styles";
+import useStyles from "./Cart.styles";
 
 export default function Cart() {
     const MotionButton = motion(Button);

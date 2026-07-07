@@ -1,5 +1,5 @@
 import { renderHook, act, waitFor } from "@testing-library/react";
-import { useProductsPage } from "@/hooks/useProductsPage";
+import { useProductsPage } from "@/src/containers/Products/Products.hooks";
 import axios from "axios";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ItemType } from "@/types/index";

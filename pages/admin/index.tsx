@@ -1,7 +1,7 @@
 import { getServerSession } from "next-auth";
 import { authOptions } from "../api/auth/[...nextauth]";
 import type { GetServerSideProps } from "next";
-import AdminDashboard from "@/src/containers/Admin";
+import AdminDashboard from "@/src/containers/Admin/Admin";
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
     const session = await getServerSession(context.req, context.res, authOptions);

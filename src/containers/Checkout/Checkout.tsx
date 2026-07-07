@@ -1,11 +1,11 @@
 import { Container, Box, Typography } from "@mui/material";
 import { motion } from "framer-motion";
 import { useRouter } from "next/router";
-import { useCheckout } from "@/hooks/useCheckout";
+import { useCheckout } from "./Checkout.hooks";
 import { OrderSummary } from "@/src/components/Checkout/OrderSummary";
 import { EmptyCheckout } from "@/src/components/Checkout/EmptyCheckout";
 import { LoadingScreen } from "@/src/components/LoadingScreen";
-import { useCheckoutStyles } from "./styles";
+import { useCheckoutStyles } from "./Checkout.styles";
 
 export default function Checkout() {
     const router = useRouter();

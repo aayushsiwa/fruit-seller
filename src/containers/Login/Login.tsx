@@ -14,8 +14,8 @@ import {
 import Link from "next/link";
 import { FiEye, FiEyeOff } from "react-icons/fi";
 import { TbBrandGoogle } from "react-icons/tb";
-import useLogin from "@/hooks/useLogin";
-import { useLoginStyles } from "./styles";
+import useLogin from "./Login.hooks";
+import { useLoginStyles } from "./Login.styles";
 
 export default function Login() {
     const classes = useLoginStyles();

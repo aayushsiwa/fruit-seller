@@ -11,13 +11,13 @@ import { FiPackage, FiShoppingBag, FiChevronRight } from "react-icons/fi";
 import { motion } from "framer-motion";
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
-import { useOrdersPage } from "@/hooks/useOrdersPage";
+import { useOrdersPage } from "./Orders.hooks";
 import { LoadingScreen } from "@/src/components/LoadingScreen";
 import { OrderStatus } from "@/types/index";
 
 dayjs.extend(relativeTime);
 import { currency } from "@/constants/index";
-import useStyles from "./styles";
+import useStyles from "./Orders.styles";
 
 const statusConfig: Record<
     OrderStatus,

@@ -1,7 +1,7 @@
 import { Container, Typography, Button, Box } from "@mui/material";
 import { FiArrowLeft } from "react-icons/fi";
 import { motion } from "framer-motion";
-import { useOrderDetailPage } from "@/hooks/useOrderDetailPage";
+import { useOrderDetailPage } from "./OrderDetail.hooks";
 import { OrderDetailsEnhanced } from "@/src/components/OrderDetail/OrderDetailsEnhanced";
 import { LoadingScreen } from "@/src/components/LoadingScreen";
 import { ErrorMessage } from "@/src/components/Success/ErrorMessage";

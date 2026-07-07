@@ -1,9 +1,10 @@
-import { useCallback, useMemo } from "react";
-import { UseMutationResult } from "@tanstack/react-query";
+import { useState, useCallback, useMemo } from "react";
+import { useQuery, useMutation, useQueryClient, UseMutationResult } from "@tanstack/react-query";
 import { useSnackbar } from "@/src/contexts/SnackBarContext";
-import { AdminActionsProps, UseAdminActionsReturn } from "@/types/admin";
-import { ItemType, User, OrderStatus, ORDER_STATUSES } from "@/types/index";
+import { ItemType, User, Order, OrderStatus, TabValue, ORDER_STATUSES } from "@/types/index";
+import { AdminActionsProps, UseAdminActionsReturn, UseAdminDataReturn, UseAdminDialogsReturn, UseAdminMutationsReturn, UseAdminDashboardReturn } from "@/types/admin";
 import { validateProductData, validateUserData } from "@/lib/validation/admin";
+import { fetchProducts, fetchUsers, fetchOrders, saveProduct, deleteProduct, saveUser, deleteUser, updateOrderStatus } from "@/pages/api/adminApi";
 
 const STATUS_ORDER: OrderStatus[] = ["Processing", "Shipped", "Delivered"];
 
@@ -20,6 +21,38 @@ function validateTransition(current: OrderStatus, next: OrderStatus): string | n
     }
     return null;
 }
+
+export const useAdminData = (isAdmin: boolean): UseAdminDataReturn => {
+    const productsQuery = useQuery({
+        queryKey: ["adminProducts"],
+        queryFn: fetchProducts,
+        enabled: isAdmin,
+    });
+
+    const usersQuery = useQuery({
+        queryKey: ["adminUsers"],
+        queryFn: fetchUsers,
+        enabled: isAdmin,
+    });
+
+    const ordersQuery = useQuery({
+        queryKey: ["adminOrders"],
+        queryFn: fetchOrders,
+        enabled: isAdmin,
+    });
+
+    return {
+        products: productsQuery.data,
+        users: usersQuery.data,
+        orders: ordersQuery.data,
+        isLoadingProducts: productsQuery.isLoading,
+        isLoadingUsers: usersQuery.isLoading,
+        isLoadingOrders: ordersQuery.isLoading,
+        productsError: productsQuery.error,
+        usersError: usersQuery.error,
+        ordersError: ordersQuery.error,
+    };
+};
 
 const useAdminActions = ({
     saveProductMutation,
@@ -274,4 +307,224 @@ const useAdminActions = ({
 };
 
 export { useAdminActions };
-export default useAdminActions;
+
+export const useAdminDialogs = (): UseAdminDialogsReturn => {
+    const [openProductDialog, setOpenProductDialog] = useState(false);
+    const [openDeleteDialog, setOpenDeleteDialog] = useState(false);
+    const [openUserDialog, setOpenUserDialog] = useState(false);
+    const [openUserDeleteDialog, setOpenUserDeleteDialog] = useState(false);
+    const [openOrderDialog, setOpenOrderDialog] = useState(false);
+    const [openConfirmDialog, setOpenConfirmDialog] = useState(false);
+    const [confirmStatus, setConfirmStatus] = useState<OrderStatus>("Processing");
+    const [selectedProduct, setSelectedProduct] = useState<Partial<ItemType>>(
+        {}
+    );
+    const [selectedUser, setSelectedUser] = useState<Partial<User>>({});
+    const [selectedOrder, setSelectedOrder] = useState<Partial<Order>>({});
+    const [error, setError] = useState<string | null>(null);
+    const [isEditProduct, setIsEditProduct] = useState(false);
+    const [isEditUser, setIsEditUser] = useState(false);
+
+    const handleOpenProductDialog = (
+        product: Partial<ItemType> | null = null
+    ) => {
+        setSelectedProduct(product || {});
+        setIsEditProduct(!!product?.id);
+        setOpenProductDialog(true);
+        setError(null);
+    };
+
+    const handleCloseProductDialog = () => {
+        setOpenProductDialog(false);
+        setSelectedProduct({});
+        setIsEditProduct(false);
+        setError(null);
+    };
+
+    const handleOpenDeleteDialog = (product: ItemType) => {
+        setSelectedProduct(product);
+        setOpenDeleteDialog(true);
+        setError(null);
+    };
+
+    const handleCloseDeleteDialog = () => {
+        setOpenDeleteDialog(false);
+        setSelectedProduct({});
+        setError(null);
+    };
+
+    const handleOpenUserDialog = (user: Partial<User> | null = null) => {
+        setSelectedUser(user || {});
+        setIsEditUser(!!user?.id);
+        setOpenUserDialog(true);
+        setError(null);
+    };
+
+    const handleCloseUserDialog = () => {
+        setOpenUserDialog(false);
+        setSelectedUser({});
+        setIsEditUser(false);
+        setError(null);
+    };
+
+    const handleOpenUserDeleteDialog = (user: User) => {
+        setSelectedUser(user);
+        setOpenUserDeleteDialog(true);
+        setError(null);
+    };
+
+    const handleCloseUserDeleteDialog = () => {
+        setOpenUserDeleteDialog(false);
+        setSelectedUser({});
+        setError(null);
+    };
+
+    const handleOpenOrderDialog = (order: Order) => {
+        setSelectedOrder(order);
+        setOpenOrderDialog(true);
+        setError(null);
+    };
+
+    const handleCloseOrderDialog = () => {
+        setOpenOrderDialog(false);
+        setSelectedOrder({});
+        setError(null);
+    };
+
+    const handleOpenConfirmDialog = (status: OrderStatus) => {
+        setConfirmStatus(status);
+        setOpenConfirmDialog(true);
+        setError(null);
+    };
+
+    const handleCloseConfirmDialog = () => {
+        setOpenConfirmDialog(false);
+        setConfirmStatus("Processing");
+        setError(null);
+    };
+
+    return {
+        openProductDialog,
+        openDeleteDialog,
+        openUserDialog,
+        openUserDeleteDialog,
+        openOrderDialog,
+        openConfirmDialog,
+        confirmStatus,
+        selectedProduct,
+        selectedUser,
+        selectedOrder,
+        error,
+        setError,
+        isEditProduct,
+        isEditUser,
+        setSelectedOrder,
+        handleOpenProductDialog,
+        handleCloseProductDialog,
+        handleOpenDeleteDialog,
+        handleCloseDeleteDialog,
+        handleOpenUserDialog,
+        handleCloseUserDialog,
+        handleOpenUserDeleteDialog,
+        handleCloseUserDeleteDialog,
+        handleOpenOrderDialog,
+        handleCloseOrderDialog,
+        handleOpenConfirmDialog,
+        handleCloseConfirmDialog,
+    };
+};
+
+export const useAdminMutations = (): UseAdminMutationsReturn => {
+  const queryClient = useQueryClient();
+
+  const saveProductMutation = useMutation({
+    mutationFn: ({
+      productData,
+      isEdit,
+      id,
+    }: {
+      productData: Partial<ItemType>;
+      isEdit: boolean;
+      id?: string;
+    }) => saveProduct(productData, isEdit, id),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["adminProducts"] });
+    },
+  });
+
+  const deleteProductMutation = useMutation({
+    mutationFn: deleteProduct,
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["adminProducts"] });
+    },
+  });
+
+  const saveUserMutation = useMutation({
+    mutationFn: ({
+      userData,
+      isEdit,
+      id,
+    }: {
+      userData: Partial<User>;
+      isEdit: boolean;
+      id?: string;
+    }) => saveUser(userData, isEdit, id),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["adminUsers"] });
+    },
+  });
+
+  const deleteUserMutation = useMutation({
+    mutationFn: deleteUser,
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["adminUsers"] });
+    },
+  });
+
+  const updateOrderMutation = useMutation({
+    mutationFn: ({
+      id,
+      status,
+      shipped_at,
+      delivered_at,
+      cancelled_at,
+    }: {
+      id: string;
+      status: OrderStatus;
+      shipped_at?: string;
+      delivered_at?: string;
+      cancelled_at?: string;
+    }) => updateOrderStatus(id, status, shipped_at, delivered_at, cancelled_at),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["adminOrders"] });
+    },
+  });
+
+  return {
+    saveProductMutation,
+    deleteProductMutation,
+    saveUserMutation,
+    deleteUserMutation,
+    updateOrderMutation,
+  };
+};
+
+export const useAdminDashboard = (): UseAdminDashboardReturn => {
+    const [activeTab, setActiveTab] = useState<TabValue>(TabValue.PRODUCTS);
+    const [searchQuery, setSearchQuery] = useState<string>("");
+
+    const handleTabChange = useCallback(
+        (event: React.SyntheticEvent, newValue: TabValue) => {
+            setActiveTab(newValue);
+            setSearchQuery("");
+        },
+        []
+    );
+
+    return {
+        activeTab,
+        searchQuery,
+        setSearchQuery,
+        handleTabChange,
+    };
+};

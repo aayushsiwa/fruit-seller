@@ -1,7 +1,7 @@
 import { Container, Snackbar, Alert } from "@mui/material";
 import { useTheme } from "@mui/material/styles";
 import { useMediaQuery } from "@mui/material";
-import { useProductDetail } from "@/hooks/useProductDetail";
+import { useProductDetail } from "./ProductDetail.hooks";
 import { BreadcrumbsNav } from "@/src/components/ProductDetail/BreadcrumbsNav";
 import { ProductInfo } from "@/src/components/ProductDetail/ProductInfo";
 import { RelatedProducts } from "@/src/components/ProductDetail/RelatedProducts";
