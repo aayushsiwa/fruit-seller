@@ -1,0 +1,22 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Checkout - UI should match snapshot with products loaded 1`] = `
+<div>
+  <div
+    class="MuiContainer-root MuiContainer-maxWidthLg css-1oqqzyl-MuiContainer-root"
+  >
+    <div
+      class="MuiBox-root css-0"
+    >
+      Checkout
+      <div
+        class="MuiBox-root css-0"
+      >
+        <div
+          data-testid="order-summary"
+        />
+      </div>
+    </div>
+  </div>
+</div>
+`;

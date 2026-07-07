@@ -1,52 +1,51 @@
 import { renderHook, act, waitFor } from "@testing-library/react";
-import { useProductsPage } from "@/src/containers/Products/Products.hooks";
+import { useProductsPage } from "./Products.hooks";
 import axios from "axios";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ItemType } from "@/types/index";
 
-const mockProducts: ItemType[] = [
-    {
-        id: "1",
-        name: "Grapes",
-        price: 100,
-        discount: 10,
-        quantity: 20,
-        image: "/grapes.jpg",
-        description: "Fresh Grapes from Nashik.",
-        createdAt: "2025-05-01T00:00:00Z",
-        category: "berries",
-        isSeasonal: true,
-    },
-    {
-        id: "2",
-        name: "Apple",
-        price: 50,
-        discount: 5,
-        quantity: 0,
-        image: "/apple.jpg",
-        description: "Organic Apples from Himachal.",
-        createdAt: "2025-05-02T00:00:00Z",
-        category: "fruits",
-        isSeasonal: false,
-    },
-];
+describe("Products - Hooks", () => {
+    const mockProducts: ItemType[] = [
+        {
+            id: "1",
+            name: "Grapes",
+            price: 100,
+            discount: 10,
+            quantity: 20,
+            image: "/grapes.jpg",
+            description: "Fresh Grapes from Nashik.",
+            createdAt: "2025-05-01T00:00:00Z",
+            category: "berries",
+            isSeasonal: true,
+        },
+        {
+            id: "2",
+            name: "Apple",
+            price: 50,
+            discount: 5,
+            quantity: 0,
+            image: "/apple.jpg",
+            description: "Organic Apples from Himachal.",
+            createdAt: "2025-05-02T00:00:00Z",
+            category: "fruits",
+            isSeasonal: false,
+        },
+    ];
 
-const createWrapper = () => {
-    const queryClient = new QueryClient({});
-    const Wrapper = ({ children }: { children: React.ReactNode }) => (
-        <QueryClientProvider client={queryClient}>
-            {children}
-        </QueryClientProvider>
-    );
-    Wrapper.displayName = "QueryClientProviderWrapper";
-    return Wrapper;
-};
+    const createWrapper = () => {
+        const queryClient = new QueryClient({});
+        const Wrapper = ({ children }: { children: React.ReactNode }) => (
+            <QueryClientProvider client={queryClient}>
+                {children}
+            </QueryClientProvider>
+        );
+        Wrapper.displayName = "QueryClientProviderWrapper";
+        return Wrapper;
+    };
 
-describe("useProductsPage", () => {
     let axiosGetSpy: jest.SpyInstance;
 
     beforeEach(() => {
-        // Create spy on axios.get
         axiosGetSpy = jest.spyOn(axios, "get").mockResolvedValue({
             status: 200,
             data: mockProducts,
@@ -61,7 +60,6 @@ describe("useProductsPage", () => {
     });
 
     afterEach(() => {
-        // Clean up spy after each test
         axiosGetSpy.mockRestore();
     });
 
@@ -74,7 +72,6 @@ describe("useProductsPage", () => {
             expect(result.current.products).toHaveLength(2);
         });
 
-        // Verify axios was called with correct endpoint
         expect(axiosGetSpy).toHaveBeenCalledWith("/api/products");
         expect(axiosGetSpy).toHaveBeenCalledTimes(1);
 
@@ -174,13 +171,11 @@ describe("useProductsPage", () => {
 
         expect(summary).toEqual(
             expect.arrayContaining([
-                expect.stringContaining("Category: berries"), // Fixed to match the actual category being set
+                expect.stringContaining("Category: berries"),
                 expect.stringContaining("Sort: "),
                 expect.stringContaining("In Stock Only"),
             ])
         );
         expect(result.current.filteredProducts[0].name).toBe("Grapes");
     });
-
-    
 });
