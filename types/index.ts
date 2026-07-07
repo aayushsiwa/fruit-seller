@@ -8,6 +8,19 @@ import { FormikProps } from "formik";
 import { Session } from "next-auth";
 import { loginInitialValues } from "@/lib/validation/loginSchema";
 
+export type OrderStatus =
+    | "Processing"
+    | "Shipped"
+    | "Delivered"
+    | "Cancelled";
+
+export const ORDER_STATUSES: OrderStatus[] = [
+    "Processing",
+    "Shipped",
+    "Delivered",
+    "Cancelled",
+];
+
 export interface ItemType {
     id: string;
     name: string;
@@ -32,7 +45,12 @@ export interface Order {
     items: CartItem[];
     total: number;
     createdAt: string;
-    status: string;
+    status: OrderStatus;
+    payment_id?: string;
+    razorpay_order_id?: string;
+    shipped_at?: string;
+    delivered_at?: string;
+    cancelled_at?: string;
 }
 
 export interface User {
@@ -107,6 +125,15 @@ export interface UsersTabProps {
     onDeleteUser: (user: User) => void;
 }
 
+export interface ConfirmStatusDialogProps {
+    open: boolean;
+    onClose: () => void;
+    onConfirm: () => void;
+    isLoading: boolean;
+    currentStatus: string;
+    newStatus: string;
+}
+
 export interface ConfirmDeleteDialogProps {
     open: boolean;
     onClose: () => void;
@@ -120,7 +147,7 @@ export interface OrderDialogProps {
     open: boolean;
     order: Partial<Order>;
     onClose: () => void;
-    onUpdateStatus: (status: string) => void;
+    onUpdateStatus: (status: OrderStatus) => void;
     onOrderChange: (order: Partial<Order>) => void;
     isLoading: boolean;
 }
@@ -490,6 +517,14 @@ export type UseCheckoutReturn = {
     handlePayNow: () => Promise<void>;
     status: "loading" | "authenticated" | "unauthenticated";
     getCartTotal: (products: (ItemType | undefined)[]) => number;
+};
+
+export type UseOrdersPageReturn = {
+    orders: Order[];
+    isLoading: boolean;
+    error: string | null;
+    handleViewOrder: (orderId: string) => void;
+    handleContinueShopping: () => void;
 };
 
 export type UseCartPageReturn = {
