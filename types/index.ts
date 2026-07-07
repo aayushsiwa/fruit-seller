@@ -368,10 +368,15 @@ export interface AuthContextType {
     isAdmin: () => boolean;
 }
 
+export type ThemeMode = "light" | "dark" | "system";
+
 export interface ThemeSwitchContextType {
     isDarkMode: boolean;
     toggleTheme: () => void;
+    themeMode: ThemeMode;
+    setThemeMode: (mode: ThemeMode) => void;
 }
+
 
 
 export interface UseProductDetailReturn {
