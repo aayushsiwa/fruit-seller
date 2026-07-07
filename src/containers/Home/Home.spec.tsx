@@ -1,5 +1,5 @@
 import { render, screen, waitFor } from "@testing-library/react";
-import Home from "@/pages/index";
+import Home from "./Home";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import * as nextRouter from "next/router";
 import userEvent from "@testing-library/user-event";
