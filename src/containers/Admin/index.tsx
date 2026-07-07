@@ -22,6 +22,7 @@ import OrdersTab from "@/src/components/admin/OrdersTab";
 import ProductDialog from "@/src/components/admin/dialogs/ProductDialog";
 import UserDialog from "@/src/components/admin/dialogs/UserDialog";
 import OrderDialog from "@/src/components/admin/dialogs/OrderDialog";
+import ConfirmStatusDialog from "@/src/components/admin/dialogs/ConfirmStatusDialog";
 import ConfirmDeleteDialog from "@/src/components/admin/dialogs/ConfirmDeleteDialog";
 import { useAuth } from "@/src/contexts/AuthContext";
 import useStyles from "./styles";
@@ -76,6 +77,10 @@ export default function AdminDashboard() {
         handleOpenOrderDialog,
         handleCloseOrderDialog,
         setSelectedOrder,
+        openConfirmDialog,
+        confirmStatus,
+        handleOpenConfirmDialog,
+        handleCloseConfirmDialog,
     } = useAdminDialogs();
     const {
         handleSaveProduct,
@@ -83,6 +88,7 @@ export default function AdminDashboard() {
         handleSaveUser,
         handleDeleteUser,
         handleUpdateOrderStatus,
+        handleConfirmOrderStatus,
     } = useAdminActions({
         saveProductMutation,
         deleteProductMutation,
@@ -100,6 +106,9 @@ export default function AdminDashboard() {
         handleCloseUserDeleteDialog,
         handleCloseOrderDialog,
         setError,
+        handleOpenConfirmDialog,
+        handleCloseConfirmDialog,
+        confirmStatus,
     });
 
     useEffect(() => {
@@ -233,6 +242,15 @@ export default function AdminDashboard() {
                 isLoading={deleteUserMutation.isPending}
                 entity={selectedUser}
                 entityType="user"
+            />
+
+            <ConfirmStatusDialog
+                open={openConfirmDialog}
+                onClose={handleCloseConfirmDialog}
+                onConfirm={handleConfirmOrderStatus}
+                isLoading={updateOrderMutation.isPending}
+                currentStatus={(selectedOrder?.status as string) || "Processing"}
+                newStatus={confirmStatus}
             />
         </Container>
     );
