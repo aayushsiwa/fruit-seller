@@ -21,6 +21,7 @@ import {
   FiChevronDown,
   FiChevronUp,
   FiHome,
+  FiLogIn,
   FiLogOut,
   FiMonitor,
   FiMoon,
@@ -29,6 +30,7 @@ import {
   FiShield,
   FiShoppingCart,
   FiSun,
+  FiUserPlus,
   FiX,
 } from 'react-icons/fi';
 
@@ -221,6 +223,21 @@ export const DrawerContent: React.FC<DrawerContentProps> = ({
               <ListItemText primary="Logout" />
             </ListItemButton>
           </ListItem>
+        )}
+        {!user && (
+          <>
+            <ListItem disablePadding>
+              <ListItemButton
+                onClick={() => handleNavigation('/login')}
+                sx={{ py: 1.5 }}
+              >
+                <ListItemIcon>
+                  <FiLogIn size={20} />
+                </ListItemIcon>
+                <ListItemText primary="Login" />
+              </ListItemButton>
+            </ListItem>
+          </>
         )}
       </List>
     </Box>
