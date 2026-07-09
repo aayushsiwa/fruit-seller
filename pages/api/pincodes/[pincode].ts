@@ -1,6 +1,40 @@
+import { PincodeOffice } from '@/entity/Pincodes/Pincodes';
 import { supabase } from '@/lib/supabase';
 import axios from 'axios';
 import type { NextApiRequest, NextApiResponse } from 'next';
+
+const SUKHPREETSALUJA_URL = 'https://api.sukhpreetsaluja.com/api/v1/pincode';
+const POSTALPINCODE_URL = 'https://api.postalpincode.in/pincode';
+
+async function fetchFromSukhpreetsaluja(pin: string): Promise<PincodeOffice[]> {
+  const { data } = await axios.get(`${SUKHPREETSALUJA_URL}/${pin}`);
+  const offices: PincodeOffice[] = (data.offices || []).map(
+    (o: Record<string, unknown>) => ({
+      officeName: String(o.office_name ?? ''),
+      district: String(o.district ?? ''),
+      state: String(o.state ?? ''),
+      block: o.block != null ? String(o.block) : null,
+      delivery: o.delivery === true || o.delivery === 'true',
+    })
+  );
+  return offices;
+}
+
+async function fetchFromPostalpincode(pin: string): Promise<PincodeOffice[]> {
+  const { data } = await axios.get(`${POSTALPINCODE_URL}/${pin}`);
+  if (!data?.[0] || data[0].Status !== 'Success') return [];
+  const offices: PincodeOffice[] = (data[0].PostOffice || []).map(
+    (o: Record<string, unknown>) => ({
+      officeName: String(o.Name ?? ''),
+      district: String(o.District ?? ''),
+      state: String(o.State ?? ''),
+      block:
+        o.Block != null && String(o.Block) !== 'NA' ? String(o.Block) : null,
+      delivery: String(o.DeliveryStatus ?? '') === 'Delivery',
+    })
+  );
+  return offices;
+}
 
 export default async function handler(
   req: NextApiRequest,
@@ -27,50 +61,62 @@ export default async function handler(
   const pin = pincode.trim();
 
   try {
-    // 1. Check local DB cache
-    const { data: cached, error: cacheError } = await supabase
+    const { data: cached } = await supabase
       .from('pincode_cache')
-      .select('city, state')
-      .eq('pincode', pin)
-      .single();
+      .select('office_name, district, state, block, delivery')
+      .eq('pincode', pin);
 
-    if (!cacheError && cached) {
-      return res
-        .status(200)
-        .json({ city: cached.city, state: cached.state, cached: true });
+    if (cached && cached.length > 0) {
+      const offices: PincodeOffice[] = cached.map(
+        (row: {
+          office_name: string;
+          district: string;
+          state: string;
+          block: string | null;
+          delivery: boolean;
+        }) => ({
+          officeName: row.office_name,
+          district: row.district,
+          state: row.state,
+          block: row.block,
+          delivery: row.delivery,
+        })
+      );
+      return res.status(200).json({ offices });
     }
 
-    // 2. Fetch from external API if not cached
-    const apiRes = await axios.get(
-      `https://api.postalpincode.in/pincode/${pin}`
-    );
-    const data = apiRes.data[0];
+    let offices: PincodeOffice[] = [];
 
-    if (
-      data &&
-      data.Status === 'Success' &&
-      data.PostOffice &&
-      data.PostOffice.length > 0
-    ) {
-      const office = data.PostOffice[0];
-      const city = office.District || '';
-      const state = office.State || '';
+    try {
+      offices = await fetchFromSukhpreetsaluja(pin);
+    } catch {
+      // fall through
+    }
 
-      if (city && state) {
-        // 3. Save to database cache (ignore insertion error if it arises)
-        await supabase.from('pincode_cache').insert({
-          pincode: pin,
-          city,
-          state,
-        });
-
-        return res.status(200).json({ city, state, cached: false });
+    if (offices.length === 0) {
+      try {
+        offices = await fetchFromPostalpincode(pin);
+      } catch {
+        // fall through
       }
     }
 
-    return res
-      .status(404)
-      .json({ error: 'No details found for this pincode.' });
+    if (offices.length === 0) {
+      return res.status(404).json({ error: 'Could not verify pincode' });
+    }
+
+    const rows = offices.map((o) => ({
+      pincode: pin,
+      office_name: o.officeName,
+      district: o.district,
+      state: o.state,
+      block: o.block,
+      delivery: o.delivery,
+    }));
+
+    await supabase.from('pincode_cache').insert(rows);
+
+    return res.status(200).json({ offices });
   } catch (error) {
     console.error('Pincode fetch error:', error);
     return res.status(500).json({ error: 'Internal server error' });

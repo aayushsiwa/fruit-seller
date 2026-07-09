@@ -1,3 +1,4 @@
+import { PincodeOffice } from '@/entity/Pincodes/Pincodes';
 import { useGetAddresses } from '@/lib/api/addresses/getAddresses';
 import { useSaveAddress } from '@/lib/api/addresses/saveAddress';
 import { useCreateOrder } from '@/lib/api/orders/createOrder';
@@ -10,7 +11,7 @@ import { useQueries } from '@tanstack/react-query';
 import axios from 'axios';
 import { useSession } from 'next-auth/react';
 import { useRouter } from 'next/router';
-import { useEffect, useMemo, useState } from 'react';
+import { useCallback, useEffect, useMemo, useState } from 'react';
 
 const RAZORPAY_SCRIPT = 'https://checkout.razorpay.com/v1/checkout.js';
 
@@ -52,7 +53,11 @@ export const useCheckout = (): UseCheckoutReturn => {
     country: 'India',
     phone: '',
   });
-  const [isAddressAutoFilled, setIsAddressAutoFilled] = useState(false);
+  const [offices, setOffices] = useState<PincodeOffice[]>([]);
+  const [selectedOffice, setSelectedOffice] = useState<PincodeOffice | null>(
+    null
+  );
+  const [initialDefaultSet, setInitialDefaultSet] = useState(false);
 
   useEffect(() => {
     loadRazorpayScript().then(setRazorpayLoaded);
@@ -67,10 +72,15 @@ export const useCheckout = (): UseCheckoutReturn => {
   );
 
   useEffect(() => {
-    if (savedAddresses.length > 0 && selectedAddressId === 'new') {
+    if (
+      savedAddresses.length > 0 &&
+      !initialDefaultSet &&
+      selectedAddressId === 'new'
+    ) {
       setSelectedAddressId(savedAddresses[0].id || 'new');
+      setInitialDefaultSet(true);
     }
-  }, [savedAddresses, selectedAddressId]);
+  }, [savedAddresses, selectedAddressId, initialDefaultSet]);
 
   const pin = newAddress.postal_code.trim();
   const isPinValid = pin.length === 6 && /^\d+$/.test(pin);
@@ -79,22 +89,47 @@ export const useCheckout = (): UseCheckoutReturn => {
   const pincodeData = pincodeResponse?.data;
 
   useEffect(() => {
-    if (pincodeData?.city && pincodeData?.state) {
-      setNewAddress((prev) => ({
-        ...prev,
-        city: pincodeData.city,
-        state: pincodeData.state,
-      }));
-      setIsAddressAutoFilled(true);
-      showSnackbar('City and State auto-filled from Pincode!', 'success');
-    }
-  }, [pincodeData, showSnackbar]);
-
-  useEffect(() => {
     if (!isPinValid) {
-      setIsAddressAutoFilled(false);
+      setOffices([]);
+      setSelectedOffice(null);
+      setNewAddress((prev) => ({ ...prev, city: '', state: '' }));
+      return;
     }
   }, [isPinValid]);
+
+  useEffect(() => {
+    if (!pincodeData) return;
+
+    const result = pincodeData.offices;
+    setOffices(result);
+
+    if (result.length >= 1) {
+      const office = result[0];
+      setNewAddress((prev) => ({
+        ...prev,
+        city: office.district,
+        state: office.state,
+      }));
+      if (result.length === 1) {
+        setSelectedOffice(office);
+      } else {
+        setSelectedOffice(null);
+      }
+    } else {
+      setSelectedOffice(null);
+    }
+  }, [pincodeData]);
+
+  const handleSelectOffice = useCallback((office: PincodeOffice | null) => {
+    setSelectedOffice(office);
+    if (office) {
+      setNewAddress((prev) => ({
+        ...prev,
+        city: office.district,
+        state: office.state,
+      }));
+    }
+  }, []);
 
   const productQueries = useQueries({
     queries: cart.map((item) => ({
@@ -258,7 +293,9 @@ export const useCheckout = (): UseCheckoutReturn => {
     saveToProfile,
     setSaveToProfile,
     shippingCost,
-    isAddressAutoFilled,
+    offices,
+    selectedOffice,
+    handleSelectOffice,
   };
 };
 
@@ -280,5 +317,7 @@ export type UseCheckoutReturn = {
   saveToProfile: boolean;
   setSaveToProfile: (save: boolean) => void;
   shippingCost: number;
-  isAddressAutoFilled: boolean;
+  offices: PincodeOffice[];
+  selectedOffice: PincodeOffice | null;
+  handleSelectOffice: (office: PincodeOffice | null) => void;
 };

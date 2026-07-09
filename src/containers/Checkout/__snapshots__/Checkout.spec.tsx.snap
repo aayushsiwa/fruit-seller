@@ -31,112 +31,52 @@ exports[`Checkout - UI > when rendered in mobile view > should match snapshot wi
               Shipping Address
             </h6>
             <div
-              class="MuiBox-root css-1yuhvjn"
+              class="MuiBox-root css-164r41r"
             >
-              <h6
-                class="MuiTypography-root MuiTypography-subtitle1 css-ynxqvi-MuiTypography-root"
-              >
-                New Shipping Address
-              </h6>
               <div
-                class="MuiBox-root css-gdel2o"
+                class="MuiFormControl-root MuiFormControl-fullWidth MuiTextField-root css-1j5gcdd-MuiFormControl-root-MuiTextField-root"
               >
-                <div
-                  class="MuiFormControl-root MuiFormControl-fullWidth MuiTextField-root css-wb57ya-MuiFormControl-root-MuiTextField-root"
+                <label
+                  class="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-sizeSmall MuiInputLabel-outlined MuiFormLabel-colorPrimary Mui-disabled MuiFormLabel-filled Mui-required MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-sizeSmall MuiInputLabel-outlined css-1jy569b-MuiFormLabel-root-MuiInputLabel-root"
+                  data-shrink="true"
+                  for=":r8:"
+                  id=":r8:-label"
                 >
-                  <label
-                    class="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-sizeSmall MuiInputLabel-outlined MuiFormLabel-colorPrimary Mui-required MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-sizeSmall MuiInputLabel-outlined css-1pysi21-MuiFormLabel-root-MuiInputLabel-root"
-                    data-shrink="false"
-                    for=":r7:"
-                    id=":r7:-label"
+                  Country
+                  <span
+                    aria-hidden="true"
+                    class="MuiFormLabel-asterisk MuiInputLabel-asterisk css-wgai2y-MuiFormLabel-asterisk"
                   >
-                    Postal Code (PIN Code)
-                    <span
-                      aria-hidden="true"
-                      class="MuiFormLabel-asterisk MuiInputLabel-asterisk css-wgai2y-MuiFormLabel-asterisk"
-                    >
-                       
-                      *
-                    </span>
-                  </label>
-                  <div
-                    class="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-colorPrimary MuiInputBase-fullWidth MuiInputBase-formControl MuiInputBase-sizeSmall css-md26zr-MuiInputBase-root-MuiOutlinedInput-root"
-                  >
-                    <input
-                      aria-describedby=":r7:-helper-text"
-                      aria-invalid="false"
-                      class="MuiInputBase-input MuiOutlinedInput-input MuiInputBase-inputSizeSmall css-1n4twyu-MuiInputBase-input-MuiOutlinedInput-input"
-                      id=":r7:"
-                      required=""
-                      type="text"
-                      value=""
-                    />
-                    <fieldset
-                      aria-hidden="true"
-                      class="MuiOutlinedInput-notchedOutline css-r01yff-MuiNotchedOutlined-root-MuiOutlinedInput-notchedOutline"
-                    >
-                      <legend
-                        class="css-njhac4-MuiNotchedOutlined-root"
-                      >
-                        <span>
-                          Postal Code (PIN Code)
-                           
-                          *
-                        </span>
-                      </legend>
-                    </fieldset>
-                  </div>
-                  <p
-                    class="MuiFormHelperText-root MuiFormHelperText-sizeSmall MuiFormHelperText-contained Mui-required css-k4qjio-MuiFormHelperText-root"
-                    id=":r7:-helper-text"
-                  >
-                    Enter 6-digit PIN code to auto-fill City/State
-                  </p>
-                </div>
+                     
+                    *
+                  </span>
+                </label>
                 <div
-                  class="MuiFormControl-root MuiFormControl-fullWidth MuiTextField-root css-wb57ya-MuiFormControl-root-MuiTextField-root"
+                  class="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-colorPrimary Mui-disabled MuiInputBase-fullWidth MuiInputBase-formControl MuiInputBase-sizeSmall css-md26zr-MuiInputBase-root-MuiOutlinedInput-root"
                 >
-                  <label
-                    class="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-sizeSmall MuiInputLabel-outlined MuiFormLabel-colorPrimary Mui-required MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-sizeSmall MuiInputLabel-outlined css-1pysi21-MuiFormLabel-root-MuiInputLabel-root"
-                    data-shrink="false"
-                    for=":r8:"
-                    id=":r8:-label"
+                  <input
+                    aria-invalid="false"
+                    class="MuiInputBase-input MuiOutlinedInput-input Mui-disabled MuiInputBase-inputSizeSmall css-1n4twyu-MuiInputBase-input-MuiOutlinedInput-input"
+                    disabled=""
+                    id=":r8:"
+                    required=""
+                    type="text"
+                    value="India"
+                  />
+                  <fieldset
+                    aria-hidden="true"
+                    class="MuiOutlinedInput-notchedOutline css-r01yff-MuiNotchedOutlined-root-MuiOutlinedInput-notchedOutline"
                   >
-                    Phone Number
-                    <span
-                      aria-hidden="true"
-                      class="MuiFormLabel-asterisk MuiInputLabel-asterisk css-wgai2y-MuiFormLabel-asterisk"
+                    <legend
+                      class="css-sl37lx-MuiNotchedOutlined-root"
                     >
-                       
-                      *
-                    </span>
-                  </label>
-                  <div
-                    class="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-colorPrimary MuiInputBase-fullWidth MuiInputBase-formControl MuiInputBase-sizeSmall css-md26zr-MuiInputBase-root-MuiOutlinedInput-root"
-                  >
-                    <input
-                      aria-invalid="false"
-                      class="MuiInputBase-input MuiOutlinedInput-input MuiInputBase-inputSizeSmall css-1n4twyu-MuiInputBase-input-MuiOutlinedInput-input"
-                      id=":r8:"
-                      required=""
-                      type="text"
-                      value=""
-                    />
-                    <fieldset
-                      aria-hidden="true"
-                      class="MuiOutlinedInput-notchedOutline css-r01yff-MuiNotchedOutlined-root-MuiOutlinedInput-notchedOutline"
-                    >
-                      <legend
-                        class="css-njhac4-MuiNotchedOutlined-root"
-                      >
-                        <span>
-                          Phone Number
-                           
-                          *
-                        </span>
-                      </legend>
-                    </fieldset>
-                  </div>
+                      <span>
+                        Country
+                         
+                        *
+                      </span>
+                    </legend>
+                  </fieldset>
                 </div>
               </div>
               <div
@@ -220,16 +160,161 @@ exports[`Checkout - UI > when rendered in mobile view > should match snapshot wi
                 </div>
               </div>
               <div
-                class="MuiBox-root css-gdel2o"
+                class="MuiFormControl-root MuiFormControl-fullWidth MuiTextField-root css-1j5gcdd-MuiFormControl-root-MuiTextField-root"
+              >
+                <label
+                  class="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-sizeSmall MuiInputLabel-outlined MuiFormLabel-colorPrimary Mui-required MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-sizeSmall MuiInputLabel-outlined css-1pysi21-MuiFormLabel-root-MuiInputLabel-root"
+                  data-shrink="false"
+                  for=":rb:"
+                  id=":rb:-label"
+                >
+                  Mobile Number
+                  <span
+                    aria-hidden="true"
+                    class="MuiFormLabel-asterisk MuiInputLabel-asterisk css-wgai2y-MuiFormLabel-asterisk"
+                  >
+                     
+                    *
+                  </span>
+                </label>
+                <div
+                  class="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-colorPrimary MuiInputBase-fullWidth MuiInputBase-formControl MuiInputBase-sizeSmall css-md26zr-MuiInputBase-root-MuiOutlinedInput-root"
+                >
+                  <input
+                    aria-invalid="false"
+                    class="MuiInputBase-input MuiOutlinedInput-input MuiInputBase-inputSizeSmall css-1n4twyu-MuiInputBase-input-MuiOutlinedInput-input"
+                    id=":rb:"
+                    required=""
+                    type="text"
+                    value=""
+                  />
+                  <fieldset
+                    aria-hidden="true"
+                    class="MuiOutlinedInput-notchedOutline css-r01yff-MuiNotchedOutlined-root-MuiOutlinedInput-notchedOutline"
+                  >
+                    <legend
+                      class="css-njhac4-MuiNotchedOutlined-root"
+                    >
+                      <span>
+                        Mobile Number
+                         
+                        *
+                      </span>
+                    </legend>
+                  </fieldset>
+                </div>
+              </div>
+              <div
+                class="MuiFormControl-root MuiFormControl-fullWidth MuiTextField-root css-1j5gcdd-MuiFormControl-root-MuiTextField-root"
+              >
+                <label
+                  class="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-sizeSmall MuiInputLabel-outlined MuiFormLabel-colorPrimary Mui-required MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-sizeSmall MuiInputLabel-outlined css-1pysi21-MuiFormLabel-root-MuiInputLabel-root"
+                  data-shrink="false"
+                  for=":rc:"
+                  id=":rc:-label"
+                >
+                  Pin Code
+                  <span
+                    aria-hidden="true"
+                    class="MuiFormLabel-asterisk MuiInputLabel-asterisk css-wgai2y-MuiFormLabel-asterisk"
+                  >
+                     
+                    *
+                  </span>
+                </label>
+                <div
+                  class="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-colorPrimary MuiInputBase-fullWidth MuiInputBase-formControl MuiInputBase-sizeSmall css-md26zr-MuiInputBase-root-MuiOutlinedInput-root"
+                >
+                  <input
+                    aria-invalid="false"
+                    class="MuiInputBase-input MuiOutlinedInput-input MuiInputBase-inputSizeSmall css-1n4twyu-MuiInputBase-input-MuiOutlinedInput-input"
+                    id=":rc:"
+                    required=""
+                    type="text"
+                    value=""
+                  />
+                  <fieldset
+                    aria-hidden="true"
+                    class="MuiOutlinedInput-notchedOutline css-r01yff-MuiNotchedOutlined-root-MuiOutlinedInput-notchedOutline"
+                  >
+                    <legend
+                      class="css-njhac4-MuiNotchedOutlined-root"
+                    >
+                      <span>
+                        Pin Code
+                         
+                        *
+                      </span>
+                    </legend>
+                  </fieldset>
+                </div>
+              </div>
+              <div
+                class="MuiFormControl-root MuiFormControl-fullWidth css-14u90gq-MuiFormControl-root"
+              >
+                <div
+                  class="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-colorPrimary Mui-disabled MuiInputBase-formControl MuiInputBase-sizeSmall css-1yk1gt9-MuiInputBase-root-MuiOutlinedInput-root-MuiSelect-root"
+                >
+                  <div
+                    aria-controls=":rd:"
+                    aria-disabled="true"
+                    aria-expanded="false"
+                    aria-haspopup="listbox"
+                    class="MuiSelect-select MuiSelect-outlined Mui-disabled MuiInputBase-input MuiOutlinedInput-input Mui-disabled MuiInputBase-inputSizeSmall css-jedpe8-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input"
+                    role="combobox"
+                  >
+                    <p
+                      class="MuiTypography-root MuiTypography-body1 css-1pnmrwp-MuiTypography-root"
+                    >
+                      Enter Pin Code first
+                    </p>
+                  </div>
+                  <input
+                    aria-hidden="true"
+                    aria-invalid="false"
+                    class="MuiSelect-nativeInput css-yf8vq0-MuiSelect-nativeInput"
+                    disabled=""
+                    tabindex="-1"
+                    value=""
+                  />
+                  <svg
+                    aria-hidden="true"
+                    class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium MuiSelect-icon MuiSelect-iconOutlined Mui-disabled css-hfutr2-MuiSvgIcon-root-MuiSelect-icon"
+                    data-testid="ArrowDropDownIcon"
+                    focusable="false"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      d="M7 10l5 5 5-5z"
+                    />
+                  </svg>
+                  <fieldset
+                    aria-hidden="true"
+                    class="MuiOutlinedInput-notchedOutline css-r01yff-MuiNotchedOutlined-root-MuiOutlinedInput-notchedOutline"
+                  >
+                    <legend
+                      class="css-1whs34k-MuiNotchedOutlined-root"
+                    >
+                      <span
+                        class="notranslate"
+                      >
+                        ​
+                      </span>
+                    </legend>
+                  </fieldset>
+                </div>
+              </div>
+              <div
+                class="MuiBox-root css-19x4egf"
               >
                 <div
                   class="MuiFormControl-root MuiFormControl-fullWidth MuiTextField-root css-wb57ya-MuiFormControl-root-MuiTextField-root"
                 >
                   <label
-                    class="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-sizeSmall MuiInputLabel-outlined MuiFormLabel-colorPrimary Mui-required MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-sizeSmall MuiInputLabel-outlined css-1pysi21-MuiFormLabel-root-MuiInputLabel-root"
+                    class="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-sizeSmall MuiInputLabel-outlined MuiFormLabel-colorPrimary Mui-disabled Mui-required MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-sizeSmall MuiInputLabel-outlined css-1pysi21-MuiFormLabel-root-MuiInputLabel-root"
                     data-shrink="false"
-                    for=":rb:"
-                    id=":rb:-label"
+                    for=":re:"
+                    id=":re:-label"
                   >
                     City
                     <span
@@ -241,12 +326,13 @@ exports[`Checkout - UI > when rendered in mobile view > should match snapshot wi
                     </span>
                   </label>
                   <div
-                    class="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-colorPrimary MuiInputBase-fullWidth MuiInputBase-formControl MuiInputBase-sizeSmall css-md26zr-MuiInputBase-root-MuiOutlinedInput-root"
+                    class="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-colorPrimary Mui-disabled MuiInputBase-fullWidth MuiInputBase-formControl MuiInputBase-sizeSmall css-md26zr-MuiInputBase-root-MuiOutlinedInput-root"
                   >
                     <input
                       aria-invalid="false"
-                      class="MuiInputBase-input MuiOutlinedInput-input MuiInputBase-inputSizeSmall css-1n4twyu-MuiInputBase-input-MuiOutlinedInput-input"
-                      id=":rb:"
+                      class="MuiInputBase-input MuiOutlinedInput-input Mui-disabled MuiInputBase-inputSizeSmall css-1n4twyu-MuiInputBase-input-MuiOutlinedInput-input"
+                      disabled=""
+                      id=":re:"
                       required=""
                       type="text"
                       value=""
@@ -271,10 +357,10 @@ exports[`Checkout - UI > when rendered in mobile view > should match snapshot wi
                   class="MuiFormControl-root MuiFormControl-fullWidth MuiTextField-root css-wb57ya-MuiFormControl-root-MuiTextField-root"
                 >
                   <label
-                    class="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-sizeSmall MuiInputLabel-outlined MuiFormLabel-colorPrimary Mui-required MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-sizeSmall MuiInputLabel-outlined css-1pysi21-MuiFormLabel-root-MuiInputLabel-root"
+                    class="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-sizeSmall MuiInputLabel-outlined MuiFormLabel-colorPrimary Mui-disabled Mui-required MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-sizeSmall MuiInputLabel-outlined css-1pysi21-MuiFormLabel-root-MuiInputLabel-root"
                     data-shrink="false"
-                    for=":rc:"
-                    id=":rc:-label"
+                    for=":rf:"
+                    id=":rf:-label"
                   >
                     State
                     <span
@@ -286,12 +372,13 @@ exports[`Checkout - UI > when rendered in mobile view > should match snapshot wi
                     </span>
                   </label>
                   <div
-                    class="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-colorPrimary MuiInputBase-fullWidth MuiInputBase-formControl MuiInputBase-sizeSmall css-md26zr-MuiInputBase-root-MuiOutlinedInput-root"
+                    class="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-colorPrimary Mui-disabled MuiInputBase-fullWidth MuiInputBase-formControl MuiInputBase-sizeSmall css-md26zr-MuiInputBase-root-MuiOutlinedInput-root"
                   >
                     <input
                       aria-invalid="false"
-                      class="MuiInputBase-input MuiOutlinedInput-input MuiInputBase-inputSizeSmall css-1n4twyu-MuiInputBase-input-MuiOutlinedInput-input"
-                      id=":rc:"
+                      class="MuiInputBase-input MuiOutlinedInput-input Mui-disabled MuiInputBase-inputSizeSmall css-1n4twyu-MuiInputBase-input-MuiOutlinedInput-input"
+                      disabled=""
+                      id=":rf:"
                       required=""
                       type="text"
                       value=""
@@ -312,58 +399,6 @@ exports[`Checkout - UI > when rendered in mobile view > should match snapshot wi
                     </fieldset>
                   </div>
                 </div>
-              </div>
-              <div
-                class="MuiBox-root css-19x4egf"
-              >
-                <div
-                  class="MuiFormControl-root MuiFormControl-fullWidth MuiTextField-root css-wb57ya-MuiFormControl-root-MuiTextField-root"
-                >
-                  <label
-                    class="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-sizeSmall MuiInputLabel-outlined MuiFormLabel-colorPrimary MuiFormLabel-filled Mui-required MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-sizeSmall MuiInputLabel-outlined css-1jy569b-MuiFormLabel-root-MuiInputLabel-root"
-                    data-shrink="true"
-                    for=":rd:"
-                    id=":rd:-label"
-                  >
-                    Country
-                    <span
-                      aria-hidden="true"
-                      class="MuiFormLabel-asterisk MuiInputLabel-asterisk css-wgai2y-MuiFormLabel-asterisk"
-                    >
-                       
-                      *
-                    </span>
-                  </label>
-                  <div
-                    class="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-colorPrimary MuiInputBase-fullWidth MuiInputBase-formControl MuiInputBase-sizeSmall css-md26zr-MuiInputBase-root-MuiOutlinedInput-root"
-                  >
-                    <input
-                      aria-invalid="false"
-                      class="MuiInputBase-input MuiOutlinedInput-input MuiInputBase-inputSizeSmall css-1n4twyu-MuiInputBase-input-MuiOutlinedInput-input"
-                      id=":rd:"
-                      required=""
-                      type="text"
-                      value="India"
-                    />
-                    <fieldset
-                      aria-hidden="true"
-                      class="MuiOutlinedInput-notchedOutline css-r01yff-MuiNotchedOutlined-root-MuiOutlinedInput-notchedOutline"
-                    >
-                      <legend
-                        class="css-sl37lx-MuiNotchedOutlined-root"
-                      >
-                        <span>
-                          Country
-                           
-                          *
-                        </span>
-                      </legend>
-                    </fieldset>
-                  </div>
-                </div>
-                <div
-                  class="MuiBox-root css-8atqhb"
-                />
               </div>
               <label
                 class="MuiFormControlLabel-root MuiFormControlLabel-labelPlacementEnd css-j204z7-MuiFormControlLabel-root"
@@ -637,112 +672,52 @@ exports[`Checkout - UI > when rendered in web view > should match snapshot with 
               Shipping Address
             </h6>
             <div
-              class="MuiBox-root css-1yuhvjn"
+              class="MuiBox-root css-164r41r"
             >
-              <h6
-                class="MuiTypography-root MuiTypography-subtitle1 css-ynxqvi-MuiTypography-root"
-              >
-                New Shipping Address
-              </h6>
               <div
-                class="MuiBox-root css-gdel2o"
+                class="MuiFormControl-root MuiFormControl-fullWidth MuiTextField-root css-1j5gcdd-MuiFormControl-root-MuiTextField-root"
               >
-                <div
-                  class="MuiFormControl-root MuiFormControl-fullWidth MuiTextField-root css-wb57ya-MuiFormControl-root-MuiTextField-root"
+                <label
+                  class="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-sizeSmall MuiInputLabel-outlined MuiFormLabel-colorPrimary Mui-disabled MuiFormLabel-filled Mui-required MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-sizeSmall MuiInputLabel-outlined css-1jy569b-MuiFormLabel-root-MuiInputLabel-root"
+                  data-shrink="true"
+                  for=":r0:"
+                  id=":r0:-label"
                 >
-                  <label
-                    class="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-sizeSmall MuiInputLabel-outlined MuiFormLabel-colorPrimary Mui-required MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-sizeSmall MuiInputLabel-outlined css-1pysi21-MuiFormLabel-root-MuiInputLabel-root"
-                    data-shrink="false"
-                    for=":r0:"
-                    id=":r0:-label"
+                  Country
+                  <span
+                    aria-hidden="true"
+                    class="MuiFormLabel-asterisk MuiInputLabel-asterisk css-wgai2y-MuiFormLabel-asterisk"
                   >
-                    Postal Code (PIN Code)
-                    <span
-                      aria-hidden="true"
-                      class="MuiFormLabel-asterisk MuiInputLabel-asterisk css-wgai2y-MuiFormLabel-asterisk"
-                    >
-                       
-                      *
-                    </span>
-                  </label>
-                  <div
-                    class="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-colorPrimary MuiInputBase-fullWidth MuiInputBase-formControl MuiInputBase-sizeSmall css-md26zr-MuiInputBase-root-MuiOutlinedInput-root"
-                  >
-                    <input
-                      aria-describedby=":r0:-helper-text"
-                      aria-invalid="false"
-                      class="MuiInputBase-input MuiOutlinedInput-input MuiInputBase-inputSizeSmall css-1n4twyu-MuiInputBase-input-MuiOutlinedInput-input"
-                      id=":r0:"
-                      required=""
-                      type="text"
-                      value=""
-                    />
-                    <fieldset
-                      aria-hidden="true"
-                      class="MuiOutlinedInput-notchedOutline css-r01yff-MuiNotchedOutlined-root-MuiOutlinedInput-notchedOutline"
-                    >
-                      <legend
-                        class="css-njhac4-MuiNotchedOutlined-root"
-                      >
-                        <span>
-                          Postal Code (PIN Code)
-                           
-                          *
-                        </span>
-                      </legend>
-                    </fieldset>
-                  </div>
-                  <p
-                    class="MuiFormHelperText-root MuiFormHelperText-sizeSmall MuiFormHelperText-contained Mui-required css-k4qjio-MuiFormHelperText-root"
-                    id=":r0:-helper-text"
-                  >
-                    Enter 6-digit PIN code to auto-fill City/State
-                  </p>
-                </div>
+                     
+                    *
+                  </span>
+                </label>
                 <div
-                  class="MuiFormControl-root MuiFormControl-fullWidth MuiTextField-root css-wb57ya-MuiFormControl-root-MuiTextField-root"
+                  class="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-colorPrimary Mui-disabled MuiInputBase-fullWidth MuiInputBase-formControl MuiInputBase-sizeSmall css-md26zr-MuiInputBase-root-MuiOutlinedInput-root"
                 >
-                  <label
-                    class="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-sizeSmall MuiInputLabel-outlined MuiFormLabel-colorPrimary Mui-required MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-sizeSmall MuiInputLabel-outlined css-1pysi21-MuiFormLabel-root-MuiInputLabel-root"
-                    data-shrink="false"
-                    for=":r1:"
-                    id=":r1:-label"
+                  <input
+                    aria-invalid="false"
+                    class="MuiInputBase-input MuiOutlinedInput-input Mui-disabled MuiInputBase-inputSizeSmall css-1n4twyu-MuiInputBase-input-MuiOutlinedInput-input"
+                    disabled=""
+                    id=":r0:"
+                    required=""
+                    type="text"
+                    value="India"
+                  />
+                  <fieldset
+                    aria-hidden="true"
+                    class="MuiOutlinedInput-notchedOutline css-r01yff-MuiNotchedOutlined-root-MuiOutlinedInput-notchedOutline"
                   >
-                    Phone Number
-                    <span
-                      aria-hidden="true"
-                      class="MuiFormLabel-asterisk MuiInputLabel-asterisk css-wgai2y-MuiFormLabel-asterisk"
+                    <legend
+                      class="css-sl37lx-MuiNotchedOutlined-root"
                     >
-                       
-                      *
-                    </span>
-                  </label>
-                  <div
-                    class="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-colorPrimary MuiInputBase-fullWidth MuiInputBase-formControl MuiInputBase-sizeSmall css-md26zr-MuiInputBase-root-MuiOutlinedInput-root"
-                  >
-                    <input
-                      aria-invalid="false"
-                      class="MuiInputBase-input MuiOutlinedInput-input MuiInputBase-inputSizeSmall css-1n4twyu-MuiInputBase-input-MuiOutlinedInput-input"
-                      id=":r1:"
-                      required=""
-                      type="text"
-                      value=""
-                    />
-                    <fieldset
-                      aria-hidden="true"
-                      class="MuiOutlinedInput-notchedOutline css-r01yff-MuiNotchedOutlined-root-MuiOutlinedInput-notchedOutline"
-                    >
-                      <legend
-                        class="css-njhac4-MuiNotchedOutlined-root"
-                      >
-                        <span>
-                          Phone Number
-                           
-                          *
-                        </span>
-                      </legend>
-                    </fieldset>
-                  </div>
+                      <span>
+                        Country
+                         
+                        *
+                      </span>
+                    </legend>
+                  </fieldset>
                 </div>
               </div>
               <div
@@ -751,8 +726,8 @@ exports[`Checkout - UI > when rendered in web view > should match snapshot with 
                 <label
                   class="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-sizeSmall MuiInputLabel-outlined MuiFormLabel-colorPrimary Mui-required MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-sizeSmall MuiInputLabel-outlined css-1pysi21-MuiFormLabel-root-MuiInputLabel-root"
                   data-shrink="false"
-                  for=":r2:"
-                  id=":r2:-label"
+                  for=":r1:"
+                  id=":r1:-label"
                 >
                   Address Line 1 (Street, Company, C/O)
                   <span
@@ -769,7 +744,7 @@ exports[`Checkout - UI > when rendered in web view > should match snapshot with 
                   <input
                     aria-invalid="false"
                     class="MuiInputBase-input MuiOutlinedInput-input MuiInputBase-inputSizeSmall css-1n4twyu-MuiInputBase-input-MuiOutlinedInput-input"
-                    id=":r2:"
+                    id=":r1:"
                     required=""
                     type="text"
                     value=""
@@ -796,8 +771,8 @@ exports[`Checkout - UI > when rendered in web view > should match snapshot with 
                 <label
                   class="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-sizeSmall MuiInputLabel-outlined MuiFormLabel-colorPrimary MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-sizeSmall MuiInputLabel-outlined css-1pysi21-MuiFormLabel-root-MuiInputLabel-root"
                   data-shrink="false"
-                  for=":r3:"
-                  id=":r3:-label"
+                  for=":r2:"
+                  id=":r2:-label"
                 >
                   Address Line 2 (Apartment, Suite, Unit, Building, Floor)
                 </label>
@@ -807,7 +782,7 @@ exports[`Checkout - UI > when rendered in web view > should match snapshot with 
                   <input
                     aria-invalid="false"
                     class="MuiInputBase-input MuiOutlinedInput-input MuiInputBase-inputSizeSmall css-1n4twyu-MuiInputBase-input-MuiOutlinedInput-input"
-                    id=":r3:"
+                    id=":r2:"
                     type="text"
                     value=""
                   />
@@ -826,16 +801,161 @@ exports[`Checkout - UI > when rendered in web view > should match snapshot with 
                 </div>
               </div>
               <div
-                class="MuiBox-root css-gdel2o"
+                class="MuiFormControl-root MuiFormControl-fullWidth MuiTextField-root css-1j5gcdd-MuiFormControl-root-MuiTextField-root"
+              >
+                <label
+                  class="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-sizeSmall MuiInputLabel-outlined MuiFormLabel-colorPrimary Mui-required MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-sizeSmall MuiInputLabel-outlined css-1pysi21-MuiFormLabel-root-MuiInputLabel-root"
+                  data-shrink="false"
+                  for=":r3:"
+                  id=":r3:-label"
+                >
+                  Mobile Number
+                  <span
+                    aria-hidden="true"
+                    class="MuiFormLabel-asterisk MuiInputLabel-asterisk css-wgai2y-MuiFormLabel-asterisk"
+                  >
+                     
+                    *
+                  </span>
+                </label>
+                <div
+                  class="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-colorPrimary MuiInputBase-fullWidth MuiInputBase-formControl MuiInputBase-sizeSmall css-md26zr-MuiInputBase-root-MuiOutlinedInput-root"
+                >
+                  <input
+                    aria-invalid="false"
+                    class="MuiInputBase-input MuiOutlinedInput-input MuiInputBase-inputSizeSmall css-1n4twyu-MuiInputBase-input-MuiOutlinedInput-input"
+                    id=":r3:"
+                    required=""
+                    type="text"
+                    value=""
+                  />
+                  <fieldset
+                    aria-hidden="true"
+                    class="MuiOutlinedInput-notchedOutline css-r01yff-MuiNotchedOutlined-root-MuiOutlinedInput-notchedOutline"
+                  >
+                    <legend
+                      class="css-njhac4-MuiNotchedOutlined-root"
+                    >
+                      <span>
+                        Mobile Number
+                         
+                        *
+                      </span>
+                    </legend>
+                  </fieldset>
+                </div>
+              </div>
+              <div
+                class="MuiFormControl-root MuiFormControl-fullWidth MuiTextField-root css-1j5gcdd-MuiFormControl-root-MuiTextField-root"
+              >
+                <label
+                  class="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-sizeSmall MuiInputLabel-outlined MuiFormLabel-colorPrimary Mui-required MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-sizeSmall MuiInputLabel-outlined css-1pysi21-MuiFormLabel-root-MuiInputLabel-root"
+                  data-shrink="false"
+                  for=":r4:"
+                  id=":r4:-label"
+                >
+                  Pin Code
+                  <span
+                    aria-hidden="true"
+                    class="MuiFormLabel-asterisk MuiInputLabel-asterisk css-wgai2y-MuiFormLabel-asterisk"
+                  >
+                     
+                    *
+                  </span>
+                </label>
+                <div
+                  class="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-colorPrimary MuiInputBase-fullWidth MuiInputBase-formControl MuiInputBase-sizeSmall css-md26zr-MuiInputBase-root-MuiOutlinedInput-root"
+                >
+                  <input
+                    aria-invalid="false"
+                    class="MuiInputBase-input MuiOutlinedInput-input MuiInputBase-inputSizeSmall css-1n4twyu-MuiInputBase-input-MuiOutlinedInput-input"
+                    id=":r4:"
+                    required=""
+                    type="text"
+                    value=""
+                  />
+                  <fieldset
+                    aria-hidden="true"
+                    class="MuiOutlinedInput-notchedOutline css-r01yff-MuiNotchedOutlined-root-MuiOutlinedInput-notchedOutline"
+                  >
+                    <legend
+                      class="css-njhac4-MuiNotchedOutlined-root"
+                    >
+                      <span>
+                        Pin Code
+                         
+                        *
+                      </span>
+                    </legend>
+                  </fieldset>
+                </div>
+              </div>
+              <div
+                class="MuiFormControl-root MuiFormControl-fullWidth css-14u90gq-MuiFormControl-root"
+              >
+                <div
+                  class="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-colorPrimary Mui-disabled MuiInputBase-formControl MuiInputBase-sizeSmall css-1yk1gt9-MuiInputBase-root-MuiOutlinedInput-root-MuiSelect-root"
+                >
+                  <div
+                    aria-controls=":r5:"
+                    aria-disabled="true"
+                    aria-expanded="false"
+                    aria-haspopup="listbox"
+                    class="MuiSelect-select MuiSelect-outlined Mui-disabled MuiInputBase-input MuiOutlinedInput-input Mui-disabled MuiInputBase-inputSizeSmall css-jedpe8-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input"
+                    role="combobox"
+                  >
+                    <p
+                      class="MuiTypography-root MuiTypography-body1 css-1pnmrwp-MuiTypography-root"
+                    >
+                      Enter Pin Code first
+                    </p>
+                  </div>
+                  <input
+                    aria-hidden="true"
+                    aria-invalid="false"
+                    class="MuiSelect-nativeInput css-yf8vq0-MuiSelect-nativeInput"
+                    disabled=""
+                    tabindex="-1"
+                    value=""
+                  />
+                  <svg
+                    aria-hidden="true"
+                    class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium MuiSelect-icon MuiSelect-iconOutlined Mui-disabled css-hfutr2-MuiSvgIcon-root-MuiSelect-icon"
+                    data-testid="ArrowDropDownIcon"
+                    focusable="false"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      d="M7 10l5 5 5-5z"
+                    />
+                  </svg>
+                  <fieldset
+                    aria-hidden="true"
+                    class="MuiOutlinedInput-notchedOutline css-r01yff-MuiNotchedOutlined-root-MuiOutlinedInput-notchedOutline"
+                  >
+                    <legend
+                      class="css-1whs34k-MuiNotchedOutlined-root"
+                    >
+                      <span
+                        class="notranslate"
+                      >
+                        ​
+                      </span>
+                    </legend>
+                  </fieldset>
+                </div>
+              </div>
+              <div
+                class="MuiBox-root css-19x4egf"
               >
                 <div
                   class="MuiFormControl-root MuiFormControl-fullWidth MuiTextField-root css-wb57ya-MuiFormControl-root-MuiTextField-root"
                 >
                   <label
-                    class="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-sizeSmall MuiInputLabel-outlined MuiFormLabel-colorPrimary Mui-required MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-sizeSmall MuiInputLabel-outlined css-1pysi21-MuiFormLabel-root-MuiInputLabel-root"
+                    class="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-sizeSmall MuiInputLabel-outlined MuiFormLabel-colorPrimary Mui-disabled Mui-required MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-sizeSmall MuiInputLabel-outlined css-1pysi21-MuiFormLabel-root-MuiInputLabel-root"
                     data-shrink="false"
-                    for=":r4:"
-                    id=":r4:-label"
+                    for=":r6:"
+                    id=":r6:-label"
                   >
                     City
                     <span
@@ -847,12 +967,13 @@ exports[`Checkout - UI > when rendered in web view > should match snapshot with 
                     </span>
                   </label>
                   <div
-                    class="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-colorPrimary MuiInputBase-fullWidth MuiInputBase-formControl MuiInputBase-sizeSmall css-md26zr-MuiInputBase-root-MuiOutlinedInput-root"
+                    class="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-colorPrimary Mui-disabled MuiInputBase-fullWidth MuiInputBase-formControl MuiInputBase-sizeSmall css-md26zr-MuiInputBase-root-MuiOutlinedInput-root"
                   >
                     <input
                       aria-invalid="false"
-                      class="MuiInputBase-input MuiOutlinedInput-input MuiInputBase-inputSizeSmall css-1n4twyu-MuiInputBase-input-MuiOutlinedInput-input"
-                      id=":r4:"
+                      class="MuiInputBase-input MuiOutlinedInput-input Mui-disabled MuiInputBase-inputSizeSmall css-1n4twyu-MuiInputBase-input-MuiOutlinedInput-input"
+                      disabled=""
+                      id=":r6:"
                       required=""
                       type="text"
                       value=""
@@ -877,10 +998,10 @@ exports[`Checkout - UI > when rendered in web view > should match snapshot with 
                   class="MuiFormControl-root MuiFormControl-fullWidth MuiTextField-root css-wb57ya-MuiFormControl-root-MuiTextField-root"
                 >
                   <label
-                    class="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-sizeSmall MuiInputLabel-outlined MuiFormLabel-colorPrimary Mui-required MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-sizeSmall MuiInputLabel-outlined css-1pysi21-MuiFormLabel-root-MuiInputLabel-root"
+                    class="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-sizeSmall MuiInputLabel-outlined MuiFormLabel-colorPrimary Mui-disabled Mui-required MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-sizeSmall MuiInputLabel-outlined css-1pysi21-MuiFormLabel-root-MuiInputLabel-root"
                     data-shrink="false"
-                    for=":r5:"
-                    id=":r5:-label"
+                    for=":r7:"
+                    id=":r7:-label"
                   >
                     State
                     <span
@@ -892,12 +1013,13 @@ exports[`Checkout - UI > when rendered in web view > should match snapshot with 
                     </span>
                   </label>
                   <div
-                    class="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-colorPrimary MuiInputBase-fullWidth MuiInputBase-formControl MuiInputBase-sizeSmall css-md26zr-MuiInputBase-root-MuiOutlinedInput-root"
+                    class="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-colorPrimary Mui-disabled MuiInputBase-fullWidth MuiInputBase-formControl MuiInputBase-sizeSmall css-md26zr-MuiInputBase-root-MuiOutlinedInput-root"
                   >
                     <input
                       aria-invalid="false"
-                      class="MuiInputBase-input MuiOutlinedInput-input MuiInputBase-inputSizeSmall css-1n4twyu-MuiInputBase-input-MuiOutlinedInput-input"
-                      id=":r5:"
+                      class="MuiInputBase-input MuiOutlinedInput-input Mui-disabled MuiInputBase-inputSizeSmall css-1n4twyu-MuiInputBase-input-MuiOutlinedInput-input"
+                      disabled=""
+                      id=":r7:"
                       required=""
                       type="text"
                       value=""
@@ -918,58 +1040,6 @@ exports[`Checkout - UI > when rendered in web view > should match snapshot with 
                     </fieldset>
                   </div>
                 </div>
-              </div>
-              <div
-                class="MuiBox-root css-19x4egf"
-              >
-                <div
-                  class="MuiFormControl-root MuiFormControl-fullWidth MuiTextField-root css-wb57ya-MuiFormControl-root-MuiTextField-root"
-                >
-                  <label
-                    class="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-sizeSmall MuiInputLabel-outlined MuiFormLabel-colorPrimary MuiFormLabel-filled Mui-required MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-sizeSmall MuiInputLabel-outlined css-1jy569b-MuiFormLabel-root-MuiInputLabel-root"
-                    data-shrink="true"
-                    for=":r6:"
-                    id=":r6:-label"
-                  >
-                    Country
-                    <span
-                      aria-hidden="true"
-                      class="MuiFormLabel-asterisk MuiInputLabel-asterisk css-wgai2y-MuiFormLabel-asterisk"
-                    >
-                       
-                      *
-                    </span>
-                  </label>
-                  <div
-                    class="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-colorPrimary MuiInputBase-fullWidth MuiInputBase-formControl MuiInputBase-sizeSmall css-md26zr-MuiInputBase-root-MuiOutlinedInput-root"
-                  >
-                    <input
-                      aria-invalid="false"
-                      class="MuiInputBase-input MuiOutlinedInput-input MuiInputBase-inputSizeSmall css-1n4twyu-MuiInputBase-input-MuiOutlinedInput-input"
-                      id=":r6:"
-                      required=""
-                      type="text"
-                      value="India"
-                    />
-                    <fieldset
-                      aria-hidden="true"
-                      class="MuiOutlinedInput-notchedOutline css-r01yff-MuiNotchedOutlined-root-MuiOutlinedInput-notchedOutline"
-                    >
-                      <legend
-                        class="css-sl37lx-MuiNotchedOutlined-root"
-                      >
-                        <span>
-                          Country
-                           
-                          *
-                        </span>
-                      </legend>
-                    </fieldset>
-                  </div>
-                </div>
-                <div
-                  class="MuiBox-root css-8atqhb"
-                />
               </div>
               <label
                 class="MuiFormControlLabel-root MuiFormControlLabel-labelPlacementEnd css-j204z7-MuiFormControlLabel-root"

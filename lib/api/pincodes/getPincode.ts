@@ -1,14 +1,10 @@
+import { PincodeData } from '@/entity/Pincodes/Pincodes';
 import {
   UseQueryOptions,
   UseQueryResult,
   useQuery,
 } from '@tanstack/react-query';
 import axios, { AxiosResponse } from 'axios';
-
-export type PincodeData = {
-  city: string;
-  state: string;
-};
 
 export const getPincodeAPI = async (
   pincode: string
