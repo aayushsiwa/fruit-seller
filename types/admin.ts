@@ -1,8 +1,8 @@
-import { ItemType, Order, OrderStatus, User } from '@/types/index';
+import { IProduct, Order, OrderStatus, User } from '@/types/index';
 import { TabValue } from '@/types/index';
 import { UseMutationResult } from '@tanstack/react-query';
 
-export type ProductFormValues = Partial<ItemType>;
+export type ProductFormValues = Partial<IProduct>;
 export type UserFormValues = Partial<User>;
 
 export type UseAdminActionsReturn = {
@@ -16,9 +16,9 @@ export type UseAdminActionsReturn = {
 
 export interface AdminActionsProps {
   saveProductMutation: UseMutationResult<
-    ItemType,
+    IProduct,
     Error,
-    { productData: Partial<ItemType>; isEdit: boolean; id?: string },
+    { productData: Partial<IProduct>; isEdit: boolean; id?: string },
     unknown
   >;
   deleteProductMutation: UseMutationResult<void, Error, string, unknown>;
@@ -41,7 +41,7 @@ export interface AdminActionsProps {
     },
     unknown
   >;
-  selectedProduct: Partial<ItemType>;
+  selectedProduct: Partial<IProduct>;
   selectedUser: Partial<User>;
   selectedOrder: Partial<Order>;
   isEditProduct: boolean;
@@ -59,9 +59,9 @@ export interface AdminActionsProps {
 
 export type UseAdminMutationsReturn = {
   saveProductMutation: UseMutationResult<
-    ItemType,
+    IProduct,
     Error,
-    { productData: Partial<ItemType>; isEdit: boolean; id?: string },
+    { productData: Partial<IProduct>; isEdit: boolean; id?: string },
     unknown
   >;
   deleteProductMutation: UseMutationResult<void, Error, string, unknown>;
@@ -94,7 +94,7 @@ export type UseAdminDialogsReturn = {
   openOrderDialog: boolean;
   openConfirmDialog: boolean;
   confirmStatus: OrderStatus;
-  selectedProduct: Partial<ItemType>;
+  selectedProduct: Partial<IProduct>;
   selectedUser: Partial<User>;
   selectedOrder: Partial<Order>;
   error: string | null;
@@ -102,9 +102,9 @@ export type UseAdminDialogsReturn = {
   isEditProduct: boolean;
   isEditUser: boolean;
   setSelectedOrder: (order: Partial<Order>) => void;
-  handleOpenProductDialog: (product?: Partial<ItemType> | null) => void;
+  handleOpenProductDialog: (product?: Partial<IProduct> | null) => void;
   handleCloseProductDialog: () => void;
-  handleOpenDeleteDialog: (product: ItemType) => void;
+  handleOpenDeleteDialog: (product: IProduct) => void;
   handleCloseDeleteDialog: () => void;
   handleOpenUserDialog: (user?: Partial<User> | null) => void;
   handleCloseUserDialog: () => void;
@@ -117,7 +117,7 @@ export type UseAdminDialogsReturn = {
 };
 
 export interface UseAdminDataReturn {
-  products: ItemType[] | undefined;
+  products: IProduct[] | undefined;
   users: User[] | undefined;
   orders: Order[] | undefined;
   isLoadingProducts: boolean;

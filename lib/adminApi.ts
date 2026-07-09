@@ -1,11 +1,11 @@
-import { ItemType, Order, OrderStatus, User } from '@/types/index';
+import { IProduct, Order, OrderStatus, User } from '@/types/index';
 import axios from 'axios';
 
 export const saveProduct = async (
-  productData: Partial<ItemType>,
+  productData: Partial<IProduct>,
   isEdit: boolean,
   id?: string
-): Promise<ItemType> => {
+): Promise<IProduct> => {
   const method = isEdit ? 'PUT' : 'POST';
   const url = isEdit ? `/api/products/${id}` : '/api/products';
 
@@ -93,7 +93,7 @@ export const updateOrderStatus = async (
   return response.json();
 };
 
-export const fetchProducts = async (): Promise<ItemType[]> => {
+export const fetchProducts = async (): Promise<IProduct[]> => {
   const response = await axios.get('/api/products');
   if (response.status !== 200) {
     throw new Error(`Failed to fetch products: ${response.statusText}`);

@@ -48,7 +48,7 @@ export default async function handler(
       description,
       image,
       category,
-      quantity,
+      stock,
       discount,
       is_seasonal,
     } = req.body;
@@ -58,7 +58,7 @@ export default async function handler(
       price,
       description,
       category,
-      quantity,
+      stock,
     });
     if (!validation.isValid) {
       return res.status(400).json({ error: validation.error });
@@ -72,7 +72,7 @@ export default async function handler(
         description,
         image,
         category,
-        quantity,
+        quantity: stock,
         discount: discount || 0,
         is_seasonal: is_seasonal || false,
       })
