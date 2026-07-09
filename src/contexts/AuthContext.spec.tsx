@@ -7,8 +7,11 @@ import { SessionProvider } from 'next-auth/react';
 import * as nextAuth from 'next-auth/react';
 import React from 'react';
 
-jest.mock('axios');
-const mockedAxios = axios as jest.Mocked<typeof axios>;
+vi.mock('axios');
+
+vi.unmock('@/src/contexts/AuthContext');
+vi.unmock('next-auth/react');
+const mockedAxios = axios as any;
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -71,13 +74,13 @@ const TestComponent = () => {
 
 describe('AuthProvider', () => {
   it('provides user data and admin check when authenticated', async () => {
-    jest.spyOn(nextAuth, 'useSession').mockReturnValue({
+    vi.spyOn(nextAuth, 'useSession').mockReturnValue({
       data: {
         user: { email: 'admin@example.com', role: 'admin' },
         expires: new Date(Date.now() + 1000 * 60 * 60).toString(),
       },
       status: 'authenticated',
-      update: jest.fn(),
+      update: vi.fn(),
     });
 
     render(
@@ -105,10 +108,10 @@ describe('AuthProvider', () => {
   });
 
   it('displays loading state', async () => {
-    jest.spyOn(nextAuth, 'useSession').mockReturnValue({
+    vi.spyOn(nextAuth, 'useSession').mockReturnValue({
       data: null,
       status: 'loading',
-      update: jest.fn(),
+      update: vi.fn(),
     });
 
     render(
@@ -129,10 +132,10 @@ describe('AuthProvider', () => {
   });
 
   it('displays unauthenticated state', async () => {
-    jest.spyOn(nextAuth, 'useSession').mockReturnValue({
+    vi.spyOn(nextAuth, 'useSession').mockReturnValue({
       data: null,
       status: 'unauthenticated',
-      update: jest.fn(),
+      update: vi.fn(),
     });
 
     render(
@@ -154,7 +157,7 @@ describe('AuthProvider', () => {
 
   it('handles register success', async () => {
     mockedAxios.post.mockResolvedValueOnce({ data: {} });
-    const signInSpy = jest.spyOn(nextAuth, 'signIn').mockResolvedValue({
+    const signInSpy = vi.spyOn(nextAuth, 'signIn').mockResolvedValue({
       error: null,
       status: 200,
       ok: true,
@@ -194,7 +197,7 @@ describe('AuthProvider', () => {
     mockedAxios.post.mockRejectedValueOnce({
       response: { data: { message: 'Registration failed' }, status: 400 },
     });
-    const signInSpy = jest.spyOn(nextAuth, 'signIn');
+    const signInSpy = vi.spyOn(nextAuth, 'signIn');
 
     render(
       <Wrapper>
@@ -223,7 +226,7 @@ describe('AuthProvider', () => {
   });
 
   it('handles login success', async () => {
-    const signInSpy = jest.spyOn(nextAuth, 'signIn').mockResolvedValue({
+    const signInSpy = vi.spyOn(nextAuth, 'signIn').mockResolvedValue({
       error: null,
       status: 200,
       ok: true,
@@ -252,7 +255,7 @@ describe('AuthProvider', () => {
   });
 
   it('handles login failure', async () => {
-    const signInSpy = jest.spyOn(nextAuth, 'signIn').mockResolvedValue({
+    const signInSpy = vi.spyOn(nextAuth, 'signIn').mockResolvedValue({
       error: 'Invalid credentials',
       status: 401,
       ok: false,
@@ -285,7 +288,7 @@ describe('AuthProvider', () => {
   });
 
   it('handles logout success', async () => {
-    const signOutSpy = jest
+    const signOutSpy = vi
       .spyOn(nextAuth, 'signOut')
       .mockResolvedValue(undefined);
 
@@ -307,7 +310,7 @@ describe('AuthProvider', () => {
   });
 
   it('handles logout failure', async () => {
-    const signOutSpy = jest
+    const signOutSpy = vi
       .spyOn(nextAuth, 'signOut')
       .mockRejectedValue(new Error('Logout error'));
 

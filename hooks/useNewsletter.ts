@@ -1,4 +1,3 @@
-import { UseNewsletterReturn } from '@/types/index';
 import { useState } from 'react';
 
 const useNewsletter = (): UseNewsletterReturn => {
@@ -35,3 +34,14 @@ const useNewsletter = (): UseNewsletterReturn => {
 };
 
 export default useNewsletter;
+
+export type UseNewsletterReturn = {
+  newsletterStatus: 'success' | 'error' | null;
+  handleNewsletterSubmit: (
+    values: { email: string },
+    helpers: {
+      setSubmitting: (isSubmitting: boolean) => void;
+      resetForm: () => void;
+    }
+  ) => Promise<void>;
+};

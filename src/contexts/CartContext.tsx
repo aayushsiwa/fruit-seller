@@ -1,11 +1,6 @@
+import { getProductAPI } from '@/api/products/getProduct';
 import { useSnackbar } from '@/src/contexts/SnackBarContext';
-import {
-  CartContextType,
-  ItemType,
-  LayoutProps,
-  LocalCartItem,
-} from '@/types/index';
-import axios from 'axios';
+import { CartItem, IProduct, LayoutProps } from '@/types/index';
 import { createContext, useContext, useEffect, useState } from 'react';
 
 const CartContext = createContext<CartContextType | undefined>(undefined);
@@ -43,17 +38,17 @@ export function CartProvider({ children }: LayoutProps) {
       let hasInvalidItems = false;
       for (const item of cart) {
         try {
-          const response = await axios.get(`/api/products/${item.id}`);
-          if (response.status === 200) {
-            const product: ItemType = response.data;
-            if (item.quantity > product.quantity) {
-              if (product.quantity === 0) {
+          const response = await getProductAPI(item.id);
+          if (response.status === 200 && response.data?.product) {
+            const product = response.data.product;
+            if (item.quantity > product.stock) {
+              if (product.stock === 0) {
                 hasInvalidItems = true;
                 continue;
               }
               validCart.push({
                 ...item,
-                quantity: product.quantity,
+                quantity: product.stock,
               });
               hasInvalidItems = true;
             } else {
@@ -88,8 +83,8 @@ export function CartProvider({ children }: LayoutProps) {
     }
   }, [cart, loading]);
 
-  const addToCart = (product: ItemType, quantity: number = 1) => {
-    if (quantity < 1 || product.quantity < quantity) {
+  const addToCart = (product: IProduct, quantity: number = 1) => {
+    if (quantity < 1 || product.stock < quantity) {
       showSnackbar('Invalid quantity or insufficient stock.', 'error');
       return;
     }
@@ -99,7 +94,7 @@ export function CartProvider({ children }: LayoutProps) {
 
       if (existingItem) {
         const newQuantity = existingItem.quantity + quantity;
-        if (newQuantity > product.quantity) {
+        if (newQuantity > product.stock) {
           showSnackbar('Cannot add: exceeds available stock.', 'error');
           return prevCart;
         }
@@ -149,7 +144,7 @@ export function CartProvider({ children }: LayoutProps) {
     showSnackbar('Cart cleared.', 'success');
   };
 
-  const getCartTotal = (products: (ItemType | undefined)[]) => {
+  const getCartTotal = (products: (IProduct | undefined)[]) => {
     return cart.reduce((total, item, index) => {
       const product = products[index];
       if (!product) return total;
@@ -177,4 +172,25 @@ export function CartProvider({ children }: LayoutProps) {
   };
 
   return <CartContext.Provider value={value}>{children}</CartContext.Provider>;
+}
+
+export interface CartContextType {
+  cart: CartItem[];
+  loading: boolean;
+  addToCart: (product: IProduct, quantity?: number) => void;
+  updateQuantity: (
+    productId: string,
+    quantity: number,
+    maxQuantity: number
+  ) => void;
+  removeFromCart: (productId: string) => void;
+  clearCart: () => void;
+  getCartTotal: (products: (IProduct | undefined)[]) => number;
+  getCartItemCount: () => number;
+  showSnackbar: (message: string, severity: 'success' | 'error') => void;
+}
+
+export interface LocalCartItem {
+  id: string;
+  quantity: number;
 }

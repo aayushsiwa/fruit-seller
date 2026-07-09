@@ -6,7 +6,10 @@ export default function SuccessPage() {
     <>
       <Head>
         <title>Order Placed Successfully | Fruit Seller</title>
-        <meta name="description" content="Thank you for your order! Your fresh organic fruits are being prepared for delivery." />
+        <meta
+          name="description"
+          content="Thank you for your order! Your fresh organic fruits are being prepared for delivery."
+        />
         <meta name="robots" content="noindex, nofollow" />
       </Head>
       <Success />

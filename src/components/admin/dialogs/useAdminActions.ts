@@ -1,7 +1,7 @@
 import { validateProductData, validateUserData } from '@/lib/validation/admin';
 import { useSnackbar } from '@/src/contexts/SnackBarContext';
 import { AdminActionsProps, UseAdminActionsReturn } from '@/types/admin';
-import { ItemType, OrderStatus, User } from '@/types/index';
+import { IProduct, OrderStatus, User } from '@/types/index';
 import { UseMutationResult } from '@tanstack/react-query';
 import { useCallback, useMemo } from 'react';
 
@@ -72,14 +72,14 @@ const useAdminActions = ({
     async (event: React.FormEvent<HTMLFormElement>) => {
       event.preventDefault();
       const formData = new FormData(event.currentTarget);
-      const productData: Partial<ItemType> = {
+      const productData: Partial<IProduct> = {
         name: formData.get('name') as string,
         price: parseFloat(formData.get('price') as string),
         description: formData.get('description') as string,
         discount: parseInt(formData.get('discount') as string, 10) || 0,
         isSeasonal: formData.get('isSeasonal') === 'true',
         category: formData.get('category') as string,
-        quantity: parseInt(formData.get('quantity') as string, 10) || 0,
+        stock: parseInt(formData.get('stock') as string, 10) || 0,
         image: (formData.get('image') as string) || undefined,
       };
 

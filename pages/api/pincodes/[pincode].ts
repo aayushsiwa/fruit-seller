@@ -13,8 +13,15 @@ export default async function handler(
 
   const { pincode } = req.query;
 
-  if (!pincode || typeof pincode !== 'string' || pincode.trim().length !== 6 || !/^\d+$/.test(pincode)) {
-    return res.status(400).json({ error: 'Invalid pincode format. Must be a 6-digit number.' });
+  if (
+    !pincode ||
+    typeof pincode !== 'string' ||
+    pincode.trim().length !== 6 ||
+    !/^\d+$/.test(pincode)
+  ) {
+    return res
+      .status(400)
+      .json({ error: 'Invalid pincode format. Must be a 6-digit number.' });
   }
 
   const pin = pincode.trim();
@@ -28,14 +35,23 @@ export default async function handler(
       .single();
 
     if (!cacheError && cached) {
-      return res.status(200).json({ city: cached.city, state: cached.state, cached: true });
+      return res
+        .status(200)
+        .json({ city: cached.city, state: cached.state, cached: true });
     }
 
     // 2. Fetch from external API if not cached
-    const apiRes = await axios.get(`https://api.postalpincode.in/pincode/${pin}`);
+    const apiRes = await axios.get(
+      `https://api.postalpincode.in/pincode/${pin}`
+    );
     const data = apiRes.data[0];
 
-    if (data && data.Status === 'Success' && data.PostOffice && data.PostOffice.length > 0) {
+    if (
+      data &&
+      data.Status === 'Success' &&
+      data.PostOffice &&
+      data.PostOffice.length > 0
+    ) {
       const office = data.PostOffice[0];
       const city = office.District || '';
       const state = office.State || '';
@@ -52,7 +68,9 @@ export default async function handler(
       }
     }
 
-    return res.status(404).json({ error: 'No details found for this pincode.' });
+    return res
+      .status(404)
+      .json({ error: 'No details found for this pincode.' });
   } catch (error) {
     console.error('Pincode fetch error:', error);
     return res.status(500).json({ error: 'Internal server error' });

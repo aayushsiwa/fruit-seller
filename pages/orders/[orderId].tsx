@@ -11,7 +11,10 @@ export default function SingleOrderPage() {
     <>
       <Head>
         <title>{`Order ${displayId} | Fruit Seller`}</title>
-        <meta name="description" content="View details, items, shipping address, and tracking status for this order." />
+        <meta
+          name="description"
+          content="View details, items, shipping address, and tracking status for this order."
+        />
         <meta name="robots" content="noindex, nofollow" />
       </Head>
       <OrderDetailPage />

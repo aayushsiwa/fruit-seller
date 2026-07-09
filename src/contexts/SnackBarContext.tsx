@@ -1,4 +1,3 @@
-import { SnackbarContextType, SnackbarSeverity } from '@/types/index';
 import { Alert, Snackbar } from '@mui/material';
 import React, { createContext, useContext, useState } from 'react';
 
@@ -47,3 +46,9 @@ export const SnackbarProvider: React.FC<{ children: React.ReactNode }> = ({
     </SnackbarContext.Provider>
   );
 };
+
+export interface SnackbarContextType {
+  showSnackbar: (message: string, severity?: SnackbarSeverity) => void;
+}
+
+export type SnackbarSeverity = 'success' | 'error' | 'warning' | 'info';
