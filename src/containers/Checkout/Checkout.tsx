@@ -7,7 +7,6 @@ import {
   Container,
   FormControl,
   FormControlLabel,
-  FormLabel,
   Grid,
   MenuItem,
   Paper,
@@ -42,7 +41,6 @@ export default function Checkout() {
     saveToProfile,
     setSaveToProfile,
     shippingCost,
-    isAddressAutoFilled,
     offices,
     selectedOffice,
     handleSelectOffice,
@@ -93,16 +91,7 @@ export default function Checkout() {
                 </Typography>
 
                 {savedAddresses.length > 0 && (
-                  <FormControl
-                    component="fieldset"
-                    sx={{ mb: 3, width: '100%' }}
-                  >
-                    <FormLabel
-                      component="legend"
-                      sx={{ mb: 2, fontWeight: 600 }}
-                    >
-                      Select a Shipping Address
-                    </FormLabel>
+                  <FormControl component="fieldset" sx={{ width: '100%' }}>
                     <RadioGroup
                       value={selectedAddressId}
                       onChange={(e) => setSelectedAddressId(e.target.value)}
@@ -157,84 +146,17 @@ export default function Checkout() {
                 )}
 
                 {selectedAddressId === 'new' && (
-                  <Box sx={{ mt: 2 }}>
-                    <Typography
-                      variant="subtitle1"
-                      sx={{ fontWeight: 600, mb: 2 }}
-                    >
-                      New Shipping Address
-                    </Typography>
-
-                    <Box sx={{ display: 'flex', gap: 2, mb: 2 }}>
-                      <TextField
-                        fullWidth
-                        label="Postal Code (PIN Code)"
-                        value={newAddress.postal_code}
-                        onChange={(e) =>
-                          setNewAddress({
-                            ...newAddress,
-                            postal_code: e.target.value,
-                          })
-                        }
-                        variant="outlined"
-                        size="small"
-                        required
-                        helperText={
-                          isAddressAutoFilled
-                            ? 'City & State verified'
-                            : 'Enter 6-digit PIN code to auto-fill City/State'
-                        }
-                      />
-                      <TextField
-                        fullWidth
-                        label="Phone Number"
-                        value={newAddress.phone}
-                        onChange={(e) =>
-                          setNewAddress({
-                            ...newAddress,
-                            phone: e.target.value,
-                          })
-                        }
-                        variant="outlined"
-                        size="small"
-                        required
-                      />
-                    </Box>
-
-                    {offices.length > 1 && (
-                      <FormControl fullWidth sx={{ mb: 2 }} size="small">
-                        <Select
-                          displayEmpty
-                          value={selectedOffice?.officeName ?? ''}
-                          onChange={(e) => {
-                            const office = offices.find(
-                              (o) => o.officeName === e.target.value
-                            );
-                            handleSelectOffice(office ?? null);
-                          }}
-                          renderValue={(value) => {
-                            if (!value) {
-                              return (
-                                <Typography color="text.secondary">
-                                  Select Delivery Office
-                                </Typography>
-                              );
-                            }
-                            return value;
-                          }}
-                        >
-                          {offices.map((office) => (
-                            <MenuItem
-                              key={office.officeName}
-                              value={office.officeName}
-                            >
-                              {office.officeName} - {office.district},{' '}
-                              {office.state}
-                            </MenuItem>
-                          ))}
-                        </Select>
-                      </FormControl>
-                    )}
+                  <Box sx={{ mt: 1 }}>
+                    <TextField
+                      fullWidth
+                      label="Country"
+                      value={newAddress.country}
+                      disabled
+                      sx={{ mb: 2 }}
+                      variant="outlined"
+                      size="small"
+                      required
+                    />
 
                     <TextField
                       fullWidth
@@ -264,14 +186,79 @@ export default function Checkout() {
                       size="small"
                     />
 
-                    <Box sx={{ display: 'flex', gap: 2, mb: 2 }}>
+                    <TextField
+                      fullWidth
+                      label="Mobile Number"
+                      value={newAddress.phone}
+                      onChange={(e) =>
+                        setNewAddress({
+                          ...newAddress,
+                          phone: e.target.value,
+                        })
+                      }
+                      sx={{ mb: 2 }}
+                      variant="outlined"
+                      size="small"
+                      required
+                    />
+
+                    <TextField
+                      fullWidth
+                      label="Pin Code"
+                      value={newAddress.postal_code}
+                      onChange={(e) =>
+                        setNewAddress({
+                          ...newAddress,
+                          postal_code: e.target.value,
+                        })
+                      }
+                      sx={{ mb: 2 }}
+                      variant="outlined"
+                      size="small"
+                      required
+                    />
+
+                    <FormControl fullWidth sx={{ mb: 2 }} size="small">
+                      <Select
+                        displayEmpty
+                        disabled={offices.length === 0}
+                        value={selectedOffice?.officeName ?? ''}
+                        onChange={(e) => {
+                          const office = offices.find(
+                            (o) => o.officeName === e.target.value
+                          );
+                          handleSelectOffice(office ?? null);
+                        }}
+                        renderValue={(value) => {
+                          if (!value) {
+                            return (
+                              <Typography color="text.secondary">
+                                {offices.length === 0
+                                  ? 'Enter Pin Code first'
+                                  : 'Select Locality'}
+                              </Typography>
+                            );
+                          }
+                          return value;
+                        }}
+                      >
+                        {offices.map((office) => (
+                          <MenuItem
+                            key={office.officeName}
+                            value={office.officeName}
+                          >
+                            {office.officeName}
+                          </MenuItem>
+                        ))}
+                      </Select>
+                    </FormControl>
+
+                    <Box sx={{ display: 'flex', gap: 2, mb: 3 }}>
                       <TextField
                         fullWidth
                         label="City"
                         value={newAddress.city}
-                        onChange={(e) =>
-                          setNewAddress({ ...newAddress, city: e.target.value })
-                        }
+                        disabled
                         variant="outlined"
                         size="small"
                         required
@@ -280,34 +267,11 @@ export default function Checkout() {
                         fullWidth
                         label="State"
                         value={newAddress.state}
-                        onChange={(e) =>
-                          setNewAddress({
-                            ...newAddress,
-                            state: e.target.value,
-                          })
-                        }
+                        disabled
                         variant="outlined"
                         size="small"
                         required
                       />
-                    </Box>
-
-                    <Box sx={{ display: 'flex', gap: 2, mb: 3 }}>
-                      <TextField
-                        fullWidth
-                        label="Country"
-                        value={newAddress.country}
-                        onChange={(e) =>
-                          setNewAddress({
-                            ...newAddress,
-                            country: e.target.value,
-                          })
-                        }
-                        variant="outlined"
-                        size="small"
-                        required
-                      />
-                      <Box sx={{ width: '100%' }} />
                     </Box>
 
                     <FormControlLabel

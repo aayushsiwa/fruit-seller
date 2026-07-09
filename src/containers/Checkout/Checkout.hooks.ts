@@ -53,12 +53,11 @@ export const useCheckout = (): UseCheckoutReturn => {
     country: 'India',
     phone: '',
   });
-  const [isAddressAutoFilled, setIsAddressAutoFilled] = useState(false);
-
   const [offices, setOffices] = useState<PincodeOffice[]>([]);
   const [selectedOffice, setSelectedOffice] = useState<PincodeOffice | null>(
     null
   );
+  const [initialDefaultSet, setInitialDefaultSet] = useState(false);
 
   useEffect(() => {
     loadRazorpayScript().then(setRazorpayLoaded);
@@ -73,10 +72,15 @@ export const useCheckout = (): UseCheckoutReturn => {
   );
 
   useEffect(() => {
-    if (savedAddresses.length > 0 && selectedAddressId === 'new') {
+    if (
+      savedAddresses.length > 0 &&
+      !initialDefaultSet &&
+      selectedAddressId === 'new'
+    ) {
       setSelectedAddressId(savedAddresses[0].id || 'new');
+      setInitialDefaultSet(true);
     }
-  }, [savedAddresses, selectedAddressId]);
+  }, [savedAddresses, selectedAddressId, initialDefaultSet]);
 
   const pin = newAddress.postal_code.trim();
   const isPinValid = pin.length === 6 && /^\d+$/.test(pin);
@@ -88,7 +92,7 @@ export const useCheckout = (): UseCheckoutReturn => {
     if (!isPinValid) {
       setOffices([]);
       setSelectedOffice(null);
-      setIsAddressAutoFilled(false);
+      setNewAddress((prev) => ({ ...prev, city: '', state: '' }));
       return;
     }
   }, [isPinValid]);
@@ -99,24 +103,22 @@ export const useCheckout = (): UseCheckoutReturn => {
     const result = pincodeData.offices;
     setOffices(result);
 
-    if (result.length === 1) {
+    if (result.length >= 1) {
       const office = result[0];
-      setSelectedOffice(office);
       setNewAddress((prev) => ({
         ...prev,
         city: office.district,
         state: office.state,
       }));
-      setIsAddressAutoFilled(true);
-      showSnackbar('City and State auto-filled from Pincode!', 'success');
-    } else if (result.length === 0) {
-      setSelectedOffice(null);
-      setIsAddressAutoFilled(false);
+      if (result.length === 1) {
+        setSelectedOffice(office);
+      } else {
+        setSelectedOffice(null);
+      }
     } else {
       setSelectedOffice(null);
-      setIsAddressAutoFilled(false);
     }
-  }, [pincodeData, showSnackbar]);
+  }, [pincodeData]);
 
   const handleSelectOffice = useCallback((office: PincodeOffice | null) => {
     setSelectedOffice(office);
@@ -291,7 +293,6 @@ export const useCheckout = (): UseCheckoutReturn => {
     saveToProfile,
     setSaveToProfile,
     shippingCost,
-    isAddressAutoFilled,
     offices,
     selectedOffice,
     handleSelectOffice,
@@ -316,7 +317,6 @@ export type UseCheckoutReturn = {
   saveToProfile: boolean;
   setSaveToProfile: (save: boolean) => void;
   shippingCost: number;
-  isAddressAutoFilled: boolean;
   offices: PincodeOffice[];
   selectedOffice: PincodeOffice | null;
   handleSelectOffice: (office: PincodeOffice | null) => void;

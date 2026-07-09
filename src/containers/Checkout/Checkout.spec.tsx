@@ -156,7 +156,6 @@ describe('Checkout - Hooks', () => {
     await waitFor(() => {
       expect(result.current.newAddress.city).toBe('New Delhi');
       expect(result.current.newAddress.state).toBe('Delhi');
-      expect(result.current.isAddressAutoFilled).toBe(true);
       expect(result.current.offices).toEqual(stableData.offices);
       expect(result.current.selectedOffice).toEqual(stableData.offices[0]);
     });
@@ -207,8 +206,7 @@ describe('Checkout - Hooks', () => {
     await waitFor(() => {
       expect(result.current.offices).toEqual(stableData.offices);
       expect(result.current.selectedOffice).toBeNull();
-      expect(result.current.isAddressAutoFilled).toBe(false);
-      expect(result.current.newAddress.city).toBe('');
+      expect(result.current.newAddress.city).toBe('Mumbai');
     });
   });
 });
