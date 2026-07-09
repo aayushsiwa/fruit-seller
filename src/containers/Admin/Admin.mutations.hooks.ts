@@ -4,7 +4,7 @@ import {
   useSaveProduct,
   useSaveUser,
   useUpdateOrderStatus,
-} from '@/api/admin/mutations';
+} from '@/lib/api/admin/mutations';
 import { UseAdminMutationsReturn } from '@/types/admin';
 
 export const useAdminMutations = (): UseAdminMutationsReturn => {

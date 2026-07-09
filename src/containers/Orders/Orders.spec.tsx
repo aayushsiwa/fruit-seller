@@ -1,5 +1,5 @@
-import * as GetOrdersAPI from '@/api/orders/getOrders';
 import { MockOrders } from '@/entity/Orders/Orders.mock';
+import * as GetOrdersAPI from '@/lib/api/orders/getOrders';
 import { render, renderHook, waitFor } from '@/src/utils/test';
 import * as MaterialUI from '@mui/material';
 import * as NextRouter from 'next/router';

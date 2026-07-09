@@ -1,9 +1,9 @@
-import { useGetAddresses } from '@/api/addresses/getAddresses';
-import { useSaveAddress } from '@/api/addresses/saveAddress';
-import { useCreateOrder } from '@/api/orders/createOrder';
-import { useInitPayment } from '@/api/payments/initPayment';
-import { useGetPincode } from '@/api/pincodes/getPincode';
-import { getProductAPI } from '@/api/products/getProduct';
+import { useGetAddresses } from '@/lib/api/addresses/getAddresses';
+import { useSaveAddress } from '@/lib/api/addresses/saveAddress';
+import { useCreateOrder } from '@/lib/api/orders/createOrder';
+import { useInitPayment } from '@/lib/api/payments/initPayment';
+import { useGetPincode } from '@/lib/api/pincodes/getPincode';
+import { getProductAPI } from '@/lib/api/products/getProduct';
 import { useCart } from '@/src/contexts/CartContext';
 import { Address, CartItem, IProduct } from '@/types/index';
 import { useQueries } from '@tanstack/react-query';

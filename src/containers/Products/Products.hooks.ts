@@ -1,6 +1,6 @@
-import { useGetProducts } from '@/api/products/getProducts';
 import { currency } from '@/constants/index';
 import { categories, sortOptions } from '@/constants/productsPage';
+import { useGetProducts } from '@/lib/api/products/getProducts';
 import { IProduct } from '@/types/index';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';

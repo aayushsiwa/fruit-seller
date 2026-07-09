@@ -1,5 +1,5 @@
-import { useGetFeaturedProducts } from '@/api/products/getFeaturedProducts';
 import { heroSlides } from '@/constants/home';
+import { useGetFeaturedProducts } from '@/lib/api/products/getFeaturedProducts';
 import { IProduct } from '@/types/index';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';

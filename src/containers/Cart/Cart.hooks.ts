@@ -1,4 +1,4 @@
-import { getProductAPI } from '@/api/products/getProduct';
+import { getProductAPI } from '@/lib/api/products/getProduct';
 import { useCart } from '@/src/contexts/CartContext';
 import { CartItem, IProduct } from '@/types/index';
 import { useQueries } from '@tanstack/react-query';

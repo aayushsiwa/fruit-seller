@@ -1,4 +1,4 @@
-import { useGetOrders } from '@/api/orders/getOrders';
+import { useGetOrders } from '@/lib/api/orders/getOrders';
 import { Order } from '@/types/index';
 import { useRouter } from 'next/router';
 

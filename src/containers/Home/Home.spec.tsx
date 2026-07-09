@@ -1,4 +1,4 @@
-import * as GetFeaturedProductsAPI from '@/api/products/getFeaturedProducts';
+import * as GetFeaturedProductsAPI from '@/lib/api/products/getFeaturedProducts';
 import {
   mockPush,
   mockUseRouter,

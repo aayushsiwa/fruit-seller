@@ -1,5 +1,5 @@
-import * as GetProductAPI from '@/api/products/getProduct';
 import { MockProducts } from '@/entity/Products/Products.mock';
+import * as GetProductAPI from '@/lib/api/products/getProduct';
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { ReactNode } from 'react';

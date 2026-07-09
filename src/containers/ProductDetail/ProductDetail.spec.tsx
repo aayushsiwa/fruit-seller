@@ -1,5 +1,5 @@
-import * as GetProductAPI from '@/api/products/getProduct';
-import * as GetRelatedProductsAPI from '@/api/products/getRelatedProducts';
+import * as GetProductAPI from '@/lib/api/products/getProduct';
+import * as GetRelatedProductsAPI from '@/lib/api/products/getRelatedProducts';
 import {
   act,
   mockAddToCart,

@@ -1,5 +1,5 @@
-import * as GetProductsAPI from '@/api/products/getProducts';
 import { MockProducts } from '@/entity/Products/Products.mock';
+import * as GetProductsAPI from '@/lib/api/products/getProducts';
 import { act, render, renderHook, waitFor } from '@/src/utils/test';
 import * as MaterialUI from '@mui/material';
 import * as NextRouter from 'next/router';

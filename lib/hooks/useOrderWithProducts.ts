@@ -1,6 +1,6 @@
-import { getOrderAPI } from '@/api/orders/getOrder';
 import { Order } from '@/entity/Orders/Orders';
 import { Product } from '@/entity/Products/Products';
+import { getOrderAPI } from '@/lib/api/orders/getOrder';
 import { useQuery } from '@tanstack/react-query';
 import { useRouter } from 'next/router';
 

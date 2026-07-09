@@ -1,12 +1,12 @@
-import * as GetAddressesAPI from '@/api/addresses/getAddresses';
-import * as SaveAddressAPI from '@/api/addresses/saveAddress';
-import * as CreateOrderAPI from '@/api/orders/createOrder';
-import * as InitPaymentAPI from '@/api/payments/initPayment';
-import * as GetPincodeAPI from '@/api/pincodes/getPincode';
-import * as GetProductAPI from '@/api/products/getProduct';
 import { MockAddresses } from '@/entity/Addresses/Addresses.mock';
 import { MockCartItems } from '@/entity/Payments/Payments.mock';
 import { MockProducts } from '@/entity/Products/Products.mock';
+import * as GetAddressesAPI from '@/lib/api/addresses/getAddresses';
+import * as SaveAddressAPI from '@/lib/api/addresses/saveAddress';
+import * as CreateOrderAPI from '@/lib/api/orders/createOrder';
+import * as InitPaymentAPI from '@/lib/api/payments/initPayment';
+import * as GetPincodeAPI from '@/lib/api/pincodes/getPincode';
+import * as GetProductAPI from '@/lib/api/products/getProduct';
 import {
   act,
   mockPush,

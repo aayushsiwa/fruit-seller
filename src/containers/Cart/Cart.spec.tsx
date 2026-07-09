@@ -1,4 +1,4 @@
-import * as GetProductAPI from '@/api/products/getProduct';
+import * as GetProductAPI from '@/lib/api/products/getProduct';
 import {
   act,
   mockPush,

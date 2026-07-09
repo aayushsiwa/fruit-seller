@@ -1,4 +1,4 @@
-import { getProductAPI } from '@/api/products/getProduct';
+import { getProductAPI } from '@/lib/api/products/getProduct';
 import { useSnackbar } from '@/src/contexts/SnackBarContext';
 import { CartItem, IProduct, LayoutProps } from '@/types/index';
 import { createContext, useContext, useEffect, useState } from 'react';

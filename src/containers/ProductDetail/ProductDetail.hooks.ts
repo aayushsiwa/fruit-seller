@@ -1,5 +1,5 @@
-import { useGetProduct } from '@/api/products/getProduct';
-import { useGetRelatedProducts } from '@/api/products/getRelatedProducts';
+import { useGetProduct } from '@/lib/api/products/getProduct';
+import { useGetRelatedProducts } from '@/lib/api/products/getRelatedProducts';
 import { useCart } from '@/src/contexts/CartContext';
 import { IProduct } from '@/types/index';
 import { SnackbarCloseReason } from '@mui/material';

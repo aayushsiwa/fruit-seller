@@ -1,6 +1,6 @@
-import { useGetAdminOrders } from '@/api/admin/getAdminOrders';
-import { useGetAdminProducts } from '@/api/admin/getAdminProducts';
-import { useGetAdminUsers } from '@/api/admin/getAdminUsers';
+import { useGetAdminOrders } from '@/lib/api/admin/getAdminOrders';
+import { useGetAdminProducts } from '@/lib/api/admin/getAdminProducts';
+import { useGetAdminUsers } from '@/lib/api/admin/getAdminUsers';
 import { UseAdminDataReturn } from '@/types/admin';
 
 export const useAdminData = (isAdmin: boolean): UseAdminDataReturn => {
