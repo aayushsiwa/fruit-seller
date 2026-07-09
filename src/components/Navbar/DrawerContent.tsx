@@ -30,7 +30,6 @@ import {
   FiShield,
   FiShoppingCart,
   FiSun,
-  FiUserPlus,
   FiX,
 } from 'react-icons/fi';
 
