@@ -17,7 +17,7 @@ async function fetchFromSukhpreetsaluja(pin: string): Promise<PincodeOffice[]> {
       delivery: o.delivery === true || o.delivery === 'true',
     })
   );
-  return offices.filter((o) => o.block != null && o.delivery);
+  return offices;
 }
 
 async function fetchFromPostalpincode(pin: string): Promise<PincodeOffice[]> {
@@ -33,7 +33,7 @@ async function fetchFromPostalpincode(pin: string): Promise<PincodeOffice[]> {
       delivery: String(o.DeliveryStatus ?? '') === 'Delivery',
     })
   );
-  return offices.filter((o) => o.block != null && o.delivery);
+  return offices;
 }
 
 export default async function handler(
