@@ -1,4 +1,4 @@
-import { DashboardStatsProps, Order } from '@/types/index';
+import { IProduct, Order, User } from '@/types/index';
 import { Box, Card, CardContent, Grid, Typography } from '@mui/material';
 import React from 'react';
 import { FaIndianRupeeSign } from 'react-icons/fa6';
@@ -82,3 +82,12 @@ const DashboardStats: React.FC<DashboardStatsProps> = ({
 };
 
 export default DashboardStats;
+
+export interface DashboardStatsProps {
+  products: IProduct[];
+  users: User[];
+  orders: Order[];
+  isLoadingProducts: boolean;
+  isLoadingUsers: boolean;
+  isLoadingOrders: boolean;
+}

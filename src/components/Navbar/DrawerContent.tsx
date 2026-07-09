@@ -1,5 +1,5 @@
 import { useThemeSwitch } from '@/src/ThemeProvider';
-import { DrawerContentProps } from '@/types/index';
+import { SessionUser } from '@/types/index';
 import {
   Avatar,
   Box,
@@ -243,3 +243,15 @@ export const DrawerContent: React.FC<DrawerContentProps> = ({
     </Box>
   );
 };
+
+export interface DrawerContentProps {
+  user: SessionUser['user'] | undefined;
+  searchQuery: string;
+  getCartItemCount: () => number;
+  isAdmin: boolean;
+  setSearchQuery: (value: string) => void;
+  handleDrawerToggle: () => void;
+  handleSearch: (e: React.KeyboardEvent<HTMLInputElement>) => void;
+  handleNavigation: (path: string) => void;
+  handleLogout: () => void;
+}

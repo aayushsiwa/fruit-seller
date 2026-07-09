@@ -8,8 +8,7 @@ import { FiArrowLeft } from 'react-icons/fi';
 import { useOrderDetailPage } from './OrderDetail.hooks';
 
 export default function OrderDetailPage() {
-  const { order, products, isLoading, error, handleBackToOrders } =
-    useOrderDetailPage();
+  const { order, isLoading, error, handleBackToOrders } = useOrderDetailPage();
 
   if (isLoading) {
     return <LoadingScreen />;
@@ -40,7 +39,7 @@ export default function OrderDetailPage() {
           Order Details
         </Typography>
 
-        {order && <OrderDetailsEnhanced order={order} products={products} />}
+        {order && <OrderDetailsEnhanced order={order} />}
       </motion.div>
     </Container>
   );

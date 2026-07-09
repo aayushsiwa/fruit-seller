@@ -1,6 +1,6 @@
 import { useThemeSwitch } from '@/src/ThemeProvider';
 import { theme } from '@/src/theme';
-import { ProfileMenuProps } from '@/types/index';
+import { SessionUser } from '@/types/index';
 import {
   Avatar,
   Box,
@@ -279,3 +279,12 @@ export const ProfileMenu: React.FC<ProfileMenuProps> = ({
     </>
   );
 };
+
+export interface ProfileMenuProps {
+  user: SessionUser['user'] | undefined;
+  anchorEl: HTMLButtonElement | null;
+  isAdmin: boolean;
+  handleMenuClose: () => void;
+  handleNavigation: (path: string) => void;
+  handleLogout: () => void;
+}

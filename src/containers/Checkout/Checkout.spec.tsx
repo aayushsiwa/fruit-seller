@@ -1,72 +1,43 @@
-import { useCart } from '@/src/contexts/CartContext';
-import { CartItem, ItemType } from '@/types/index';
-import { useQueries, useQuery } from '@tanstack/react-query';
-import { render, screen } from '@testing-library/react';
-import { renderHook } from '@testing-library/react';
-import axios from 'axios';
-import { useSession } from 'next-auth/react';
-import { useRouter } from 'next/router';
+import * as GetAddressesAPI from '@/api/addresses/getAddresses';
+import * as SaveAddressAPI from '@/api/addresses/saveAddress';
+import * as CreateOrderAPI from '@/api/orders/createOrder';
+import * as InitPaymentAPI from '@/api/payments/initPayment';
+import * as GetPincodeAPI from '@/api/pincodes/getPincode';
+import * as GetProductAPI from '@/api/products/getProduct';
+import { MockAddresses } from '@/entity/Addresses/Addresses.mock';
+import { MockCartItems } from '@/entity/Payments/Payments.mock';
+import { MockProducts } from '@/entity/Products/Products.mock';
+import {
+  act,
+  mockPush,
+  mockUseCart,
+  mockUseRouter,
+  mockUseSession,
+  render,
+  renderHook,
+  screen,
+  waitFor,
+} from '@/src/utils/test';
+import { CartItem } from '@/types/index';
+import * as MaterialUI from '@mui/material';
 
 import Checkout from './Checkout';
 import { useCheckout } from './Checkout.hooks';
 
-jest.mock('framer-motion', () => {
-  const FakeMotion = ({ children }: { children: React.ReactNode }) => (
-    <>{children}</>
-  );
-  return {
-    motion: new Proxy(FakeMotion, {
-      get: () => FakeMotion,
-    }),
-    AnimatePresence: FakeMotion,
-  };
-});
-
-jest.mock('next/router', () => ({ useRouter: jest.fn() }));
-jest.mock('next-auth/react', () => ({
-  useSession: jest.fn(),
-  signIn: jest.fn(),
-}));
-jest.mock('@/src/contexts/CartContext', () => ({ useCart: jest.fn() }));
-jest.mock('axios');
-jest.mock('@tanstack/react-query', () => ({ useQueries: jest.fn(), useQuery: jest.fn() }));
-
-jest.mock('./Checkout.styles', () => ({
-  __esModule: true,
-  useCheckoutStyles: () => ({}),
-}));
-
-jest.mock('@/src/components/LoadingScreen', () => ({
-  __esModule: true,
-  LoadingScreen: () => <div data-testid="loading-screen" />,
-}));
-
-jest.mock('@/src/components/Checkout/OrderSummary', () => ({
-  __esModule: true,
-  OrderSummary: () => <div data-testid="order-summary" />,
-}));
-
-jest.mock('@/src/components/Checkout/EmptyCheckout', () => ({
-  __esModule: true,
-  EmptyCheckout: () => <div data-testid="empty-checkout" />,
-}));
-
-const mockPush = jest.fn();
-
 const defaultCartCtx = {
   cart: [] as CartItem[],
-  getCartTotal: jest.fn(),
-  clearCart: jest.fn(),
-  showSnackbar: jest.fn(),
+  getCartTotal: vi.fn(() => 0),
+  clearCart: vi.fn(),
+  showSnackbar: vi.fn(),
   loading: false,
 };
 
 interface WindowWithRazorpay {
-  Razorpay?: jest.Mock;
+  Razorpay?: any;
 }
 
 beforeEach(() => {
-  (window as unknown as WindowWithRazorpay).Razorpay = jest.fn();
+  (window as unknown as WindowWithRazorpay).Razorpay = vi.fn();
 });
 
 afterEach(() => {
@@ -74,27 +45,45 @@ afterEach(() => {
 });
 
 function setupDefaultMocks() {
-  (useRouter as jest.Mock).mockReturnValue({
+  (mockUseRouter as any).mockReturnValue({
     push: mockPush,
-    prefetch: jest.fn(),
-  });
-  (useSession as jest.Mock).mockReturnValue({
+    prefetch: vi.fn(),
+  } as any);
+  (mockUseSession as any).mockReturnValue({
     data: null,
     status: 'unauthenticated',
   });
-  (useCart as jest.Mock).mockReturnValue(defaultCartCtx);
-  (useQueries as jest.Mock).mockReturnValue([]);
-  (useQuery as jest.Mock).mockReturnValue({ data: undefined });
-  (axios.get as jest.Mock).mockResolvedValue({ data: [] });
-  jest.clearAllMocks();
+  (mockUseCart as any).mockReturnValue(defaultCartCtx as any);
+
+  vi.spyOn(GetAddressesAPI, 'useGetAddresses').mockReturnValue({
+    data: undefined,
+  } as any);
+  vi.spyOn(GetPincodeAPI, 'useGetPincode').mockReturnValue({
+    data: undefined,
+  } as any);
+  vi.spyOn(SaveAddressAPI, 'useSaveAddress').mockReturnValue({
+    mutateAsync: vi.fn(),
+  } as any);
+  vi.spyOn(InitPaymentAPI, 'useInitPayment').mockReturnValue({
+    mutateAsync: vi.fn(),
+  } as any);
+  vi.spyOn(CreateOrderAPI, 'useCreateOrder').mockReturnValue({
+    mutateAsync: vi.fn(),
+  } as any);
+  vi.spyOn(MaterialUI, 'useMediaQuery').mockReturnValue(false);
+  vi.clearAllMocks();
   mockPush.mockClear();
 }
 
 describe('Checkout - Hooks', () => {
   beforeEach(setupDefaultMocks);
 
-  it('should return default state', () => {
+  it('should return default state', async () => {
     const { result } = renderHook(() => useCheckout());
+
+    await waitFor(() => {
+      expect(result.current.status).toBe('unauthenticated');
+    });
 
     expect(result.current.cart).toEqual([]);
     expect(result.current.products).toEqual([]);
@@ -102,78 +91,163 @@ describe('Checkout - Hooks', () => {
     expect(result.current.isLoadingProducts).toBe(false);
     expect(result.current.hasError).toBe(false);
     expect(result.current.processing).toBe(false);
-    expect(result.current.status).toBe('unauthenticated');
   });
 
-  it('should redirect to login when unauthenticated', () => {
+  it('should redirect to login when unauthenticated', async () => {
     render(<Checkout />);
-    expect(mockPush).toHaveBeenCalledWith('/login');
+    await waitFor(() => {
+      expect(mockPush).toHaveBeenCalledWith('/login');
+    });
+  });
+
+  it('should load saved addresses when authenticated', async () => {
+    (mockUseSession as any).mockReturnValue({
+      data: { user: { email: 'test@test.com' } } as any,
+      status: 'authenticated',
+    });
+
+    vi.spyOn(GetAddressesAPI, 'useGetAddresses').mockReturnValue({
+      data: { data: MockAddresses },
+    } as any);
+
+    const { result } = renderHook(() => useCheckout());
+
+    await waitFor(() => {
+      expect(result.current.savedAddresses).toEqual(MockAddresses);
+      expect(result.current.selectedAddressId).toBe('addr-1');
+    });
+  });
+
+  it('should auto-fill city and state when valid pincode query returns data', async () => {
+    (mockUseSession as any).mockReturnValue({
+      data: { user: { email: 'test@test.com' } } as any,
+      status: 'authenticated',
+    });
+
+    const stableData = { city: 'New Delhi', state: 'Delhi' };
+    vi.spyOn(GetPincodeAPI, 'useGetPincode').mockImplementation(
+      (pin, enabled) => {
+        if (enabled) {
+          return { data: { data: stableData } } as any;
+        }
+        return { data: undefined } as any;
+      }
+    );
+
+    const { result } = renderHook(() => useCheckout());
+
+    act(() => {
+      result.current.setNewAddress((prev) => ({
+        ...prev,
+        postal_code: '110001',
+      }));
+    });
+
+    await waitFor(() => {
+      expect(result.current.newAddress.city).toBe('New Delhi');
+      expect(result.current.newAddress.state).toBe('Delhi');
+      expect(result.current.isAddressAutoFilled).toBe(true);
+    });
   });
 });
 
 describe('Checkout - UI', () => {
-  const mockProducts: ItemType[] = [
-    {
-      id: '1',
-      name: 'Apple',
-      price: 100,
-      quantity: 10,
-      image: 'apple.jpg',
-      description: 'Fresh apple',
-      category: 'Fruit',
-      discount: 0,
-      isSeasonal: false,
-      createdAt: '2025-01-01',
-    },
-    {
-      id: '2',
-      name: 'Banana',
-      price: 50,
-      quantity: 20,
-      image: 'banana.jpg',
-      description: 'Fresh banana',
-      category: 'Fruit',
-      discount: 5,
-      isSeasonal: true,
-      createdAt: '2025-01-01',
-    },
-  ];
-
-  const mockCart: CartItem[] = [
-    { id: '1', quantity: 2 },
-    { id: '2', quantity: 1 },
-  ];
+  const mockProducts = MockProducts;
+  const mockCart = MockCartItems;
 
   beforeEach(setupDefaultMocks);
 
-  it('should render loading state', () => {
-    (useSession as jest.Mock).mockReturnValue({
-      data: null,
-      status: 'loading',
+  describe('when rendered in web view', () => {
+    beforeEach(() => {
+      vi.spyOn(MaterialUI, 'useMediaQuery').mockReturnValue(false);
     });
 
-    render(<Checkout />);
-    expect(screen.getByTestId('loading-screen')).toBeInTheDocument();
+    it('should render loading state', async () => {
+      (mockUseSession as any).mockReturnValue({
+        data: null,
+        status: 'loading',
+      });
+
+      let container: any;
+      await act(async () => {
+        const res = render(<Checkout />);
+        container = res.container;
+      });
+      expect(container).toMatchSnapshot();
+    });
+
+    it('should match snapshot with products loaded', async () => {
+      (mockUseSession as any).mockReturnValue({
+        data: { user: { email: 'test@test.com' } } as any,
+        status: 'authenticated',
+      });
+      (mockUseCart as any).mockReturnValue({
+        ...defaultCartCtx,
+        cart: mockCart,
+      } as any);
+      vi.spyOn(GetProductAPI, 'getProductAPI').mockImplementation(
+        (id: string) => {
+          const product = mockProducts.find((p) => p.id === id);
+          return Promise.resolve({ data: { product } } as any);
+        }
+      );
+
+      let container: any;
+      await act(async () => {
+        const res = render(<Checkout />);
+        container = res.container;
+      });
+      await waitFor(() => {
+        expect(screen.getByText('Grapes')).toBeInTheDocument();
+      });
+      expect(container).toMatchSnapshot();
+    });
   });
 
-  it('should match snapshot with products loaded', () => {
-    (useSession as jest.Mock).mockReturnValue({
-      data: { user: { email: 'test@test.com' } },
-      status: 'authenticated',
+  describe('when rendered in mobile view', () => {
+    beforeEach(() => {
+      vi.spyOn(MaterialUI, 'useMediaQuery').mockReturnValue(true);
     });
-    (useCart as jest.Mock).mockReturnValue({
-      ...defaultCartCtx,
-      cart: mockCart,
-    });
-    (useQueries as jest.Mock).mockReturnValue(
-      mockCart.map((_item, i) => ({
-        data: mockProducts[i],
-        isLoading: false,
-        error: null,
-      }))
-    );
 
-    const { container } = render(<Checkout />);
-    expect(container).toMatchSnapshot();
+    it('should render loading state', async () => {
+      (mockUseSession as any).mockReturnValue({
+        data: null,
+        status: 'loading',
+      });
+
+      let container: any;
+      await act(async () => {
+        const res = render(<Checkout />);
+        container = res.container;
+      });
+      expect(container).toMatchSnapshot();
+    });
+
+    it('should match snapshot with products loaded', async () => {
+      (mockUseSession as any).mockReturnValue({
+        data: { user: { email: 'test@test.com' } } as any,
+        status: 'authenticated',
+      });
+      (mockUseCart as any).mockReturnValue({
+        ...defaultCartCtx,
+        cart: mockCart,
+      } as any);
+      vi.spyOn(GetProductAPI, 'getProductAPI').mockImplementation(
+        (id: string) => {
+          const product = mockProducts.find((p) => p.id === id);
+          return Promise.resolve({ data: { product } } as any);
+        }
+      );
+
+      let container: any;
+      await act(async () => {
+        const res = render(<Checkout />);
+        container = res.container;
+      });
+      await waitFor(() => {
+        expect(screen.getByText('Grapes')).toBeInTheDocument();
+      });
+      expect(container).toMatchSnapshot();
+    });
   });
 });

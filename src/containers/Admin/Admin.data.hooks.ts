@@ -1,25 +1,12 @@
-import { fetchOrders, fetchProducts, fetchUsers } from '@/lib/adminApi';
+import { useGetAdminOrders } from '@/api/admin/getAdminOrders';
+import { useGetAdminProducts } from '@/api/admin/getAdminProducts';
+import { useGetAdminUsers } from '@/api/admin/getAdminUsers';
 import { UseAdminDataReturn } from '@/types/admin';
-import { useQuery } from '@tanstack/react-query';
 
 export const useAdminData = (isAdmin: boolean): UseAdminDataReturn => {
-  const productsQuery = useQuery({
-    queryKey: ['adminProducts'],
-    queryFn: fetchProducts,
-    enabled: isAdmin,
-  });
-
-  const usersQuery = useQuery({
-    queryKey: ['adminUsers'],
-    queryFn: fetchUsers,
-    enabled: isAdmin,
-  });
-
-  const ordersQuery = useQuery({
-    queryKey: ['adminOrders'],
-    queryFn: fetchOrders,
-    enabled: isAdmin,
-  });
+  const productsQuery = useGetAdminProducts(isAdmin);
+  const usersQuery = useGetAdminUsers(isAdmin);
+  const ordersQuery = useGetAdminOrders(isAdmin);
 
   return {
     products: productsQuery.data,

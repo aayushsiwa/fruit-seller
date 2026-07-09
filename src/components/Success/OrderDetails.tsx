@@ -1,13 +1,10 @@
 import { currency, defaultImage } from '@/constants/index';
-import { CartItem, OrderDetailsProps } from '@/types/index';
+import { Order, OrderItem } from '@/types/index';
 import { Box, Divider, Paper, Typography } from '@mui/material';
 import { motion } from 'framer-motion';
 import Image from 'next/image';
 
-export const OrderDetails: React.FC<OrderDetailsProps> = ({
-  order,
-  products,
-}) => {
+export const OrderDetails: React.FC<OrderDetailsProps> = ({ order }) => {
   return (
     <Paper
       elevation={3}
@@ -27,15 +24,15 @@ export const OrderDetails: React.FC<OrderDetailsProps> = ({
           gap: 2,
         }}
       >
-        {order.items.map((item: CartItem, index: number) => {
-          const product = products[index];
+        {order.items.map((item: OrderItem, index: number) => {
+          const product = item.product;
           if (!product) return null;
           const price = product.discount
             ? product.price * (1 - product.discount / 100)
             : product.price;
           return (
             <Box
-              key={item.id}
+              key={product.id}
               sx={{
                 p: 2,
                 border: 1,
@@ -98,3 +95,7 @@ export const OrderDetails: React.FC<OrderDetailsProps> = ({
     </Paper>
   );
 };
+
+export interface OrderDetailsProps {
+  order: Order;
+}

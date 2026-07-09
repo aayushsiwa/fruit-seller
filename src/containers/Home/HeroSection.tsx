@@ -1,5 +1,4 @@
 import { heroSlides } from '@/constants/home';
-import { HeroSectionProps } from '@/types/index';
 import { Button, Container, Grid, Typography } from '@mui/material';
 import { AnimatePresence, motion } from 'framer-motion';
 import { useRouter } from 'next/router';
@@ -92,14 +91,10 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ currentSlide }) => {
           >
             {heroSlides[currentSlide].subtitle}
           </Typography>
-          <motion.button
+          <motion.div
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
-            style={{
-              borderRadius: 8,
-              overflow: 'hidden',
-              border: 'none',
-            }}
+            style={{ display: 'inline-block' }}
           >
             <Button
               variant="contained"
@@ -115,9 +110,13 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ currentSlide }) => {
             >
               {heroSlides[currentSlide].cta}
             </Button>
-          </motion.button>
+          </motion.div>
         </motion.div>
       </Container>
     </Grid>
   );
 };
+
+export interface HeroSectionProps {
+  currentSlide: number;
+}

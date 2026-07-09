@@ -1,5 +1,5 @@
 import { currency, defaultImage } from '@/constants';
-import { CartItemsProps } from '@/types/index';
+import { CartItem, IProduct } from '@/types/index';
 import { Box, IconButton, TextField, Typography } from '@mui/material';
 import { AnimatePresence, motion } from 'framer-motion';
 import Image from 'next/image';
@@ -32,6 +32,7 @@ export const CartItems: React.FC<CartItemsProps> = ({
   return (
     <AnimatePresence>
       <Box
+        data-testid="cart-items"
         sx={{
           display: 'grid',
           gridTemplateColumns: {
@@ -128,7 +129,7 @@ export const CartItems: React.FC<CartItemsProps> = ({
                       handleQuantityChange(
                         item.id,
                         item.quantity - 1,
-                        product.quantity
+                        product.stock
                       )
                     }
                     disabled={item.quantity <= 1}
@@ -143,7 +144,7 @@ export const CartItems: React.FC<CartItemsProps> = ({
                     onChange={(e) => {
                       const value = Number.parseInt(e.target.value);
                       if (!isNaN(value)) {
-                        handleQuantityChange(item.id, value, product.quantity);
+                        handleQuantityChange(item.id, value, product.stock);
                       }
                     }}
                     inputProps={{
@@ -160,10 +161,10 @@ export const CartItems: React.FC<CartItemsProps> = ({
                       handleQuantityChange(
                         item.id,
                         item.quantity + 1,
-                        product.quantity
+                        product.stock
                       )
                     }
-                    disabled={item.quantity >= product.quantity}
+                    disabled={item.quantity >= product.stock}
                     component={motion.div}
                     whileHover={{ scale: 1.1 }}
                     aria-label="Increase quantity"
@@ -188,3 +189,16 @@ export const CartItems: React.FC<CartItemsProps> = ({
     </AnimatePresence>
   );
 };
+
+export interface CartItemsProps {
+  cart: CartItem[];
+  products: (IProduct | undefined)[];
+  handleQuantityChange: (
+    id: string,
+    newQuantity: number,
+    maxQuantity: number
+  ) => void;
+  handleRemoveItem: (id: string) => void;
+  isLoadingProducts: boolean;
+  hasError: boolean;
+}

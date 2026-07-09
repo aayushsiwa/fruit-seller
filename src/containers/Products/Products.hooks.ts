@@ -1,19 +1,37 @@
+import { useGetProducts } from '@/api/products/getProducts';
 import { currency } from '@/constants/index';
 import { categories, sortOptions } from '@/constants/productsPage';
-import { ItemType, UseProductsPageReturn } from '@/types/index';
-import { useQuery } from '@tanstack/react-query';
-import axios from 'axios';
+import { IProduct } from '@/types/index';
+import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 
-const fetchProducts = async (): Promise<ItemType[]> => {
-  const response = await axios.get('/api/products');
-  if (response.status !== 200) throw new Error('Failed to fetch products');
-  return response.data;
+export type ProductsPageHooks = {
+  products: IProduct[];
+  filteredProducts: IProduct[];
+  priceRange: [number, number];
+  setPriceRange: React.Dispatch<React.SetStateAction<[number, number]>>;
+  minPrice: number;
+  maxPrice: number;
+  sortOption: string;
+  setSortOption: React.Dispatch<React.SetStateAction<string>>;
+  category: string;
+  setCategory: React.Dispatch<React.SetStateAction<string>>;
+  inStockOnly: boolean;
+  setInStockOnly: React.Dispatch<React.SetStateAction<boolean>>;
+  openFilterDialog: boolean;
+  setOpenFilterDialog: React.Dispatch<React.SetStateAction<boolean>>;
+  isLoading: boolean;
+  error: string | null;
+  handleResetFilters: () => void;
+  getFilterSummary: () => string[];
+  categories: typeof categories;
+  sortOptions: typeof sortOptions;
 };
 
-export const useProductsPage = (): UseProductsPageReturn => {
-  const [products, setProducts] = useState<ItemType[]>([]);
-  const [filteredProducts, setFilteredProducts] = useState<ItemType[]>([]);
+export const useProductsPage = (): ProductsPageHooks => {
+  const router = useRouter();
+  const [products, setProducts] = useState<IProduct[]>([]);
+  const [filteredProducts, setFilteredProducts] = useState<IProduct[]>([]);
   const [priceRange, setPriceRange] = useState<[number, number]>([0, 100]);
   const [minPrice, setMinPrice] = useState(0);
   const [maxPrice, setMaxPrice] = useState(100);
@@ -22,10 +40,8 @@ export const useProductsPage = (): UseProductsPageReturn => {
   const [inStockOnly, setInStockOnly] = useState(false);
   const [openFilterDialog, setOpenFilterDialog] = useState(false);
 
-  const { data, isLoading, error } = useQuery({
-    queryKey: ['products'],
-    queryFn: fetchProducts,
-  });
+  const { data: response, isLoading, error } = useGetProducts();
+  const data = response?.data?.products;
 
   useEffect(() => {
     if (data?.length) {
@@ -42,8 +58,7 @@ export const useProductsPage = (): UseProductsPageReturn => {
   useEffect(() => {
     let filtered = [...products];
 
-    const searchParams = new URLSearchParams(window.location.search);
-    const searchQuery = searchParams.get('search');
+    const searchQuery = router.query.search as string;
     if (searchQuery) {
       const search = searchQuery.toLowerCase();
       filtered = filtered.filter((product) =>
@@ -60,7 +75,7 @@ export const useProductsPage = (): UseProductsPageReturn => {
     }
 
     if (inStockOnly) {
-      filtered = filtered.filter((p) => p.quantity > 0);
+      filtered = filtered.filter((p) => p.stock > 0);
     }
 
     switch (sortOption) {
@@ -87,7 +102,14 @@ export const useProductsPage = (): UseProductsPageReturn => {
     }
 
     setFilteredProducts(filtered);
-  }, [priceRange, category, sortOption, inStockOnly, products]);
+  }, [
+    priceRange,
+    category,
+    sortOption,
+    inStockOnly,
+    products,
+    router.query.search,
+  ]);
 
   const handleResetFilters = () => {
     setPriceRange([minPrice, maxPrice]);

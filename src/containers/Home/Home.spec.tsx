@@ -1,84 +1,44 @@
-import { ItemType } from '@/types/index';
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import { render, screen, waitFor } from '@testing-library/react';
+import * as GetFeaturedProductsAPI from '@/api/products/getFeaturedProducts';
+import {
+  mockPush,
+  mockUseRouter,
+  render,
+  screen,
+  waitFor,
+} from '@/src/utils/test';
+import { IProduct } from '@/types/index';
+import * as MaterialUI from '@mui/material';
 import userEvent from '@testing-library/user-event';
-import axios from 'axios';
-import * as nextRouter from 'next/router';
 
 import Home from './Home';
 
-jest.mock('axios');
-const mockedAxios = axios as jest.Mocked<typeof axios>;
-
-jest.mock('@/src/components/ProductCard', () => ({
-  __esModule: true,
-  default: ({ product }: { product: ItemType }) => (
-    <div data-testid="product-card">{product.name}</div>
-  ),
-}));
-
-jest.mock('framer-motion', () => {
-  const FakeMotion = ({ children }: { children: React.ReactNode }) => (
-    <>{children}</>
-  );
-  return {
-    motion: new Proxy(FakeMotion, {
-      get: () => FakeMotion,
-    }),
-    AnimatePresence: FakeMotion,
-  };
-});
-
-const renderWithQueryProvider = (ui: React.ReactNode) => {
-  const queryClient = new QueryClient({
-    defaultOptions: {
-      queries: {
-        retry: false, // Disable retries for tests
-      },
-    },
-  });
-  return render(
-    <QueryClientProvider client={queryClient}>{ui}</QueryClientProvider>
-  );
-};
-
 describe('Home Page', () => {
-  let mockPush: jest.Mock;
-  let mockRouter: Partial<nextRouter.NextRouter>;
-
   beforeEach(() => {
-    mockPush = jest.fn();
-    mockRouter = {
+    vi.spyOn(MaterialUI, 'useMediaQuery').mockReturnValue(false);
+    mockUseRouter.mockReturnValue({
       push: mockPush,
-      prefetch: jest.fn(),
+      prefetch: vi.fn(),
       route: '/',
       pathname: '/',
       query: {},
       asPath: '/',
-    };
-
-    jest
-      .spyOn(nextRouter, 'useRouter')
-      .mockReturnValue(mockRouter as nextRouter.NextRouter);
-
-    mockedAxios.get.mockClear();
-    mockPush.mockClear();
+    } as any);
   });
 
   afterEach(() => {
-    jest.restoreAllMocks();
+    vi.restoreAllMocks();
   });
 
   describe('Hero Section', () => {
     it('renders hero section with main heading', () => {
-      renderWithQueryProvider(<Home />);
+      render(<Home />);
       expect(
         screen.getByText(/Fresh Fruits Delivered to Your Door/i)
       ).toBeInTheDocument();
     });
 
     it('navigates to products when hero CTA button is clicked', async () => {
-      renderWithQueryProvider(<Home />);
+      render(<Home />);
       const shopNowButton = screen.getAllByRole('button', {
         name: /Shop Now/i,
       })[0];
@@ -90,17 +50,20 @@ describe('Home Page', () => {
 
   describe('Featured Products', () => {
     it('renders loading spinner while fetching products', () => {
-      mockedAxios.get.mockImplementation(() => new Promise(() => {}));
-      renderWithQueryProvider(<Home />);
+      vi.spyOn(
+        GetFeaturedProductsAPI,
+        'useGetFeaturedProducts'
+      ).mockReturnValue({ isLoading: true } as any);
+      render(<Home />);
       expect(screen.getByRole('progressbar')).toBeInTheDocument();
     });
 
     it('renders featured products after successful fetch', async () => {
-      const mockProducts: ItemType[] = [
+      const mockProducts: IProduct[] = [
         {
           id: '1',
           name: 'Apple',
-          quantity: 10,
+          stock: 10,
           price: 1.99,
           image: 'apple.jpg',
           description: 'Fresh apple',
@@ -112,7 +75,7 @@ describe('Home Page', () => {
         {
           id: '2',
           name: 'Banana',
-          quantity: 5,
+          stock: 5,
           price: 0.99,
           image: 'banana.jpg',
           description: 'Fresh banana',
@@ -123,41 +86,102 @@ describe('Home Page', () => {
         },
       ];
 
-      mockedAxios.get.mockResolvedValueOnce({
-        data: mockProducts,
-        status: 200,
-      });
+      vi.spyOn(
+        GetFeaturedProductsAPI,
+        'useGetFeaturedProducts'
+      ).mockReturnValue({
+        data: { data: { products: mockProducts } },
+        isLoading: false,
+      } as any);
 
-      renderWithQueryProvider(<Home />);
+      render(<Home />);
 
       await waitFor(() =>
-        expect(screen.getAllByTestId('product-card')).toHaveLength(2)
+        expect(screen.getByText('Apple')).toBeInTheDocument()
       );
 
-      expect(screen.getByText('Apple')).toBeInTheDocument();
       expect(screen.getByText('Banana')).toBeInTheDocument();
     });
 
     it('handles empty products list', async () => {
-      mockedAxios.get.mockResolvedValueOnce({
-        data: [],
-        status: 200,
-      });
+      vi.spyOn(
+        GetFeaturedProductsAPI,
+        'useGetFeaturedProducts'
+      ).mockReturnValue({
+        data: { data: { products: [] } },
+        isLoading: false,
+      } as any);
 
-      renderWithQueryProvider(<Home />);
+      render(<Home />);
 
       await waitFor(() => {
-        expect(screen.queryByTestId('product-card')).not.toBeInTheDocument();
+        expect(screen.queryByText('Apple')).not.toBeInTheDocument();
       });
     });
   });
 
   describe('Benefits Section', () => {
     it('renders benefits section with correct content', () => {
-      renderWithQueryProvider(<Home />);
+      render(<Home />);
 
       expect(screen.getByText('Why Choose Us?')).toBeInTheDocument();
       expect(screen.getByText('Farm Fresh')).toBeInTheDocument();
+    });
+  });
+
+  describe('Home Page Snapshots', () => {
+    describe('when rendered in web view', () => {
+      beforeEach(() => {
+        vi.spyOn(MaterialUI, 'useMediaQuery').mockReturnValue(false);
+      });
+
+      it('should match snapshot when API is loading', () => {
+        vi.spyOn(
+          GetFeaturedProductsAPI,
+          'useGetFeaturedProducts'
+        ).mockReturnValue({ isLoading: true } as any);
+        const { container } = render(<Home />);
+        expect(container).toMatchSnapshot();
+      });
+
+      it('should match snapshot when API is successful', async () => {
+        vi.spyOn(
+          GetFeaturedProductsAPI,
+          'useGetFeaturedProducts'
+        ).mockReturnValue({
+          data: { data: { products: [] } },
+          isLoading: false,
+        } as any);
+        const { container } = render(<Home />);
+        expect(container).toMatchSnapshot();
+      });
+    });
+
+    describe('when rendered in mobile view', () => {
+      beforeEach(() => {
+        vi.spyOn(MaterialUI, 'useMediaQuery').mockReturnValue(true);
+      });
+
+      it('should match snapshot when API is loading', () => {
+        vi.spyOn(
+          GetFeaturedProductsAPI,
+          'useGetFeaturedProducts'
+        ).mockReturnValue({ isLoading: true } as any);
+        const { container } = render(<Home />);
+        expect(container).toMatchSnapshot();
+      });
+
+      it('should match snapshot when API is successful', async () => {
+        vi.spyOn(
+          GetFeaturedProductsAPI,
+          'useGetFeaturedProducts'
+        ).mockReturnValue({
+          data: { data: { products: [] } },
+          isLoading: false,
+        } as any);
+        const { container } = render(<Home />);
+        expect(container).toMatchSnapshot();
+      });
     });
   });
 });

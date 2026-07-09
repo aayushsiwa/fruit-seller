@@ -1,4 +1,4 @@
-import { UserDialogProps } from '@/types/index';
+import { User } from '@/types/index';
 import {
   Button,
   Dialog,
@@ -92,3 +92,11 @@ const UserDialog: React.FC<UserDialogProps> = ({
 };
 
 export default UserDialog;
+
+export interface UserDialogProps {
+  open: boolean;
+  user: Partial<User>;
+  onClose: () => void;
+  onSave: (event: React.FormEvent<HTMLFormElement>) => void;
+  isLoading: boolean;
+}

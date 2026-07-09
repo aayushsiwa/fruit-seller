@@ -1,29 +1,11 @@
-import { Order, UseOrdersPageReturn } from '@/types/index';
-import axios from 'axios';
+import { useGetOrders } from '@/api/orders/getOrders';
+import { Order } from '@/types/index';
 import { useRouter } from 'next/router';
-import { useEffect, useState } from 'react';
 
 export const useOrdersPage = (): UseOrdersPageReturn => {
   const router = useRouter();
-  const [orders, setOrders] = useState<Order[]>([]);
-  const [isLoading, setIsLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
-
-  useEffect(() => {
-    const fetchOrders = async () => {
-      setIsLoading(true);
-      setError(null);
-      try {
-        const { data } = await axios.get<Order[]>('/api/orders');
-        setOrders(data);
-      } catch (err: unknown) {
-        setError(err instanceof Error ? err.message : 'Failed to load orders');
-      } finally {
-        setIsLoading(false);
-      }
-    };
-    fetchOrders();
-  }, []);
+  const { data: response, isLoading, error } = useGetOrders();
+  const orders = response?.data || [];
 
   const handleViewOrder = (orderId: string) => {
     router.push(`/orders/${orderId}`);
@@ -36,8 +18,16 @@ export const useOrdersPage = (): UseOrdersPageReturn => {
   return {
     orders,
     isLoading,
-    error,
+    error: error ? error.message : null,
     handleViewOrder,
     handleContinueShopping,
   };
+};
+
+export type UseOrdersPageReturn = {
+  orders: Order[];
+  isLoading: boolean;
+  error: string | null;
+  handleViewOrder: (orderId: string) => void;
+  handleContinueShopping: () => void;
 };

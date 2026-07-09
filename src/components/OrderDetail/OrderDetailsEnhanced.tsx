@@ -1,5 +1,6 @@
 import { currency, defaultImage } from '@/constants/index';
-import { CartItem, OrderDetailsProps } from '@/types/index';
+import { OrderDetailsProps } from '@/src/components/Success/OrderDetails';
+import { OrderItem } from '@/types/index';
 import {
   Box,
   Divider,
@@ -56,7 +57,6 @@ function isDelivered(status: string): boolean {
 
 export const OrderDetailsEnhanced: React.FC<OrderDetailsProps> = ({
   order,
-  products,
 }) => {
   const isCancelled = order.status === 'Cancelled';
 
@@ -227,12 +227,17 @@ export const OrderDetailsEnhanced: React.FC<OrderDetailsProps> = ({
             </Typography>
           )}
           <Typography variant="body2" color="text.secondary">
-            {order.shipping_address.city}, {order.shipping_address.state} - {order.shipping_address.postal_code}
+            {order.shipping_address.city}, {order.shipping_address.state} -{' '}
+            {order.shipping_address.postal_code}
           </Typography>
           <Typography variant="body2" color="text.secondary">
             {order.shipping_address.country}
           </Typography>
-          <Typography variant="caption" color="text.secondary" sx={{ display: 'block', mt: 0.5 }}>
+          <Typography
+            variant="caption"
+            color="text.secondary"
+            sx={{ display: 'block', mt: 0.5 }}
+          >
             Phone: {order.shipping_address.phone}
           </Typography>
         </Box>
@@ -250,15 +255,15 @@ export const OrderDetailsEnhanced: React.FC<OrderDetailsProps> = ({
           gap: 2,
         }}
       >
-        {order.items.map((item: CartItem, index: number) => {
-          const product = products[index];
+        {order.items.map((item: OrderItem) => {
+          const product = item.product;
           if (!product) return null;
           const price = product.discount
             ? product.price * (1 - product.discount / 100)
             : product.price;
           return (
             <NextLink
-              key={item.id}
+              key={product.id}
               href={`/products/${product.id}`}
               passHref
               legacyBehavior

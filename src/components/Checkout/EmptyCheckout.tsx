@@ -5,6 +5,7 @@ import { FiCreditCard } from 'react-icons/fi';
 export const EmptyCheckout: React.FC = () => {
   return (
     <Box
+      data-testid="empty-checkout"
       sx={{ textAlign: 'center', py: 8 }}
       component={motion.div}
       initial={{ opacity: 0 }}

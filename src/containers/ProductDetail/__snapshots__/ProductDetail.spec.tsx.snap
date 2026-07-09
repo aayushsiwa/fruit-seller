@@ -1,25 +1,941 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`ProductDetail - UI should match snapshot with product data 1`] = `
-<DocumentFragment>
+exports[`ProductDetail - UI > when rendered in mobile view > should match snapshot when API fails 1`] = `
+<div>
+  <div
+    animate="[object Object]"
+    class="MuiBox-root css-pydr4d"
+    initial="[object Object]"
+    transition="[object Object]"
+  >
+    <div
+      animate="[object Object]"
+      transition="[object Object]"
+    >
+      <span
+        aria-label="Loading fresh fruits"
+        class="MuiCircularProgress-root MuiCircularProgress-indeterminate MuiCircularProgress-colorPrimary css-yeb4xq-MuiCircularProgress-root"
+        role="progressbar"
+        style="width: 60px; height: 60px;"
+      >
+        <svg
+          class="MuiCircularProgress-svg css-1idz92c-MuiCircularProgress-svg"
+          viewBox="22 22 44 44"
+        >
+          <circle
+            class="MuiCircularProgress-circle MuiCircularProgress-circleIndeterminate css-176wh8e-MuiCircularProgress-circle"
+            cx="44"
+            cy="44"
+            fill="none"
+            r="20"
+            stroke-width="4"
+          />
+        </svg>
+      </span>
+    </div>
+    <h5
+      class="MuiTypography-root MuiTypography-h5 css-a75hxv-MuiTypography-root"
+    >
+      Loading Fresh Fruits...
+    </h5>
+    <p
+      class="MuiTypography-root MuiTypography-body2 css-t8k1ig-MuiTypography-root"
+    >
+      Getting the freshest picks ready for you!
+    </p>
+  </div>
+</div>
+`;
+
+exports[`ProductDetail - UI > when rendered in mobile view > should match snapshot when API is loading 1`] = `
+<div>
+  <div
+    animate="[object Object]"
+    class="MuiBox-root css-pydr4d"
+    initial="[object Object]"
+    transition="[object Object]"
+  >
+    <div
+      animate="[object Object]"
+      transition="[object Object]"
+    >
+      <span
+        aria-label="Loading fresh fruits"
+        class="MuiCircularProgress-root MuiCircularProgress-indeterminate MuiCircularProgress-colorPrimary css-yeb4xq-MuiCircularProgress-root"
+        role="progressbar"
+        style="width: 60px; height: 60px;"
+      >
+        <svg
+          class="MuiCircularProgress-svg css-1idz92c-MuiCircularProgress-svg"
+          viewBox="22 22 44 44"
+        >
+          <circle
+            class="MuiCircularProgress-circle MuiCircularProgress-circleIndeterminate css-176wh8e-MuiCircularProgress-circle"
+            cx="44"
+            cy="44"
+            fill="none"
+            r="20"
+            stroke-width="4"
+          />
+        </svg>
+      </span>
+    </div>
+    <h5
+      class="MuiTypography-root MuiTypography-h5 css-a75hxv-MuiTypography-root"
+    >
+      Loading Fresh Fruits...
+    </h5>
+    <p
+      class="MuiTypography-root MuiTypography-body2 css-t8k1ig-MuiTypography-root"
+    >
+      Getting the freshest picks ready for you!
+    </p>
+  </div>
+</div>
+`;
+
+exports[`ProductDetail - UI > when rendered in mobile view > should match snapshot when API is successful 1`] = `
+<div>
   <div
     class="MuiContainer-root MuiContainer-maxWidthLg css-1oqqzyl-MuiContainer-root"
   >
     <div
-      data-testid="breadcrumbs-nav"
+      animate="[object Object]"
+      class="MuiTypography-root MuiTypography-body1 MuiBreadcrumbs-root css-1cumb9k-MuiTypography-root-MuiBreadcrumbs-root"
+      initial="[object Object]"
+      transition="[object Object]"
     >
-      Apple
+      <ol
+        class="MuiBreadcrumbs-ol css-4pdmu4-MuiBreadcrumbs-ol"
+      >
+        <li
+          class="MuiBreadcrumbs-li"
+        >
+          <a
+            class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineNone css-xmgnhp-MuiTypography-root-MuiLink-root"
+            href="/"
+          >
+            Home
+          </a>
+        </li>
+        <li
+          aria-hidden="true"
+          class="MuiBreadcrumbs-separator css-1wuw8dw-MuiBreadcrumbs-separator"
+        >
+          /
+        </li>
+        <li
+          class="MuiBreadcrumbs-li"
+        >
+          <a
+            class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineNone css-r74m4g-MuiTypography-root-MuiLink-root"
+            href="/products"
+          >
+            Products
+          </a>
+        </li>
+        <li
+          aria-hidden="true"
+          class="MuiBreadcrumbs-separator css-1wuw8dw-MuiBreadcrumbs-separator"
+        >
+          /
+        </li>
+        <li
+          class="MuiBreadcrumbs-li"
+        >
+          <p
+            class="MuiTypography-root MuiTypography-body1 css-gtcsjv-MuiTypography-root"
+          >
+            Apple
+          </p>
+        </li>
+      </ol>
     </div>
     <div
-      data-testid="product-info"
+      class="MuiBox-root css-6r2fzw"
     >
-      Product Info
+      <div
+        class="MuiBox-root css-1gt30r3"
+      >
+        <div
+          animate="[object Object]"
+          class="MuiBox-root css-lj8do"
+          initial="[object Object]"
+          transition="[object Object]"
+        >
+          <img
+            alt="Apple"
+            data-nimg="1"
+            decoding="async"
+            height="400"
+            loading="lazy"
+            src="/_next/image?url=%2Fapple.jpg&w=828&q=75"
+            srcset="/_next/image?url=%2Fapple.jpg&w=640&q=75 1x, /_next/image?url=%2Fapple.jpg&w=828&q=75 2x"
+            style="color: transparent; object-fit: cover;"
+            width="400"
+          />
+        </div>
+      </div>
+      <div
+        animate="[object Object]"
+        class="MuiBox-root css-1gt30r3"
+        initial="[object Object]"
+        transition="[object Object]"
+      >
+        <h1
+          class="MuiTypography-root MuiTypography-h4 MuiTypography-gutterBottom css-18dekmd-MuiTypography-root"
+        >
+          Apple
+        </h1>
+        <div
+          class="MuiBox-root css-lakumo"
+        >
+          <h5
+            class="MuiTypography-root MuiTypography-h5 css-1u32wzb-MuiTypography-root"
+          >
+            ₹
+             
+            47.50
+          </h5>
+          <span
+            class="MuiTypography-root MuiTypography-body2 css-13rm4i2-MuiTypography-root"
+          >
+            M.R.P.: 
+            ₹
+            50.00
+          </span>
+        </div>
+        <p
+          class="MuiTypography-root MuiTypography-body1 MuiTypography-paragraph css-z2eky3-MuiTypography-root"
+        >
+          Fresh apple from farm
+        </p>
+        <hr
+          class="MuiDivider-root MuiDivider-fullWidth css-ctpjxq-MuiDivider-root"
+        />
+        <div
+          class="MuiBox-root css-1i5b2bs"
+        >
+          <div
+            class="MuiBox-root css-ece9u5"
+          >
+            <p
+              class="MuiTypography-root MuiTypography-body2 css-r40f8v-MuiTypography-root"
+            >
+              Category
+            </p>
+            <p
+              class="MuiTypography-root MuiTypography-body1 css-ahj2mt-MuiTypography-root"
+            >
+              fruits
+            </p>
+          </div>
+          <div
+            class="MuiBox-root css-ece9u5"
+          >
+            <p
+              class="MuiTypography-root MuiTypography-body2 css-r40f8v-MuiTypography-root"
+            >
+              Availability
+            </p>
+            <p
+              class="MuiTypography-root MuiTypography-body1 css-18todbp-MuiTypography-root"
+            >
+              In Stock (10)
+            </p>
+          </div>
+          <div
+            class="MuiBox-root css-ece9u5"
+          >
+            <p
+              class="MuiTypography-root MuiTypography-body2 css-r40f8v-MuiTypography-root"
+            >
+              Seasonal
+            </p>
+            <p
+              class="MuiTypography-root MuiTypography-body1 css-ahj2mt-MuiTypography-root"
+            >
+              No
+            </p>
+          </div>
+        </div>
+        <hr
+          class="MuiDivider-root MuiDivider-fullWidth css-ctpjxq-MuiDivider-root"
+        />
+        <div
+          class="MuiBox-root css-13v4qt8"
+        >
+          <div
+            class="MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeLarge MuiButton-containedSizeLarge MuiButton-colorPrimary MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeLarge MuiButton-containedSizeLarge MuiButton-colorPrimary css-b9pnv8-MuiButtonBase-root-MuiButton-root"
+            role="button"
+            tabindex="0"
+            whilehover="[object Object]"
+            whiletap="[object Object]"
+          >
+            <span
+              class="MuiButton-icon MuiButton-startIcon MuiButton-iconSizeLarge css-htszrh-MuiButton-startIcon"
+            >
+              <svg
+                fill="none"
+                height="1em"
+                stroke="currentColor"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                viewBox="0 0 24 24"
+                width="1em"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <circle
+                  cx="9"
+                  cy="21"
+                  r="1"
+                />
+                <circle
+                  cx="20"
+                  cy="21"
+                  r="1"
+                />
+                <path
+                  d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"
+                />
+              </svg>
+            </span>
+            Add to Cart
+            <span
+              class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+            />
+          </div>
+          <div
+            class="MuiButtonBase-root MuiIconButton-root MuiIconButton-colorPrimary MuiIconButton-sizeMedium css-1ugjb1i-MuiButtonBase-root-MuiIconButton-root"
+            role="button"
+            tabindex="0"
+            whilehover="[object Object]"
+          >
+            <svg
+              fill="none"
+              height="1em"
+              stroke="currentColor"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              viewBox="0 0 24 24"
+              width="1em"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <circle
+                cx="18"
+                cy="5"
+                r="3"
+              />
+              <circle
+                cx="6"
+                cy="12"
+                r="3"
+              />
+              <circle
+                cx="18"
+                cy="19"
+                r="3"
+              />
+              <line
+                x1="8.59"
+                x2="15.42"
+                y1="13.51"
+                y2="17.49"
+              />
+              <line
+                x1="15.41"
+                x2="8.59"
+                y1="6.51"
+                y2="10.49"
+              />
+            </svg>
+            <span
+              class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+            />
+          </div>
+        </div>
+      </div>
     </div>
     <div
-      data-testid="related-products"
+      animate="[object Object]"
+      class="MuiBox-root css-1cpq4zq"
+      initial="[object Object]"
+      transition="[object Object]"
     >
-      1 related product(s)
+      <h5
+        class="MuiTypography-root MuiTypography-h5 MuiTypography-gutterBottom css-1n80bwy-MuiTypography-root"
+      >
+        Related Products
+      </h5>
+      <div
+        class="MuiBox-root css-kgaz8t"
+      >
+        <div
+          animate="[object Object]"
+          class="MuiBox-root css-kwa40h"
+          exit="[object Object]"
+          initial="[object Object]"
+          transition="[object Object]"
+        >
+          <div
+            class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation1 MuiCard-root css-1dc3bjb-MuiPaper-root-MuiCard-root"
+            transition="[object Object]"
+            whilehover="[object Object]"
+          >
+            <img
+              alt="Banana"
+              class="MuiCardMedia-root MuiCardMedia-media MuiCardMedia-img css-6mo23z-MuiCardMedia-root"
+              height="160"
+              loading="lazy"
+              src="/banana.jpg"
+            />
+            <div
+              class="MuiCardContent-root css-2r3irp-MuiCardContent-root"
+            >
+              <div
+                class="MuiBox-root css-69i1ev"
+              >
+                <h6
+                  class="MuiTypography-root MuiTypography-h6 MuiTypography-noWrap css-ddygbf-MuiTypography-root"
+                  title="Banana"
+                >
+                  Banana
+                </h6>
+              </div>
+              <h6
+                class="MuiTypography-root MuiTypography-h6 css-tjvwag-MuiTypography-root"
+              >
+                ₹
+                30.00
+              </h6>
+              <p
+                class="MuiTypography-root MuiTypography-body2 css-1sbvnan-MuiTypography-root"
+                title="Fresh banana"
+              >
+                Fresh banana
+              </p>
+            </div>
+            <div
+              class="MuiCardActions-root MuiCardActions-spacing css-1vua6p0-MuiCardActions-root"
+            >
+              <div
+                class="MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButton-colorPrimary MuiButton-fullWidth MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButton-colorPrimary MuiButton-fullWidth css-1fu7jd5-MuiButtonBase-root-MuiButton-root"
+                role="button"
+                tabindex="0"
+                whilehover="[object Object]"
+                whiletap="[object Object]"
+              >
+                <span
+                  class="MuiButton-icon MuiButton-startIcon MuiButton-iconSizeMedium css-1d6wzja-MuiButton-startIcon"
+                >
+                  <svg
+                    fill="none"
+                    height="1em"
+                    stroke="currentColor"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    viewBox="0 0 24 24"
+                    width="1em"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <circle
+                      cx="9"
+                      cy="21"
+                      r="1"
+                    />
+                    <circle
+                      cx="20"
+                      cy="21"
+                      r="1"
+                    />
+                    <path
+                      d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"
+                    />
+                  </svg>
+                </span>
+                Add to Cart
+                <span
+                  class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
-</DocumentFragment>
+</div>
+`;
+
+exports[`ProductDetail - UI > when rendered in web view > should match snapshot when API fails 1`] = `
+<div>
+  <div
+    animate="[object Object]"
+    class="MuiBox-root css-pydr4d"
+    initial="[object Object]"
+    transition="[object Object]"
+  >
+    <div
+      animate="[object Object]"
+      transition="[object Object]"
+    >
+      <span
+        aria-label="Loading fresh fruits"
+        class="MuiCircularProgress-root MuiCircularProgress-indeterminate MuiCircularProgress-colorPrimary css-yeb4xq-MuiCircularProgress-root"
+        role="progressbar"
+        style="width: 60px; height: 60px;"
+      >
+        <svg
+          class="MuiCircularProgress-svg css-1idz92c-MuiCircularProgress-svg"
+          viewBox="22 22 44 44"
+        >
+          <circle
+            class="MuiCircularProgress-circle MuiCircularProgress-circleIndeterminate css-176wh8e-MuiCircularProgress-circle"
+            cx="44"
+            cy="44"
+            fill="none"
+            r="20"
+            stroke-width="4"
+          />
+        </svg>
+      </span>
+    </div>
+    <h5
+      class="MuiTypography-root MuiTypography-h5 css-a75hxv-MuiTypography-root"
+    >
+      Loading Fresh Fruits...
+    </h5>
+    <p
+      class="MuiTypography-root MuiTypography-body2 css-t8k1ig-MuiTypography-root"
+    >
+      Getting the freshest picks ready for you!
+    </p>
+  </div>
+</div>
+`;
+
+exports[`ProductDetail - UI > when rendered in web view > should match snapshot when API is loading 1`] = `
+<div>
+  <div
+    animate="[object Object]"
+    class="MuiBox-root css-pydr4d"
+    initial="[object Object]"
+    transition="[object Object]"
+  >
+    <div
+      animate="[object Object]"
+      transition="[object Object]"
+    >
+      <span
+        aria-label="Loading fresh fruits"
+        class="MuiCircularProgress-root MuiCircularProgress-indeterminate MuiCircularProgress-colorPrimary css-yeb4xq-MuiCircularProgress-root"
+        role="progressbar"
+        style="width: 60px; height: 60px;"
+      >
+        <svg
+          class="MuiCircularProgress-svg css-1idz92c-MuiCircularProgress-svg"
+          viewBox="22 22 44 44"
+        >
+          <circle
+            class="MuiCircularProgress-circle MuiCircularProgress-circleIndeterminate css-176wh8e-MuiCircularProgress-circle"
+            cx="44"
+            cy="44"
+            fill="none"
+            r="20"
+            stroke-width="4"
+          />
+        </svg>
+      </span>
+    </div>
+    <h5
+      class="MuiTypography-root MuiTypography-h5 css-a75hxv-MuiTypography-root"
+    >
+      Loading Fresh Fruits...
+    </h5>
+    <p
+      class="MuiTypography-root MuiTypography-body2 css-t8k1ig-MuiTypography-root"
+    >
+      Getting the freshest picks ready for you!
+    </p>
+  </div>
+</div>
+`;
+
+exports[`ProductDetail - UI > when rendered in web view > should match snapshot when API is successful 1`] = `
+<div>
+  <div
+    class="MuiContainer-root MuiContainer-maxWidthLg css-1oqqzyl-MuiContainer-root"
+  >
+    <div
+      animate="[object Object]"
+      class="MuiTypography-root MuiTypography-body1 MuiBreadcrumbs-root css-1cumb9k-MuiTypography-root-MuiBreadcrumbs-root"
+      initial="[object Object]"
+      transition="[object Object]"
+    >
+      <ol
+        class="MuiBreadcrumbs-ol css-4pdmu4-MuiBreadcrumbs-ol"
+      >
+        <li
+          class="MuiBreadcrumbs-li"
+        >
+          <a
+            class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineNone css-xmgnhp-MuiTypography-root-MuiLink-root"
+            href="/"
+          >
+            Home
+          </a>
+        </li>
+        <li
+          aria-hidden="true"
+          class="MuiBreadcrumbs-separator css-1wuw8dw-MuiBreadcrumbs-separator"
+        >
+          /
+        </li>
+        <li
+          class="MuiBreadcrumbs-li"
+        >
+          <a
+            class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineNone css-r74m4g-MuiTypography-root-MuiLink-root"
+            href="/products"
+          >
+            Products
+          </a>
+        </li>
+        <li
+          aria-hidden="true"
+          class="MuiBreadcrumbs-separator css-1wuw8dw-MuiBreadcrumbs-separator"
+        >
+          /
+        </li>
+        <li
+          class="MuiBreadcrumbs-li"
+        >
+          <p
+            class="MuiTypography-root MuiTypography-body1 css-gtcsjv-MuiTypography-root"
+          >
+            Apple
+          </p>
+        </li>
+      </ol>
+    </div>
+    <div
+      class="MuiBox-root css-5kz7rn"
+    >
+      <div
+        class="MuiBox-root css-1gt30r3"
+      >
+        <div
+          animate="[object Object]"
+          class="MuiBox-root css-lj8do"
+          initial="[object Object]"
+          transition="[object Object]"
+        >
+          <img
+            alt="Apple"
+            data-nimg="1"
+            decoding="async"
+            height="400"
+            loading="lazy"
+            src="/_next/image?url=%2Fapple.jpg&w=828&q=75"
+            srcset="/_next/image?url=%2Fapple.jpg&w=640&q=75 1x, /_next/image?url=%2Fapple.jpg&w=828&q=75 2x"
+            style="color: transparent; object-fit: cover;"
+            width="400"
+          />
+        </div>
+      </div>
+      <div
+        animate="[object Object]"
+        class="MuiBox-root css-1gt30r3"
+        initial="[object Object]"
+        transition="[object Object]"
+      >
+        <h1
+          class="MuiTypography-root MuiTypography-h4 MuiTypography-gutterBottom css-18dekmd-MuiTypography-root"
+        >
+          Apple
+        </h1>
+        <div
+          class="MuiBox-root css-lakumo"
+        >
+          <h5
+            class="MuiTypography-root MuiTypography-h5 css-1u32wzb-MuiTypography-root"
+          >
+            ₹
+             
+            47.50
+          </h5>
+          <span
+            class="MuiTypography-root MuiTypography-body2 css-13rm4i2-MuiTypography-root"
+          >
+            M.R.P.: 
+            ₹
+            50.00
+          </span>
+        </div>
+        <p
+          class="MuiTypography-root MuiTypography-body1 MuiTypography-paragraph css-z2eky3-MuiTypography-root"
+        >
+          Fresh apple from farm
+        </p>
+        <hr
+          class="MuiDivider-root MuiDivider-fullWidth css-ctpjxq-MuiDivider-root"
+        />
+        <div
+          class="MuiBox-root css-1i5b2bs"
+        >
+          <div
+            class="MuiBox-root css-ece9u5"
+          >
+            <p
+              class="MuiTypography-root MuiTypography-body2 css-r40f8v-MuiTypography-root"
+            >
+              Category
+            </p>
+            <p
+              class="MuiTypography-root MuiTypography-body1 css-ahj2mt-MuiTypography-root"
+            >
+              fruits
+            </p>
+          </div>
+          <div
+            class="MuiBox-root css-ece9u5"
+          >
+            <p
+              class="MuiTypography-root MuiTypography-body2 css-r40f8v-MuiTypography-root"
+            >
+              Availability
+            </p>
+            <p
+              class="MuiTypography-root MuiTypography-body1 css-18todbp-MuiTypography-root"
+            >
+              In Stock (10)
+            </p>
+          </div>
+          <div
+            class="MuiBox-root css-ece9u5"
+          >
+            <p
+              class="MuiTypography-root MuiTypography-body2 css-r40f8v-MuiTypography-root"
+            >
+              Seasonal
+            </p>
+            <p
+              class="MuiTypography-root MuiTypography-body1 css-ahj2mt-MuiTypography-root"
+            >
+              No
+            </p>
+          </div>
+        </div>
+        <hr
+          class="MuiDivider-root MuiDivider-fullWidth css-ctpjxq-MuiDivider-root"
+        />
+        <div
+          class="MuiBox-root css-13v4qt8"
+        >
+          <div
+            class="MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeLarge MuiButton-containedSizeLarge MuiButton-colorPrimary MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeLarge MuiButton-containedSizeLarge MuiButton-colorPrimary css-b9pnv8-MuiButtonBase-root-MuiButton-root"
+            role="button"
+            tabindex="0"
+            whilehover="[object Object]"
+            whiletap="[object Object]"
+          >
+            <span
+              class="MuiButton-icon MuiButton-startIcon MuiButton-iconSizeLarge css-htszrh-MuiButton-startIcon"
+            >
+              <svg
+                fill="none"
+                height="1em"
+                stroke="currentColor"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                viewBox="0 0 24 24"
+                width="1em"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <circle
+                  cx="9"
+                  cy="21"
+                  r="1"
+                />
+                <circle
+                  cx="20"
+                  cy="21"
+                  r="1"
+                />
+                <path
+                  d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"
+                />
+              </svg>
+            </span>
+            Add to Cart
+            <span
+              class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+            />
+          </div>
+          <div
+            class="MuiButtonBase-root MuiIconButton-root MuiIconButton-colorPrimary MuiIconButton-sizeMedium css-1ugjb1i-MuiButtonBase-root-MuiIconButton-root"
+            role="button"
+            tabindex="0"
+            whilehover="[object Object]"
+          >
+            <svg
+              fill="none"
+              height="1em"
+              stroke="currentColor"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              viewBox="0 0 24 24"
+              width="1em"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <circle
+                cx="18"
+                cy="5"
+                r="3"
+              />
+              <circle
+                cx="6"
+                cy="12"
+                r="3"
+              />
+              <circle
+                cx="18"
+                cy="19"
+                r="3"
+              />
+              <line
+                x1="8.59"
+                x2="15.42"
+                y1="13.51"
+                y2="17.49"
+              />
+              <line
+                x1="15.41"
+                x2="8.59"
+                y1="6.51"
+                y2="10.49"
+              />
+            </svg>
+            <span
+              class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+    <div
+      animate="[object Object]"
+      class="MuiBox-root css-1cpq4zq"
+      initial="[object Object]"
+      transition="[object Object]"
+    >
+      <h5
+        class="MuiTypography-root MuiTypography-h5 MuiTypography-gutterBottom css-1n80bwy-MuiTypography-root"
+      >
+        Related Products
+      </h5>
+      <div
+        class="MuiBox-root css-kgaz8t"
+      >
+        <div
+          animate="[object Object]"
+          class="MuiBox-root css-kwa40h"
+          exit="[object Object]"
+          initial="[object Object]"
+          transition="[object Object]"
+        >
+          <div
+            class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation1 MuiCard-root css-1dc3bjb-MuiPaper-root-MuiCard-root"
+            transition="[object Object]"
+            whilehover="[object Object]"
+          >
+            <img
+              alt="Banana"
+              class="MuiCardMedia-root MuiCardMedia-media MuiCardMedia-img css-6mo23z-MuiCardMedia-root"
+              height="160"
+              loading="lazy"
+              src="/banana.jpg"
+            />
+            <div
+              class="MuiCardContent-root css-2r3irp-MuiCardContent-root"
+            >
+              <div
+                class="MuiBox-root css-69i1ev"
+              >
+                <h6
+                  class="MuiTypography-root MuiTypography-h6 MuiTypography-noWrap css-ddygbf-MuiTypography-root"
+                  title="Banana"
+                >
+                  Banana
+                </h6>
+              </div>
+              <h6
+                class="MuiTypography-root MuiTypography-h6 css-tjvwag-MuiTypography-root"
+              >
+                ₹
+                30.00
+              </h6>
+              <p
+                class="MuiTypography-root MuiTypography-body2 css-1sbvnan-MuiTypography-root"
+                title="Fresh banana"
+              >
+                Fresh banana
+              </p>
+            </div>
+            <div
+              class="MuiCardActions-root MuiCardActions-spacing css-1vua6p0-MuiCardActions-root"
+            >
+              <div
+                class="MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButton-colorPrimary MuiButton-fullWidth MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButton-colorPrimary MuiButton-fullWidth css-1fu7jd5-MuiButtonBase-root-MuiButton-root"
+                role="button"
+                tabindex="0"
+                whilehover="[object Object]"
+                whiletap="[object Object]"
+              >
+                <span
+                  class="MuiButton-icon MuiButton-startIcon MuiButton-iconSizeMedium css-1d6wzja-MuiButton-startIcon"
+                >
+                  <svg
+                    fill="none"
+                    height="1em"
+                    stroke="currentColor"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    viewBox="0 0 24 24"
+                    width="1em"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <circle
+                      cx="9"
+                      cy="21"
+                      r="1"
+                    />
+                    <circle
+                      cx="20"
+                      cy="21"
+                      r="1"
+                    />
+                    <path
+                      d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"
+                    />
+                  </svg>
+                </span>
+                Add to Cart
+                <span
+                  class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 `;

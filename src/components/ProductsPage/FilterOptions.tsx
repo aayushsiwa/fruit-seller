@@ -1,4 +1,3 @@
-import { FilterOptionsProps } from '@/types/index';
 import {
   Box,
   Button,
@@ -35,6 +34,7 @@ export const FilterOptions: React.FC<FilterOptionsProps> = ({
 
   return (
     <Paper
+      data-testid="filter-options"
       elevation={2}
       sx={{
         p: 3,
@@ -117,3 +117,20 @@ export const FilterOptions: React.FC<FilterOptionsProps> = ({
     </Paper>
   );
 };
+
+export interface FilterOptionsProps {
+  priceRange: [number, number];
+  setPriceRange: (range: [number, number]) => void;
+  minPrice: number;
+  maxPrice: number;
+  category: string;
+  setCategory: (category: string) => void;
+  sortOption: string;
+  setSortOption: (option: string) => void;
+  inStockOnly: boolean;
+  setInStockOnly: (value: boolean) => void;
+  handleResetFilters: () => void;
+  getFilterSummary: () => string[];
+  categories: string[];
+  sortOptions: { value: string; label: string }[];
+}

@@ -1,78 +1,38 @@
-import { ItemType } from '@/types/index';
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import { act, renderHook, waitFor } from '@testing-library/react';
-import axios from 'axios';
+import * as GetProductsAPI from '@/api/products/getProducts';
+import { MockProducts } from '@/entity/Products/Products.mock';
+import { act, render, renderHook, waitFor } from '@/src/utils/test';
+import * as MaterialUI from '@mui/material';
+import * as NextRouter from 'next/router';
 
-import { useProductsPage } from './Products.hooks';
+import ProductsPage from './Products';
+import * as ProductsHooks from './Products.hooks';
 
 describe('Products - Hooks', () => {
-  const mockProducts: ItemType[] = [
-    {
-      id: '1',
-      name: 'Grapes',
-      price: 100,
-      discount: 10,
-      quantity: 20,
-      image: '/grapes.jpg',
-      description: 'Fresh Grapes from Nashik.',
-      createdAt: '2025-05-01T00:00:00Z',
-      category: 'berries',
-      isSeasonal: true,
-    },
-    {
-      id: '2',
-      name: 'Apple',
-      price: 50,
-      discount: 5,
-      quantity: 0,
-      image: '/apple.jpg',
-      description: 'Organic Apples from Himachal.',
-      createdAt: '2025-05-02T00:00:00Z',
-      category: 'fruits',
-      isSeasonal: false,
-    },
-  ];
-
-  const createWrapper = () => {
-    const queryClient = new QueryClient({});
-    const Wrapper = ({ children }: { children: React.ReactNode }) => (
-      <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>
-    );
-    Wrapper.displayName = 'QueryClientProviderWrapper';
-    return Wrapper;
-  };
-
-  let axiosGetSpy: jest.SpyInstance;
-
   beforeEach(() => {
-    axiosGetSpy = jest.spyOn(axios, 'get').mockResolvedValue({
-      status: 200,
-      data: mockProducts,
-    });
+    // Mock API query hook to return successful data
+    vi.spyOn(GetProductsAPI, 'useGetProducts').mockReturnValue({
+      data: { data: { products: MockProducts } },
+      isLoading: false,
+      error: null,
+    } as unknown as ReturnType<typeof GetProductsAPI.useGetProducts>);
 
-    Object.defineProperty(window, 'location', {
-      value: {
-        search: '',
-      },
-      writable: true,
+    vi.spyOn(NextRouter, 'useRouter').mockImplementation(() => {
+      type Return = ReturnType<typeof NextRouter.useRouter>;
+      return {
+        push: vi.fn(),
+        pathname: '/products',
+        query: { search: '' },
+        prefetch: vi.fn(),
+      } as Partial<Return> as Return;
     });
-  });
-
-  afterEach(() => {
-    axiosGetSpy.mockRestore();
   });
 
   it('fetches and sets products correctly', async () => {
-    const { result } = renderHook(() => useProductsPage(), {
-      wrapper: createWrapper(),
-    });
+    const { result } = renderHook(() => ProductsHooks.useProductsPage());
 
     await waitFor(() => {
       expect(result.current.products).toHaveLength(2);
     });
-
-    expect(axiosGetSpy).toHaveBeenCalledWith('/api/products');
-    expect(axiosGetSpy).toHaveBeenCalledTimes(1);
 
     expect(result.current.products.length).toBe(2);
     expect(result.current.products[0].name).toBe('Grapes');
@@ -83,9 +43,7 @@ describe('Products - Hooks', () => {
   });
 
   it('applies price range filter correctly', async () => {
-    const { result } = renderHook(() => useProductsPage(), {
-      wrapper: createWrapper(),
-    });
+    const { result } = renderHook(() => ProductsHooks.useProductsPage());
 
     await waitFor(() => {
       expect(result.current.products).toHaveLength(2);
@@ -100,13 +58,10 @@ describe('Products - Hooks', () => {
     });
 
     expect(result.current.filteredProducts[0].name).toBe('Grapes');
-    expect(axiosGetSpy).toHaveBeenCalledWith('/api/products');
   });
 
   it('filters by inStockOnly', async () => {
-    const { result } = renderHook(() => useProductsPage(), {
-      wrapper: createWrapper(),
-    });
+    const { result } = renderHook(() => ProductsHooks.useProductsPage());
 
     await waitFor(() => {
       expect(result.current.products).toHaveLength(2);
@@ -121,14 +76,11 @@ describe('Products - Hooks', () => {
     });
 
     expect(result.current.filteredProducts[0].name).toBe('Grapes');
-    expect(result.current.filteredProducts[0].quantity).toBeGreaterThan(0);
+    expect(result.current.filteredProducts[0].stock).toBeGreaterThan(0);
   });
 
   it('sorts by discounted', async () => {
-    const { result } = renderHook(() => useProductsPage(), {
-      wrapper: createWrapper(),
-    });
-
+    const { result } = renderHook(() => ProductsHooks.useProductsPage());
     await waitFor(() => {
       expect(result.current.products).toHaveLength(2);
     });
@@ -147,9 +99,7 @@ describe('Products - Hooks', () => {
   });
 
   it('returns correct filter summary', async () => {
-    const { result } = renderHook(() => useProductsPage(), {
-      wrapper: createWrapper(),
-    });
+    const { result } = renderHook(() => ProductsHooks.useProductsPage());
 
     await waitFor(() => {
       expect(result.current.products).toHaveLength(2);
@@ -176,5 +126,97 @@ describe('Products - Hooks', () => {
       ])
     );
     expect(result.current.filteredProducts[0].name).toBe('Grapes');
+  });
+});
+
+describe('Products - UI', () => {
+  beforeEach(() => {
+    vi.spyOn(NextRouter, 'useRouter').mockImplementation(() => {
+      type Return = ReturnType<typeof NextRouter.useRouter>;
+      return {
+        push: vi.fn(),
+        pathname: '/products',
+        query: { search: '' },
+        prefetch: vi.fn(),
+      } as Partial<Return> as Return;
+    });
+  });
+
+  describe('when rendered in web view', () => {
+    beforeEach(() => {
+      vi.spyOn(MaterialUI, 'useMediaQuery').mockReturnValue(false);
+    });
+
+    it('should match snapshot when API is loading', () => {
+      vi.spyOn(GetProductsAPI, 'useGetProducts').mockReturnValue({
+        data: undefined,
+        isLoading: true,
+        error: null,
+      } as unknown as ReturnType<typeof GetProductsAPI.useGetProducts>);
+
+      const { container } = render(<ProductsPage />);
+      expect(container).toMatchSnapshot();
+    });
+
+    it('should match snapshot when API is successful', () => {
+      vi.spyOn(GetProductsAPI, 'useGetProducts').mockReturnValue({
+        data: { data: { products: MockProducts } },
+        isLoading: false,
+        error: null,
+      } as unknown as ReturnType<typeof GetProductsAPI.useGetProducts>);
+
+      const { container } = render(<ProductsPage />);
+      expect(container).toMatchSnapshot();
+    });
+
+    it('should match snapshot when API fails', () => {
+      vi.spyOn(GetProductsAPI, 'useGetProducts').mockReturnValue({
+        data: undefined,
+        isLoading: false,
+        error: new Error('Failed to fetch products'),
+      } as unknown as ReturnType<typeof GetProductsAPI.useGetProducts>);
+
+      const { container } = render(<ProductsPage />);
+      expect(container).toMatchSnapshot();
+    });
+  });
+
+  describe('when rendered in mobile view', () => {
+    beforeEach(() => {
+      vi.spyOn(MaterialUI, 'useMediaQuery').mockReturnValue(true);
+    });
+
+    it('should match snapshot when API is loading', () => {
+      vi.spyOn(GetProductsAPI, 'useGetProducts').mockReturnValue({
+        data: undefined,
+        isLoading: true,
+        error: null,
+      } as unknown as ReturnType<typeof GetProductsAPI.useGetProducts>);
+
+      const { container } = render(<ProductsPage />);
+      expect(container).toMatchSnapshot();
+    });
+
+    it('should match snapshot when API is successful', () => {
+      vi.spyOn(GetProductsAPI, 'useGetProducts').mockReturnValue({
+        data: { data: { products: MockProducts } },
+        isLoading: false,
+        error: null,
+      } as unknown as ReturnType<typeof GetProductsAPI.useGetProducts>);
+
+      const { container } = render(<ProductsPage />);
+      expect(container).toMatchSnapshot();
+    });
+
+    it('should match snapshot when API fails', () => {
+      vi.spyOn(GetProductsAPI, 'useGetProducts').mockReturnValue({
+        data: undefined,
+        isLoading: false,
+        error: new Error('Failed to fetch products'),
+      } as unknown as ReturnType<typeof GetProductsAPI.useGetProducts>);
+
+      const { container } = render(<ProductsPage />);
+      expect(container).toMatchSnapshot();
+    });
   });
 });

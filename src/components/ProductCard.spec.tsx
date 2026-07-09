@@ -1,29 +1,29 @@
 import ProductCard from '@/src/components/ProductCard';
-import { ItemType } from '@/types/index';
+import { IProduct } from '@/types/index';
 import { render } from '@testing-library/react';
 import React from 'react';
 
-jest.mock('next/router', () => ({
+vi.mock('next/router', () => ({
   useRouter: () => ({
-    push: jest.fn(),
+    push: vi.fn(),
   }),
 }));
 
-jest.mock('@/src/contexts/CartContext', () => ({
+vi.mock('@/src/contexts/CartContext', () => ({
   useCart: () => ({
     cart: [],
-    addToCart: jest.fn(),
-    updateQuantity: jest.fn(),
-    removeFromCart: jest.fn(),
+    addToCart: vi.fn(),
+    updateQuantity: vi.fn(),
+    removeFromCart: vi.fn(),
   }),
 }));
 
-const sampleProduct: ItemType = {
+const sampleProduct: IProduct = {
   id: '1',
   name: 'Grapes',
   price: 100,
   discount: 10,
-  quantity: 20,
+  stock: 20,
   image: '/grapes.jpg',
   description: 'Fresh Grapes from Nashik.',
   createdAt: '2025-05-01T00:00:00Z',

@@ -1,4 +1,3 @@
-import { FilterChipsProps } from '@/types/index';
 import { Box, Chip, Typography } from '@mui/material';
 import { FiX } from 'react-icons/fi';
 
@@ -16,7 +15,7 @@ export const FilterChips: React.FC<FilterChipsProps> = ({
   if (!filters.length) return null;
 
   return (
-    <>
+    <Box data-testid="filter-chips">
       <Typography variant="subtitle2" sx={{ mb: 1 }}>
         Active Filters:
       </Typography>
@@ -41,6 +40,16 @@ export const FilterChips: React.FC<FilterChipsProps> = ({
           />
         ))}
       </Box>
-    </>
+    </Box>
   );
 };
+
+export interface FilterChipsProps {
+  getFilterSummary: () => string[];
+  setPriceRange: (range: [number, number]) => void;
+  minPrice: number;
+  maxPrice: number;
+  setCategory: (category: string) => void;
+  setSortOption: (option: string) => void;
+  setInStockOnly: (value: boolean) => void;
+}

@@ -1,25 +1,10 @@
+import { useGetProduct } from '@/api/products/getProduct';
+import { useGetRelatedProducts } from '@/api/products/getRelatedProducts';
 import { useCart } from '@/src/contexts/CartContext';
-import { ItemType, UseProductDetailReturn } from '@/types/index';
-import { useQuery } from '@tanstack/react-query';
-import axios from 'axios';
+import { IProduct } from '@/types/index';
+import { SnackbarCloseReason } from '@mui/material';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
-
-const fetchProductDetails = async (id: string) => {
-  const response = await axios.get(`/api/products/${id}`);
-  if (response.status !== 200 || !response.data) {
-    throw new Error('Failed to fetch product details');
-  }
-  return response.data;
-};
-
-const fetchRelatedProducts = async (id: string) => {
-  const response = await axios.get(`/api/products?related=${id}`);
-  if (response.status !== 200 || !response.data) {
-    throw new Error('Failed to fetch related products');
-  }
-  return response.data;
-};
 
 export const useProductDetail = (): UseProductDetailReturn => {
   const router = useRouter();
@@ -32,23 +17,20 @@ export const useProductDetail = (): UseProductDetailReturn => {
     severity: 'success' | 'error';
   }>({ open: false, message: '', severity: 'success' });
 
-  const { data: product, isLoading: isLoadingProduct } = useQuery<ItemType>({
-    queryKey: ['product', id],
-    queryFn: () => fetchProductDetails(id as string),
-    enabled: !!id,
-  });
+  const { data: getProductResponse, isLoading: isLoadingProduct } =
+    useGetProduct(id as string);
+  const product = getProductResponse?.data?.product;
 
-  const { data: relatedProducts } = useQuery<ItemType[]>({
-    queryKey: ['relatedProducts', id],
-    queryFn: () => fetchRelatedProducts(id as string),
-    enabled: !!id,
-  });
+  const { data: getRelatedProductsResponse } = useGetRelatedProducts(
+    id as string
+  );
+  const relatedProducts = getRelatedProductsResponse?.data?.products;
 
   const cartItem = cart.find((item) => item.id === (id as string));
   const cartQuantity = cartItem ? cartItem.quantity : 0;
 
   const handleAddToCart = () => {
-    if (product && product.quantity >= 1) {
+    if (product && product.stock >= 1) {
       addToCart(product, 1);
       setError(null);
     } else {
@@ -62,7 +44,7 @@ export const useProductDetail = (): UseProductDetailReturn => {
     if (newQuantity <= 0) {
       removeFromCart(product.id);
     } else {
-      updateQuantity(product.id, newQuantity, product.quantity);
+      updateQuantity(product.id, newQuantity, product.stock);
     }
   };
 
@@ -105,3 +87,25 @@ export const useProductDetail = (): UseProductDetailReturn => {
     isMobile: false,
   };
 };
+
+export interface UseProductDetailReturn {
+  product: IProduct | undefined;
+  isLoadingProduct: boolean;
+  relatedProducts: IProduct[] | undefined;
+  cartQuantity: number;
+  error: string | null;
+  setError: React.Dispatch<React.SetStateAction<string | null>>;
+  snackbar: {
+    open: boolean;
+    message: string;
+    severity: 'success' | 'error';
+  };
+  handleCloseSnackbar: (
+    event?: React.SyntheticEvent | Event,
+    reason?: SnackbarCloseReason
+  ) => void;
+  handleAddToCart: () => void;
+  handleQuantityChange: (newQuantity: number) => void;
+  handleShare: () => void;
+  isMobile: boolean;
+}

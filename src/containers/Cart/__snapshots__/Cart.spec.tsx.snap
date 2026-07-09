@@ -1,12 +1,12 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`Cart - UI should match snapshot with cart items 1`] = `
+exports[`Cart - UI > when rendered in mobile view > should match snapshot when cart is empty 1`] = `
 <div>
   <div
     class="MuiContainer-root MuiContainer-maxWidthLg css-1oqqzyl-MuiContainer-root"
   >
     <div
-      class="MuiBox-root css-0"
+      class="MuiBox-root css-ua6fsr"
     >
       <h1
         class="MuiTypography-root MuiTypography-h4 MuiTypography-gutterBottom css-1vw6mcs-MuiTypography-root"
@@ -20,30 +20,1534 @@ exports[`Cart - UI should match snapshot with cart items 1`] = `
       </p>
     </div>
     <div
-      class="MuiBox-root css-0"
+      animate="[object Object]"
+      class="MuiBox-root css-1vuwmwg"
+      data-testid="empty-cart"
+      initial="[object Object]"
+      transition="[object Object]"
+    >
+      <svg
+        fill="none"
+        height="60"
+        stroke="currentColor"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        stroke-width="2"
+        style="margin-bottom: 16px; opacity: 0.3;"
+        viewBox="0 0 24 24"
+        width="60"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <circle
+          cx="9"
+          cy="21"
+          r="1"
+        />
+        <circle
+          cx="20"
+          cy="21"
+          r="1"
+        />
+        <path
+          d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"
+        />
+      </svg>
+      <h5
+        class="MuiTypography-root MuiTypography-h5 MuiTypography-gutterBottom css-h93ljk-MuiTypography-root"
+      >
+        Your cart is empty
+      </h5>
+      <p
+        class="MuiTypography-root MuiTypography-body1 MuiTypography-paragraph css-120mgm7-MuiTypography-root"
+      >
+        Looks like you haven't added any products to your cart yet.
+      </p>
+      <div
+        class="MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButton-colorPrimary MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButton-colorPrimary css-lll1vm-MuiButtonBase-root-MuiButton-root"
+        role="button"
+        tabindex="0"
+        whilehover="[object Object]"
+      >
+        Start Shopping
+        <span
+          class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+        />
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Cart - UI > when rendered in mobile view > should match snapshot when cart is loading 1`] = `
+<div>
+  <div
+    animate="[object Object]"
+    class="MuiBox-root css-pydr4d"
+    initial="[object Object]"
+    transition="[object Object]"
+  >
+    <div
+      animate="[object Object]"
+      transition="[object Object]"
+    >
+      <span
+        aria-label="Loading fresh fruits"
+        class="MuiCircularProgress-root MuiCircularProgress-indeterminate MuiCircularProgress-colorPrimary css-yeb4xq-MuiCircularProgress-root"
+        role="progressbar"
+        style="width: 60px; height: 60px;"
+      >
+        <svg
+          class="MuiCircularProgress-svg css-1idz92c-MuiCircularProgress-svg"
+          viewBox="22 22 44 44"
+        >
+          <circle
+            class="MuiCircularProgress-circle MuiCircularProgress-circleIndeterminate css-176wh8e-MuiCircularProgress-circle"
+            cx="44"
+            cy="44"
+            fill="none"
+            r="20"
+            stroke-width="4"
+          />
+        </svg>
+      </span>
+    </div>
+    <h5
+      class="MuiTypography-root MuiTypography-h5 css-a75hxv-MuiTypography-root"
+    >
+      Loading Fresh Fruits...
+    </h5>
+    <p
+      class="MuiTypography-root MuiTypography-body2 css-t8k1ig-MuiTypography-root"
+    >
+      Getting the freshest picks ready for you!
+    </p>
+  </div>
+</div>
+`;
+
+exports[`Cart - UI > when rendered in mobile view > should match snapshot with cart items 1`] = `
+<div>
+  <div
+    class="MuiContainer-root MuiContainer-maxWidthLg css-1oqqzyl-MuiContainer-root"
+  >
+    <div
+      class="MuiBox-root css-ua6fsr"
+    >
+      <h1
+        class="MuiTypography-root MuiTypography-h4 MuiTypography-gutterBottom css-1vw6mcs-MuiTypography-root"
+      >
+        Your Cart
+      </h1>
+      <p
+        class="MuiTypography-root MuiTypography-body1 css-1pnmrwp-MuiTypography-root"
+      >
+        Review your items and proceed to checkout
+      </p>
+    </div>
+    <div
+      class="MuiBox-root css-1c42i1t"
     >
       <div
-        class="MuiBox-root css-0"
+        class="MuiBox-root css-76fu17"
       >
         <div
+          class="MuiBox-root css-5i2lth"
           data-testid="cart-items"
-        />
-        <div
-          class="MuiBox-root css-0"
         >
-          Continue Shopping
-          Clear Cart
-          <span
-            class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
-          />
+          <div
+            animate="[object Object]"
+            class="MuiBox-root css-1uibpwp"
+            exit="[object Object]"
+            initial="[object Object]"
+            transition="[object Object]"
+          >
+            <div
+              class="MuiBox-root css-1kukc4r"
+            >
+              <img
+                alt="Apple"
+                data-nimg="1"
+                decoding="async"
+                height="80"
+                loading="lazy"
+                src="/_next/image?url=%2Fapple.jpg&w=256&q=75"
+                srcset="/_next/image?url=%2Fapple.jpg&w=96&q=75 1x, /_next/image?url=%2Fapple.jpg&w=256&q=75 2x"
+                style="color: transparent; object-fit: cover; border-radius: 4px; margin-right: 16px;"
+                width="80"
+              />
+              <div
+                class="MuiBox-root css-i9gxme"
+              >
+                <h6
+                  class="MuiTypography-root MuiTypography-subtitle1 css-5amadx-MuiTypography-root"
+                >
+                  Apple
+                </h6>
+                <p
+                  class="MuiTypography-root MuiTypography-body2 MuiTypography-gutterBottom css-186q1z4-MuiTypography-root"
+                >
+                  ₹
+                  100.00
+                   per kg
+                </p>
+                <p
+                  class="MuiTypography-root MuiTypography-body2 css-ngc1bc-MuiTypography-root"
+                >
+                  Subtotal: 
+                  ₹
+                  200.00
+                </p>
+              </div>
+            </div>
+            <div
+              class="MuiBox-root css-69i1ev"
+            >
+              <div
+                class="MuiBox-root css-70qvj9"
+              >
+                <div
+                  aria-label="Decrease quantity"
+                  class="MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeSmall css-1pe4mpk-MuiButtonBase-root-MuiIconButton-root"
+                  role="button"
+                  tabindex="0"
+                  whilehover="[object Object]"
+                >
+                  <svg
+                    fill="none"
+                    height="16"
+                    stroke="currentColor"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    viewBox="0 0 24 24"
+                    width="16"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <line
+                      x1="5"
+                      x2="19"
+                      y1="12"
+                      y2="12"
+                    />
+                  </svg>
+                  <span
+                    class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+                  />
+                </div>
+                <div
+                  class="MuiFormControl-root MuiTextField-root css-1rsdrlu-MuiFormControl-root-MuiTextField-root"
+                >
+                  <div
+                    class="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-colorPrimary MuiInputBase-formControl MuiInputBase-sizeSmall css-9ddj71-MuiInputBase-root-MuiOutlinedInput-root"
+                  >
+                    <input
+                      aria-invalid="false"
+                      aria-label="Cart quantity"
+                      class="MuiInputBase-input MuiOutlinedInput-input MuiInputBase-inputSizeSmall css-1n4twyu-MuiInputBase-input-MuiOutlinedInput-input"
+                      id=":r2:"
+                      min="0"
+                      style="text-align: center;"
+                      type="text"
+                      value="2"
+                    />
+                    <fieldset
+                      aria-hidden="true"
+                      class="MuiOutlinedInput-notchedOutline css-r01yff-MuiNotchedOutlined-root-MuiOutlinedInput-notchedOutline"
+                    >
+                      <legend
+                        class="css-1whs34k-MuiNotchedOutlined-root"
+                      >
+                        <span
+                          class="notranslate"
+                        >
+                          ​
+                        </span>
+                      </legend>
+                    </fieldset>
+                  </div>
+                </div>
+                <div
+                  aria-label="Increase quantity"
+                  class="MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeSmall css-1pe4mpk-MuiButtonBase-root-MuiIconButton-root"
+                  role="button"
+                  tabindex="0"
+                  whilehover="[object Object]"
+                >
+                  <svg
+                    fill="none"
+                    height="16"
+                    stroke="currentColor"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    viewBox="0 0 24 24"
+                    width="16"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <line
+                      x1="12"
+                      x2="12"
+                      y1="5"
+                      y2="19"
+                    />
+                    <line
+                      x1="5"
+                      x2="19"
+                      y1="12"
+                      y2="12"
+                    />
+                  </svg>
+                  <span
+                    class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+                  />
+                </div>
+              </div>
+              <div
+                aria-label="Remove Apple from cart"
+                class="MuiButtonBase-root MuiIconButton-root MuiIconButton-colorError MuiIconButton-sizeMedium css-1jo1f9u-MuiButtonBase-root-MuiIconButton-root"
+                role="button"
+                tabindex="0"
+                whilehover="[object Object]"
+              >
+                <svg
+                  fill="none"
+                  height="1em"
+                  stroke="currentColor"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  viewBox="0 0 24 24"
+                  width="1em"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <polyline
+                    points="3 6 5 6 21 6"
+                  />
+                  <path
+                    d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"
+                  />
+                  <line
+                    x1="10"
+                    x2="10"
+                    y1="11"
+                    y2="17"
+                  />
+                  <line
+                    x1="14"
+                    x2="14"
+                    y1="11"
+                    y2="17"
+                  />
+                </svg>
+                <span
+                  class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+                />
+              </div>
+            </div>
+          </div>
+          <div
+            animate="[object Object]"
+            class="MuiBox-root css-1uibpwp"
+            exit="[object Object]"
+            initial="[object Object]"
+            transition="[object Object]"
+          >
+            <div
+              class="MuiBox-root css-1kukc4r"
+            >
+              <img
+                alt="Banana"
+                data-nimg="1"
+                decoding="async"
+                height="80"
+                loading="lazy"
+                src="/_next/image?url=%2Fbanana.jpg&w=256&q=75"
+                srcset="/_next/image?url=%2Fbanana.jpg&w=96&q=75 1x, /_next/image?url=%2Fbanana.jpg&w=256&q=75 2x"
+                style="color: transparent; object-fit: cover; border-radius: 4px; margin-right: 16px;"
+                width="80"
+              />
+              <div
+                class="MuiBox-root css-i9gxme"
+              >
+                <h6
+                  class="MuiTypography-root MuiTypography-subtitle1 css-5amadx-MuiTypography-root"
+                >
+                  Banana
+                </h6>
+                <p
+                  class="MuiTypography-root MuiTypography-body2 MuiTypography-gutterBottom css-186q1z4-MuiTypography-root"
+                >
+                  ₹
+                  50.00
+                   per kg
+                </p>
+                <p
+                  class="MuiTypography-root MuiTypography-body2 MuiTypography-gutterBottom css-186q1z4-MuiTypography-root"
+                >
+                  Discount: 
+                  5
+                  % (Now 
+                  ₹
+                  47.50
+                   per kg)
+                </p>
+                <p
+                  class="MuiTypography-root MuiTypography-body2 css-ngc1bc-MuiTypography-root"
+                >
+                  Subtotal: 
+                  ₹
+                  47.50
+                </p>
+              </div>
+            </div>
+            <div
+              class="MuiBox-root css-69i1ev"
+            >
+              <div
+                class="MuiBox-root css-70qvj9"
+              >
+                <div
+                  aria-disabled="true"
+                  aria-label="Decrease quantity"
+                  class="MuiButtonBase-root Mui-disabled MuiIconButton-root Mui-disabled MuiIconButton-sizeSmall css-1pe4mpk-MuiButtonBase-root-MuiIconButton-root"
+                  role="button"
+                  tabindex="-1"
+                  whilehover="[object Object]"
+                >
+                  <svg
+                    fill="none"
+                    height="16"
+                    stroke="currentColor"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    viewBox="0 0 24 24"
+                    width="16"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <line
+                      x1="5"
+                      x2="19"
+                      y1="12"
+                      y2="12"
+                    />
+                  </svg>
+                </div>
+                <div
+                  class="MuiFormControl-root MuiTextField-root css-1rsdrlu-MuiFormControl-root-MuiTextField-root"
+                >
+                  <div
+                    class="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-colorPrimary MuiInputBase-formControl MuiInputBase-sizeSmall css-9ddj71-MuiInputBase-root-MuiOutlinedInput-root"
+                  >
+                    <input
+                      aria-invalid="false"
+                      aria-label="Cart quantity"
+                      class="MuiInputBase-input MuiOutlinedInput-input MuiInputBase-inputSizeSmall css-1n4twyu-MuiInputBase-input-MuiOutlinedInput-input"
+                      id=":r3:"
+                      min="0"
+                      style="text-align: center;"
+                      type="text"
+                      value="1"
+                    />
+                    <fieldset
+                      aria-hidden="true"
+                      class="MuiOutlinedInput-notchedOutline css-r01yff-MuiNotchedOutlined-root-MuiOutlinedInput-notchedOutline"
+                    >
+                      <legend
+                        class="css-1whs34k-MuiNotchedOutlined-root"
+                      >
+                        <span
+                          class="notranslate"
+                        >
+                          ​
+                        </span>
+                      </legend>
+                    </fieldset>
+                  </div>
+                </div>
+                <div
+                  aria-label="Increase quantity"
+                  class="MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeSmall css-1pe4mpk-MuiButtonBase-root-MuiIconButton-root"
+                  role="button"
+                  tabindex="0"
+                  whilehover="[object Object]"
+                >
+                  <svg
+                    fill="none"
+                    height="16"
+                    stroke="currentColor"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    viewBox="0 0 24 24"
+                    width="16"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <line
+                      x1="12"
+                      x2="12"
+                      y1="5"
+                      y2="19"
+                    />
+                    <line
+                      x1="5"
+                      x2="19"
+                      y1="12"
+                      y2="12"
+                    />
+                  </svg>
+                  <span
+                    class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+                  />
+                </div>
+              </div>
+              <div
+                aria-label="Remove Banana from cart"
+                class="MuiButtonBase-root MuiIconButton-root MuiIconButton-colorError MuiIconButton-sizeMedium css-1jo1f9u-MuiButtonBase-root-MuiIconButton-root"
+                role="button"
+                tabindex="0"
+                whilehover="[object Object]"
+              >
+                <svg
+                  fill="none"
+                  height="1em"
+                  stroke="currentColor"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  viewBox="0 0 24 24"
+                  width="1em"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <polyline
+                    points="3 6 5 6 21 6"
+                  />
+                  <path
+                    d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"
+                  />
+                  <line
+                    x1="10"
+                    x2="10"
+                    y1="11"
+                    y2="17"
+                  />
+                  <line
+                    x1="14"
+                    x2="14"
+                    y1="11"
+                    y2="17"
+                  />
+                </svg>
+                <span
+                  class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+        <div
+          class="MuiBox-root css-1cmoj5h"
+        >
+          <button
+            class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeMedium MuiButton-outlinedSizeMedium MuiButton-colorPrimary MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeMedium MuiButton-outlinedSizeMedium MuiButton-colorPrimary css-1rwt2y5-MuiButtonBase-root-MuiButton-root"
+            tabindex="0"
+            type="button"
+            whilehover="[object Object]"
+          >
+            <span
+              class="MuiButton-icon MuiButton-startIcon MuiButton-iconSizeMedium css-1d6wzja-MuiButton-startIcon"
+            >
+              <svg
+                fill="none"
+                height="1em"
+                stroke="currentColor"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                viewBox="0 0 24 24"
+                width="1em"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <line
+                  x1="19"
+                  x2="5"
+                  y1="12"
+                  y2="12"
+                />
+                <polyline
+                  points="12 19 5 12 12 5"
+                />
+              </svg>
+            </span>
+            Continue Shopping
+            <span
+              class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+            />
+          </button>
+          <div
+            class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedError MuiButton-sizeMedium MuiButton-outlinedSizeMedium MuiButton-colorError MuiButton-root MuiButton-outlined MuiButton-outlinedError MuiButton-sizeMedium MuiButton-outlinedSizeMedium MuiButton-colorError css-180lf2n-MuiButtonBase-root-MuiButton-root"
+            role="button"
+            tabindex="0"
+            whilehover="[object Object]"
+          >
+            Clear Cart
+            <span
+              class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+            />
+          </div>
         </div>
       </div>
       <div
-        class="MuiBox-root css-0"
+        class="MuiBox-root css-ujeysi"
       >
         <div
+          class="MuiPaper-root MuiPaper-outlined MuiPaper-rounded MuiCard-root css-1v5z4dq-MuiPaper-root-MuiCard-root"
           data-testid="order-summary"
+        >
+          <div
+            class="MuiCardContent-root css-46bh2p-MuiCardContent-root"
+          >
+            <h6
+              class="MuiTypography-root MuiTypography-h6 MuiTypography-gutterBottom css-18k87ye-MuiTypography-root"
+            >
+              Order Summary
+            </h6>
+            <div
+              class="MuiBox-root css-1ebprri"
+            >
+              <div
+                class="MuiBox-root css-3mllz6"
+              >
+                <p
+                  class="MuiTypography-root MuiTypography-body2 css-e784if-MuiTypography-root"
+                >
+                  Subtotal
+                </p>
+                <p
+                  class="MuiTypography-root MuiTypography-body2 css-e784if-MuiTypography-root"
+                >
+                  ₹
+                  0.00
+                </p>
+              </div>
+              <div
+                class="MuiBox-root css-3mllz6"
+              >
+                <p
+                  class="MuiTypography-root MuiTypography-body2 css-e784if-MuiTypography-root"
+                >
+                  Shipping
+                </p>
+                <p
+                  class="MuiTypography-root MuiTypography-body2 css-e784if-MuiTypography-root"
+                >
+                  ₹
+                  0.00
+                </p>
+              </div>
+              <div
+                class="MuiBox-root css-3mllz6"
+              >
+                <p
+                  class="MuiTypography-root MuiTypography-body2 css-e784if-MuiTypography-root"
+                >
+                  Tax (10%)
+                </p>
+                <p
+                  class="MuiTypography-root MuiTypography-body2 css-e784if-MuiTypography-root"
+                >
+                  ₹
+                  0.00
+                </p>
+              </div>
+            </div>
+            <hr
+              class="MuiDivider-root MuiDivider-fullWidth css-ctpjxq-MuiDivider-root"
+            />
+            <div
+              class="MuiBox-root css-nznorp"
+            >
+              <h6
+                class="MuiTypography-root MuiTypography-subtitle1 css-5amadx-MuiTypography-root"
+              >
+                Total
+              </h6>
+              <h6
+                class="MuiTypography-root MuiTypography-subtitle1 css-1786zc4-MuiTypography-root"
+              >
+                ₹
+                0.00
+              </h6>
+            </div>
+            <div
+              class="MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeLarge MuiButton-containedSizeLarge MuiButton-colorPrimary MuiButton-fullWidth MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeLarge MuiButton-containedSizeLarge MuiButton-colorPrimary MuiButton-fullWidth css-189e9pj-MuiButtonBase-root-MuiButton-root"
+              role="button"
+              tabindex="0"
+              whilehover="[object Object]"
+              whiletap="[object Object]"
+            >
+              <span
+                class="MuiButton-icon MuiButton-startIcon MuiButton-iconSizeLarge css-htszrh-MuiButton-startIcon"
+              >
+                <svg
+                  fill="none"
+                  height="1em"
+                  stroke="currentColor"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  viewBox="0 0 24 24"
+                  width="1em"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <circle
+                    cx="9"
+                    cy="21"
+                    r="1"
+                  />
+                  <circle
+                    cx="20"
+                    cy="21"
+                    r="1"
+                  />
+                  <path
+                    d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"
+                  />
+                </svg>
+              </span>
+              Proceed to Checkout
+              <span
+                class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+              />
+            </div>
+            <div
+              class="MuiBox-root css-178yklu"
+            >
+              <p
+                class="MuiTypography-root MuiTypography-body2 MuiTypography-gutterBottom css-186q1z4-MuiTypography-root"
+              >
+                We accept:
+              </p>
+              <div
+                class="MuiBox-root css-1mcghfl"
+              >
+                <div
+                  class="MuiChip-root MuiChip-outlined MuiChip-sizeSmall MuiChip-colorDefault MuiChip-outlinedDefault css-1gyxgoa-MuiChip-root"
+                >
+                  <span
+                    class="MuiChip-label MuiChip-labelSmall css-rrn746-MuiChip-label"
+                  >
+                    Visa
+                  </span>
+                </div>
+                <div
+                  class="MuiChip-root MuiChip-outlined MuiChip-sizeSmall MuiChip-colorDefault MuiChip-outlinedDefault css-1gyxgoa-MuiChip-root"
+                >
+                  <span
+                    class="MuiChip-label MuiChip-labelSmall css-rrn746-MuiChip-label"
+                  >
+                    Mastercard
+                  </span>
+                </div>
+                <div
+                  class="MuiChip-root MuiChip-outlined MuiChip-sizeSmall MuiChip-colorDefault MuiChip-outlinedDefault css-1gyxgoa-MuiChip-root"
+                >
+                  <span
+                    class="MuiChip-label MuiChip-labelSmall css-rrn746-MuiChip-label"
+                  >
+                    PayPal
+                  </span>
+                </div>
+                <div
+                  class="MuiChip-root MuiChip-outlined MuiChip-sizeSmall MuiChip-colorDefault MuiChip-outlinedDefault css-1gyxgoa-MuiChip-root"
+                >
+                  <span
+                    class="MuiChip-label MuiChip-labelSmall css-rrn746-MuiChip-label"
+                  >
+                    Apple Pay
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Cart - UI > when rendered in web view > should match snapshot when cart is empty 1`] = `
+<div>
+  <div
+    class="MuiContainer-root MuiContainer-maxWidthLg css-1oqqzyl-MuiContainer-root"
+  >
+    <div
+      class="MuiBox-root css-ua6fsr"
+    >
+      <h1
+        class="MuiTypography-root MuiTypography-h4 MuiTypography-gutterBottom css-1vw6mcs-MuiTypography-root"
+      >
+        Your Cart
+      </h1>
+      <p
+        class="MuiTypography-root MuiTypography-body1 css-1pnmrwp-MuiTypography-root"
+      >
+        Review your items and proceed to checkout
+      </p>
+    </div>
+    <div
+      animate="[object Object]"
+      class="MuiBox-root css-1vuwmwg"
+      data-testid="empty-cart"
+      initial="[object Object]"
+      transition="[object Object]"
+    >
+      <svg
+        fill="none"
+        height="60"
+        stroke="currentColor"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        stroke-width="2"
+        style="margin-bottom: 16px; opacity: 0.3;"
+        viewBox="0 0 24 24"
+        width="60"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <circle
+          cx="9"
+          cy="21"
+          r="1"
         />
+        <circle
+          cx="20"
+          cy="21"
+          r="1"
+        />
+        <path
+          d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"
+        />
+      </svg>
+      <h5
+        class="MuiTypography-root MuiTypography-h5 MuiTypography-gutterBottom css-h93ljk-MuiTypography-root"
+      >
+        Your cart is empty
+      </h5>
+      <p
+        class="MuiTypography-root MuiTypography-body1 MuiTypography-paragraph css-120mgm7-MuiTypography-root"
+      >
+        Looks like you haven't added any products to your cart yet.
+      </p>
+      <div
+        class="MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButton-colorPrimary MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButton-colorPrimary css-lll1vm-MuiButtonBase-root-MuiButton-root"
+        role="button"
+        tabindex="0"
+        whilehover="[object Object]"
+      >
+        Start Shopping
+        <span
+          class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+        />
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Cart - UI > when rendered in web view > should match snapshot when cart is loading 1`] = `
+<div>
+  <div
+    animate="[object Object]"
+    class="MuiBox-root css-pydr4d"
+    initial="[object Object]"
+    transition="[object Object]"
+  >
+    <div
+      animate="[object Object]"
+      transition="[object Object]"
+    >
+      <span
+        aria-label="Loading fresh fruits"
+        class="MuiCircularProgress-root MuiCircularProgress-indeterminate MuiCircularProgress-colorPrimary css-yeb4xq-MuiCircularProgress-root"
+        role="progressbar"
+        style="width: 60px; height: 60px;"
+      >
+        <svg
+          class="MuiCircularProgress-svg css-1idz92c-MuiCircularProgress-svg"
+          viewBox="22 22 44 44"
+        >
+          <circle
+            class="MuiCircularProgress-circle MuiCircularProgress-circleIndeterminate css-176wh8e-MuiCircularProgress-circle"
+            cx="44"
+            cy="44"
+            fill="none"
+            r="20"
+            stroke-width="4"
+          />
+        </svg>
+      </span>
+    </div>
+    <h5
+      class="MuiTypography-root MuiTypography-h5 css-a75hxv-MuiTypography-root"
+    >
+      Loading Fresh Fruits...
+    </h5>
+    <p
+      class="MuiTypography-root MuiTypography-body2 css-t8k1ig-MuiTypography-root"
+    >
+      Getting the freshest picks ready for you!
+    </p>
+  </div>
+</div>
+`;
+
+exports[`Cart - UI > when rendered in web view > should match snapshot with cart items 1`] = `
+<div>
+  <div
+    class="MuiContainer-root MuiContainer-maxWidthLg css-1oqqzyl-MuiContainer-root"
+  >
+    <div
+      class="MuiBox-root css-ua6fsr"
+    >
+      <h1
+        class="MuiTypography-root MuiTypography-h4 MuiTypography-gutterBottom css-1vw6mcs-MuiTypography-root"
+      >
+        Your Cart
+      </h1>
+      <p
+        class="MuiTypography-root MuiTypography-body1 css-1pnmrwp-MuiTypography-root"
+      >
+        Review your items and proceed to checkout
+      </p>
+    </div>
+    <div
+      class="MuiBox-root css-1c42i1t"
+    >
+      <div
+        class="MuiBox-root css-76fu17"
+      >
+        <div
+          class="MuiBox-root css-5i2lth"
+          data-testid="cart-items"
+        >
+          <div
+            animate="[object Object]"
+            class="MuiBox-root css-1uibpwp"
+            exit="[object Object]"
+            initial="[object Object]"
+            transition="[object Object]"
+          >
+            <div
+              class="MuiBox-root css-1kukc4r"
+            >
+              <img
+                alt="Apple"
+                data-nimg="1"
+                decoding="async"
+                height="80"
+                loading="lazy"
+                src="/_next/image?url=%2Fapple.jpg&w=256&q=75"
+                srcset="/_next/image?url=%2Fapple.jpg&w=96&q=75 1x, /_next/image?url=%2Fapple.jpg&w=256&q=75 2x"
+                style="color: transparent; object-fit: cover; border-radius: 4px; margin-right: 16px;"
+                width="80"
+              />
+              <div
+                class="MuiBox-root css-i9gxme"
+              >
+                <h6
+                  class="MuiTypography-root MuiTypography-subtitle1 css-5amadx-MuiTypography-root"
+                >
+                  Apple
+                </h6>
+                <p
+                  class="MuiTypography-root MuiTypography-body2 MuiTypography-gutterBottom css-186q1z4-MuiTypography-root"
+                >
+                  ₹
+                  100.00
+                   per kg
+                </p>
+                <p
+                  class="MuiTypography-root MuiTypography-body2 css-ngc1bc-MuiTypography-root"
+                >
+                  Subtotal: 
+                  ₹
+                  200.00
+                </p>
+              </div>
+            </div>
+            <div
+              class="MuiBox-root css-69i1ev"
+            >
+              <div
+                class="MuiBox-root css-70qvj9"
+              >
+                <div
+                  aria-label="Decrease quantity"
+                  class="MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeSmall css-1pe4mpk-MuiButtonBase-root-MuiIconButton-root"
+                  role="button"
+                  tabindex="0"
+                  whilehover="[object Object]"
+                >
+                  <svg
+                    fill="none"
+                    height="16"
+                    stroke="currentColor"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    viewBox="0 0 24 24"
+                    width="16"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <line
+                      x1="5"
+                      x2="19"
+                      y1="12"
+                      y2="12"
+                    />
+                  </svg>
+                  <span
+                    class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+                  />
+                </div>
+                <div
+                  class="MuiFormControl-root MuiTextField-root css-1rsdrlu-MuiFormControl-root-MuiTextField-root"
+                >
+                  <div
+                    class="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-colorPrimary MuiInputBase-formControl MuiInputBase-sizeSmall css-9ddj71-MuiInputBase-root-MuiOutlinedInput-root"
+                  >
+                    <input
+                      aria-invalid="false"
+                      aria-label="Cart quantity"
+                      class="MuiInputBase-input MuiOutlinedInput-input MuiInputBase-inputSizeSmall css-1n4twyu-MuiInputBase-input-MuiOutlinedInput-input"
+                      id=":r0:"
+                      min="0"
+                      style="text-align: center;"
+                      type="text"
+                      value="2"
+                    />
+                    <fieldset
+                      aria-hidden="true"
+                      class="MuiOutlinedInput-notchedOutline css-r01yff-MuiNotchedOutlined-root-MuiOutlinedInput-notchedOutline"
+                    >
+                      <legend
+                        class="css-1whs34k-MuiNotchedOutlined-root"
+                      >
+                        <span
+                          class="notranslate"
+                        >
+                          ​
+                        </span>
+                      </legend>
+                    </fieldset>
+                  </div>
+                </div>
+                <div
+                  aria-label="Increase quantity"
+                  class="MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeSmall css-1pe4mpk-MuiButtonBase-root-MuiIconButton-root"
+                  role="button"
+                  tabindex="0"
+                  whilehover="[object Object]"
+                >
+                  <svg
+                    fill="none"
+                    height="16"
+                    stroke="currentColor"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    viewBox="0 0 24 24"
+                    width="16"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <line
+                      x1="12"
+                      x2="12"
+                      y1="5"
+                      y2="19"
+                    />
+                    <line
+                      x1="5"
+                      x2="19"
+                      y1="12"
+                      y2="12"
+                    />
+                  </svg>
+                  <span
+                    class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+                  />
+                </div>
+              </div>
+              <div
+                aria-label="Remove Apple from cart"
+                class="MuiButtonBase-root MuiIconButton-root MuiIconButton-colorError MuiIconButton-sizeMedium css-1jo1f9u-MuiButtonBase-root-MuiIconButton-root"
+                role="button"
+                tabindex="0"
+                whilehover="[object Object]"
+              >
+                <svg
+                  fill="none"
+                  height="1em"
+                  stroke="currentColor"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  viewBox="0 0 24 24"
+                  width="1em"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <polyline
+                    points="3 6 5 6 21 6"
+                  />
+                  <path
+                    d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"
+                  />
+                  <line
+                    x1="10"
+                    x2="10"
+                    y1="11"
+                    y2="17"
+                  />
+                  <line
+                    x1="14"
+                    x2="14"
+                    y1="11"
+                    y2="17"
+                  />
+                </svg>
+                <span
+                  class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+                />
+              </div>
+            </div>
+          </div>
+          <div
+            animate="[object Object]"
+            class="MuiBox-root css-1uibpwp"
+            exit="[object Object]"
+            initial="[object Object]"
+            transition="[object Object]"
+          >
+            <div
+              class="MuiBox-root css-1kukc4r"
+            >
+              <img
+                alt="Banana"
+                data-nimg="1"
+                decoding="async"
+                height="80"
+                loading="lazy"
+                src="/_next/image?url=%2Fbanana.jpg&w=256&q=75"
+                srcset="/_next/image?url=%2Fbanana.jpg&w=96&q=75 1x, /_next/image?url=%2Fbanana.jpg&w=256&q=75 2x"
+                style="color: transparent; object-fit: cover; border-radius: 4px; margin-right: 16px;"
+                width="80"
+              />
+              <div
+                class="MuiBox-root css-i9gxme"
+              >
+                <h6
+                  class="MuiTypography-root MuiTypography-subtitle1 css-5amadx-MuiTypography-root"
+                >
+                  Banana
+                </h6>
+                <p
+                  class="MuiTypography-root MuiTypography-body2 MuiTypography-gutterBottom css-186q1z4-MuiTypography-root"
+                >
+                  ₹
+                  50.00
+                   per kg
+                </p>
+                <p
+                  class="MuiTypography-root MuiTypography-body2 MuiTypography-gutterBottom css-186q1z4-MuiTypography-root"
+                >
+                  Discount: 
+                  5
+                  % (Now 
+                  ₹
+                  47.50
+                   per kg)
+                </p>
+                <p
+                  class="MuiTypography-root MuiTypography-body2 css-ngc1bc-MuiTypography-root"
+                >
+                  Subtotal: 
+                  ₹
+                  47.50
+                </p>
+              </div>
+            </div>
+            <div
+              class="MuiBox-root css-69i1ev"
+            >
+              <div
+                class="MuiBox-root css-70qvj9"
+              >
+                <div
+                  aria-disabled="true"
+                  aria-label="Decrease quantity"
+                  class="MuiButtonBase-root Mui-disabled MuiIconButton-root Mui-disabled MuiIconButton-sizeSmall css-1pe4mpk-MuiButtonBase-root-MuiIconButton-root"
+                  role="button"
+                  tabindex="-1"
+                  whilehover="[object Object]"
+                >
+                  <svg
+                    fill="none"
+                    height="16"
+                    stroke="currentColor"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    viewBox="0 0 24 24"
+                    width="16"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <line
+                      x1="5"
+                      x2="19"
+                      y1="12"
+                      y2="12"
+                    />
+                  </svg>
+                </div>
+                <div
+                  class="MuiFormControl-root MuiTextField-root css-1rsdrlu-MuiFormControl-root-MuiTextField-root"
+                >
+                  <div
+                    class="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-colorPrimary MuiInputBase-formControl MuiInputBase-sizeSmall css-9ddj71-MuiInputBase-root-MuiOutlinedInput-root"
+                  >
+                    <input
+                      aria-invalid="false"
+                      aria-label="Cart quantity"
+                      class="MuiInputBase-input MuiOutlinedInput-input MuiInputBase-inputSizeSmall css-1n4twyu-MuiInputBase-input-MuiOutlinedInput-input"
+                      id=":r1:"
+                      min="0"
+                      style="text-align: center;"
+                      type="text"
+                      value="1"
+                    />
+                    <fieldset
+                      aria-hidden="true"
+                      class="MuiOutlinedInput-notchedOutline css-r01yff-MuiNotchedOutlined-root-MuiOutlinedInput-notchedOutline"
+                    >
+                      <legend
+                        class="css-1whs34k-MuiNotchedOutlined-root"
+                      >
+                        <span
+                          class="notranslate"
+                        >
+                          ​
+                        </span>
+                      </legend>
+                    </fieldset>
+                  </div>
+                </div>
+                <div
+                  aria-label="Increase quantity"
+                  class="MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeSmall css-1pe4mpk-MuiButtonBase-root-MuiIconButton-root"
+                  role="button"
+                  tabindex="0"
+                  whilehover="[object Object]"
+                >
+                  <svg
+                    fill="none"
+                    height="16"
+                    stroke="currentColor"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    viewBox="0 0 24 24"
+                    width="16"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <line
+                      x1="12"
+                      x2="12"
+                      y1="5"
+                      y2="19"
+                    />
+                    <line
+                      x1="5"
+                      x2="19"
+                      y1="12"
+                      y2="12"
+                    />
+                  </svg>
+                  <span
+                    class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+                  />
+                </div>
+              </div>
+              <div
+                aria-label="Remove Banana from cart"
+                class="MuiButtonBase-root MuiIconButton-root MuiIconButton-colorError MuiIconButton-sizeMedium css-1jo1f9u-MuiButtonBase-root-MuiIconButton-root"
+                role="button"
+                tabindex="0"
+                whilehover="[object Object]"
+              >
+                <svg
+                  fill="none"
+                  height="1em"
+                  stroke="currentColor"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  viewBox="0 0 24 24"
+                  width="1em"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <polyline
+                    points="3 6 5 6 21 6"
+                  />
+                  <path
+                    d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"
+                  />
+                  <line
+                    x1="10"
+                    x2="10"
+                    y1="11"
+                    y2="17"
+                  />
+                  <line
+                    x1="14"
+                    x2="14"
+                    y1="11"
+                    y2="17"
+                  />
+                </svg>
+                <span
+                  class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+        <div
+          class="MuiBox-root css-1cmoj5h"
+        >
+          <button
+            class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeMedium MuiButton-outlinedSizeMedium MuiButton-colorPrimary MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeMedium MuiButton-outlinedSizeMedium MuiButton-colorPrimary css-1rwt2y5-MuiButtonBase-root-MuiButton-root"
+            tabindex="0"
+            type="button"
+            whilehover="[object Object]"
+          >
+            <span
+              class="MuiButton-icon MuiButton-startIcon MuiButton-iconSizeMedium css-1d6wzja-MuiButton-startIcon"
+            >
+              <svg
+                fill="none"
+                height="1em"
+                stroke="currentColor"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                viewBox="0 0 24 24"
+                width="1em"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <line
+                  x1="19"
+                  x2="5"
+                  y1="12"
+                  y2="12"
+                />
+                <polyline
+                  points="12 19 5 12 12 5"
+                />
+              </svg>
+            </span>
+            Continue Shopping
+            <span
+              class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+            />
+          </button>
+          <div
+            class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedError MuiButton-sizeMedium MuiButton-outlinedSizeMedium MuiButton-colorError MuiButton-root MuiButton-outlined MuiButton-outlinedError MuiButton-sizeMedium MuiButton-outlinedSizeMedium MuiButton-colorError css-180lf2n-MuiButtonBase-root-MuiButton-root"
+            role="button"
+            tabindex="0"
+            whilehover="[object Object]"
+          >
+            Clear Cart
+            <span
+              class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+            />
+          </div>
+        </div>
+      </div>
+      <div
+        class="MuiBox-root css-ujeysi"
+      >
+        <div
+          class="MuiPaper-root MuiPaper-outlined MuiPaper-rounded MuiCard-root css-1v5z4dq-MuiPaper-root-MuiCard-root"
+          data-testid="order-summary"
+        >
+          <div
+            class="MuiCardContent-root css-46bh2p-MuiCardContent-root"
+          >
+            <h6
+              class="MuiTypography-root MuiTypography-h6 MuiTypography-gutterBottom css-18k87ye-MuiTypography-root"
+            >
+              Order Summary
+            </h6>
+            <div
+              class="MuiBox-root css-1ebprri"
+            >
+              <div
+                class="MuiBox-root css-3mllz6"
+              >
+                <p
+                  class="MuiTypography-root MuiTypography-body2 css-e784if-MuiTypography-root"
+                >
+                  Subtotal
+                </p>
+                <p
+                  class="MuiTypography-root MuiTypography-body2 css-e784if-MuiTypography-root"
+                >
+                  ₹
+                  0.00
+                </p>
+              </div>
+              <div
+                class="MuiBox-root css-3mllz6"
+              >
+                <p
+                  class="MuiTypography-root MuiTypography-body2 css-e784if-MuiTypography-root"
+                >
+                  Shipping
+                </p>
+                <p
+                  class="MuiTypography-root MuiTypography-body2 css-e784if-MuiTypography-root"
+                >
+                  ₹
+                  0.00
+                </p>
+              </div>
+              <div
+                class="MuiBox-root css-3mllz6"
+              >
+                <p
+                  class="MuiTypography-root MuiTypography-body2 css-e784if-MuiTypography-root"
+                >
+                  Tax (10%)
+                </p>
+                <p
+                  class="MuiTypography-root MuiTypography-body2 css-e784if-MuiTypography-root"
+                >
+                  ₹
+                  0.00
+                </p>
+              </div>
+            </div>
+            <hr
+              class="MuiDivider-root MuiDivider-fullWidth css-ctpjxq-MuiDivider-root"
+            />
+            <div
+              class="MuiBox-root css-nznorp"
+            >
+              <h6
+                class="MuiTypography-root MuiTypography-subtitle1 css-5amadx-MuiTypography-root"
+              >
+                Total
+              </h6>
+              <h6
+                class="MuiTypography-root MuiTypography-subtitle1 css-1786zc4-MuiTypography-root"
+              >
+                ₹
+                0.00
+              </h6>
+            </div>
+            <div
+              class="MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeLarge MuiButton-containedSizeLarge MuiButton-colorPrimary MuiButton-fullWidth MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeLarge MuiButton-containedSizeLarge MuiButton-colorPrimary MuiButton-fullWidth css-189e9pj-MuiButtonBase-root-MuiButton-root"
+              role="button"
+              tabindex="0"
+              whilehover="[object Object]"
+              whiletap="[object Object]"
+            >
+              <span
+                class="MuiButton-icon MuiButton-startIcon MuiButton-iconSizeLarge css-htszrh-MuiButton-startIcon"
+              >
+                <svg
+                  fill="none"
+                  height="1em"
+                  stroke="currentColor"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  viewBox="0 0 24 24"
+                  width="1em"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <circle
+                    cx="9"
+                    cy="21"
+                    r="1"
+                  />
+                  <circle
+                    cx="20"
+                    cy="21"
+                    r="1"
+                  />
+                  <path
+                    d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"
+                  />
+                </svg>
+              </span>
+              Proceed to Checkout
+              <span
+                class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+              />
+            </div>
+            <div
+              class="MuiBox-root css-178yklu"
+            >
+              <p
+                class="MuiTypography-root MuiTypography-body2 MuiTypography-gutterBottom css-186q1z4-MuiTypography-root"
+              >
+                We accept:
+              </p>
+              <div
+                class="MuiBox-root css-1mcghfl"
+              >
+                <div
+                  class="MuiChip-root MuiChip-outlined MuiChip-sizeSmall MuiChip-colorDefault MuiChip-outlinedDefault css-1gyxgoa-MuiChip-root"
+                >
+                  <span
+                    class="MuiChip-label MuiChip-labelSmall css-rrn746-MuiChip-label"
+                  >
+                    Visa
+                  </span>
+                </div>
+                <div
+                  class="MuiChip-root MuiChip-outlined MuiChip-sizeSmall MuiChip-colorDefault MuiChip-outlinedDefault css-1gyxgoa-MuiChip-root"
+                >
+                  <span
+                    class="MuiChip-label MuiChip-labelSmall css-rrn746-MuiChip-label"
+                  >
+                    Mastercard
+                  </span>
+                </div>
+                <div
+                  class="MuiChip-root MuiChip-outlined MuiChip-sizeSmall MuiChip-colorDefault MuiChip-outlinedDefault css-1gyxgoa-MuiChip-root"
+                >
+                  <span
+                    class="MuiChip-label MuiChip-labelSmall css-rrn746-MuiChip-label"
+                  >
+                    PayPal
+                  </span>
+                </div>
+                <div
+                  class="MuiChip-root MuiChip-outlined MuiChip-sizeSmall MuiChip-colorDefault MuiChip-outlinedDefault css-1gyxgoa-MuiChip-root"
+                >
+                  <span
+                    class="MuiChip-label MuiChip-labelSmall css-rrn746-MuiChip-label"
+                  >
+                    Apple Pay
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>

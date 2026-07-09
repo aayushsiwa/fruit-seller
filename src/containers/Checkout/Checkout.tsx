@@ -3,27 +3,25 @@ import { OrderSummary } from '@/src/components/Checkout/OrderSummary';
 import { LoadingScreen } from '@/src/components/LoadingScreen';
 import {
   Box,
+  Checkbox,
   Container,
-  Typography,
+  FormControl,
+  FormControlLabel,
+  FormLabel,
   Grid,
   Paper,
-  FormControl,
-  FormLabel,
-  RadioGroup,
-  FormControlLabel,
   Radio,
+  RadioGroup,
   TextField,
-  Checkbox,
+  Typography,
 } from '@mui/material';
 import { motion } from 'framer-motion';
 import { useRouter } from 'next/router';
 
 import { useCheckout } from './Checkout.hooks';
-import { useCheckoutStyles } from './Checkout.styles';
 
 export default function Checkout() {
   const router = useRouter();
-  const classes = useCheckoutStyles();
   const {
     cart,
     products,
@@ -56,11 +54,11 @@ export default function Checkout() {
 
   return (
     <Container maxWidth="lg">
-      <Box className={classes.root}>
+      <Box sx={{ pt: 4, pb: 4 }}>
         <Typography
           variant="h4"
           gutterBottom
-          className={classes.title}
+          sx={{ fontWeight: 600, mb: 4 }}
           component={motion.div}
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -72,26 +70,34 @@ export default function Checkout() {
         {cart.length === 0 ? (
           <EmptyCheckout />
         ) : isLoadingProducts ? (
-          <Box className={classes.loadingBox}>
+          <Box sx={{ textAlign: 'center', py: 8 }}>
             <Typography>Loading products...</Typography>
           </Box>
         ) : hasError ? (
-          <Box className={classes.errorText}>
+          <Box>
             <Typography color="error">
               Failed to load some product details. Please try again.
             </Typography>
           </Box>
         ) : (
-          <Grid container spacing={4} className={classes.summaryBox}>
+          <Grid container spacing={4} sx={{ width: '100%' }}>
             <Grid item xs={12} md={7}>
-              <Paper className={classes.addressPaper} elevation={3}>
-                <Typography variant="h6" className={classes.sectionTitle} sx={{ mb: 3 }}>
+              <Paper sx={{ p: 3, borderRadius: 1, mb: 3 }} elevation={3}>
+                <Typography variant="h6" sx={{ fontWeight: 600, mb: 2 }}>
                   Shipping Address
                 </Typography>
-                
+
                 {savedAddresses.length > 0 && (
-                  <FormControl component="fieldset" sx={{ mb: 3, width: '100%' }}>
-                    <FormLabel component="legend" sx={{ mb: 2, fontWeight: 600 }}>Select a Shipping Address</FormLabel>
+                  <FormControl
+                    component="fieldset"
+                    sx={{ mb: 3, width: '100%' }}
+                  >
+                    <FormLabel
+                      component="legend"
+                      sx={{ mb: 2, fontWeight: 600 }}
+                    >
+                      Select a Shipping Address
+                    </FormLabel>
                     <RadioGroup
                       value={selectedAddressId}
                       onChange={(e) => setSelectedAddressId(e.target.value)}
@@ -103,13 +109,24 @@ export default function Checkout() {
                           control={<Radio color="primary" />}
                           label={
                             <Box sx={{ py: 1 }}>
-                              <Typography variant="body1" sx={{ fontWeight: 500 }}>
+                              <Typography
+                                variant="body1"
+                                sx={{ fontWeight: 500 }}
+                              >
                                 {addr.street}
                               </Typography>
-                              <Typography variant="body2" color="text.secondary">
-                                {addr.city}, {addr.state} - {addr.postal_code}, {addr.country}
+                              <Typography
+                                variant="body2"
+                                color="text.secondary"
+                              >
+                                {addr.city}, {addr.state} - {addr.postal_code},{' '}
+                                {addr.country}
                               </Typography>
-                              <Typography variant="caption" color="text.secondary" display="block">
+                              <Typography
+                                variant="caption"
+                                color="text.secondary"
+                                display="block"
+                              >
                                 Phone: {addr.phone}
                               </Typography>
                             </Box>
@@ -121,7 +138,10 @@ export default function Checkout() {
                         value="new"
                         control={<Radio color="primary" />}
                         label={
-                          <Typography variant="body1" sx={{ fontWeight: 500, py: 1 }}>
+                          <Typography
+                            variant="body1"
+                            sx={{ fontWeight: 500, py: 1 }}
+                          >
                             Use a new shipping address
                           </Typography>
                         }
@@ -133,26 +153,43 @@ export default function Checkout() {
 
                 {selectedAddressId === 'new' && (
                   <Box sx={{ mt: 2 }}>
-                    <Typography variant="subtitle1" sx={{ fontWeight: 600, mb: 2 }}>
+                    <Typography
+                      variant="subtitle1"
+                      sx={{ fontWeight: 600, mb: 2 }}
+                    >
                       New Shipping Address
                     </Typography>
-                    
-                    <Box className={classes.formRow}>
+
+                    <Box sx={{ display: 'flex', gap: 2, mb: 2 }}>
                       <TextField
                         fullWidth
                         label="Postal Code (PIN Code)"
                         value={newAddress.postal_code}
-                        onChange={(e) => setNewAddress({ ...newAddress, postal_code: e.target.value })}
+                        onChange={(e) =>
+                          setNewAddress({
+                            ...newAddress,
+                            postal_code: e.target.value,
+                          })
+                        }
                         variant="outlined"
                         size="small"
                         required
-                        helperText={isAddressAutoFilled ? "City & State verified" : "Enter 6-digit PIN code to auto-fill City/State"}
+                        helperText={
+                          isAddressAutoFilled
+                            ? 'City & State verified'
+                            : 'Enter 6-digit PIN code to auto-fill City/State'
+                        }
                       />
                       <TextField
                         fullWidth
                         label="Phone Number"
                         value={newAddress.phone}
-                        onChange={(e) => setNewAddress({ ...newAddress, phone: e.target.value })}
+                        onChange={(e) =>
+                          setNewAddress({
+                            ...newAddress,
+                            phone: e.target.value,
+                          })
+                        }
                         variant="outlined"
                         size="small"
                         required
@@ -163,7 +200,9 @@ export default function Checkout() {
                       fullWidth
                       label="Address Line 1 (Street, Company, C/O)"
                       value={newAddress.street}
-                      onChange={(e) => setNewAddress({ ...newAddress, street: e.target.value })}
+                      onChange={(e) =>
+                        setNewAddress({ ...newAddress, street: e.target.value })
+                      }
                       sx={{ mb: 2 }}
                       variant="outlined"
                       size="small"
@@ -174,18 +213,25 @@ export default function Checkout() {
                       fullWidth
                       label="Address Line 2 (Apartment, Suite, Unit, Building, Floor)"
                       value={newAddress.street2}
-                      onChange={(e) => setNewAddress({ ...newAddress, street2: e.target.value })}
+                      onChange={(e) =>
+                        setNewAddress({
+                          ...newAddress,
+                          street2: e.target.value,
+                        })
+                      }
                       sx={{ mb: 2 }}
                       variant="outlined"
                       size="small"
                     />
-                    
-                    <Box className={classes.formRow}>
+
+                    <Box sx={{ display: 'flex', gap: 2, mb: 2 }}>
                       <TextField
                         fullWidth
                         label="City"
                         value={newAddress.city}
-                        onChange={(e) => setNewAddress({ ...newAddress, city: e.target.value })}
+                        onChange={(e) =>
+                          setNewAddress({ ...newAddress, city: e.target.value })
+                        }
                         variant="outlined"
                         size="small"
                         required
@@ -195,20 +241,30 @@ export default function Checkout() {
                         fullWidth
                         label="State"
                         value={newAddress.state}
-                        onChange={(e) => setNewAddress({ ...newAddress, state: e.target.value })}
+                        onChange={(e) =>
+                          setNewAddress({
+                            ...newAddress,
+                            state: e.target.value,
+                          })
+                        }
                         variant="outlined"
                         size="small"
                         required
                         disabled={isAddressAutoFilled}
                       />
                     </Box>
-                    
-                    <Box className={classes.formRow} sx={{ mb: 3 }}>
+
+                    <Box sx={{ display: 'flex', gap: 2, mb: 3 }}>
                       <TextField
                         fullWidth
                         label="Country"
                         value={newAddress.country}
-                        onChange={(e) => setNewAddress({ ...newAddress, country: e.target.value })}
+                        onChange={(e) =>
+                          setNewAddress({
+                            ...newAddress,
+                            country: e.target.value,
+                          })
+                        }
                         variant="outlined"
                         size="small"
                         required

@@ -1,4 +1,3 @@
-import { ConfirmStatusDialogProps } from '@/types/index';
 import {
   Alert,
   Button,
@@ -48,3 +47,12 @@ const ConfirmStatusDialog: React.FC<ConfirmStatusDialogProps> = ({
 };
 
 export default ConfirmStatusDialog;
+
+export interface ConfirmStatusDialogProps {
+  open: boolean;
+  onClose: () => void;
+  onConfirm: () => void;
+  isLoading: boolean;
+  currentStatus: string;
+  newStatus: string;
+}

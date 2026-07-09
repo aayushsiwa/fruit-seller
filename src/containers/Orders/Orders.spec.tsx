@@ -1,84 +1,30 @@
-import { Order } from '@/types/index';
-import { render, renderHook, screen, waitFor } from '@testing-library/react';
-import axios from 'axios';
-import * as nextRouter from 'next/router';
+import * as GetOrdersAPI from '@/api/orders/getOrders';
+import { MockOrders } from '@/entity/Orders/Orders.mock';
+import { render, renderHook, waitFor } from '@/src/utils/test';
+import * as MaterialUI from '@mui/material';
+import * as NextRouter from 'next/router';
 
 import Orders from './Orders';
 import { useOrdersPage } from './Orders.hooks';
 
-jest.mock('framer-motion', () => {
-  const FakeMotion = ({ children }: { children: React.ReactNode }) => (
-    <>{children}</>
-  );
-  return {
-    motion: new Proxy(FakeMotion, {
-      get: () => FakeMotion,
-    }),
-    AnimatePresence: FakeMotion,
-  };
-});
-
-jest.mock('@/src/components/LoadingScreen', () => ({
-  LoadingScreen: () => <div data-testid="loading-screen">Loading...</div>,
-}));
-
-jest.mock('dayjs', () => {
-  const dayjsFn = () => ({ fromNow: () => 'a few days ago' });
-  dayjsFn.extend = jest.fn();
-  return dayjsFn;
-});
-jest.mock('dayjs/plugin/relativeTime', () => jest.fn());
-
-jest.mock('@/constants/index', () => ({
-  currency: '₹',
-}));
-
-jest.mock('@mui/styles', () => ({
-  makeStyles: () => () => ({}),
-}));
-
-const mockOrders: Order[] = [
-  {
-    id: 'order-1',
-    userName: 'John Doe',
-    items: [
-      { id: 'p1', quantity: 2 },
-      { id: 'p2', quantity: 1 },
-    ],
-    total: 250.5,
-    createdAt: '2025-06-01T10:00:00Z',
-    status: 'Processing',
-  },
-  {
-    id: 'order-2',
-    userName: 'Jane Doe',
-    items: [{ id: 'p3', quantity: 1 }],
-    total: 99.99,
-    createdAt: '2025-05-15T08:30:00Z',
-    status: 'Delivered',
-    delivered_at: '2025-05-20T12:00:00Z',
-  },
-];
-
 describe('Orders - Hooks', () => {
-  let axiosGetSpy: jest.SpyInstance;
-  let mockPush: jest.Mock;
+  let mockPush: any;
 
   beforeEach(() => {
-    mockPush = jest.fn();
-    jest.spyOn(nextRouter, 'useRouter').mockReturnValue({
-      push: mockPush,
-      query: {},
-    } as unknown as nextRouter.NextRouter);
-
-    axiosGetSpy = jest.spyOn(axios, 'get').mockResolvedValue({
-      status: 200,
-      data: mockOrders,
+    mockPush = vi.fn();
+    vi.spyOn(NextRouter, 'useRouter').mockImplementation(() => {
+      type Return = ReturnType<typeof NextRouter.useRouter>;
+      return {
+        push: mockPush,
+        query: {},
+      } as Partial<Return> as Return;
     });
-  });
 
-  afterEach(() => {
-    jest.restoreAllMocks();
+    vi.spyOn(GetOrdersAPI, 'useGetOrders').mockReturnValue({
+      data: { data: MockOrders },
+      isLoading: false,
+      error: null,
+    } as unknown as ReturnType<typeof GetOrdersAPI.useGetOrders>);
   });
 
   it('should fetch orders on mount and set them', async () => {
@@ -91,11 +37,14 @@ describe('Orders - Hooks', () => {
     expect(result.current.orders).toHaveLength(2);
     expect(result.current.orders[0].id).toBe('order-1');
     expect(result.current.error).toBeNull();
-    expect(axiosGetSpy).toHaveBeenCalledWith('/api/orders');
   });
 
   it('should handle fetch error', async () => {
-    axiosGetSpy.mockRejectedValueOnce(new Error('Network Error'));
+    vi.spyOn(GetOrdersAPI, 'useGetOrders').mockReturnValue({
+      data: undefined,
+      isLoading: false,
+      error: new Error('Network Error') as any,
+    } as unknown as ReturnType<typeof GetOrdersAPI.useGetOrders>);
 
     const { result } = renderHook(() => useOrdersPage());
 
@@ -123,53 +72,94 @@ describe('Orders - Hooks', () => {
 });
 
 describe('Orders - UI', () => {
-  let axiosGetSpy: jest.SpyInstance;
-  let mockPush: jest.Mock;
+  let mockPush: any;
 
   beforeEach(() => {
-    mockPush = jest.fn();
-    jest.spyOn(nextRouter, 'useRouter').mockReturnValue({
-      push: mockPush,
-      query: {},
-    } as unknown as nextRouter.NextRouter);
-
-    axiosGetSpy = jest.spyOn(axios, 'get');
+    mockPush = vi.fn();
+    vi.spyOn(NextRouter, 'useRouter').mockImplementation(() => {
+      type Return = ReturnType<typeof NextRouter.useRouter>;
+      return {
+        push: mockPush,
+        query: {},
+      } as Partial<Return> as Return;
+    });
   });
 
-  afterEach(() => {
-    jest.restoreAllMocks();
-  });
-
-  it('should render loading state', () => {
-    axiosGetSpy.mockImplementationOnce(() => new Promise(() => {}));
-
-    render(<Orders />);
-
-    expect(screen.getByTestId('loading-screen')).toBeInTheDocument();
-  });
-
-  it('should render empty state', async () => {
-    axiosGetSpy.mockResolvedValueOnce({ data: [], status: 200 });
-
-    render(<Orders />);
-
-    await waitFor(() => {
-      expect(screen.getByText('My Orders')).toBeInTheDocument();
+  describe('when rendered in web view', () => {
+    beforeEach(() => {
+      vi.spyOn(MaterialUI, 'useMediaQuery').mockReturnValue(false);
     });
 
-    expect(screen.getByText('No orders yet')).toBeInTheDocument();
-    expect(screen.getByText('Start Shopping')).toBeInTheDocument();
-  });
+    it('should match snapshot when API is loading', () => {
+      vi.spyOn(GetOrdersAPI, 'useGetOrders').mockReturnValue({
+        data: undefined,
+        isLoading: true,
+        error: null,
+      } as unknown as ReturnType<typeof GetOrdersAPI.useGetOrders>);
 
-  it('should match snapshot when rendering orders', async () => {
-    axiosGetSpy.mockResolvedValueOnce({ data: mockOrders, status: 200 });
-
-    const { asFragment } = render(<Orders />);
-
-    await waitFor(() => {
-      expect(screen.getByText('My Orders')).toBeInTheDocument();
+      const { container } = render(<Orders />);
+      expect(container).toMatchSnapshot();
     });
 
-    expect(asFragment()).toMatchSnapshot();
+    it('should match snapshot when API is successful', () => {
+      vi.spyOn(GetOrdersAPI, 'useGetOrders').mockReturnValue({
+        data: { data: MockOrders },
+        isLoading: false,
+        error: null,
+      } as unknown as ReturnType<typeof GetOrdersAPI.useGetOrders>);
+
+      const { container } = render(<Orders />);
+      expect(container).toMatchSnapshot();
+    });
+
+    it('should match snapshot when API fails', () => {
+      vi.spyOn(GetOrdersAPI, 'useGetOrders').mockReturnValue({
+        data: undefined,
+        isLoading: false,
+        error: new Error('Network Error') as any,
+      } as unknown as ReturnType<typeof GetOrdersAPI.useGetOrders>);
+
+      const { container } = render(<Orders />);
+      expect(container).toMatchSnapshot();
+    });
+  });
+
+  describe('when rendered in mobile view', () => {
+    beforeEach(() => {
+      vi.spyOn(MaterialUI, 'useMediaQuery').mockReturnValue(true);
+    });
+
+    it('should match snapshot when API is loading', () => {
+      vi.spyOn(GetOrdersAPI, 'useGetOrders').mockReturnValue({
+        data: undefined,
+        isLoading: true,
+        error: null,
+      } as unknown as ReturnType<typeof GetOrdersAPI.useGetOrders>);
+
+      const { container } = render(<Orders />);
+      expect(container).toMatchSnapshot();
+    });
+
+    it('should match snapshot when API is successful', () => {
+      vi.spyOn(GetOrdersAPI, 'useGetOrders').mockReturnValue({
+        data: { data: MockOrders },
+        isLoading: false,
+        error: null,
+      } as unknown as ReturnType<typeof GetOrdersAPI.useGetOrders>);
+
+      const { container } = render(<Orders />);
+      expect(container).toMatchSnapshot();
+    });
+
+    it('should match snapshot when API fails', () => {
+      vi.spyOn(GetOrdersAPI, 'useGetOrders').mockReturnValue({
+        data: undefined,
+        isLoading: false,
+        error: new Error('Network Error') as any,
+      } as unknown as ReturnType<typeof GetOrdersAPI.useGetOrders>);
+
+      const { container } = render(<Orders />);
+      expect(container).toMatchSnapshot();
+    });
   });
 });

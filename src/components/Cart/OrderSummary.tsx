@@ -1,5 +1,5 @@
 import { currency, paymentMethods } from '@/constants/index';
-import { OrderSummaryProps } from '@/types/index';
+import { CartItem, IProduct } from '@/types/index';
 import {
   Box,
   Button,
@@ -23,7 +23,7 @@ export const OrderSummary: React.FC<OrderSummaryProps> = ({
   const total = subtotal + tax;
 
   return (
-    <Card variant="outlined">
+    <Card variant="outlined" data-testid="order-summary">
       <CardContent>
         <Typography variant="h6" gutterBottom>
           Order Summary
@@ -119,3 +119,15 @@ export const OrderSummary: React.FC<OrderSummaryProps> = ({
     </Card>
   );
 };
+
+export interface OrderSummaryProps {
+  cart: CartItem[];
+  products: (IProduct | undefined)[];
+  getCartTotal: (products: (IProduct | undefined)[]) => number;
+  handlePayNow: () => void;
+  processing: boolean;
+  hasError: boolean;
+  handleCheckout: () => void;
+  disabled?: boolean;
+  shippingCost?: number;
+}

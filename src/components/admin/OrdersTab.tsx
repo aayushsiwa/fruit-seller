@@ -1,4 +1,4 @@
-import { Order, OrdersTabProps } from '@/types/index';
+import { Order } from '@/types/index';
 import {
   Chip,
   CircularProgress,
@@ -104,3 +104,10 @@ const OrdersTab: React.FC<OrdersTabProps> = ({
 };
 
 export default OrdersTab;
+
+export interface OrdersTabProps {
+  orders: Order[];
+  isLoading: boolean;
+  error: string | null;
+  onEditOrder: (order: Order) => void;
+}

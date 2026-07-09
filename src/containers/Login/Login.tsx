@@ -16,10 +16,8 @@ import { FiEye, FiEyeOff } from 'react-icons/fi';
 import { TbBrandGoogle } from 'react-icons/tb';
 
 import useLogin from './Login.hooks';
-import { useLoginStyles } from './Login.styles';
 
 export default function Login() {
-  const classes = useLoginStyles();
   const {
     formik,
     showPassword,
@@ -31,7 +29,7 @@ export default function Login() {
   if (isLoading) {
     return (
       <Container maxWidth="sm">
-        <Box className={classes.loadingBox}>
+        <Box sx={{ my: 4, textAlign: 'center' }}>
           <Typography>Loading...</Typography>
         </Box>
       </Container>
@@ -40,14 +38,14 @@ export default function Login() {
 
   return (
     <Container maxWidth="sm">
-      <Box className={classes.container}>
-        <Paper elevation={3} className={classes.paper}>
-          <Box className={classes.welcomeBox}>
+      <Box sx={{ mt: 4, mb: 4 }}>
+        <Paper elevation={3} sx={{ p: 4, borderRadius: '16px' }}>
+          <Box sx={{ textAlign: 'center', mb: 4 }}>
             <Typography
               variant="h4"
               component="h1"
               gutterBottom
-              className={classes.title}
+              sx={{ fontWeight: 700 }}
             >
               Welcome Back
             </Typography>
@@ -103,7 +101,7 @@ export default function Login() {
               </Grid>
 
               <Grid item xs={12}>
-                <Box className={classes.forgotPasswordBox}>
+                <Box sx={{ display: 'flex', justifyContent: 'flex-end' }}>
                   <Link href="/forgot-password" passHref>
                     <MuiLink variant="body2" underline="hover">
                       Forgot password?
@@ -127,14 +125,14 @@ export default function Login() {
             </Grid>
           </form>
 
-          <Box className={classes.signUpBox}>
+          <Box sx={{ mt: 3, textAlign: 'center' }}>
             <Typography variant="body2">
               Don&apos;t have an account?{' '}
               <Link href="/register" passHref>
                 <MuiLink
                   variant="body2"
                   underline="hover"
-                  className={classes.signUpLink}
+                  sx={{ fontWeight: 600 }}
                 >
                   Sign up
                 </MuiLink>
@@ -142,13 +140,13 @@ export default function Login() {
             </Typography>
           </Box>
 
-          <Divider className={classes.divider}>
+          <Divider sx={{ mt: 3, mb: 3 }}>
             <Typography variant="body2" color="text.secondary">
               OR
             </Typography>
           </Divider>
 
-          <Box className={classes.googleButtonBox}>
+          <Box sx={{ display: 'flex', justifyContent: 'center' }}>
             <Button
               variant="outlined"
               startIcon={<TbBrandGoogle />}

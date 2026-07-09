@@ -1,5 +1,5 @@
 import { validTargets } from '@/lib/validation/orders';
-import { OrderDialogProps, OrderStatus } from '@/types/index';
+import { Order, OrderStatus } from '@/types/index';
 import {
   Button,
   Dialog,
@@ -117,3 +117,12 @@ const OrderDialog: React.FC<OrderDialogProps> = ({
 };
 
 export default OrderDialog;
+
+export interface OrderDialogProps {
+  open: boolean;
+  order: Partial<Order>;
+  onClose: () => void;
+  onUpdateStatus: (status: OrderStatus) => void;
+  onOrderChange: (order: Partial<Order>) => void;
+  isLoading: boolean;
+}

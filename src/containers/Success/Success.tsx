@@ -6,12 +6,9 @@ import { motion } from 'framer-motion';
 import { FiCheckCircle } from 'react-icons/fi';
 
 import { useSuccess } from './Success.hooks';
-import { useSuccessStyles } from './Success.styles';
 
 export default function Success() {
-  const classes = useSuccessStyles();
-  const { order, products, isLoading, error, handleContinueShopping } =
-    useSuccess();
+  const { order, isLoading, error, handleContinueShopping } = useSuccess();
 
   if (isLoading) {
     return <LoadingScreen />;
@@ -22,7 +19,7 @@ export default function Success() {
   }
 
   return (
-    <Container maxWidth="lg" className={classes.container}>
+    <Container maxWidth="lg" sx={{ textAlign: 'center', mt: 8 }}>
       <motion.div
         initial={{ opacity: 0, scale: 0.9 }}
         animate={{ opacity: 1, scale: 1 }}
@@ -32,12 +29,12 @@ export default function Success() {
           size={60}
           color="green"
           aria-label="Payment successful"
-          className={classes.checkIcon}
+          style={{ marginBottom: 16 }}
         />
         <Typography
           variant="h4"
           gutterBottom
-          className={classes.successMessageTitle}
+          sx={{ fontWeight: 700, color: 'primary.main' }}
         >
           Payment Successful
         </Typography>
@@ -45,19 +42,24 @@ export default function Success() {
           variant="body1"
           color="text.secondary"
           paragraph
-          className={classes.successMessage}
+          sx={{ mx: 'auto', mb: 4, display: 'flex', justifyContent: 'center' }}
         >
           Thank you for your purchase! You&apos;ll receive a confirmation soon.
         </Typography>
 
-        {order && <OrderDetails order={order} products={products} />}
+        {order && <OrderDetails order={order} />}
 
         <Button
           variant="contained"
           color="primary"
           onClick={handleContinueShopping}
-          className={classes.continueButton}
-          sx={{ mt: 4 }}
+          sx={{
+            mt: 4,
+            py: 1.5,
+            fontWeight: 600,
+            borderRadius: 2,
+            textTransform: 'none',
+          }}
           component={motion.div}
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}

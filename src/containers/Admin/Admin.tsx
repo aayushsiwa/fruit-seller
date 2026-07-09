@@ -28,11 +28,9 @@ import {
   useAdminDialogs,
   useAdminMutations,
 } from './Admin.hooks';
-import useStyles from './Admin.styles';
 
 export default function AdminDashboard() {
   const router = useRouter();
-  const classes = useStyles();
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('md'));
   const { activeTab, searchQuery, setSearchQuery, handleTabChange } =
@@ -125,20 +123,20 @@ export default function AdminDashboard() {
 
   return (
     <Container maxWidth="lg">
-      <Box className={classes.headerBox}>
+      <Box sx={{ mb: 4 }}>
         <Typography
           variant="h4"
           component="h1"
           gutterBottom
-          className={classes.title}
+          sx={{ fontWeight: 600 }}
         >
           Admin Dashboard
         </Typography>
-        <Typography variant="body1" className={classes.subtitle}>
+        <Typography variant="body1" sx={{ color: 'text.secondary' }}>
           Manage your products, users, and orders
         </Typography>
         {error && (
-          <Typography color="error" className={classes.error}>
+          <Typography color="error" sx={{ mt: 2 }}>
             {error}
           </Typography>
         )}
@@ -153,13 +151,13 @@ export default function AdminDashboard() {
         isLoadingOrders={isLoadingOrders}
       />
 
-      <Box className={classes.tabsBox}>
+      <Box sx={{ mb: 3 }}>
         <Tabs
           value={activeTab}
           onChange={handleTabChange}
           variant={isMobile ? 'scrollable' : 'standard'}
           scrollButtons={isMobile}
-          className={classes.tabs}
+          sx={{ borderBottom: 1, borderColor: 'divider' }}
         >
           <Tab label="Products" />
           <Tab label="Users" />

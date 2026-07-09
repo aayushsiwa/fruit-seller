@@ -1,21 +1,16 @@
+import { mockShowSnackbar, renderHook } from '@/src/utils/test';
 import { AdminActionsProps } from '@/types/admin';
 import { UseMutationResult } from '@tanstack/react-query';
-import { renderHook } from '@testing-library/react';
 import React from 'react';
 
 import { useAdminActions } from './Admin.hooks';
 
-const mockShowSnackbar = jest.fn();
-jest.mock('@/src/contexts/SnackBarContext', () => ({
-  useSnackbar: () => ({ showSnackbar: mockShowSnackbar }),
-}));
-
 describe('Admin - Hooks', () => {
   describe('useAdminActions - handleSaveUser', () => {
     it('should call mutateAsync, show success snackbar and close dialog', async () => {
-      const mutateAsync = jest.fn().mockResolvedValue({});
-      const setError = jest.fn();
-      const handleCloseUserDialog = jest.fn();
+      const mutateAsync = vi.fn().mockResolvedValue({});
+      const setError = vi.fn();
+      const handleCloseUserDialog = vi.fn();
 
       const props = {
         saveProductMutation: {} as UseMutationResult,
@@ -28,14 +23,14 @@ describe('Admin - Hooks', () => {
         selectedOrder: { id: 'order123' },
         isEditProduct: false,
         isEditUser: false,
-        handleCloseProductDialog: jest.fn(),
-        handleCloseDeleteDialog: jest.fn(),
+        handleCloseProductDialog: vi.fn(),
+        handleCloseDeleteDialog: vi.fn(),
         handleCloseUserDialog,
-        handleCloseUserDeleteDialog: jest.fn(),
-        handleCloseOrderDialog: jest.fn(),
+        handleCloseUserDeleteDialog: vi.fn(),
+        handleCloseOrderDialog: vi.fn(),
         setError,
-        handleOpenConfirmDialog: jest.fn(),
-        handleCloseConfirmDialog: jest.fn(),
+        handleOpenConfirmDialog: vi.fn(),
+        handleCloseConfirmDialog: vi.fn(),
         confirmStatus: 'Processing' as const,
       };
 
@@ -56,7 +51,7 @@ describe('Admin - Hooks', () => {
       addInput('role', 'admin');
 
       const formEvent = {
-        preventDefault: jest.fn(),
+        preventDefault: vi.fn(),
         currentTarget: form,
       } as unknown as React.FormEvent<HTMLFormElement>;
 

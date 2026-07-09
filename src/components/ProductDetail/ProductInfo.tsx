@@ -1,5 +1,5 @@
 import { currency, defaultImage } from '@/constants/index';
-import { ProductInfoProps } from '@/types/index';
+import { IProduct } from '@/types/index';
 import {
   Alert,
   Box,
@@ -129,10 +129,10 @@ export const ProductInfo: React.FC<ProductInfoProps> = ({
               </Typography>
               <Typography
                 variant="body1"
-                color={product.quantity > 0 ? 'success.main' : 'error.main'}
+                color={product.stock > 0 ? 'success.main' : 'error.main'}
               >
-                {product.quantity > 0
-                  ? `In Stock (${product.quantity})`
+                {product.stock > 0
+                  ? `In Stock (${product.stock})`
                   : 'Out of Stock'}
               </Typography>
             </Box>
@@ -173,7 +173,7 @@ export const ProductInfo: React.FC<ProductInfoProps> = ({
                 <IconButton
                   size="small"
                   onClick={() => handleQuantityChange(cartQuantity - 1)}
-                  disabled={product.quantity === 0}
+                  disabled={product.stock === 0}
                   component={motion.div}
                   whileHover={{ scale: 1.1 }}
                 >
@@ -189,7 +189,7 @@ export const ProductInfo: React.FC<ProductInfoProps> = ({
                   }}
                   inputProps={{
                     min: 0,
-                    max: product.quantity,
+                    max: product.stock,
                     style: { textAlign: 'center' },
                   }}
                   sx={{ width: 60 }}
@@ -198,7 +198,7 @@ export const ProductInfo: React.FC<ProductInfoProps> = ({
                 <IconButton
                   size="small"
                   onClick={() => handleQuantityChange(cartQuantity + 1)}
-                  disabled={cartQuantity >= product.quantity}
+                  disabled={cartQuantity >= product.stock}
                   component={motion.div}
                   whileHover={{ scale: 1.1 }}
                 >
@@ -212,7 +212,7 @@ export const ProductInfo: React.FC<ProductInfoProps> = ({
                 size="large"
                 startIcon={<FiShoppingCart />}
                 onClick={handleAddToCart}
-                disabled={product.quantity === 0}
+                disabled={product.stock === 0}
                 sx={{ flexGrow: 1 }}
                 component={motion.div}
                 whileHover={{ scale: 1.05 }}
@@ -236,3 +236,14 @@ export const ProductInfo: React.FC<ProductInfoProps> = ({
     </>
   );
 };
+
+export interface ProductInfoProps {
+  product: IProduct;
+  isMobile: boolean;
+  cartQuantity: number;
+  error: string | null;
+  setError: (error: string | null) => void;
+  handleAddToCart: () => void;
+  handleQuantityChange: (quantity: number) => void;
+  handleShare: () => void;
+}
