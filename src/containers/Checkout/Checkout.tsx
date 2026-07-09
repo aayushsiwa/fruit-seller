@@ -9,9 +9,11 @@ import {
   FormControlLabel,
   FormLabel,
   Grid,
+  MenuItem,
   Paper,
   Radio,
   RadioGroup,
+  Select,
   TextField,
   Typography,
 } from '@mui/material';
@@ -41,6 +43,9 @@ export default function Checkout() {
     setSaveToProfile,
     shippingCost,
     isAddressAutoFilled,
+    offices,
+    selectedOffice,
+    handleSelectOffice,
   } = useCheckout();
 
   if (isLoading) {
@@ -196,6 +201,41 @@ export default function Checkout() {
                       />
                     </Box>
 
+                    {offices.length > 1 && (
+                      <FormControl fullWidth sx={{ mb: 2 }} size="small">
+                        <Select
+                          displayEmpty
+                          value={selectedOffice?.officeName ?? ''}
+                          onChange={(e) => {
+                            const office = offices.find(
+                              (o) => o.officeName === e.target.value
+                            );
+                            handleSelectOffice(office ?? null);
+                          }}
+                          renderValue={(value) => {
+                            if (!value) {
+                              return (
+                                <Typography color="text.secondary">
+                                  Select Delivery Office
+                                </Typography>
+                              );
+                            }
+                            return value;
+                          }}
+                        >
+                          {offices.map((office) => (
+                            <MenuItem
+                              key={office.officeName}
+                              value={office.officeName}
+                            >
+                              {office.officeName} - {office.district},{' '}
+                              {office.state}
+                            </MenuItem>
+                          ))}
+                        </Select>
+                      </FormControl>
+                    )}
+
                     <TextField
                       fullWidth
                       label="Address Line 1 (Street, Company, C/O)"
@@ -235,7 +275,6 @@ export default function Checkout() {
                         variant="outlined"
                         size="small"
                         required
-                        disabled={isAddressAutoFilled}
                       />
                       <TextField
                         fullWidth
@@ -250,7 +289,6 @@ export default function Checkout() {
                         variant="outlined"
                         size="small"
                         required
-                        disabled={isAddressAutoFilled}
                       />
                     </Box>
 

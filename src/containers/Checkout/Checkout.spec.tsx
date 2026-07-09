@@ -118,13 +118,23 @@ describe('Checkout - Hooks', () => {
     });
   });
 
-  it('should auto-fill city and state when valid pincode query returns data', async () => {
+  it('should auto-fill city and state when a single office is returned', async () => {
     (mockUseSession as any).mockReturnValue({
       data: { user: { email: 'test@test.com' } } as any,
       status: 'authenticated',
     });
 
-    const stableData = { city: 'New Delhi', state: 'Delhi' };
+    const stableData = {
+      offices: [
+        {
+          officeName: 'Connaught Place HO',
+          district: 'New Delhi',
+          state: 'Delhi',
+          block: 'Connaught Place',
+          delivery: true,
+        },
+      ],
+    };
     vi.spyOn(GetPincodeAPI, 'useGetPincode').mockImplementation(
       (pin, enabled) => {
         if (enabled) {
@@ -147,6 +157,58 @@ describe('Checkout - Hooks', () => {
       expect(result.current.newAddress.city).toBe('New Delhi');
       expect(result.current.newAddress.state).toBe('Delhi');
       expect(result.current.isAddressAutoFilled).toBe(true);
+      expect(result.current.offices).toEqual(stableData.offices);
+      expect(result.current.selectedOffice).toEqual(stableData.offices[0]);
+    });
+  });
+
+  it('should not auto-fill when multiple offices are returned', async () => {
+    (mockUseSession as any).mockReturnValue({
+      data: { user: { email: 'test@test.com' } } as any,
+      status: 'authenticated',
+    });
+
+    const stableData = {
+      offices: [
+        {
+          officeName: 'Mumbai GPO',
+          district: 'Mumbai',
+          state: 'Maharashtra',
+          block: 'Fort',
+          delivery: true,
+        },
+        {
+          officeName: 'Elephanta Caves PO',
+          district: 'Raigarh',
+          state: 'Maharashtra',
+          block: 'Raigarh',
+          delivery: true,
+        },
+      ],
+    };
+    vi.spyOn(GetPincodeAPI, 'useGetPincode').mockImplementation(
+      (pin, enabled) => {
+        if (enabled) {
+          return { data: { data: stableData } } as any;
+        }
+        return { data: undefined } as any;
+      }
+    );
+
+    const { result } = renderHook(() => useCheckout());
+
+    act(() => {
+      result.current.setNewAddress((prev) => ({
+        ...prev,
+        postal_code: '400001',
+      }));
+    });
+
+    await waitFor(() => {
+      expect(result.current.offices).toEqual(stableData.offices);
+      expect(result.current.selectedOffice).toBeNull();
+      expect(result.current.isAddressAutoFilled).toBe(false);
+      expect(result.current.newAddress.city).toBe('');
     });
   });
 });
