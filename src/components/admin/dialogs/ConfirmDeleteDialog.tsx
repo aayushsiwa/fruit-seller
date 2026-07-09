@@ -1,4 +1,4 @@
-import { ConfirmDeleteDialogProps, ItemType, User } from '@/types/index';
+import { IProduct, User } from '@/types/index';
 import {
   Button,
   Dialog,
@@ -24,7 +24,7 @@ const ConfirmDeleteDialog: React.FC<ConfirmDeleteDialogProps> = ({
         <DialogContentText>
           Are you sure you want to delete the {entityType}
           {entityType === 'product'
-            ? (entity as ItemType).name
+            ? (entity as IProduct).name
             : `${(entity as User).firstName} ${(entity as User).lastName}`}
           ? This action cannot be undone.
         </DialogContentText>
@@ -45,3 +45,12 @@ const ConfirmDeleteDialog: React.FC<ConfirmDeleteDialogProps> = ({
 };
 
 export default ConfirmDeleteDialog;
+
+export interface ConfirmDeleteDialogProps {
+  open: boolean;
+  onClose: () => void;
+  onConfirm: () => void;
+  isLoading: boolean;
+  entity: Partial<IProduct | User>;
+  entityType: 'product' | 'user';
+}

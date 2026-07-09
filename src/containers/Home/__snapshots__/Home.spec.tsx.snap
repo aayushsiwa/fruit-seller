@@ -1,0 +1,1617 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`Home Page > Home Page Snapshots > when rendered in mobile view > should match snapshot when API is loading 1`] = `
+<div>
+  <div
+    class="MuiGrid-root css-1thbrpa-MuiGrid-root"
+  >
+    <div
+      class="MuiGrid-root css-15z23i5-MuiGrid-root"
+    >
+      <div
+        animate="[object Object]"
+        exit="[object Object]"
+        initial="[object Object]"
+        style="position: absolute; top: 0px; left: 0px; right: 0px; bottom: 0px; background-image: url("https://images.unsplash.com/photo-1490885578174-acda8905c2c6?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80"); background-size: cover; background-position: center center;"
+        transition="[object Object]"
+      />
+      <div
+        class="MuiContainer-root MuiContainer-maxWidthLg css-114lxs4-MuiContainer-root"
+      >
+        <div
+          animate="[object Object]"
+          initial="[object Object]"
+          transition="[object Object]"
+        >
+          <h1
+            class="MuiTypography-root MuiTypography-h2 MuiTypography-gutterBottom css-3z3j86-MuiTypography-root"
+          >
+            Fresh Fruits Delivered to Your Door
+          </h1>
+          <h6
+            class="MuiTypography-root MuiTypography-h6 css-1orzdsu-MuiTypography-root"
+          >
+            We source the freshest fruits directly from local farmers. Enjoy nature's goodness with just a few clicks.
+          </h6>
+          <div
+            style="display: inline-block;"
+            whilehover="[object Object]"
+            whiletap="[object Object]"
+          >
+            <button
+              class="MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedSecondary MuiButton-sizeLarge MuiButton-containedSizeLarge MuiButton-colorSecondary MuiButton-root MuiButton-contained MuiButton-containedSecondary MuiButton-sizeLarge MuiButton-containedSizeLarge MuiButton-colorSecondary css-1noct3x-MuiButtonBase-root-MuiButton-root"
+              tabindex="0"
+              type="button"
+            >
+              Shop Now
+              <span
+                class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+              />
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div
+      class="MuiGrid-root css-vj1n65-MuiGrid-root"
+    >
+      <div
+        class="MuiBox-root css-1td7tad"
+      >
+        <div
+          class="MuiTypography-root MuiTypography-h4 css-1n4lw5g-MuiTypography-root"
+          initial="[object Object]"
+          transition="[object Object]"
+          viewport="[object Object]"
+          whileinview="[object Object]"
+        >
+          Featured Products
+        </div>
+        <div
+          class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-colorPrimary MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-colorPrimary css-1e6y48t-MuiButtonBase-root-MuiButton-root"
+          role="button"
+          tabindex="0"
+          whilehover="[object Object]"
+        >
+          View All
+          <span
+            class="MuiButton-icon MuiButton-endIcon MuiButton-iconSizeMedium css-9tj150-MuiButton-endIcon"
+          >
+            <svg
+              fill="none"
+              height="1em"
+              stroke="currentColor"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              viewBox="0 0 24 24"
+              width="1em"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <line
+                x1="5"
+                x2="19"
+                y1="12"
+                y2="12"
+              />
+              <polyline
+                points="12 5 19 12 12 19"
+              />
+            </svg>
+          </span>
+          <span
+            class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+          />
+        </div>
+      </div>
+      <div
+        class="MuiBox-root css-zzzt33"
+      >
+        <span
+          class="MuiCircularProgress-root MuiCircularProgress-indeterminate MuiCircularProgress-colorPrimary css-18lrjg1-MuiCircularProgress-root"
+          role="progressbar"
+          style="width: 40px; height: 40px;"
+        >
+          <svg
+            class="MuiCircularProgress-svg css-1idz92c-MuiCircularProgress-svg"
+            viewBox="22 22 44 44"
+          >
+            <circle
+              class="MuiCircularProgress-circle MuiCircularProgress-circleIndeterminate css-176wh8e-MuiCircularProgress-circle"
+              cx="44"
+              cy="44"
+              fill="none"
+              r="20.2"
+              stroke-width="3.6"
+            />
+          </svg>
+        </span>
+      </div>
+    </div>
+    <div
+      class="MuiGrid-root css-vj1n65-MuiGrid-root"
+    >
+      <div
+        class="MuiBox-root css-1td7tad"
+      >
+        <div
+          class="MuiTypography-root MuiTypography-h4 css-1n4lw5g-MuiTypography-root"
+          initial="[object Object]"
+          transition="[object Object]"
+          viewport="[object Object]"
+          whileinview="[object Object]"
+        >
+          Why Choose Us?
+        </div>
+      </div>
+      <div
+        class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-4 css-1xnaaoc-MuiGrid-root"
+      >
+        <div
+          class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-6 MuiGrid-grid-md-3 css-10voxkt-MuiGrid-root"
+          initial="[object Object]"
+          transition="[object Object]"
+          viewport="[object Object]"
+          whileinview="[object Object]"
+        >
+          <div
+            class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation1 MuiCard-root css-1menj7t-MuiPaper-root-MuiCard-root"
+          >
+            <img
+              alt="Farm Fresh"
+              class="MuiCardMedia-root MuiCardMedia-media MuiCardMedia-img css-l2hvxy-MuiCardMedia-root"
+              src="https://images.unsplash.com/photo-1665516930780-2b09cc3a89aa?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NDd8fGZhcm0lMjBmcmVzaCUyMGZydWl0c3xlbnwwfHwwfHx8MA%3D%3D"
+            />
+            <div
+              class="MuiCardContent-root css-6kfvpf-MuiCardContent-root"
+            >
+              <h3
+                class="MuiTypography-root MuiTypography-h6 MuiTypography-gutterBottom css-1oh0c0-MuiTypography-root"
+              >
+                Farm Fresh
+              </h3>
+              <p
+                class="MuiTypography-root MuiTypography-body2 css-r40f8v-MuiTypography-root"
+              >
+                Sourced directly from local farmers for maximum freshness.
+              </p>
+            </div>
+          </div>
+        </div>
+        <div
+          class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-6 MuiGrid-grid-md-3 css-10voxkt-MuiGrid-root"
+          initial="[object Object]"
+          transition="[object Object]"
+          viewport="[object Object]"
+          whileinview="[object Object]"
+        >
+          <div
+            class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation1 MuiCard-root css-1menj7t-MuiPaper-root-MuiCard-root"
+          >
+            <img
+              alt="Fast Delivery"
+              class="MuiCardMedia-root MuiCardMedia-media MuiCardMedia-img css-l2hvxy-MuiCardMedia-root"
+              src="https://images.pexels.com/photos/6868618/pexels-photo-6868618.jpeg?auto=compress&cs=tinysrgb&w=600"
+            />
+            <div
+              class="MuiCardContent-root css-6kfvpf-MuiCardContent-root"
+            >
+              <h3
+                class="MuiTypography-root MuiTypography-h6 MuiTypography-gutterBottom css-1oh0c0-MuiTypography-root"
+              >
+                Fast Delivery
+              </h3>
+              <p
+                class="MuiTypography-root MuiTypography-body2 css-r40f8v-MuiTypography-root"
+              >
+                Delivered to your door within 24 hours of ordering.
+              </p>
+            </div>
+          </div>
+        </div>
+        <div
+          class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-6 MuiGrid-grid-md-3 css-10voxkt-MuiGrid-root"
+          initial="[object Object]"
+          transition="[object Object]"
+          viewport="[object Object]"
+          whileinview="[object Object]"
+        >
+          <div
+            class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation1 MuiCard-root css-1menj7t-MuiPaper-root-MuiCard-root"
+          >
+            <img
+              alt="Organic Options"
+              class="MuiCardMedia-root MuiCardMedia-media MuiCardMedia-img css-l2hvxy-MuiCardMedia-root"
+              src="https://images.pexels.com/photos/3669640/pexels-photo-3669640.jpeg?auto=compress&cs=tinysrgb&w=600"
+            />
+            <div
+              class="MuiCardContent-root css-6kfvpf-MuiCardContent-root"
+            >
+              <h3
+                class="MuiTypography-root MuiTypography-h6 MuiTypography-gutterBottom css-1oh0c0-MuiTypography-root"
+              >
+                Organic Options
+              </h3>
+              <p
+                class="MuiTypography-root MuiTypography-body2 css-r40f8v-MuiTypography-root"
+              >
+                Certified organic fruits grown with care.
+              </p>
+            </div>
+          </div>
+        </div>
+        <div
+          class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-6 MuiGrid-grid-md-3 css-10voxkt-MuiGrid-root"
+          initial="[object Object]"
+          transition="[object Object]"
+          viewport="[object Object]"
+          whileinview="[object Object]"
+        >
+          <div
+            class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation1 MuiCard-root css-1menj7t-MuiPaper-root-MuiCard-root"
+          >
+            <img
+              alt="Satisfaction Guaranteed"
+              class="MuiCardMedia-root MuiCardMedia-media MuiCardMedia-img css-l2hvxy-MuiCardMedia-root"
+              src="https://images.pexels.com/photos/7564196/pexels-photo-7564196.jpeg?auto=compress&cs=tinysrgb&w=600"
+            />
+            <div
+              class="MuiCardContent-root css-6kfvpf-MuiCardContent-root"
+            >
+              <h3
+                class="MuiTypography-root MuiTypography-h6 MuiTypography-gutterBottom css-1oh0c0-MuiTypography-root"
+              >
+                Satisfaction Guaranteed
+              </h3>
+              <p
+                class="MuiTypography-root MuiTypography-body2 css-r40f8v-MuiTypography-root"
+              >
+                100% satisfaction or your money back.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div
+      class="MuiGrid-root css-vj1n65-MuiGrid-root"
+    >
+      <div
+        class="MuiBox-root css-4ssav0"
+        initial="[object Object]"
+        transition="[object Object]"
+        viewport="[object Object]"
+        whileinview="[object Object]"
+      >
+        <h2
+          class="MuiTypography-root MuiTypography-h4 MuiTypography-gutterBottom css-18dekmd-MuiTypography-root"
+        >
+          Ready to Order Fresh Fruits?
+        </h2>
+        <p
+          class="MuiTypography-root MuiTypography-body1 MuiTypography-paragraph css-oxxpx7-MuiTypography-root"
+        >
+          Join thousands of satisfied customers who enjoy our farm-fresh fruits delivered right to their doorstep.
+        </p>
+        <div
+          class="MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeLarge MuiButton-containedSizeLarge MuiButton-colorPrimary MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeLarge MuiButton-containedSizeLarge MuiButton-colorPrimary css-1rwjri4-MuiButtonBase-root-MuiButton-root"
+          role="button"
+          tabindex="0"
+          whilehover="[object Object]"
+          whiletap="[object Object]"
+        >
+          Shop Now
+          <span
+            class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+          />
+        </div>
+      </div>
+    </div>
+    <div
+      class="MuiGrid-root css-vj1n65-MuiGrid-root"
+    >
+      <div
+        class="MuiContainer-root MuiContainer-maxWidthLg css-1oqqzyl-MuiContainer-root"
+      >
+        <div
+          class="MuiBox-root css-y8tuk2"
+          initial="[object Object]"
+          transition="[object Object]"
+          viewport="[object Object]"
+          whileinview="[object Object]"
+        >
+          <h2
+            class="MuiTypography-root MuiTypography-h4 MuiTypography-gutterBottom css-1hq7j2s-MuiTypography-root"
+          >
+            Stay Fresh with Our Newsletter
+          </h2>
+          <p
+            class="MuiTypography-root MuiTypography-body1 MuiTypography-paragraph css-1eqf12s-MuiTypography-root"
+          >
+            Subscribe to get exclusive offers, seasonal updates, and fruit-inspired recipes.
+          </p>
+          <form
+            action="#"
+          >
+            <div
+              class="MuiBox-root css-nh2c3l"
+            >
+              <div
+                class="MuiBox-root css-1kxonj9"
+              >
+                <div
+                  class="MuiFormControl-root MuiFormControl-fullWidth MuiTextField-root css-1urc22b-MuiFormControl-root-MuiTextField-root"
+                >
+                  <div
+                    class="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-colorPrimary MuiInputBase-fullWidth MuiInputBase-formControl MuiInputBase-adornedStart css-8j6b76-MuiInputBase-root-MuiOutlinedInput-root"
+                  >
+                    <svg
+                      fill="none"
+                      height="1em"
+                      stroke="currentColor"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      style="color: grey; margin-right: 8px;"
+                      viewBox="0 0 24 24"
+                      width="1em"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"
+                      />
+                      <polyline
+                        points="22,6 12,13 2,6"
+                      />
+                    </svg>
+                    <input
+                      aria-invalid="false"
+                      class="MuiInputBase-input MuiOutlinedInput-input MuiInputBase-inputAdornedStart css-1o9s3wi-MuiInputBase-input-MuiOutlinedInput-input"
+                      id=":r8:"
+                      name="email"
+                      placeholder="Enter your email"
+                      type="text"
+                      value=""
+                    />
+                    <fieldset
+                      aria-hidden="true"
+                      class="MuiOutlinedInput-notchedOutline css-r01yff-MuiNotchedOutlined-root-MuiOutlinedInput-notchedOutline"
+                    >
+                      <legend
+                        class="css-1whs34k-MuiNotchedOutlined-root"
+                      >
+                        <span
+                          class="notranslate"
+                        >
+                          ​
+                        </span>
+                      </legend>
+                    </fieldset>
+                  </div>
+                </div>
+              </div>
+              <div
+                whilehover="[object Object]"
+                whiletap="[object Object]"
+              >
+                <button
+                  class="MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedSecondary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButton-colorSecondary MuiButton-root MuiButton-contained MuiButton-containedSecondary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButton-colorSecondary css-12o9g6g-MuiButtonBase-root-MuiButton-root"
+                  tabindex="0"
+                  type="submit"
+                >
+                  Subscribe
+                  <span
+                    class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+                  />
+                </button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Home Page > Home Page Snapshots > when rendered in mobile view > should match snapshot when API is successful 1`] = `
+<div>
+  <div
+    class="MuiGrid-root css-1thbrpa-MuiGrid-root"
+  >
+    <div
+      class="MuiGrid-root css-15z23i5-MuiGrid-root"
+    >
+      <div
+        animate="[object Object]"
+        exit="[object Object]"
+        initial="[object Object]"
+        style="position: absolute; top: 0px; left: 0px; right: 0px; bottom: 0px; background-image: url("https://images.unsplash.com/photo-1490885578174-acda8905c2c6?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80"); background-size: cover; background-position: center center;"
+        transition="[object Object]"
+      />
+      <div
+        class="MuiContainer-root MuiContainer-maxWidthLg css-114lxs4-MuiContainer-root"
+      >
+        <div
+          animate="[object Object]"
+          initial="[object Object]"
+          transition="[object Object]"
+        >
+          <h1
+            class="MuiTypography-root MuiTypography-h2 MuiTypography-gutterBottom css-3z3j86-MuiTypography-root"
+          >
+            Fresh Fruits Delivered to Your Door
+          </h1>
+          <h6
+            class="MuiTypography-root MuiTypography-h6 css-1orzdsu-MuiTypography-root"
+          >
+            We source the freshest fruits directly from local farmers. Enjoy nature's goodness with just a few clicks.
+          </h6>
+          <div
+            style="display: inline-block;"
+            whilehover="[object Object]"
+            whiletap="[object Object]"
+          >
+            <button
+              class="MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedSecondary MuiButton-sizeLarge MuiButton-containedSizeLarge MuiButton-colorSecondary MuiButton-root MuiButton-contained MuiButton-containedSecondary MuiButton-sizeLarge MuiButton-containedSizeLarge MuiButton-colorSecondary css-1noct3x-MuiButtonBase-root-MuiButton-root"
+              tabindex="0"
+              type="button"
+            >
+              Shop Now
+              <span
+                class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+              />
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div
+      class="MuiGrid-root css-vj1n65-MuiGrid-root"
+    >
+      <div
+        class="MuiBox-root css-1td7tad"
+      >
+        <div
+          class="MuiTypography-root MuiTypography-h4 css-1n4lw5g-MuiTypography-root"
+          initial="[object Object]"
+          transition="[object Object]"
+          viewport="[object Object]"
+          whileinview="[object Object]"
+        >
+          Featured Products
+        </div>
+        <div
+          class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-colorPrimary MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-colorPrimary css-1e6y48t-MuiButtonBase-root-MuiButton-root"
+          role="button"
+          tabindex="0"
+          whilehover="[object Object]"
+        >
+          View All
+          <span
+            class="MuiButton-icon MuiButton-endIcon MuiButton-iconSizeMedium css-9tj150-MuiButton-endIcon"
+          >
+            <svg
+              fill="none"
+              height="1em"
+              stroke="currentColor"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              viewBox="0 0 24 24"
+              width="1em"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <line
+                x1="5"
+                x2="19"
+                y1="12"
+                y2="12"
+              />
+              <polyline
+                points="12 5 19 12 12 19"
+              />
+            </svg>
+          </span>
+          <span
+            class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+          />
+        </div>
+      </div>
+      <div
+        class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-3 css-1s324r5-MuiGrid-root"
+      />
+    </div>
+    <div
+      class="MuiGrid-root css-vj1n65-MuiGrid-root"
+    >
+      <div
+        class="MuiBox-root css-1td7tad"
+      >
+        <div
+          class="MuiTypography-root MuiTypography-h4 css-1n4lw5g-MuiTypography-root"
+          initial="[object Object]"
+          transition="[object Object]"
+          viewport="[object Object]"
+          whileinview="[object Object]"
+        >
+          Why Choose Us?
+        </div>
+      </div>
+      <div
+        class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-4 css-1xnaaoc-MuiGrid-root"
+      >
+        <div
+          class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-6 MuiGrid-grid-md-3 css-10voxkt-MuiGrid-root"
+          initial="[object Object]"
+          transition="[object Object]"
+          viewport="[object Object]"
+          whileinview="[object Object]"
+        >
+          <div
+            class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation1 MuiCard-root css-1menj7t-MuiPaper-root-MuiCard-root"
+          >
+            <img
+              alt="Farm Fresh"
+              class="MuiCardMedia-root MuiCardMedia-media MuiCardMedia-img css-l2hvxy-MuiCardMedia-root"
+              src="https://images.unsplash.com/photo-1665516930780-2b09cc3a89aa?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NDd8fGZhcm0lMjBmcmVzaCUyMGZydWl0c3xlbnwwfHwwfHx8MA%3D%3D"
+            />
+            <div
+              class="MuiCardContent-root css-6kfvpf-MuiCardContent-root"
+            >
+              <h3
+                class="MuiTypography-root MuiTypography-h6 MuiTypography-gutterBottom css-1oh0c0-MuiTypography-root"
+              >
+                Farm Fresh
+              </h3>
+              <p
+                class="MuiTypography-root MuiTypography-body2 css-r40f8v-MuiTypography-root"
+              >
+                Sourced directly from local farmers for maximum freshness.
+              </p>
+            </div>
+          </div>
+        </div>
+        <div
+          class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-6 MuiGrid-grid-md-3 css-10voxkt-MuiGrid-root"
+          initial="[object Object]"
+          transition="[object Object]"
+          viewport="[object Object]"
+          whileinview="[object Object]"
+        >
+          <div
+            class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation1 MuiCard-root css-1menj7t-MuiPaper-root-MuiCard-root"
+          >
+            <img
+              alt="Fast Delivery"
+              class="MuiCardMedia-root MuiCardMedia-media MuiCardMedia-img css-l2hvxy-MuiCardMedia-root"
+              src="https://images.pexels.com/photos/6868618/pexels-photo-6868618.jpeg?auto=compress&cs=tinysrgb&w=600"
+            />
+            <div
+              class="MuiCardContent-root css-6kfvpf-MuiCardContent-root"
+            >
+              <h3
+                class="MuiTypography-root MuiTypography-h6 MuiTypography-gutterBottom css-1oh0c0-MuiTypography-root"
+              >
+                Fast Delivery
+              </h3>
+              <p
+                class="MuiTypography-root MuiTypography-body2 css-r40f8v-MuiTypography-root"
+              >
+                Delivered to your door within 24 hours of ordering.
+              </p>
+            </div>
+          </div>
+        </div>
+        <div
+          class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-6 MuiGrid-grid-md-3 css-10voxkt-MuiGrid-root"
+          initial="[object Object]"
+          transition="[object Object]"
+          viewport="[object Object]"
+          whileinview="[object Object]"
+        >
+          <div
+            class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation1 MuiCard-root css-1menj7t-MuiPaper-root-MuiCard-root"
+          >
+            <img
+              alt="Organic Options"
+              class="MuiCardMedia-root MuiCardMedia-media MuiCardMedia-img css-l2hvxy-MuiCardMedia-root"
+              src="https://images.pexels.com/photos/3669640/pexels-photo-3669640.jpeg?auto=compress&cs=tinysrgb&w=600"
+            />
+            <div
+              class="MuiCardContent-root css-6kfvpf-MuiCardContent-root"
+            >
+              <h3
+                class="MuiTypography-root MuiTypography-h6 MuiTypography-gutterBottom css-1oh0c0-MuiTypography-root"
+              >
+                Organic Options
+              </h3>
+              <p
+                class="MuiTypography-root MuiTypography-body2 css-r40f8v-MuiTypography-root"
+              >
+                Certified organic fruits grown with care.
+              </p>
+            </div>
+          </div>
+        </div>
+        <div
+          class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-6 MuiGrid-grid-md-3 css-10voxkt-MuiGrid-root"
+          initial="[object Object]"
+          transition="[object Object]"
+          viewport="[object Object]"
+          whileinview="[object Object]"
+        >
+          <div
+            class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation1 MuiCard-root css-1menj7t-MuiPaper-root-MuiCard-root"
+          >
+            <img
+              alt="Satisfaction Guaranteed"
+              class="MuiCardMedia-root MuiCardMedia-media MuiCardMedia-img css-l2hvxy-MuiCardMedia-root"
+              src="https://images.pexels.com/photos/7564196/pexels-photo-7564196.jpeg?auto=compress&cs=tinysrgb&w=600"
+            />
+            <div
+              class="MuiCardContent-root css-6kfvpf-MuiCardContent-root"
+            >
+              <h3
+                class="MuiTypography-root MuiTypography-h6 MuiTypography-gutterBottom css-1oh0c0-MuiTypography-root"
+              >
+                Satisfaction Guaranteed
+              </h3>
+              <p
+                class="MuiTypography-root MuiTypography-body2 css-r40f8v-MuiTypography-root"
+              >
+                100% satisfaction or your money back.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div
+      class="MuiGrid-root css-vj1n65-MuiGrid-root"
+    >
+      <div
+        class="MuiBox-root css-4ssav0"
+        initial="[object Object]"
+        transition="[object Object]"
+        viewport="[object Object]"
+        whileinview="[object Object]"
+      >
+        <h2
+          class="MuiTypography-root MuiTypography-h4 MuiTypography-gutterBottom css-18dekmd-MuiTypography-root"
+        >
+          Ready to Order Fresh Fruits?
+        </h2>
+        <p
+          class="MuiTypography-root MuiTypography-body1 MuiTypography-paragraph css-oxxpx7-MuiTypography-root"
+        >
+          Join thousands of satisfied customers who enjoy our farm-fresh fruits delivered right to their doorstep.
+        </p>
+        <div
+          class="MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeLarge MuiButton-containedSizeLarge MuiButton-colorPrimary MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeLarge MuiButton-containedSizeLarge MuiButton-colorPrimary css-1rwjri4-MuiButtonBase-root-MuiButton-root"
+          role="button"
+          tabindex="0"
+          whilehover="[object Object]"
+          whiletap="[object Object]"
+        >
+          Shop Now
+          <span
+            class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+          />
+        </div>
+      </div>
+    </div>
+    <div
+      class="MuiGrid-root css-vj1n65-MuiGrid-root"
+    >
+      <div
+        class="MuiContainer-root MuiContainer-maxWidthLg css-1oqqzyl-MuiContainer-root"
+      >
+        <div
+          class="MuiBox-root css-y8tuk2"
+          initial="[object Object]"
+          transition="[object Object]"
+          viewport="[object Object]"
+          whileinview="[object Object]"
+        >
+          <h2
+            class="MuiTypography-root MuiTypography-h4 MuiTypography-gutterBottom css-1hq7j2s-MuiTypography-root"
+          >
+            Stay Fresh with Our Newsletter
+          </h2>
+          <p
+            class="MuiTypography-root MuiTypography-body1 MuiTypography-paragraph css-1eqf12s-MuiTypography-root"
+          >
+            Subscribe to get exclusive offers, seasonal updates, and fruit-inspired recipes.
+          </p>
+          <form
+            action="#"
+          >
+            <div
+              class="MuiBox-root css-nh2c3l"
+            >
+              <div
+                class="MuiBox-root css-1kxonj9"
+              >
+                <div
+                  class="MuiFormControl-root MuiFormControl-fullWidth MuiTextField-root css-1urc22b-MuiFormControl-root-MuiTextField-root"
+                >
+                  <div
+                    class="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-colorPrimary MuiInputBase-fullWidth MuiInputBase-formControl MuiInputBase-adornedStart css-8j6b76-MuiInputBase-root-MuiOutlinedInput-root"
+                  >
+                    <svg
+                      fill="none"
+                      height="1em"
+                      stroke="currentColor"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      style="color: grey; margin-right: 8px;"
+                      viewBox="0 0 24 24"
+                      width="1em"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"
+                      />
+                      <polyline
+                        points="22,6 12,13 2,6"
+                      />
+                    </svg>
+                    <input
+                      aria-invalid="false"
+                      class="MuiInputBase-input MuiOutlinedInput-input MuiInputBase-inputAdornedStart css-1o9s3wi-MuiInputBase-input-MuiOutlinedInput-input"
+                      id=":r9:"
+                      name="email"
+                      placeholder="Enter your email"
+                      type="text"
+                      value=""
+                    />
+                    <fieldset
+                      aria-hidden="true"
+                      class="MuiOutlinedInput-notchedOutline css-r01yff-MuiNotchedOutlined-root-MuiOutlinedInput-notchedOutline"
+                    >
+                      <legend
+                        class="css-1whs34k-MuiNotchedOutlined-root"
+                      >
+                        <span
+                          class="notranslate"
+                        >
+                          ​
+                        </span>
+                      </legend>
+                    </fieldset>
+                  </div>
+                </div>
+              </div>
+              <div
+                whilehover="[object Object]"
+                whiletap="[object Object]"
+              >
+                <button
+                  class="MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedSecondary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButton-colorSecondary MuiButton-root MuiButton-contained MuiButton-containedSecondary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButton-colorSecondary css-12o9g6g-MuiButtonBase-root-MuiButton-root"
+                  tabindex="0"
+                  type="submit"
+                >
+                  Subscribe
+                  <span
+                    class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+                  />
+                </button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Home Page > Home Page Snapshots > when rendered in web view > should match snapshot when API is loading 1`] = `
+<div>
+  <div
+    class="MuiGrid-root css-1thbrpa-MuiGrid-root"
+  >
+    <div
+      class="MuiGrid-root css-15z23i5-MuiGrid-root"
+    >
+      <div
+        animate="[object Object]"
+        exit="[object Object]"
+        initial="[object Object]"
+        style="position: absolute; top: 0px; left: 0px; right: 0px; bottom: 0px; background-image: url("https://images.unsplash.com/photo-1490885578174-acda8905c2c6?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80"); background-size: cover; background-position: center center;"
+        transition="[object Object]"
+      />
+      <div
+        class="MuiContainer-root MuiContainer-maxWidthLg css-114lxs4-MuiContainer-root"
+      >
+        <div
+          animate="[object Object]"
+          initial="[object Object]"
+          transition="[object Object]"
+        >
+          <h1
+            class="MuiTypography-root MuiTypography-h2 MuiTypography-gutterBottom css-3z3j86-MuiTypography-root"
+          >
+            Fresh Fruits Delivered to Your Door
+          </h1>
+          <h6
+            class="MuiTypography-root MuiTypography-h6 css-1orzdsu-MuiTypography-root"
+          >
+            We source the freshest fruits directly from local farmers. Enjoy nature's goodness with just a few clicks.
+          </h6>
+          <div
+            style="display: inline-block;"
+            whilehover="[object Object]"
+            whiletap="[object Object]"
+          >
+            <button
+              class="MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedSecondary MuiButton-sizeLarge MuiButton-containedSizeLarge MuiButton-colorSecondary MuiButton-root MuiButton-contained MuiButton-containedSecondary MuiButton-sizeLarge MuiButton-containedSizeLarge MuiButton-colorSecondary css-1noct3x-MuiButtonBase-root-MuiButton-root"
+              tabindex="0"
+              type="button"
+            >
+              Shop Now
+              <span
+                class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+              />
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div
+      class="MuiGrid-root css-vj1n65-MuiGrid-root"
+    >
+      <div
+        class="MuiBox-root css-1td7tad"
+      >
+        <div
+          class="MuiTypography-root MuiTypography-h4 css-1n4lw5g-MuiTypography-root"
+          initial="[object Object]"
+          transition="[object Object]"
+          viewport="[object Object]"
+          whileinview="[object Object]"
+        >
+          Featured Products
+        </div>
+        <div
+          class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-colorPrimary MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-colorPrimary css-1e6y48t-MuiButtonBase-root-MuiButton-root"
+          role="button"
+          tabindex="0"
+          whilehover="[object Object]"
+        >
+          View All
+          <span
+            class="MuiButton-icon MuiButton-endIcon MuiButton-iconSizeMedium css-9tj150-MuiButton-endIcon"
+          >
+            <svg
+              fill="none"
+              height="1em"
+              stroke="currentColor"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              viewBox="0 0 24 24"
+              width="1em"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <line
+                x1="5"
+                x2="19"
+                y1="12"
+                y2="12"
+              />
+              <polyline
+                points="12 5 19 12 12 19"
+              />
+            </svg>
+          </span>
+          <span
+            class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+          />
+        </div>
+      </div>
+      <div
+        class="MuiBox-root css-zzzt33"
+      >
+        <span
+          class="MuiCircularProgress-root MuiCircularProgress-indeterminate MuiCircularProgress-colorPrimary css-18lrjg1-MuiCircularProgress-root"
+          role="progressbar"
+          style="width: 40px; height: 40px;"
+        >
+          <svg
+            class="MuiCircularProgress-svg css-1idz92c-MuiCircularProgress-svg"
+            viewBox="22 22 44 44"
+          >
+            <circle
+              class="MuiCircularProgress-circle MuiCircularProgress-circleIndeterminate css-176wh8e-MuiCircularProgress-circle"
+              cx="44"
+              cy="44"
+              fill="none"
+              r="20.2"
+              stroke-width="3.6"
+            />
+          </svg>
+        </span>
+      </div>
+    </div>
+    <div
+      class="MuiGrid-root css-vj1n65-MuiGrid-root"
+    >
+      <div
+        class="MuiBox-root css-1td7tad"
+      >
+        <div
+          class="MuiTypography-root MuiTypography-h4 css-1n4lw5g-MuiTypography-root"
+          initial="[object Object]"
+          transition="[object Object]"
+          viewport="[object Object]"
+          whileinview="[object Object]"
+        >
+          Why Choose Us?
+        </div>
+      </div>
+      <div
+        class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-4 css-1xnaaoc-MuiGrid-root"
+      >
+        <div
+          class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-6 MuiGrid-grid-md-3 css-10voxkt-MuiGrid-root"
+          initial="[object Object]"
+          transition="[object Object]"
+          viewport="[object Object]"
+          whileinview="[object Object]"
+        >
+          <div
+            class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation1 MuiCard-root css-1menj7t-MuiPaper-root-MuiCard-root"
+          >
+            <img
+              alt="Farm Fresh"
+              class="MuiCardMedia-root MuiCardMedia-media MuiCardMedia-img css-l2hvxy-MuiCardMedia-root"
+              src="https://images.unsplash.com/photo-1665516930780-2b09cc3a89aa?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NDd8fGZhcm0lMjBmcmVzaCUyMGZydWl0c3xlbnwwfHwwfHx8MA%3D%3D"
+            />
+            <div
+              class="MuiCardContent-root css-6kfvpf-MuiCardContent-root"
+            >
+              <h3
+                class="MuiTypography-root MuiTypography-h6 MuiTypography-gutterBottom css-1oh0c0-MuiTypography-root"
+              >
+                Farm Fresh
+              </h3>
+              <p
+                class="MuiTypography-root MuiTypography-body2 css-r40f8v-MuiTypography-root"
+              >
+                Sourced directly from local farmers for maximum freshness.
+              </p>
+            </div>
+          </div>
+        </div>
+        <div
+          class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-6 MuiGrid-grid-md-3 css-10voxkt-MuiGrid-root"
+          initial="[object Object]"
+          transition="[object Object]"
+          viewport="[object Object]"
+          whileinview="[object Object]"
+        >
+          <div
+            class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation1 MuiCard-root css-1menj7t-MuiPaper-root-MuiCard-root"
+          >
+            <img
+              alt="Fast Delivery"
+              class="MuiCardMedia-root MuiCardMedia-media MuiCardMedia-img css-l2hvxy-MuiCardMedia-root"
+              src="https://images.pexels.com/photos/6868618/pexels-photo-6868618.jpeg?auto=compress&cs=tinysrgb&w=600"
+            />
+            <div
+              class="MuiCardContent-root css-6kfvpf-MuiCardContent-root"
+            >
+              <h3
+                class="MuiTypography-root MuiTypography-h6 MuiTypography-gutterBottom css-1oh0c0-MuiTypography-root"
+              >
+                Fast Delivery
+              </h3>
+              <p
+                class="MuiTypography-root MuiTypography-body2 css-r40f8v-MuiTypography-root"
+              >
+                Delivered to your door within 24 hours of ordering.
+              </p>
+            </div>
+          </div>
+        </div>
+        <div
+          class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-6 MuiGrid-grid-md-3 css-10voxkt-MuiGrid-root"
+          initial="[object Object]"
+          transition="[object Object]"
+          viewport="[object Object]"
+          whileinview="[object Object]"
+        >
+          <div
+            class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation1 MuiCard-root css-1menj7t-MuiPaper-root-MuiCard-root"
+          >
+            <img
+              alt="Organic Options"
+              class="MuiCardMedia-root MuiCardMedia-media MuiCardMedia-img css-l2hvxy-MuiCardMedia-root"
+              src="https://images.pexels.com/photos/3669640/pexels-photo-3669640.jpeg?auto=compress&cs=tinysrgb&w=600"
+            />
+            <div
+              class="MuiCardContent-root css-6kfvpf-MuiCardContent-root"
+            >
+              <h3
+                class="MuiTypography-root MuiTypography-h6 MuiTypography-gutterBottom css-1oh0c0-MuiTypography-root"
+              >
+                Organic Options
+              </h3>
+              <p
+                class="MuiTypography-root MuiTypography-body2 css-r40f8v-MuiTypography-root"
+              >
+                Certified organic fruits grown with care.
+              </p>
+            </div>
+          </div>
+        </div>
+        <div
+          class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-6 MuiGrid-grid-md-3 css-10voxkt-MuiGrid-root"
+          initial="[object Object]"
+          transition="[object Object]"
+          viewport="[object Object]"
+          whileinview="[object Object]"
+        >
+          <div
+            class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation1 MuiCard-root css-1menj7t-MuiPaper-root-MuiCard-root"
+          >
+            <img
+              alt="Satisfaction Guaranteed"
+              class="MuiCardMedia-root MuiCardMedia-media MuiCardMedia-img css-l2hvxy-MuiCardMedia-root"
+              src="https://images.pexels.com/photos/7564196/pexels-photo-7564196.jpeg?auto=compress&cs=tinysrgb&w=600"
+            />
+            <div
+              class="MuiCardContent-root css-6kfvpf-MuiCardContent-root"
+            >
+              <h3
+                class="MuiTypography-root MuiTypography-h6 MuiTypography-gutterBottom css-1oh0c0-MuiTypography-root"
+              >
+                Satisfaction Guaranteed
+              </h3>
+              <p
+                class="MuiTypography-root MuiTypography-body2 css-r40f8v-MuiTypography-root"
+              >
+                100% satisfaction or your money back.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div
+      class="MuiGrid-root css-vj1n65-MuiGrid-root"
+    >
+      <div
+        class="MuiBox-root css-4ssav0"
+        initial="[object Object]"
+        transition="[object Object]"
+        viewport="[object Object]"
+        whileinview="[object Object]"
+      >
+        <h2
+          class="MuiTypography-root MuiTypography-h4 MuiTypography-gutterBottom css-18dekmd-MuiTypography-root"
+        >
+          Ready to Order Fresh Fruits?
+        </h2>
+        <p
+          class="MuiTypography-root MuiTypography-body1 MuiTypography-paragraph css-oxxpx7-MuiTypography-root"
+        >
+          Join thousands of satisfied customers who enjoy our farm-fresh fruits delivered right to their doorstep.
+        </p>
+        <div
+          class="MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeLarge MuiButton-containedSizeLarge MuiButton-colorPrimary MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeLarge MuiButton-containedSizeLarge MuiButton-colorPrimary css-1rwjri4-MuiButtonBase-root-MuiButton-root"
+          role="button"
+          tabindex="0"
+          whilehover="[object Object]"
+          whiletap="[object Object]"
+        >
+          Shop Now
+          <span
+            class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+          />
+        </div>
+      </div>
+    </div>
+    <div
+      class="MuiGrid-root css-vj1n65-MuiGrid-root"
+    >
+      <div
+        class="MuiContainer-root MuiContainer-maxWidthLg css-1oqqzyl-MuiContainer-root"
+      >
+        <div
+          class="MuiBox-root css-y8tuk2"
+          initial="[object Object]"
+          transition="[object Object]"
+          viewport="[object Object]"
+          whileinview="[object Object]"
+        >
+          <h2
+            class="MuiTypography-root MuiTypography-h4 MuiTypography-gutterBottom css-1hq7j2s-MuiTypography-root"
+          >
+            Stay Fresh with Our Newsletter
+          </h2>
+          <p
+            class="MuiTypography-root MuiTypography-body1 MuiTypography-paragraph css-1eqf12s-MuiTypography-root"
+          >
+            Subscribe to get exclusive offers, seasonal updates, and fruit-inspired recipes.
+          </p>
+          <form
+            action="#"
+          >
+            <div
+              class="MuiBox-root css-nh2c3l"
+            >
+              <div
+                class="MuiBox-root css-1kxonj9"
+              >
+                <div
+                  class="MuiFormControl-root MuiFormControl-fullWidth MuiTextField-root css-1urc22b-MuiFormControl-root-MuiTextField-root"
+                >
+                  <div
+                    class="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-colorPrimary MuiInputBase-fullWidth MuiInputBase-formControl MuiInputBase-adornedStart css-8j6b76-MuiInputBase-root-MuiOutlinedInput-root"
+                  >
+                    <svg
+                      fill="none"
+                      height="1em"
+                      stroke="currentColor"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      style="color: grey; margin-right: 8px;"
+                      viewBox="0 0 24 24"
+                      width="1em"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"
+                      />
+                      <polyline
+                        points="22,6 12,13 2,6"
+                      />
+                    </svg>
+                    <input
+                      aria-invalid="false"
+                      class="MuiInputBase-input MuiOutlinedInput-input MuiInputBase-inputAdornedStart css-1o9s3wi-MuiInputBase-input-MuiOutlinedInput-input"
+                      id=":r6:"
+                      name="email"
+                      placeholder="Enter your email"
+                      type="text"
+                      value=""
+                    />
+                    <fieldset
+                      aria-hidden="true"
+                      class="MuiOutlinedInput-notchedOutline css-r01yff-MuiNotchedOutlined-root-MuiOutlinedInput-notchedOutline"
+                    >
+                      <legend
+                        class="css-1whs34k-MuiNotchedOutlined-root"
+                      >
+                        <span
+                          class="notranslate"
+                        >
+                          ​
+                        </span>
+                      </legend>
+                    </fieldset>
+                  </div>
+                </div>
+              </div>
+              <div
+                whilehover="[object Object]"
+                whiletap="[object Object]"
+              >
+                <button
+                  class="MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedSecondary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButton-colorSecondary MuiButton-root MuiButton-contained MuiButton-containedSecondary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButton-colorSecondary css-12o9g6g-MuiButtonBase-root-MuiButton-root"
+                  tabindex="0"
+                  type="submit"
+                >
+                  Subscribe
+                  <span
+                    class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+                  />
+                </button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Home Page > Home Page Snapshots > when rendered in web view > should match snapshot when API is successful 1`] = `
+<div>
+  <div
+    class="MuiGrid-root css-1thbrpa-MuiGrid-root"
+  >
+    <div
+      class="MuiGrid-root css-15z23i5-MuiGrid-root"
+    >
+      <div
+        animate="[object Object]"
+        exit="[object Object]"
+        initial="[object Object]"
+        style="position: absolute; top: 0px; left: 0px; right: 0px; bottom: 0px; background-image: url("https://images.unsplash.com/photo-1490885578174-acda8905c2c6?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80"); background-size: cover; background-position: center center;"
+        transition="[object Object]"
+      />
+      <div
+        class="MuiContainer-root MuiContainer-maxWidthLg css-114lxs4-MuiContainer-root"
+      >
+        <div
+          animate="[object Object]"
+          initial="[object Object]"
+          transition="[object Object]"
+        >
+          <h1
+            class="MuiTypography-root MuiTypography-h2 MuiTypography-gutterBottom css-3z3j86-MuiTypography-root"
+          >
+            Fresh Fruits Delivered to Your Door
+          </h1>
+          <h6
+            class="MuiTypography-root MuiTypography-h6 css-1orzdsu-MuiTypography-root"
+          >
+            We source the freshest fruits directly from local farmers. Enjoy nature's goodness with just a few clicks.
+          </h6>
+          <div
+            style="display: inline-block;"
+            whilehover="[object Object]"
+            whiletap="[object Object]"
+          >
+            <button
+              class="MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedSecondary MuiButton-sizeLarge MuiButton-containedSizeLarge MuiButton-colorSecondary MuiButton-root MuiButton-contained MuiButton-containedSecondary MuiButton-sizeLarge MuiButton-containedSizeLarge MuiButton-colorSecondary css-1noct3x-MuiButtonBase-root-MuiButton-root"
+              tabindex="0"
+              type="button"
+            >
+              Shop Now
+              <span
+                class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+              />
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div
+      class="MuiGrid-root css-vj1n65-MuiGrid-root"
+    >
+      <div
+        class="MuiBox-root css-1td7tad"
+      >
+        <div
+          class="MuiTypography-root MuiTypography-h4 css-1n4lw5g-MuiTypography-root"
+          initial="[object Object]"
+          transition="[object Object]"
+          viewport="[object Object]"
+          whileinview="[object Object]"
+        >
+          Featured Products
+        </div>
+        <div
+          class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-colorPrimary MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-colorPrimary css-1e6y48t-MuiButtonBase-root-MuiButton-root"
+          role="button"
+          tabindex="0"
+          whilehover="[object Object]"
+        >
+          View All
+          <span
+            class="MuiButton-icon MuiButton-endIcon MuiButton-iconSizeMedium css-9tj150-MuiButton-endIcon"
+          >
+            <svg
+              fill="none"
+              height="1em"
+              stroke="currentColor"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              viewBox="0 0 24 24"
+              width="1em"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <line
+                x1="5"
+                x2="19"
+                y1="12"
+                y2="12"
+              />
+              <polyline
+                points="12 5 19 12 12 19"
+              />
+            </svg>
+          </span>
+          <span
+            class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+          />
+        </div>
+      </div>
+      <div
+        class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-3 css-1s324r5-MuiGrid-root"
+      />
+    </div>
+    <div
+      class="MuiGrid-root css-vj1n65-MuiGrid-root"
+    >
+      <div
+        class="MuiBox-root css-1td7tad"
+      >
+        <div
+          class="MuiTypography-root MuiTypography-h4 css-1n4lw5g-MuiTypography-root"
+          initial="[object Object]"
+          transition="[object Object]"
+          viewport="[object Object]"
+          whileinview="[object Object]"
+        >
+          Why Choose Us?
+        </div>
+      </div>
+      <div
+        class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-4 css-1xnaaoc-MuiGrid-root"
+      >
+        <div
+          class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-6 MuiGrid-grid-md-3 css-10voxkt-MuiGrid-root"
+          initial="[object Object]"
+          transition="[object Object]"
+          viewport="[object Object]"
+          whileinview="[object Object]"
+        >
+          <div
+            class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation1 MuiCard-root css-1menj7t-MuiPaper-root-MuiCard-root"
+          >
+            <img
+              alt="Farm Fresh"
+              class="MuiCardMedia-root MuiCardMedia-media MuiCardMedia-img css-l2hvxy-MuiCardMedia-root"
+              src="https://images.unsplash.com/photo-1665516930780-2b09cc3a89aa?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NDd8fGZhcm0lMjBmcmVzaCUyMGZydWl0c3xlbnwwfHwwfHx8MA%3D%3D"
+            />
+            <div
+              class="MuiCardContent-root css-6kfvpf-MuiCardContent-root"
+            >
+              <h3
+                class="MuiTypography-root MuiTypography-h6 MuiTypography-gutterBottom css-1oh0c0-MuiTypography-root"
+              >
+                Farm Fresh
+              </h3>
+              <p
+                class="MuiTypography-root MuiTypography-body2 css-r40f8v-MuiTypography-root"
+              >
+                Sourced directly from local farmers for maximum freshness.
+              </p>
+            </div>
+          </div>
+        </div>
+        <div
+          class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-6 MuiGrid-grid-md-3 css-10voxkt-MuiGrid-root"
+          initial="[object Object]"
+          transition="[object Object]"
+          viewport="[object Object]"
+          whileinview="[object Object]"
+        >
+          <div
+            class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation1 MuiCard-root css-1menj7t-MuiPaper-root-MuiCard-root"
+          >
+            <img
+              alt="Fast Delivery"
+              class="MuiCardMedia-root MuiCardMedia-media MuiCardMedia-img css-l2hvxy-MuiCardMedia-root"
+              src="https://images.pexels.com/photos/6868618/pexels-photo-6868618.jpeg?auto=compress&cs=tinysrgb&w=600"
+            />
+            <div
+              class="MuiCardContent-root css-6kfvpf-MuiCardContent-root"
+            >
+              <h3
+                class="MuiTypography-root MuiTypography-h6 MuiTypography-gutterBottom css-1oh0c0-MuiTypography-root"
+              >
+                Fast Delivery
+              </h3>
+              <p
+                class="MuiTypography-root MuiTypography-body2 css-r40f8v-MuiTypography-root"
+              >
+                Delivered to your door within 24 hours of ordering.
+              </p>
+            </div>
+          </div>
+        </div>
+        <div
+          class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-6 MuiGrid-grid-md-3 css-10voxkt-MuiGrid-root"
+          initial="[object Object]"
+          transition="[object Object]"
+          viewport="[object Object]"
+          whileinview="[object Object]"
+        >
+          <div
+            class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation1 MuiCard-root css-1menj7t-MuiPaper-root-MuiCard-root"
+          >
+            <img
+              alt="Organic Options"
+              class="MuiCardMedia-root MuiCardMedia-media MuiCardMedia-img css-l2hvxy-MuiCardMedia-root"
+              src="https://images.pexels.com/photos/3669640/pexels-photo-3669640.jpeg?auto=compress&cs=tinysrgb&w=600"
+            />
+            <div
+              class="MuiCardContent-root css-6kfvpf-MuiCardContent-root"
+            >
+              <h3
+                class="MuiTypography-root MuiTypography-h6 MuiTypography-gutterBottom css-1oh0c0-MuiTypography-root"
+              >
+                Organic Options
+              </h3>
+              <p
+                class="MuiTypography-root MuiTypography-body2 css-r40f8v-MuiTypography-root"
+              >
+                Certified organic fruits grown with care.
+              </p>
+            </div>
+          </div>
+        </div>
+        <div
+          class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-6 MuiGrid-grid-md-3 css-10voxkt-MuiGrid-root"
+          initial="[object Object]"
+          transition="[object Object]"
+          viewport="[object Object]"
+          whileinview="[object Object]"
+        >
+          <div
+            class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation1 MuiCard-root css-1menj7t-MuiPaper-root-MuiCard-root"
+          >
+            <img
+              alt="Satisfaction Guaranteed"
+              class="MuiCardMedia-root MuiCardMedia-media MuiCardMedia-img css-l2hvxy-MuiCardMedia-root"
+              src="https://images.pexels.com/photos/7564196/pexels-photo-7564196.jpeg?auto=compress&cs=tinysrgb&w=600"
+            />
+            <div
+              class="MuiCardContent-root css-6kfvpf-MuiCardContent-root"
+            >
+              <h3
+                class="MuiTypography-root MuiTypography-h6 MuiTypography-gutterBottom css-1oh0c0-MuiTypography-root"
+              >
+                Satisfaction Guaranteed
+              </h3>
+              <p
+                class="MuiTypography-root MuiTypography-body2 css-r40f8v-MuiTypography-root"
+              >
+                100% satisfaction or your money back.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div
+      class="MuiGrid-root css-vj1n65-MuiGrid-root"
+    >
+      <div
+        class="MuiBox-root css-4ssav0"
+        initial="[object Object]"
+        transition="[object Object]"
+        viewport="[object Object]"
+        whileinview="[object Object]"
+      >
+        <h2
+          class="MuiTypography-root MuiTypography-h4 MuiTypography-gutterBottom css-18dekmd-MuiTypography-root"
+        >
+          Ready to Order Fresh Fruits?
+        </h2>
+        <p
+          class="MuiTypography-root MuiTypography-body1 MuiTypography-paragraph css-oxxpx7-MuiTypography-root"
+        >
+          Join thousands of satisfied customers who enjoy our farm-fresh fruits delivered right to their doorstep.
+        </p>
+        <div
+          class="MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeLarge MuiButton-containedSizeLarge MuiButton-colorPrimary MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeLarge MuiButton-containedSizeLarge MuiButton-colorPrimary css-1rwjri4-MuiButtonBase-root-MuiButton-root"
+          role="button"
+          tabindex="0"
+          whilehover="[object Object]"
+          whiletap="[object Object]"
+        >
+          Shop Now
+          <span
+            class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+          />
+        </div>
+      </div>
+    </div>
+    <div
+      class="MuiGrid-root css-vj1n65-MuiGrid-root"
+    >
+      <div
+        class="MuiContainer-root MuiContainer-maxWidthLg css-1oqqzyl-MuiContainer-root"
+      >
+        <div
+          class="MuiBox-root css-y8tuk2"
+          initial="[object Object]"
+          transition="[object Object]"
+          viewport="[object Object]"
+          whileinview="[object Object]"
+        >
+          <h2
+            class="MuiTypography-root MuiTypography-h4 MuiTypography-gutterBottom css-1hq7j2s-MuiTypography-root"
+          >
+            Stay Fresh with Our Newsletter
+          </h2>
+          <p
+            class="MuiTypography-root MuiTypography-body1 MuiTypography-paragraph css-1eqf12s-MuiTypography-root"
+          >
+            Subscribe to get exclusive offers, seasonal updates, and fruit-inspired recipes.
+          </p>
+          <form
+            action="#"
+          >
+            <div
+              class="MuiBox-root css-nh2c3l"
+            >
+              <div
+                class="MuiBox-root css-1kxonj9"
+              >
+                <div
+                  class="MuiFormControl-root MuiFormControl-fullWidth MuiTextField-root css-1urc22b-MuiFormControl-root-MuiTextField-root"
+                >
+                  <div
+                    class="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-colorPrimary MuiInputBase-fullWidth MuiInputBase-formControl MuiInputBase-adornedStart css-8j6b76-MuiInputBase-root-MuiOutlinedInput-root"
+                  >
+                    <svg
+                      fill="none"
+                      height="1em"
+                      stroke="currentColor"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      style="color: grey; margin-right: 8px;"
+                      viewBox="0 0 24 24"
+                      width="1em"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"
+                      />
+                      <polyline
+                        points="22,6 12,13 2,6"
+                      />
+                    </svg>
+                    <input
+                      aria-invalid="false"
+                      class="MuiInputBase-input MuiOutlinedInput-input MuiInputBase-inputAdornedStart css-1o9s3wi-MuiInputBase-input-MuiOutlinedInput-input"
+                      id=":r7:"
+                      name="email"
+                      placeholder="Enter your email"
+                      type="text"
+                      value=""
+                    />
+                    <fieldset
+                      aria-hidden="true"
+                      class="MuiOutlinedInput-notchedOutline css-r01yff-MuiNotchedOutlined-root-MuiOutlinedInput-notchedOutline"
+                    >
+                      <legend
+                        class="css-1whs34k-MuiNotchedOutlined-root"
+                      >
+                        <span
+                          class="notranslate"
+                        >
+                          ​
+                        </span>
+                      </legend>
+                    </fieldset>
+                  </div>
+                </div>
+              </div>
+              <div
+                whilehover="[object Object]"
+                whiletap="[object Object]"
+              >
+                <button
+                  class="MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedSecondary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButton-colorSecondary MuiButton-root MuiButton-contained MuiButton-containedSecondary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButton-colorSecondary css-12o9g6g-MuiButtonBase-root-MuiButton-root"
+                  tabindex="0"
+                  type="submit"
+                >
+                  Subscribe
+                  <span
+                    class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+                  />
+                </button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;

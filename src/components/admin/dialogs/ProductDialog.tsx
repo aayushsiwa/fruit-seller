@@ -1,4 +1,4 @@
-import { ProductDialogProps } from '@/types/index';
+import { IProduct } from '@/types/index';
 import {
   Button,
   Dialog,
@@ -80,10 +80,10 @@ const ProductDialog: React.FC<ProductDialogProps> = ({
             </Grid>
             <Grid item xs={12} sm={6}>
               <TextField
-                name="quantity"
-                label="Quantity"
+                name="stock"
+                label="Stock"
                 type="number"
-                defaultValue={product.quantity || 0}
+                defaultValue={product.stock || 0}
                 fullWidth
                 margin="normal"
                 required
@@ -144,3 +144,11 @@ const ProductDialog: React.FC<ProductDialogProps> = ({
 };
 
 export default ProductDialog;
+
+export interface ProductDialogProps {
+  open: boolean;
+  product: Partial<IProduct>;
+  onClose: () => void;
+  onSave: (event: React.FormEvent<HTMLFormElement>) => void;
+  isLoading: boolean;
+}

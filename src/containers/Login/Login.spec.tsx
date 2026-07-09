@@ -1,137 +1,49 @@
-import { render, screen } from '@testing-library/react';
-import { act, renderHook } from '@testing-library/react';
+import {
+  act,
+  mockLogin,
+  mockPush,
+  mockSignIn,
+  mockUseSession,
+  render,
+  renderHook,
+  screen,
+  waitFor,
+} from '@/src/utils/test';
 
 import Login from './Login';
-
-const mockSignIn = jest.fn();
-const mockUseSession = jest.fn();
-const mockRouterPush = jest.fn();
-const mockShowSnackbar = jest.fn();
-const mockLogin = jest.fn();
-
-let capturedLoginOnSubmit:
-  ((values: { email: string; password: string }) => Promise<void>) | undefined;
-
-const mockFormik = {
-  values: { email: '', password: '' },
-  touched: {} as Record<string, boolean>,
-  errors: {} as Record<string, string>,
-  handleSubmit: jest.fn(),
-  handleChange: jest.fn(),
-  handleBlur: jest.fn(),
-  isSubmitting: false,
-};
-
-const mockUseFormik = jest.fn(
-  ({
-    onSubmit,
-  }: {
-    onSubmit: (values: { email: string; password: string }) => Promise<void>;
-  }) => {
-    capturedLoginOnSubmit = onSubmit;
-    return mockFormik;
-  }
-);
-
-jest.mock('next-auth/react', () => ({
-  signIn: (...args: unknown[]) =>
-    (mockSignIn as (...args: unknown[]) => unknown)(...args),
-  useSession: () => mockUseSession(),
-}));
-
-jest.mock('next/router', () => ({
-  useRouter: () => ({ push: mockRouterPush }),
-}));
-
-jest.mock('formik', () => ({
-  useFormik: (args: unknown) =>
-    mockUseFormik(
-      args as {
-        onSubmit: (values: {
-          email: string;
-          password: string;
-        }) => Promise<void>;
-      }
-    ),
-}));
-
-jest.mock('@/src/contexts/SnackBarContext', () => ({
-  useSnackbar: () => ({ showSnackbar: mockShowSnackbar }),
-}));
-
-jest.mock('@/src/contexts/AuthContext', () => ({
-  useAuth: () => ({ login: mockLogin }),
-}));
-
-jest.mock('@/lib/validation/loginSchema', () => ({
-  loginInitialValues: { email: '', password: '' },
-  loginSchema: { validate: jest.fn() },
-}));
-
-jest.mock('react-icons/fi', () => ({
-  FiEye: () => <svg data-testid="FiEye" />,
-  FiEyeOff: () => <svg data-testid="FiEyeOff" />,
-}));
-
-jest.mock('react-icons/tb', () => ({
-  TbBrandGoogle: () => <svg data-testid="TbBrandGoogle" />,
-}));
-
-jest.mock('@mui/styles', () => ({
-  makeStyles: () => () => ({}),
-}));
-
-jest.mock('next/link', () => {
-  const MockLink = ({
-    children,
-    href,
-  }: {
-    children: React.ReactNode;
-    href: string;
-  }) => <a href={href}>{children}</a>;
-  MockLink.displayName = 'MockLink';
-  return MockLink;
-});
-
-const mockUseLoginReturn = jest.fn();
-jest.mock('./Login.hooks', () => ({
-  __esModule: true,
-  default: (...args: unknown[]) => mockUseLoginReturn(...args),
-}));
+import * as LoginHooks from './Login.hooks';
 
 describe('Login - Hooks', () => {
-  let useLogin: typeof import('./Login.hooks').default;
-
-  beforeAll(() => {
-    useLogin = jest.requireActual('./Login.hooks').default;
-  });
-
   beforeEach(() => {
-    jest.clearAllMocks();
+    vi.clearAllMocks();
     mockUseSession.mockReturnValue({ data: null, status: 'unauthenticated' });
-    capturedLoginOnSubmit = undefined;
   });
 
   it('should call login and redirect on form submission', async () => {
     mockLogin.mockResolvedValue(undefined);
 
-    renderHook(() => useLogin());
+    const { result } = renderHook(() => LoginHooks.default());
 
     await act(async () => {
-      await capturedLoginOnSubmit!({
+      await result.current.formik.setValues({
         email: 'test@example.com',
         password: 'secret123',
       });
     });
 
-    expect(mockLogin).toHaveBeenCalledWith('test@example.com', 'secret123');
-    expect(mockRouterPush).toHaveBeenCalledWith('/');
+    await act(async () => {
+      await result.current.formik.submitForm();
+    });
+    await waitFor(() => {
+      expect(mockLogin).toHaveBeenCalledWith('test@example.com', 'secret123');
+      expect(mockPush).toHaveBeenCalledWith('/');
+    });
   });
 
   it('should call signIn on handleGoogleSignIn', async () => {
     mockSignIn.mockResolvedValue(undefined);
 
-    const { result } = renderHook(() => useLogin());
+    const { result } = renderHook(() => LoginHooks.default());
 
     await act(async () => {
       await result.current.handleGoogleSignIn();
@@ -143,7 +55,7 @@ describe('Login - Hooks', () => {
   });
 
   it('should toggle showPassword', () => {
-    const { result } = renderHook(() => useLogin());
+    const { result } = renderHook(() => LoginHooks.default());
 
     expect(result.current.showPassword).toBe(false);
 
@@ -163,39 +75,41 @@ describe('Login - UI', () => {
         values: { email: '', password: '' },
         touched: {} as Record<string, boolean>,
         errors: {} as Record<string, string>,
-        handleSubmit: jest.fn(),
-        handleChange: jest.fn(),
-        handleBlur: jest.fn(),
+        handleSubmit: vi.fn(),
+        handleChange: vi.fn(),
+        handleBlur: vi.fn(),
         isSubmitting: false,
         ...((formikOverrides as Record<string, unknown>) || {}),
       },
       showPassword: false,
-      handleClickShowPassword: jest.fn(),
-      handleGoogleSignIn: jest.fn(),
+      handleClickShowPassword: vi.fn(),
+      handleGoogleSignIn: vi.fn(),
       isLoading: false,
       ...restOverrides,
-    };
+    } as any;
   };
 
   beforeEach(() => {
-    jest.clearAllMocks();
-    mockUseLoginReturn.mockReturnValue(buildMockReturn());
+    vi.clearAllMocks();
   });
 
   it('should render loading state', () => {
-    mockUseLoginReturn.mockReturnValue(buildMockReturn({ isLoading: true }));
+    vi.spyOn(LoginHooks, 'default').mockReturnValue(
+      buildMockReturn({ isLoading: true })
+    );
 
     render(<Login />);
     expect(screen.getByText('Loading...')).toBeInTheDocument();
   });
 
   it('should match snapshot', () => {
+    vi.spyOn(LoginHooks, 'default').mockReturnValue(buildMockReturn());
     const { asFragment } = render(<Login />);
     expect(asFragment()).toMatchSnapshot();
   });
 
   it('should show "Signing in..." when formik.isSubmitting is true', () => {
-    mockUseLoginReturn.mockReturnValue(
+    vi.spyOn(LoginHooks, 'default').mockReturnValue(
       buildMockReturn({
         formik: { isSubmitting: true },
       })

@@ -1,14 +1,9 @@
+import { getProductAPI } from '@/lib/api/products/getProduct';
 import { useCart } from '@/src/contexts/CartContext';
-import { CartItem, UseCartPageReturn } from '@/types/index';
+import { CartItem, IProduct } from '@/types/index';
 import { useQueries } from '@tanstack/react-query';
-import axios from 'axios';
 import { signIn, useSession } from 'next-auth/react';
 import { useRouter } from 'next/router';
-
-const fetchProductDetails = async (id: string) => {
-  const response = await axios.get(`/api/products/${id}`);
-  return response.data;
-};
 
 export const useCartPage = (): UseCartPageReturn => {
   const router = useRouter();
@@ -26,7 +21,10 @@ export const useCartPage = (): UseCartPageReturn => {
   const productQueries = useQueries({
     queries: cart.map((item: CartItem) => ({
       queryKey: ['product', item.id],
-      queryFn: () => fetchProductDetails(item.id),
+      queryFn: async () => {
+        const response = await getProductAPI(item.id);
+        return response.data.product;
+      },
       enabled: !cartLoading,
     })),
   });
@@ -78,4 +76,23 @@ export const useCartPage = (): UseCartPageReturn => {
     getCartTotal,
     clearCart,
   };
+};
+
+export type UseCartPageReturn = {
+  cart: CartItem[];
+  products: (IProduct | undefined)[];
+  isLoadingProducts: boolean;
+  hasError: boolean;
+  cartLoading: boolean;
+  isLoading: boolean;
+  handleQuantityChange: (
+    id: string,
+    newQuantity: number,
+    maxQuantity: number
+  ) => void;
+  handleRemoveItem: (id: string) => void;
+  handleContinueShopping: () => void;
+  handleCheckout: () => void;
+  getCartTotal: (products: (IProduct | undefined)[]) => number;
+  clearCart: () => void;
 };

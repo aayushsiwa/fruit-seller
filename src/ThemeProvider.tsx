@@ -1,5 +1,4 @@
 import { darkTheme, theme } from '@/src/theme';
-import { ThemeMode, ThemeSwitchContextType } from '@/types/index';
 import CssBaseline from '@mui/material/CssBaseline';
 import { ThemeProvider } from '@mui/material/styles';
 import useMediaQuery from '@mui/material/useMediaQuery';
@@ -62,3 +61,12 @@ export const ThemeSwitchProvider: React.FC<{ children: React.ReactNode }> = ({
     </ThemeSwitchContext.Provider>
   );
 };
+
+export interface ThemeSwitchContextType {
+  isDarkMode: boolean;
+  toggleTheme: () => void;
+  themeMode: ThemeMode;
+  setThemeMode: (mode: ThemeMode) => void;
+}
+
+export type ThemeMode = 'light' | 'dark' | 'system';

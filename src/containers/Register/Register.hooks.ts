@@ -4,9 +4,9 @@ import {
 } from '@/lib/validation/registerSchema';
 import { useAuth } from '@/src/contexts/AuthContext';
 import { useSnackbar } from '@/src/contexts/SnackBarContext';
-import { RegisterData, UseRegisterReturn } from '@/types/index';
-import { useMutation } from '@tanstack/react-query';
-import { useFormik } from 'formik';
+import { RegisterData } from '@/types/index';
+import { UseMutationResult, useMutation } from '@tanstack/react-query';
+import { FormikProps, useFormik } from 'formik';
 import { signIn } from 'next-auth/react';
 import { useRouter } from 'next/router';
 import { useCallback, useState } from 'react';
@@ -95,3 +95,16 @@ const useRegister = (): UseRegisterReturn => {
 };
 
 export default useRegister;
+
+export type UseRegisterReturn = {
+  register: (data: RegisterData) => Promise<void>;
+  isLoading: boolean;
+  isGoogleLoading: boolean;
+  showPassword: boolean;
+  handleClickShowPassword: () => void;
+  handleGoogleSignIn: () => Promise<void>;
+  formik: FormikProps<
+    RegisterData & { confirmPassword: string; agreeTerms: boolean }
+  >;
+  registerMutation: UseMutationResult<void, Error, RegisterData>;
+};

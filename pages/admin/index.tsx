@@ -20,7 +20,10 @@ export default function AdminPage() {
     <>
       <Head>
         <title>Admin Dashboard | Fruit Seller</title>
-        <meta name="description" content="Manage inventory, products, orders, and users for the Fruit Seller application." />
+        <meta
+          name="description"
+          content="Manage inventory, products, orders, and users for the Fruit Seller application."
+        />
         <meta name="robots" content="noindex, nofollow" />
       </Head>
       <AdminDashboard />

@@ -1,5 +1,5 @@
 import ProductCard from '@/src/components/ProductCard';
-import { ProductGridProps } from '@/types/index';
+import { IProduct } from '@/types/index';
 import { Box, Button, CircularProgress, Grid, Typography } from '@mui/material';
 
 export const ProductGrid: React.FC<ProductGridProps> = ({
@@ -36,7 +36,7 @@ export const ProductGrid: React.FC<ProductGridProps> = ({
   }
 
   return (
-    <Grid container spacing={3}>
+    <Grid data-testid="product-grid" container spacing={3}>
       {filteredProducts.length ? (
         filteredProducts.map((product) => (
           <Grid item key={product.id} xs={12} sm={6} md={4} lg={3}>
@@ -59,3 +59,10 @@ export const ProductGrid: React.FC<ProductGridProps> = ({
     </Grid>
   );
 };
+
+export interface ProductGridProps {
+  filteredProducts: IProduct[];
+  isLoading: boolean;
+  error: string | null;
+  handleResetFilters: () => void;
+}

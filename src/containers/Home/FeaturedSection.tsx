@@ -1,5 +1,5 @@
 import ProductCard from '@/src/components/ProductCard';
-import { FeaturedSectionProps, ItemType } from '@/types/index';
+import { IProduct } from '@/types/index';
 import { Box, Button, CircularProgress, Grid, Typography } from '@mui/material';
 import { motion } from 'framer-motion';
 import { useRouter } from 'next/router';
@@ -54,8 +54,8 @@ export const FeaturedSection: React.FC<FeaturedSectionProps> = ({
         </Typography>
       ) : (
         <Grid container spacing={3} justifyContent="center" alignItems="center">
-          {featuredProducts?.map((product: ItemType, index: number) =>
-            product.quantity > 0 ? (
+          {featuredProducts?.map((product: IProduct, index: number) =>
+            product.stock > 0 ? (
               <Grid
                 item
                 key={product.id}
@@ -78,3 +78,9 @@ export const FeaturedSection: React.FC<FeaturedSectionProps> = ({
     </Grid>
   );
 };
+
+export interface FeaturedSectionProps {
+  featuredProducts: IProduct[];
+  isLoading: boolean;
+  error: string | null;
+}

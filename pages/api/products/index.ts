@@ -60,7 +60,7 @@ export default async function handler(
       console.error('Supabase GET error:', error);
       return res.status(500).json({ error: 'Failed to fetch products' });
     }
-    return res.status(200).json(data);
+    return res.status(200).json({ products: data });
   }
 
   if (req.method === 'POST') {
@@ -74,7 +74,7 @@ export default async function handler(
       description,
       image,
       category,
-      quantity,
+      stock,
       discount,
       is_seasonal,
     } = req.body;
@@ -84,7 +84,7 @@ export default async function handler(
       price,
       description,
       category,
-      quantity,
+      stock,
     });
     if (!validation.isValid) {
       return res.status(400).json({ error: validation.error });
@@ -98,7 +98,7 @@ export default async function handler(
         description,
         image,
         category,
-        quantity,
+        quantity: stock,
         discount: discount || 0,
         is_seasonal: is_seasonal || false,
       })
@@ -124,7 +124,7 @@ export default async function handler(
       description,
       image,
       category,
-      quantity,
+      stock,
       discount,
       is_seasonal,
     } = req.body;
@@ -133,13 +133,13 @@ export default async function handler(
       return res.status(400).json({ error: 'Missing product ID' });
     }
 
-    if (name || price || description || category || quantity != null) {
+    if (name || price || description || category || stock != null) {
       const validation = validateProductData({
         name,
         price,
         description,
         category,
-        quantity,
+        stock,
       });
       if (!validation.isValid) {
         return res.status(400).json({ error: validation.error });
@@ -154,7 +154,7 @@ export default async function handler(
         description,
         image,
         category,
-        quantity,
+        quantity: stock,
         discount: discount || 0,
         is_seasonal: is_seasonal || false,
       })

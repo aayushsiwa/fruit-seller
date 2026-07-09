@@ -1,9 +1,11 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`ProductCard Snapshot renders correctly and matches snapshot 1`] = `
+exports[`ProductCard Snapshot > renders correctly and matches snapshot 1`] = `
 <DocumentFragment>
   <div
     class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation1 MuiCard-root css-1dc3bjb-MuiPaper-root-MuiCard-root"
+    transition="[object Object]"
+    whilehover="[object Object]"
   >
     <img
       alt="Grapes"
@@ -53,6 +55,8 @@ exports[`ProductCard Snapshot renders correctly and matches snapshot 1`] = `
         class="MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButton-colorPrimary MuiButton-fullWidth MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButton-colorPrimary MuiButton-fullWidth css-1fu7jd5-MuiButtonBase-root-MuiButton-root"
         role="button"
         tabindex="0"
+        whilehover="[object Object]"
+        whiletap="[object Object]"
       >
         <span
           class="MuiButton-icon MuiButton-startIcon MuiButton-iconSizeMedium css-1d6wzja-MuiButton-startIcon"

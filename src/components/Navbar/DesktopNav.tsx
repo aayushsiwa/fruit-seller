@@ -1,4 +1,4 @@
-import { DesktopNavProps } from '@/types/index';
+import { SessionUser } from '@/types/index';
 import {
   Avatar,
   Box,
@@ -12,6 +12,8 @@ import {
 } from '@mui/material';
 import { Badge } from '@mui/material';
 import { useTheme } from '@mui/material/styles';
+import { useRouter } from 'next/router';
+import { MouseEvent } from 'react';
 import React from 'react';
 import { FiSearch, FiShoppingCart, FiUser } from 'react-icons/fi';
 
@@ -165,3 +167,13 @@ export const DesktopNav: React.FC<DesktopNavProps> = ({
     </>
   );
 };
+
+export interface DesktopNavProps {
+  user: SessionUser['user'] | undefined;
+  router: ReturnType<typeof useRouter>;
+  searchQuery: string;
+  getCartItemCount: () => number;
+  setSearchQuery: (value: string) => void;
+  handleSearch: (e: React.KeyboardEvent<HTMLInputElement>) => void;
+  handleProfileMenuOpen: (event: React.MouseEvent<HTMLButtonElement>) => void;
+}

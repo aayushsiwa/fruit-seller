@@ -1,10 +1,10 @@
 import { useCart } from '@/src/contexts/CartContext';
-import { ItemType } from '@/types/index';
-import { UseProductCardReturn } from '@/types/index';
+import { IProduct } from '@/types/index';
 import { useRouter } from 'next/router';
+import { ChangeEvent } from 'react';
 import { MouseEvent } from 'react';
 
-const useProductCard = (product: ItemType): UseProductCardReturn => {
+const useProductCard = (product: IProduct): UseProductCardReturn => {
   const router = useRouter();
   const { cart, addToCart, updateQuantity, removeFromCart } = useCart();
 
@@ -15,7 +15,7 @@ const useProductCard = (product: ItemType): UseProductCardReturn => {
     ? product.price * (1 - product.discount / 100)
     : null;
 
-  const isOutOfStock = product.quantity === 0;
+  const isOutOfStock = product.stock === 0;
 
   const handleAddToCart = (e: MouseEvent) => {
     e.stopPropagation();
@@ -26,8 +26,8 @@ const useProductCard = (product: ItemType): UseProductCardReturn => {
     e.stopPropagation();
     if (newQuantity <= 0) {
       removeFromCart(product.id);
-    } else if (newQuantity <= product.quantity) {
-      updateQuantity(product.id, newQuantity, product.quantity);
+    } else if (newQuantity <= product.stock) {
+      updateQuantity(product.id, newQuantity, product.stock);
     }
   };
 
@@ -40,11 +40,11 @@ const useProductCard = (product: ItemType): UseProductCardReturn => {
   ) => {
     e.stopPropagation();
     const value = Number.parseInt(e.target.value);
-    if (!isNaN(value) && value >= 0 && value <= product.quantity) {
+    if (!isNaN(value) && value >= 0 && value <= product.stock) {
       if (value === 0) {
         removeFromCart(product.id);
       } else {
-        updateQuantity(product.id, value, product.quantity);
+        updateQuantity(product.id, value, product.stock);
       }
     }
   };
@@ -61,3 +61,15 @@ const useProductCard = (product: ItemType): UseProductCardReturn => {
 };
 
 export default useProductCard;
+
+export type UseProductCardReturn = {
+  cartQuantity: number;
+  discountedPrice: number | null;
+  isOutOfStock: boolean;
+  handleAddToCart: (e: MouseEvent) => void;
+  handleQuantityChange: (e: MouseEvent, newQuantity: number) => void;
+  handleViewDetails: () => void;
+  handleInputChange: (
+    e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => void;
+};

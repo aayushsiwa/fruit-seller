@@ -1,4 +1,3 @@
-import { EmptyCartProps } from '@/types/index';
 import { Box, Button, Typography } from '@mui/material';
 import { motion } from 'framer-motion';
 import { FiShoppingCart } from 'react-icons/fi';
@@ -8,6 +7,7 @@ export const EmptyCart: React.FC<EmptyCartProps> = ({
 }) => {
   return (
     <Box
+      data-testid="empty-cart"
       sx={{ textAlign: 'center', py: 8 }}
       component={motion.div}
       initial={{ opacity: 0 }}
@@ -34,3 +34,7 @@ export const EmptyCart: React.FC<EmptyCartProps> = ({
     </Box>
   );
 };
+
+export interface EmptyCartProps {
+  handleContinueShopping: () => void;
+}

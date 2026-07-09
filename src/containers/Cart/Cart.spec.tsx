@@ -1,100 +1,50 @@
-import { useCart } from '@/src/contexts/CartContext';
-import { CartItem, ItemType } from '@/types/index';
-import { useQueries } from '@tanstack/react-query';
-import { render, screen } from '@testing-library/react';
-import { act, renderHook } from '@testing-library/react';
-import { signIn, useSession } from 'next-auth/react';
-import { useRouter } from 'next/router';
+import * as GetProductAPI from '@/lib/api/products/getProduct';
+import {
+  act,
+  mockPush,
+  mockSignIn,
+  mockUseCart,
+  mockUseRouter,
+  mockUseSession,
+  render,
+  renderHook,
+  screen,
+  waitFor,
+} from '@/src/utils/test';
+import { CartItem, IProduct } from '@/types/index';
+import * as MaterialUI from '@mui/material';
 
 import Cart from './Cart';
 import { useCartPage } from './Cart.hooks';
 
-jest.mock('framer-motion', () => {
-  const FakeMotion = ({ children }: { children: React.ReactNode }) => (
-    <>{children}</>
-  );
-  FakeMotion.displayName = 'FakeMotion';
-  const motion = new Proxy(
-    function MotionComponent(_tag: string) {
-      const Inner = ({ children }: { children: React.ReactNode }) => (
-        <>{children}</>
-      );
-      Inner.displayName = `motion.${_tag}`;
-      return Inner;
-    },
-    { get: () => FakeMotion }
-  );
-  return {
-    motion,
-    AnimatePresence: FakeMotion,
-  };
-});
-
-jest.mock('next/router', () => ({ useRouter: jest.fn() }));
-jest.mock('next-auth/react', () => ({
-  useSession: jest.fn(),
-  signIn: jest.fn(),
-}));
-jest.mock('@/src/contexts/CartContext', () => ({ useCart: jest.fn() }));
-jest.mock('axios');
-jest.mock('@tanstack/react-query', () => ({ useQueries: jest.fn() }));
-
-jest.mock('./Cart.styles', () => ({
-  __esModule: true,
-  default: () => ({}),
-}));
-
-jest.mock('@/src/components/LoadingScreen', () => ({
-  __esModule: true,
-  LoadingScreen: () => <div data-testid="loading-screen" />,
-}));
-
-jest.mock('@/src/components/Cart/CartItems', () => ({
-  __esModule: true,
-  CartItems: () => <div data-testid="cart-items" />,
-}));
-
-jest.mock('@/src/components/Cart/OrderSummary', () => ({
-  __esModule: true,
-  OrderSummary: () => <div data-testid="order-summary" />,
-}));
-
-jest.mock('@/src/components/Cart/EmptyCart', () => ({
-  __esModule: true,
-  EmptyCart: () => <div data-testid="empty-cart" />,
-}));
-
-const mockPush = jest.fn();
-const mockSignIn = signIn as unknown as jest.Mock;
-
 const defaultCartCtx = {
   cart: [] as CartItem[],
-  updateQuantity: jest.fn(),
-  removeFromCart: jest.fn(),
-  getCartTotal: jest.fn(),
-  clearCart: jest.fn(),
-  showSnackbar: jest.fn(),
+  updateQuantity: vi.fn(),
+  removeFromCart: vi.fn(),
+  getCartTotal: vi.fn(() => 0),
+  clearCart: vi.fn(),
+  showSnackbar: vi.fn(),
   loading: false,
 };
 
-function setupDefaultMocks() {
-  (useRouter as jest.Mock).mockReturnValue({
-    push: mockPush,
-    prefetch: jest.fn(),
-  });
-  (useSession as jest.Mock).mockReturnValue({
-    data: null,
-    status: 'unauthenticated',
-  });
-  (useCart as jest.Mock).mockReturnValue(defaultCartCtx);
-  (useQueries as jest.Mock).mockReturnValue([]);
-  jest.clearAllMocks();
-  mockPush.mockClear();
-  mockSignIn.mockClear();
-}
-
 describe('Cart - Hooks', () => {
-  beforeEach(setupDefaultMocks);
+  beforeEach(() => {
+    mockUseRouter.mockReturnValue({
+      push: mockPush,
+      prefetch: vi.fn(),
+    } as any);
+
+    mockUseSession.mockReturnValue({
+      data: null,
+      status: 'unauthenticated',
+    } as any);
+
+    mockUseCart.mockReturnValue(defaultCartCtx as any);
+
+    vi.clearAllMocks();
+    mockPush.mockClear();
+    mockSignIn.mockClear();
+  });
 
   it('should return default empty state', () => {
     const { result } = renderHook(() => useCartPage());
@@ -130,10 +80,10 @@ describe('Cart - Hooks', () => {
   });
 
   it('should navigate to checkout on handleCheckout when authenticated', () => {
-    (useSession as jest.Mock).mockReturnValue({
+    mockUseSession.mockReturnValue({
       data: { user: { email: 'test@test.com' } },
       status: 'authenticated',
-    });
+    } as any);
 
     const { result } = renderHook(() => useCartPage());
 
@@ -146,13 +96,13 @@ describe('Cart - Hooks', () => {
 });
 
 describe('Cart - UI', () => {
-  const mockProducts: ItemType[] = [
+  const mockProducts: IProduct[] = [
     {
       id: '1',
       name: 'Apple',
       price: 100,
-      quantity: 10,
-      image: 'apple.jpg',
+      stock: 10,
+      image: '/apple.jpg',
       description: 'Fresh apple',
       category: 'Fruit',
       discount: 0,
@@ -163,8 +113,8 @@ describe('Cart - UI', () => {
       id: '2',
       name: 'Banana',
       price: 50,
-      quantity: 20,
-      image: 'banana.jpg',
+      stock: 20,
+      image: '/banana.jpg',
       description: 'Fresh banana',
       category: 'Fruit',
       discount: 5,
@@ -178,37 +128,99 @@ describe('Cart - UI', () => {
     { id: '2', quantity: 1 },
   ];
 
-  beforeEach(setupDefaultMocks);
+  beforeEach(() => {
+    mockUseRouter.mockReturnValue({
+      push: mockPush,
+      prefetch: vi.fn(),
+    } as any);
 
-  it('should render loading state', () => {
-    (useCart as jest.Mock).mockReturnValue({
-      ...defaultCartCtx,
-      loading: true,
-    });
+    mockUseSession.mockReturnValue({
+      data: null,
+      status: 'unauthenticated',
+    } as any);
 
-    render(<Cart />);
-    expect(screen.getByTestId('loading-screen')).toBeInTheDocument();
+    mockUseCart.mockReturnValue(defaultCartCtx as any);
+
+    vi.spyOn(MaterialUI, 'useMediaQuery').mockReturnValue(false);
   });
 
-  it('should render empty cart state', () => {
-    render(<Cart />);
-    expect(screen.getByTestId('empty-cart')).toBeInTheDocument();
+  describe('when rendered in web view', () => {
+    beforeEach(() => {
+      vi.spyOn(MaterialUI, 'useMediaQuery').mockReturnValue(false);
+    });
+
+    it('should match snapshot when cart is loading', () => {
+      mockUseCart.mockReturnValue({
+        ...defaultCartCtx,
+        loading: true,
+      } as any);
+
+      const { container } = render(<Cart />);
+      expect(container).toMatchSnapshot();
+    });
+
+    it('should match snapshot when cart is empty', () => {
+      const { container } = render(<Cart />);
+      expect(container).toMatchSnapshot();
+    });
+
+    it('should match snapshot with cart items', async () => {
+      mockUseCart.mockReturnValue({
+        ...defaultCartCtx,
+        cart: mockCart,
+      } as any);
+      vi.spyOn(GetProductAPI, 'getProductAPI').mockImplementation(
+        (id: string) => {
+          const product = mockProducts.find((p) => p.id === id);
+          return Promise.resolve({ data: { product } } as any);
+        }
+      );
+
+      const { container } = render(<Cart />);
+      await waitFor(() => {
+        expect(screen.getByText('Apple')).toBeInTheDocument();
+      });
+      expect(container).toMatchSnapshot();
+    });
   });
 
-  it('should match snapshot with cart items', () => {
-    (useCart as jest.Mock).mockReturnValue({
-      ...defaultCartCtx,
-      cart: mockCart,
+  describe('when rendered in mobile view', () => {
+    beforeEach(() => {
+      vi.spyOn(MaterialUI, 'useMediaQuery').mockReturnValue(true);
     });
-    (useQueries as jest.Mock).mockReturnValue(
-      mockCart.map((_item, i) => ({
-        data: mockProducts[i],
-        isLoading: false,
-        error: null,
-      }))
-    );
 
-    const { container } = render(<Cart />);
-    expect(container).toMatchSnapshot();
+    it('should match snapshot when cart is loading', () => {
+      mockUseCart.mockReturnValue({
+        ...defaultCartCtx,
+        loading: true,
+      } as any);
+
+      const { container } = render(<Cart />);
+      expect(container).toMatchSnapshot();
+    });
+
+    it('should match snapshot when cart is empty', () => {
+      const { container } = render(<Cart />);
+      expect(container).toMatchSnapshot();
+    });
+
+    it('should match snapshot with cart items', async () => {
+      mockUseCart.mockReturnValue({
+        ...defaultCartCtx,
+        cart: mockCart,
+      } as any);
+      vi.spyOn(GetProductAPI, 'getProductAPI').mockImplementation(
+        (id: string) => {
+          const product = mockProducts.find((p) => p.id === id);
+          return Promise.resolve({ data: { product } } as any);
+        }
+      );
+
+      const { container } = render(<Cart />);
+      await waitFor(() => {
+        expect(screen.getByText('Apple')).toBeInTheDocument();
+      });
+      expect(container).toMatchSnapshot();
+    });
   });
 });

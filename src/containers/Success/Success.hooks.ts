@@ -1,4 +1,5 @@
 import { useOrderWithProducts } from '@/lib/hooks/useOrderWithProducts';
+import { IProduct, Order } from '@/types/index';
 import { useRouter } from 'next/router';
 
 export const useSuccess = () => {
@@ -16,4 +17,12 @@ export const useSuccess = () => {
     error,
     handleContinueShopping,
   };
+};
+
+export type UseSuccessReturn = {
+  order: Order | null;
+  products: (IProduct | undefined)[];
+  isLoading: boolean;
+  error: string | null;
+  handleContinueShopping: () => void;
 };

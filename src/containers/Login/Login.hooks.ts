@@ -1,8 +1,7 @@
 import { loginInitialValues, loginSchema } from '@/lib/validation/loginSchema';
 import { useAuth } from '@/src/contexts/AuthContext';
 import { useSnackbar } from '@/src/contexts/SnackBarContext';
-import { UseLoginReturn } from '@/types/index';
-import { useFormik } from 'formik';
+import { FormikProps, useFormik } from 'formik';
 import { signIn, useSession } from 'next-auth/react';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
@@ -55,3 +54,11 @@ const useLogin = (): UseLoginReturn => {
 };
 
 export default useLogin;
+
+export type UseLoginReturn = {
+  formik: FormikProps<typeof loginInitialValues>;
+  showPassword: boolean;
+  handleClickShowPassword: () => void;
+  handleGoogleSignIn: () => Promise<void>;
+  isLoading: boolean;
+};

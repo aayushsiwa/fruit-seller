@@ -1,5 +1,5 @@
 import { currency, defaultImage } from '@/constants/index';
-import { OrderSummaryProps } from '@/types/index';
+import { OrderSummaryProps } from '@/src/components/Cart/OrderSummary';
 import {
   Box,
   Button,
@@ -26,6 +26,7 @@ export const OrderSummary: React.FC<OrderSummaryProps> = ({
 
   return (
     <Paper
+      data-testid="order-summary"
       elevation={3}
       sx={{ p: 3, borderRadius: 2 }}
       component={motion.div}

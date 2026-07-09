@@ -1,5 +1,6 @@
-import { MobileNavProps } from '@/types/index';
+import { SessionUser } from '@/types/index';
 import { Box, Button, IconButton } from '@mui/material';
+import { useRouter } from 'next/router';
 import React from 'react';
 import { FiMenu } from 'react-icons/fi';
 
@@ -47,3 +48,9 @@ export const MobileNav: React.FC<MobileNavProps> = ({
     </>
   );
 };
+
+export interface MobileNavProps {
+  user: SessionUser['user'] | undefined;
+  router: ReturnType<typeof useRouter>;
+  handleDrawerToggle: () => void;
+}

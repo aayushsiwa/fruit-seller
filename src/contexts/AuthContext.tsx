@@ -1,4 +1,4 @@
-import { AuthContextType, RegisterData } from '@/types/index';
+import { RegisterData } from '@/types/index';
 import { useMutation } from '@tanstack/react-query';
 import axios from 'axios';
 import {
@@ -121,3 +121,22 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
 };
 
 export const useAuth = () => useContext(AuthContext);
+
+export interface AuthContextType {
+  user: AuthUser | null | undefined;
+  loading: boolean;
+  error: string | null;
+  register: (userData: RegisterData) => Promise<void>;
+  login: (email: string, password: string) => Promise<void>;
+  logout: () => Promise<void>;
+  isAdmin: () => boolean;
+}
+
+export interface AuthUser {
+  name?: string | null;
+  email?: string | null;
+  image?: string | null;
+  id?: string;
+  role?: string;
+  cartId?: string;
+}

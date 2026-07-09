@@ -1,44 +1,18 @@
+import { useGetAddresses } from '@/lib/api/addresses/getAddresses';
+import { useSaveAddress } from '@/lib/api/addresses/saveAddress';
+import { useCreateOrder } from '@/lib/api/orders/createOrder';
+import { useInitPayment } from '@/lib/api/payments/initPayment';
+import { useGetPincode } from '@/lib/api/pincodes/getPincode';
+import { getProductAPI } from '@/lib/api/products/getProduct';
 import { useCart } from '@/src/contexts/CartContext';
-import { ItemType, UseCheckoutReturn, Address } from '@/types/index';
-import { useQueries, useQuery } from '@tanstack/react-query';
+import { Address, CartItem, IProduct } from '@/types/index';
+import { useQueries } from '@tanstack/react-query';
 import axios from 'axios';
 import { useSession } from 'next-auth/react';
 import { useRouter } from 'next/router';
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 
 const RAZORPAY_SCRIPT = 'https://checkout.razorpay.com/v1/checkout.js';
-
-const fetchProductDetails = async (id: string) => {
-  try {
-    const response = await axios.get(`/api/products/${id}`);
-    if (response.status !== 200 || !response.data) {
-      throw new Error(`Failed to fetch product ${id}`);
-    }
-    return response.data;
-  } catch (error) {
-    throw new Error(
-      `Failed to fetch product ${id} : ${
-        error instanceof Error ? error.message : 'Unknown error'
-      }`
-    );
-  }
-};
-
-const fetchPincodeDetails = async (pincode: string) => {
-  try {
-    const response = await axios.get(`/api/pincodes/${pincode}`);
-    if (response.status !== 200 || !response.data) {
-      throw new Error(`Failed to fetch pincode ${pincode}`);
-    }
-    return response.data;
-  } catch (error) {
-    throw new Error(
-      `Failed to fetch pincode ${pincode} : ${
-        error instanceof Error ? error.message : 'Unknown error'
-      }`
-    );
-  }
-};
 
 function loadRazorpayScript(): Promise<boolean> {
   return new Promise((resolve) => {
@@ -67,8 +41,6 @@ export const useCheckout = (): UseCheckoutReturn => {
   const [processing, setProcessing] = useState(false);
   const [razorpayLoaded, setRazorpayLoaded] = useState(false);
 
-  // Address-related states
-  const [savedAddresses, setSavedAddresses] = useState<Address[]>([]);
   const [selectedAddressId, setSelectedAddressId] = useState<string>('new');
   const [saveToProfile, setSaveToProfile] = useState<boolean>(true);
   const [newAddress, setNewAddress] = useState<Address>({
@@ -80,37 +52,31 @@ export const useCheckout = (): UseCheckoutReturn => {
     country: 'India',
     phone: '',
   });
-
   const [isAddressAutoFilled, setIsAddressAutoFilled] = useState(false);
 
   useEffect(() => {
     loadRazorpayScript().then(setRazorpayLoaded);
   }, []);
 
+  const { data: addressesResponse } = useGetAddresses(
+    status === 'authenticated'
+  );
+  const savedAddresses = useMemo(
+    () => addressesResponse?.data || [],
+    [addressesResponse]
+  );
+
   useEffect(() => {
-    if (session && status === 'authenticated') {
-      axios.get('/api/addresses')
-        .then((res) => {
-          setSavedAddresses(res.data);
-          if (res.data.length > 0) {
-            setSelectedAddressId(res.data[0].id);
-          }
-        })
-        .catch((err) => {
-          console.error('Failed to fetch addresses', err);
-        });
+    if (savedAddresses.length > 0 && selectedAddressId === 'new') {
+      setSelectedAddressId(savedAddresses[0].id || 'new');
     }
-  }, [session, status]);
+  }, [savedAddresses, selectedAddressId]);
 
   const pin = newAddress.postal_code.trim();
   const isPinValid = pin.length === 6 && /^\d+$/.test(pin);
 
-  const { data: pincodeData } = useQuery<{ city: string; state: string }>({
-    queryKey: ['pincode', pin],
-    queryFn: () => fetchPincodeDetails(pin),
-    enabled: isPinValid,
-    staleTime: Infinity, // pincode mappings don't change, so cache permanently in memory
-  });
+  const { data: pincodeResponse } = useGetPincode(pin, isPinValid);
+  const pincodeData = pincodeResponse?.data;
 
   useEffect(() => {
     if (pincodeData?.city && pincodeData?.state) {
@@ -133,17 +99,24 @@ export const useCheckout = (): UseCheckoutReturn => {
   const productQueries = useQueries({
     queries: cart.map((item) => ({
       queryKey: ['product', item.id],
-      queryFn: () => fetchProductDetails(item.id),
+      queryFn: async () => {
+        const response = await getProductAPI(item.id);
+        return response.data.product;
+      },
       enabled: !cartLoading,
     })),
   });
 
-  const products = productQueries.map((query) => query.data as ItemType);
+  const products = productQueries.map((query) => query.data as IProduct);
   const isLoadingProducts = productQueries.some((query) => query.isLoading);
   const hasError = productQueries.some((query) => query.error);
 
   const subtotal = getCartTotal(products);
   const shippingCost = subtotal >= 500 || subtotal === 0 ? 0 : 50;
+
+  const saveAddressMutation = useSaveAddress();
+  const initPaymentMutation = useInitPayment();
+  const createOrderMutation = useCreateOrder();
 
   const handlePayNow = async () => {
     if (!session || status !== 'authenticated') {
@@ -156,7 +129,6 @@ export const useCheckout = (): UseCheckoutReturn => {
       return;
     }
 
-    // Get final shipping address
     let shippingAddress: Address;
     if (selectedAddressId === 'new') {
       const { street, city, state, postal_code, country, phone } = newAddress;
@@ -166,7 +138,9 @@ export const useCheckout = (): UseCheckoutReturn => {
       }
       shippingAddress = newAddress;
     } else {
-      const selected = savedAddresses.find((addr) => addr.id === selectedAddressId);
+      const selected = savedAddresses.find(
+        (addr) => addr.id === selectedAddressId
+      );
       if (!selected) {
         showSnackbar('Selected address not found.', 'error');
         return;
@@ -181,7 +155,7 @@ export const useCheckout = (): UseCheckoutReturn => {
         showSnackbar(`Product ${item.id} not found or invalid.`, 'error');
         return;
       }
-      if (product.quantity < item.quantity) {
+      if (product.stock < item.quantity) {
         showSnackbar(`Insufficient stock for ${product.name}.`, 'error');
         return;
       }
@@ -192,21 +166,18 @@ export const useCheckout = (): UseCheckoutReturn => {
       const tax = subtotal * 0.1;
       const total = subtotal + tax + shippingCost;
 
-      // If use new address and save to profile is checked, save it to the DB
       let finalAddress = { ...shippingAddress };
       if (selectedAddressId === 'new' && saveToProfile) {
         try {
-          const addrRes = await axios.post('/api/addresses', newAddress);
-          setSavedAddresses((prev) => [addrRes.data, ...prev]);
-          setSelectedAddressId(addrRes.data.id);
+          const addrRes = await saveAddressMutation.mutateAsync(newAddress);
           finalAddress = addrRes.data;
+          setSelectedAddressId(finalAddress.id || 'new');
         } catch (addrErr) {
           console.error('Failed to save address to profile', addrErr);
-          // Don't block order placement if saving address to profile fails
         }
       }
 
-      const initResponse = await axios.post('/api/payments/init', {
+      const initResponse = await initPaymentMutation.mutateAsync({
         cart,
         total,
       });
@@ -229,20 +200,14 @@ export const useCheckout = (): UseCheckoutReturn => {
           razorpay_signature: string;
         }) => {
           try {
-            const orderResponse = await axios.post('/api/orders', {
+            const orderResponse = await createOrderMutation.mutateAsync({
               cart,
               total,
               ...response,
               shipping_address: finalAddress,
             });
 
-            if (orderResponse.status !== 200 || !orderResponse.data) {
-              showSnackbar('Failed to process order.', 'error');
-              setProcessing(false);
-              return;
-            }
-
-            const { order } = orderResponse.data;
+            const order = orderResponse.data.order;
             clearCart();
             showSnackbar('Order placed successfully!', 'success');
             router.push(`/success?orderId=${order.id}`);
@@ -295,4 +260,25 @@ export const useCheckout = (): UseCheckoutReturn => {
     shippingCost,
     isAddressAutoFilled,
   };
+};
+
+export type UseCheckoutReturn = {
+  cart: CartItem[];
+  products: IProduct[];
+  isLoading: boolean;
+  isLoadingProducts: boolean;
+  hasError: boolean;
+  processing: boolean;
+  handlePayNow: () => Promise<void>;
+  status: 'loading' | 'authenticated' | 'unauthenticated';
+  getCartTotal: (products: (IProduct | undefined)[]) => number;
+  savedAddresses: Address[];
+  selectedAddressId: string;
+  setSelectedAddressId: (id: string) => void;
+  newAddress: Address;
+  setNewAddress: React.Dispatch<React.SetStateAction<Address>>;
+  saveToProfile: boolean;
+  setSaveToProfile: (save: boolean) => void;
+  shippingCost: number;
+  isAddressAutoFilled: boolean;
 };

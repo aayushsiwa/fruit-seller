@@ -6,7 +6,10 @@ export default function OrdersPage() {
     <>
       <Head>
         <title>My Orders | Fruit Seller</title>
-        <meta name="description" content="View and track your previous and active fruit orders." />
+        <meta
+          name="description"
+          content="View and track your previous and active fruit orders."
+        />
         <meta name="robots" content="noindex, nofollow" />
       </Head>
       <Orders />

@@ -1,153 +1,47 @@
-import { render, screen } from '@testing-library/react';
-import { act, renderHook } from '@testing-library/react';
+import {
+  act,
+  mockLogin,
+  mockRegister,
+  render,
+  renderHook,
+  screen,
+} from '@/src/utils/test';
+import * as Formik from 'formik';
+import * as NextAuthReact from 'next-auth/react';
+import * as NextRouter from 'next/router';
 
 import Register from './Register';
-
-const mockSignIn = jest.fn();
-const mockRouterPush = jest.fn();
-const mockShowSnackbar = jest.fn();
-const mockRegister = jest.fn();
-const mockLogin = jest.fn();
-
-const mockMutateAsync = jest.fn();
-const mockUseMutation = jest.fn(() => ({
-  mutateAsync: mockMutateAsync,
-  isPending: false,
-}));
-
-let capturedRegisterOnSubmit:
-  | ((
-      values: Record<string, unknown>,
-      helpers: { setSubmitting: (v: boolean) => void }
-    ) => Promise<void>)
-  | undefined;
-
-const mockFormik = {
-  values: {
-    firstName: '',
-    lastName: '',
-    email: '',
-    password: '',
-    confirmPassword: '',
-    agreeTerms: false,
-  },
-  touched: {} as Record<string, boolean>,
-  errors: {} as Record<string, string>,
-  handleSubmit: jest.fn(),
-  handleChange: jest.fn(),
-  handleBlur: jest.fn(),
-  isSubmitting: false,
-};
-
-const mockUseFormik = jest.fn(
-  ({
-    onSubmit,
-  }: {
-    onSubmit: (
-      values: Record<string, unknown>,
-      helpers: { setSubmitting: (v: boolean) => void }
-    ) => Promise<void>;
-  }) => {
-    capturedRegisterOnSubmit = onSubmit;
-    return mockFormik;
-  }
-);
-
-jest.mock('next-auth/react', () => ({
-  signIn: (...args: unknown[]) =>
-    (mockSignIn as (...args: unknown[]) => unknown)(...args),
-}));
-
-jest.mock('next/router', () => ({
-  useRouter: () => ({ push: mockRouterPush }),
-}));
-
-jest.mock('formik', () => ({
-  useFormik: (args: unknown) =>
-    mockUseFormik(
-      args as {
-        onSubmit: (
-          values: Record<string, unknown>,
-          helpers: { setSubmitting: (v: boolean) => void }
-        ) => Promise<void>;
-      }
-    ),
-}));
-
-jest.mock('@tanstack/react-query', () => ({
-  useMutation: () => mockUseMutation(),
-}));
-
-jest.mock('@/src/contexts/SnackBarContext', () => ({
-  useSnackbar: () => ({ showSnackbar: mockShowSnackbar }),
-}));
-
-jest.mock('@/src/contexts/AuthContext', () => ({
-  useAuth: () => ({ register: mockRegister, login: mockLogin }),
-}));
-
-jest.mock('@/lib/validation/registerSchema', () => ({
-  registerInitialValues: {
-    firstName: '',
-    lastName: '',
-    email: '',
-    password: '',
-    confirmPassword: '',
-    agreeTerms: false,
-  },
-  registerSchema: { validate: jest.fn() },
-}));
-
-jest.mock('react-icons/fi', () => ({
-  FiEye: () => <svg data-testid="FiEye" />,
-  FiEyeOff: () => <svg data-testid="FiEyeOff" />,
-}));
-
-jest.mock('react-icons/tb', () => ({
-  TbBrandGoogle: () => <svg data-testid="TbBrandGoogle" />,
-}));
-
-jest.mock('@mui/styles', () => ({
-  makeStyles: () => () => ({}),
-}));
-
-jest.mock('next/link', () => {
-  const MockLink = ({
-    children,
-    href,
-  }: {
-    children: React.ReactNode;
-    href: string;
-  }) => <a href={href}>{children}</a>;
-  MockLink.displayName = 'MockLink';
-  return MockLink;
-});
-
-const mockUseRegisterReturn = jest.fn();
-jest.mock('./Register.hooks', () => ({
-  __esModule: true,
-  default: (...args: unknown[]) => mockUseRegisterReturn(...args),
-}));
+import * as RegisterHooks from './Register.hooks';
+import useRegister from './Register.hooks';
 
 describe('Register - Hooks', () => {
-  let useRegister: typeof import('./Register.hooks').default;
-
-  beforeAll(() => {
-    useRegister = jest.requireActual('./Register.hooks').default;
-  });
-
   beforeEach(() => {
-    jest.clearAllMocks();
-    capturedRegisterOnSubmit = undefined;
+    vi.clearAllMocks();
+    mockRegister.mockResolvedValue(undefined);
+    mockLogin.mockResolvedValue(undefined);
   });
 
   it('should call register on form submission', async () => {
-    mockRegister.mockResolvedValue(undefined);
+    vi.spyOn(NextRouter, 'useRouter').mockReturnValue({ push: vi.fn() } as any);
+
+    let capturedOnSubmit: any;
+    vi.spyOn(Formik, 'useFormik').mockImplementation((args: any) => {
+      capturedOnSubmit = args.onSubmit;
+      return {
+        values: {},
+        touched: {},
+        errors: {},
+        handleSubmit: vi.fn(),
+        handleChange: vi.fn(),
+        handleBlur: vi.fn(),
+        isSubmitting: false,
+      } as any;
+    });
 
     renderHook(() => useRegister());
 
     await act(async () => {
-      await capturedRegisterOnSubmit!(
+      await capturedOnSubmit!(
         {
           firstName: 'John',
           lastName: 'Doe',
@@ -156,7 +50,7 @@ describe('Register - Hooks', () => {
           confirmPassword: 'Pass123!',
           agreeTerms: true,
         },
-        { setSubmitting: jest.fn() }
+        { setSubmitting: vi.fn() }
       );
     });
 
@@ -169,7 +63,10 @@ describe('Register - Hooks', () => {
   });
 
   it('should call signIn on handleGoogleSignIn', async () => {
-    mockSignIn.mockResolvedValue(undefined);
+    const mockSignIn = vi.fn().mockResolvedValue(undefined);
+    vi.spyOn(NextAuthReact, 'signIn').mockImplementation(mockSignIn as any);
+    vi.spyOn(NextRouter, 'useRouter').mockReturnValue({ push: vi.fn() } as any);
+    vi.spyOn(Formik, 'useFormik').mockReturnValue({} as any);
 
     const { result } = renderHook(() => useRegister());
 
@@ -183,6 +80,9 @@ describe('Register - Hooks', () => {
   });
 
   it('should toggle showPassword', () => {
+    vi.spyOn(NextRouter, 'useRouter').mockReturnValue({ push: vi.fn() } as any);
+    vi.spyOn(Formik, 'useFormik').mockReturnValue({} as any);
+
     const { result } = renderHook(() => useRegister());
 
     expect(result.current.showPassword).toBe(false);
@@ -208,40 +108,44 @@ describe('Register - UI', () => {
       },
       touched: {} as Record<string, boolean>,
       errors: {} as Record<string, string>,
-      handleSubmit: jest.fn(),
-      handleChange: jest.fn(),
-      handleBlur: jest.fn(),
+      handleSubmit: vi.fn(),
+      handleChange: vi.fn(),
+      handleBlur: vi.fn(),
       isSubmitting: false,
       ...((overrides.formik as Record<string, unknown>) || {}),
     },
     showPassword: false,
-    handleClickShowPassword: jest.fn(),
-    handleGoogleSignIn: jest.fn(),
+    handleClickShowPassword: vi.fn(),
+    handleGoogleSignIn: vi.fn(),
     isLoading: false,
     isGoogleLoading: false,
     ...overrides,
   });
 
   beforeEach(() => {
-    jest.clearAllMocks();
-    mockUseRegisterReturn.mockReturnValue(buildMockReturn());
+    vi.clearAllMocks();
   });
 
   it('should render loading state', () => {
-    mockUseRegisterReturn.mockReturnValue(buildMockReturn({ isLoading: true }));
+    vi.spyOn(RegisterHooks, 'default').mockReturnValue(
+      buildMockReturn({ isLoading: true }) as any
+    );
 
     render(<Register />);
     expect(screen.getByRole('progressbar')).toBeInTheDocument();
   });
 
   it('should match snapshot', () => {
+    vi.spyOn(RegisterHooks, 'default').mockReturnValue(
+      buildMockReturn() as any
+    );
     const { asFragment } = render(<Register />);
     expect(asFragment()).toMatchSnapshot();
   });
 
   it('should show Google loading state', () => {
-    mockUseRegisterReturn.mockReturnValue(
-      buildMockReturn({ isGoogleLoading: true })
+    vi.spyOn(RegisterHooks, 'default').mockReturnValue(
+      buildMockReturn({ isGoogleLoading: true }) as any
     );
 
     render(<Register />);

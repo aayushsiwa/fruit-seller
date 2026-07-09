@@ -1,9 +1,14 @@
+import { MockProducts } from '@/entity/Products/Products.mock';
+import * as GetProductAPI from '@/lib/api/products/getProduct';
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { ReactNode } from 'react';
 
 import { CartProvider, useCart } from './CartContext';
 import { SnackbarProvider } from './SnackBarContext';
+
+vi.unmock('@/src/contexts/CartContext');
+vi.unmock('@/src/contexts/SnackBarContext');
 
 function renderWithProviders(ui: ReactNode) {
   return render(
@@ -13,32 +18,7 @@ function renderWithProviders(ui: ReactNode) {
   );
 }
 
-const mockProducts = [
-  {
-    id: '1',
-    name: 'Apple',
-    price: 1.0,
-    quantity: 10,
-    image: 'apple.jpg',
-    description: 'Fresh apple',
-    category: 'Fruit',
-    discount: 10,
-    isSeasonal: false,
-    createdAt: '2023-01-01',
-  },
-  {
-    id: '2',
-    name: 'Banana',
-    price: 0.5,
-    quantity: 20,
-    image: 'banana.jpg',
-    description: 'Fresh banana',
-    category: 'Fruit',
-    discount: 5,
-    isSeasonal: false,
-    createdAt: '2023-01-01',
-  },
-];
+const mockProducts = MockProducts;
 
 function TestComponent() {
   const { cart, addToCart, removeFromCart, clearCart } = useCart();
@@ -46,7 +26,7 @@ function TestComponent() {
   return (
     <div>
       <button onClick={() => addToCart(mockProducts[0])}>Add</button>
-      <button onClick={() => removeFromCart('1')}>Remove</button>
+      <button onClick={() => removeFromCart(mockProducts[0].id)}>Remove</button>
       <button onClick={clearCart}>Clear</button>
       <div data-testid="cart-length">{cart.length}</div>
     </div>
@@ -54,23 +34,23 @@ function TestComponent() {
 }
 
 describe('CartProvider', () => {
-  beforeAll(() => {
-    global.fetch = jest.fn((url: string) => {
-      const productId = url.split('/').pop();
-      const product = mockProducts.find((p) => p.id === productId);
-      if (product) {
-        return Promise.resolve({
-          ok: true,
-          json: () => Promise.resolve(product),
-        } as Response);
+  beforeEach(() => {
+    vi.spyOn(GetProductAPI, 'getProductAPI').mockImplementation(
+      (id: string) => {
+        const product = mockProducts.find((p) => p.id === id);
+        if (product) {
+          return Promise.resolve({
+            status: 200,
+            data: { product },
+          } as any);
+        }
+        return Promise.reject(new Error('Product not found'));
       }
-      return Promise.resolve({ ok: false } as Response);
-    }) as jest.Mock;
+    );
   });
 
-  afterAll(() => {
-    jest.restoreAllMocks();
-    (global.fetch as jest.Mock).mockRestore();
+  afterEach(() => {
+    vi.clearAllMocks();
   });
 
   it('adds items to the cart', async () => {

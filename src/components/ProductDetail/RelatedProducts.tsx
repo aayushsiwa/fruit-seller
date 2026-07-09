@@ -1,5 +1,5 @@
 import ProductCard from '@/src/components/ProductCard';
-import { RelatedProductsProps } from '@/types/index';
+import { IProduct } from '@/types/index';
 import { Box, Typography } from '@mui/material';
 import { AnimatePresence, motion } from 'framer-motion';
 
@@ -50,3 +50,7 @@ export const RelatedProducts: React.FC<RelatedProductsProps> = ({
     </Box>
   );
 };
+
+export interface RelatedProductsProps {
+  relatedProducts: IProduct[];
+}

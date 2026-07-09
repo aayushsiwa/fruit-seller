@@ -1,5 +1,5 @@
 import { useThemeSwitch } from '@/src/ThemeProvider';
-import { DrawerContentProps } from '@/types/index';
+import { SessionUser } from '@/types/index';
 import {
   Avatar,
   Box,
@@ -21,6 +21,7 @@ import {
   FiChevronDown,
   FiChevronUp,
   FiHome,
+  FiLogIn,
   FiLogOut,
   FiMonitor,
   FiMoon,
@@ -222,7 +223,34 @@ export const DrawerContent: React.FC<DrawerContentProps> = ({
             </ListItemButton>
           </ListItem>
         )}
+        {!user && (
+          <>
+            <ListItem disablePadding>
+              <ListItemButton
+                onClick={() => handleNavigation('/login')}
+                sx={{ py: 1.5 }}
+              >
+                <ListItemIcon>
+                  <FiLogIn size={20} />
+                </ListItemIcon>
+                <ListItemText primary="Login" />
+              </ListItemButton>
+            </ListItem>
+          </>
+        )}
       </List>
     </Box>
   );
 };
+
+export interface DrawerContentProps {
+  user: SessionUser['user'] | undefined;
+  searchQuery: string;
+  getCartItemCount: () => number;
+  isAdmin: boolean;
+  setSearchQuery: (value: string) => void;
+  handleDrawerToggle: () => void;
+  handleSearch: (e: React.KeyboardEvent<HTMLInputElement>) => void;
+  handleNavigation: (path: string) => void;
+  handleLogout: () => void;
+}

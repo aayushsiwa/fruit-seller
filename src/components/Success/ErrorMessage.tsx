@@ -1,4 +1,3 @@
-import { ErrorMessageProps } from '@/types/index';
 import { Box, Button, Typography } from '@mui/material';
 import { motion } from 'framer-motion';
 
@@ -33,3 +32,8 @@ export const ErrorMessage: React.FC<ErrorMessageProps> = ({
     </Box>
   );
 };
+
+export interface ErrorMessageProps {
+  message: string;
+  onRetry: () => void;
+}

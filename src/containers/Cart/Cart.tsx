@@ -7,11 +7,9 @@ import { motion } from 'framer-motion';
 import { FiArrowLeft } from 'react-icons/fi';
 
 import { useCartPage } from './Cart.hooks';
-import useStyles from './Cart.styles';
 
 export default function Cart() {
   const MotionButton = motion(Button);
-  const classes = useStyles();
 
   const {
     cart,
@@ -33,7 +31,7 @@ export default function Cart() {
 
   return (
     <Container maxWidth="lg">
-      <Box className={classes.headerBox}>
+      <Box sx={{ mb: 4, mt: 2 }}>
         <Typography variant="h4" component="h1" gutterBottom>
           Your Cart
         </Typography>
@@ -45,8 +43,14 @@ export default function Cart() {
       {cart.length === 0 ? (
         <EmptyCart handleContinueShopping={handleContinueShopping} />
       ) : (
-        <Box className={classes.flexContainer}>
-          <Box className={classes.cartBox}>
+        <Box
+          sx={{
+            display: 'flex',
+            flexDirection: { xs: 'column', md: 'row' },
+            gap: 4,
+          }}
+        >
+          <Box sx={{ width: { xs: '100%', md: '65%' } }}>
             <CartItems
               cart={cart}
               products={products}
@@ -55,7 +59,15 @@ export default function Cart() {
               isLoadingProducts={isLoadingProducts}
               hasError={hasError}
             />
-            <Box className={classes.buttonsWrapper}>
+            <Box
+              sx={{
+                display: 'flex',
+                justifyContent: 'space-between',
+                mt: 3,
+                flexWrap: 'wrap',
+                gap: 2,
+              }}
+            >
               <MotionButton
                 variant="outlined"
                 startIcon={<FiArrowLeft />}
@@ -76,7 +88,7 @@ export default function Cart() {
               </Button>
             </Box>
           </Box>
-          <Box className={classes.summaryBox}>
+          <Box sx={{ width: { xs: '100%', md: '30%' } }}>
             <OrderSummary
               cart={cart}
               products={products}

@@ -2,7 +2,6 @@ import Footer from '@/src/components/Footer';
 import { LoadingScreen } from '@/src/components/LoadingScreen';
 import Navbar from '@/src/components/Navbar/Navbar';
 import { useAuth } from '@/src/contexts/AuthContext';
-import { LayoutProps } from '@/types/index';
 import { Box, Container } from '@mui/material';
 import React from 'react';
 
@@ -32,3 +31,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
 };
 
 export default Layout;
+
+export interface LayoutProps {
+  children: React.ReactNode;
+}

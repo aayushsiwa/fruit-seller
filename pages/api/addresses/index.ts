@@ -33,7 +33,8 @@ export default async function handler(
   }
 
   if (req.method === 'POST') {
-    const { street, street2, city, state, postal_code, country, phone } = req.body;
+    const { street, street2, city, state, postal_code, country, phone } =
+      req.body;
 
     if (!street || !city || !state || !postal_code || !country || !phone) {
       return res.status(400).json({ error: 'All fields are required' });

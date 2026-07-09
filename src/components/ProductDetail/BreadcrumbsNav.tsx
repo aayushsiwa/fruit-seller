@@ -1,4 +1,3 @@
-import { BreadcrumbsNavProps } from '@/types/index';
 import { Breadcrumbs, Link, Typography } from '@mui/material';
 import { motion } from 'framer-motion';
 
@@ -23,3 +22,7 @@ export const BreadcrumbsNav: React.FC<BreadcrumbsNavProps> = ({
     </Breadcrumbs>
   );
 };
+
+export interface BreadcrumbsNavProps {
+  productName: string;
+}

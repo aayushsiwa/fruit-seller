@@ -1,5 +1,5 @@
 import { UseAdminDialogsReturn } from '@/types/admin';
-import { ItemType, Order, OrderStatus, User } from '@/types/index';
+import { IProduct, Order, OrderStatus, User } from '@/types/index';
 import { useState } from 'react';
 
 export const useAdminDialogs = (): UseAdminDialogsReturn => {
@@ -10,7 +10,7 @@ export const useAdminDialogs = (): UseAdminDialogsReturn => {
   const [openOrderDialog, setOpenOrderDialog] = useState(false);
   const [openConfirmDialog, setOpenConfirmDialog] = useState(false);
   const [confirmStatus, setConfirmStatus] = useState<OrderStatus>('Processing');
-  const [selectedProduct, setSelectedProduct] = useState<Partial<ItemType>>({});
+  const [selectedProduct, setSelectedProduct] = useState<Partial<IProduct>>({});
   const [selectedUser, setSelectedUser] = useState<Partial<User>>({});
   const [selectedOrder, setSelectedOrder] = useState<Partial<Order>>({});
   const [error, setError] = useState<string | null>(null);
@@ -18,7 +18,7 @@ export const useAdminDialogs = (): UseAdminDialogsReturn => {
   const [isEditUser, setIsEditUser] = useState(false);
 
   const handleOpenProductDialog = (
-    product: Partial<ItemType> | null = null
+    product: Partial<IProduct> | null = null
   ) => {
     setSelectedProduct(product || {});
     setIsEditProduct(!!product?.id);
@@ -33,7 +33,7 @@ export const useAdminDialogs = (): UseAdminDialogsReturn => {
     setError(null);
   };
 
-  const handleOpenDeleteDialog = (product: ItemType) => {
+  const handleOpenDeleteDialog = (product: IProduct) => {
     setSelectedProduct(product);
     setOpenDeleteDialog(true);
     setError(null);

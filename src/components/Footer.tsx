@@ -16,12 +16,7 @@ const Footer = () => {
       sx={{ bgcolor: 'background.paper', py: 6, mt: 'auto' }}
     >
       <Container maxWidth="xl">
-        <Grid
-          container
-          spacing={4}
-          display={'flex'}
-          justifyContent={'space-between'}
-        >
+        <Grid container spacing={4} justifyContent={'space-between'}>
           <Grid item xs={12} sm={4}>
             <Typography variant="h6" color="primary" gutterBottom>
               Fruit Seller

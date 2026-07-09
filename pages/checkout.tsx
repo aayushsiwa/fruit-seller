@@ -6,7 +6,10 @@ export default function CheckoutPage() {
     <>
       <Head>
         <title>Checkout | Fruit Seller</title>
-        <meta name="description" content="Secure checkout. Enter your shipping details and payment information to complete your order." />
+        <meta
+          name="description"
+          content="Secure checkout. Enter your shipping details and payment information to complete your order."
+        />
         <link rel="canonical" href="https://fruitseller.com/checkout" />
         <meta name="robots" content="noindex, nofollow" />
       </Head>

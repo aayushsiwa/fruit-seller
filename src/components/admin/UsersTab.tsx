@@ -1,4 +1,4 @@
-import { User, UsersTabProps } from '@/types/index';
+import { User } from '@/types/index';
 import {
   Box,
   Button,
@@ -124,3 +124,12 @@ const UsersTab: React.FC<UsersTabProps> = ({
 };
 
 export default UsersTab;
+
+export interface UsersTabProps {
+  users: User[];
+  isLoading: boolean;
+  error: string | null;
+  onAddUser: () => void;
+  onEditUser: (user: User) => void;
+  onDeleteUser: (user: User) => void;
+}

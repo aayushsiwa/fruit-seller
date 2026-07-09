@@ -16,7 +16,6 @@ import { motion } from 'framer-motion';
 import { FiChevronRight, FiPackage, FiShoppingBag } from 'react-icons/fi';
 
 import { useOrdersPage } from './Orders.hooks';
-import useStyles from './Orders.styles';
 
 dayjs.extend(relativeTime);
 
@@ -31,7 +30,6 @@ const statusConfig: Record<
 };
 
 export default function Orders() {
-  const classes = useStyles();
   const { orders, isLoading, error, handleViewOrder, handleContinueShopping } =
     useOrdersPage();
 
@@ -42,7 +40,7 @@ export default function Orders() {
   if (error) {
     return (
       <Container maxWidth="lg">
-        <Box className={classes.emptyBox}>
+        <Box sx={{ textAlign: 'center', p: 8, px: 2 }}>
           <FiPackage size={48} color="#999" />
           <Typography variant="h6" color="error" gutterBottom>
             Failed to load orders
@@ -61,12 +59,12 @@ export default function Orders() {
   if (orders.length === 0) {
     return (
       <Container maxWidth="lg">
-        <Box className={classes.headerBox}>
+        <Box sx={{ mb: 4, mt: 2 }}>
           <Typography variant="h4" component="h1" gutterBottom>
             My Orders
           </Typography>
         </Box>
-        <Box className={classes.emptyBox}>
+        <Box sx={{ textAlign: 'center', p: 8, px: 2 }}>
           <FiShoppingBag size={48} color="#999" />
           <Typography variant="h6" gutterBottom>
             No orders yet
@@ -84,7 +82,7 @@ export default function Orders() {
 
   return (
     <Container maxWidth="md" sx={{ py: 4 }}>
-      <Box className={classes.headerBox}>
+      <Box sx={{ mb: 4, mt: 2 }}>
         <Typography variant="h4" component="h1" gutterBottom>
           My Orders
         </Typography>
@@ -104,16 +102,46 @@ export default function Orders() {
           >
             <Paper
               elevation={1}
-              className={classes.orderCard}
               onClick={() => handleViewOrder(order.id)}
+              sx={{
+                p: 2.5,
+                mb: 2,
+                cursor: 'pointer',
+                position: 'relative',
+                overflow: 'hidden',
+                transition: 'box-shadow 0.2s, transform 0.2s',
+                '&:hover': {
+                  boxShadow: 4,
+                  transform: 'translateY(-2px)',
+                },
+              }}
             >
               <Box
-                className={classes.statusBorder}
-                sx={{ bgcolor: cfg.border }}
+                sx={{
+                  position: 'absolute',
+                  left: 0,
+                  top: 0,
+                  bottom: 0,
+                  width: 4,
+                  bgcolor: cfg.border,
+                }}
               />
               <Box sx={{ pl: 2 }}>
-                <Box className={classes.orderHeader}>
-                  <Typography className={classes.orderId}>
+                <Box
+                  sx={{
+                    display: 'flex',
+                    justifyContent: 'space-between',
+                    alignItems: 'center',
+                    mb: 1.5,
+                  }}
+                >
+                  <Typography
+                    sx={{
+                      fontWeight: 600,
+                      fontSize: '0.95rem',
+                      letterSpacing: '0.02em',
+                    }}
+                  >
                     Order #{order.id.slice(0, 8)}
                   </Typography>
                   <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
@@ -121,13 +149,23 @@ export default function Orders() {
                       label={order.status}
                       size="small"
                       color={cfg.color}
-                      className={classes.statusBadge}
+                      sx={{
+                        fontWeight: 600,
+                        fontSize: '0.7rem',
+                        borderRadius: 1,
+                      }}
                     />
                     <FiChevronRight size={16} color="#999" />
                   </Box>
                 </Box>
                 <Divider sx={{ mb: 1.5 }} />
-                <Box className={classes.orderMeta}>
+                <Box
+                  sx={{
+                    display: 'flex',
+                    justifyContent: 'space-between',
+                    alignItems: 'center',
+                  }}
+                >
                   <Typography variant="body2" color="text.secondary">
                     {dayjs(order.createdAt).fromNow()}
                     {order.delivered_at

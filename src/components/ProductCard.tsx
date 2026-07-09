@@ -1,6 +1,6 @@
 import { currency, defaultImage } from '@/constants/index';
 import useProductCard from '@/hooks/useProductCard';
-import { ItemType } from '@/types/index';
+import { IProduct } from '@/types/index';
 import {
   Box,
   Button,
@@ -15,7 +15,7 @@ import {
 import { motion } from 'framer-motion';
 import { FiMinus, FiPlus, FiShoppingCart } from 'react-icons/fi';
 
-const ProductCard = ({ product }: { product: ItemType }) => {
+const ProductCard = ({ product }: { product: IProduct }) => {
   const {
     isOutOfStock,
     handleAddToCart,
@@ -165,7 +165,7 @@ const ProductCard = ({ product }: { product: ItemType }) => {
               }}
               inputProps={{
                 min: 0,
-                max: product.quantity,
+                max: product.stock,
                 style: { textAlign: 'center' },
               }}
               sx={{ width: 50 }}
@@ -174,7 +174,7 @@ const ProductCard = ({ product }: { product: ItemType }) => {
             <IconButton
               size="small"
               onClick={(e) => handleQuantityChange(e, cartQuantity + 1)}
-              disabled={cartQuantity >= product.quantity}
+              disabled={cartQuantity >= product.stock}
               component={motion.div}
               whileHover={{ scale: 1.1 }}
             >

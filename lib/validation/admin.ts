@@ -1,4 +1,4 @@
-import { ItemType, User } from '@/types/index';
+import { IProduct, User } from '@/types/index';
 import * as Yup from 'yup';
 
 interface ValidationResult {
@@ -8,7 +8,7 @@ interface ValidationResult {
 
 export const validateProductData = (
   productData: Partial<
-    Pick<ItemType, 'name' | 'price' | 'description' | 'category' | 'quantity'>
+    Pick<IProduct, 'name' | 'price' | 'description' | 'category' | 'stock'>
   >
 ): ValidationResult => {
   if (!productData.name) {
@@ -23,8 +23,8 @@ export const validateProductData = (
   if (!productData.category) {
     return { isValid: false, error: 'Category is required' };
   }
-  if (productData.quantity == null || productData.quantity < 0) {
-    return { isValid: false, error: 'Quantity cannot be negative' };
+  if (productData.stock == null || productData.stock < 0) {
+    return { isValid: false, error: 'Stock cannot be negative' };
   }
   return { isValid: true };
 };
@@ -59,10 +59,10 @@ export const productSchema = Yup.object({
     .default(0),
   isSeasonal: Yup.boolean().default(false),
   category: Yup.string().required('Category is required'),
-  quantity: Yup.number()
-    .integer('Quantity must be a whole number')
-    .min(0, 'Quantity cannot be negative')
-    .required('Quantity is required'),
+  stock: Yup.number()
+    .integer('Stock must be a whole number')
+    .min(0, 'Stock cannot be negative')
+    .required('Stock is required'),
   image: Yup.string().url('Must be a valid URL').nullable(),
 });
 

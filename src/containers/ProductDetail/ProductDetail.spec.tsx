@@ -1,99 +1,24 @@
-import { ItemType, UseProductDetailReturn } from '@/types/index';
-import { ThemeProvider, createTheme } from '@mui/material/styles';
-import { useQuery } from '@tanstack/react-query';
-import { render, screen } from '@testing-library/react';
-import { act, renderHook, waitFor } from '@testing-library/react';
+import * as GetProductAPI from '@/lib/api/products/getProduct';
+import * as GetRelatedProductsAPI from '@/lib/api/products/getRelatedProducts';
+import {
+  act,
+  mockAddToCart,
+  render,
+  renderHook,
+  waitFor,
+} from '@/src/utils/test';
+import { IProduct } from '@/types/index';
+import * as MaterialUI from '@mui/material';
+import * as NextRouter from 'next/router';
 import React from 'react';
 
 import ProductDetail from './ProductDetail';
-import { useProductDetail } from './ProductDetail.hooks';
 
-jest.mock('framer-motion', () => {
-  const MotionDiv = ({
-    children,
-    ...props
-  }: { children: React.ReactNode } & Record<string, unknown>) => (
-    <div {...props}>{children}</div>
-  );
-  MotionDiv.displayName = 'motion.div';
-  const AnimatePresence = ({ children }: { children: React.ReactNode }) => (
-    <>{children}</>
-  );
-  AnimatePresence.displayName = 'AnimatePresence';
-  return {
-    motion: {
-      div: MotionDiv,
-    },
-    AnimatePresence,
-  };
-});
-
-jest.mock('next/router', () => ({
-  useRouter: jest.fn(() => ({
-    query: { id: '1' },
-    push: jest.fn(),
-  })),
-}));
-
-jest.mock('@tanstack/react-query', () => ({
-  useQuery: jest.fn(),
-}));
-
-const mockAddToCart = jest.fn();
-const mockUpdateQuantity = jest.fn();
-const mockRemoveFromCart = jest.fn();
-
-jest.mock('@/src/contexts/CartContext', () => ({
-  useCart: jest.fn(() => ({
-    cart: [],
-    addToCart: mockAddToCart,
-    updateQuantity: mockUpdateQuantity,
-    removeFromCart: mockRemoveFromCart,
-  })),
-}));
-
-jest.mock('axios');
-
-jest.mock('@mui/styles', () => ({
-  makeStyles: jest.fn(() => jest.fn(() => ({}))),
-}));
-
-jest.mock('@/src/components/LoadingScreen', () => ({
-  LoadingScreen: () => <div data-testid="loading-screen">Loading...</div>,
-}));
-
-jest.mock('@/src/components/ProductDetail/BreadcrumbsNav', () => ({
-  BreadcrumbsNav: ({ productName }: { productName: string }) => (
-    <div data-testid="breadcrumbs-nav">{productName}</div>
-  ),
-}));
-
-jest.mock('@/src/components/ProductDetail/ProductInfo', () => ({
-  ProductInfo: () => <div data-testid="product-info">Product Info</div>,
-}));
-
-jest.mock('@/src/components/ProductDetail/RelatedProducts', () => ({
-  RelatedProducts: ({ relatedProducts }: { relatedProducts: ItemType[] }) => (
-    <div data-testid="related-products">
-      {relatedProducts.length} related product(s)
-    </div>
-  ),
-}));
-
-jest.mock('./ProductDetail.hooks', () => ({
-  useProductDetail: jest.fn(),
-}));
-
-const theme = createTheme();
-
-const renderWithTheme = (ui: React.ReactElement) =>
-  render(<ThemeProvider theme={theme}>{ui}</ThemeProvider>);
-
-const mockProduct: ItemType = {
+const mockProduct: IProduct = {
   id: '1',
   name: 'Apple',
   price: 50,
-  quantity: 20,
+  stock: 10,
   image: '/apple.jpg',
   description: 'Fresh apple from farm',
   category: 'fruits',
@@ -102,12 +27,12 @@ const mockProduct: ItemType = {
   createdAt: '2025-01-01T00:00:00Z',
 };
 
-const mockRelatedProducts: ItemType[] = [
+const mockRelatedProducts: IProduct[] = [
   {
     id: '2',
     name: 'Banana',
     price: 30,
-    quantity: 10,
+    stock: 10,
     image: '/banana.jpg',
     description: 'Fresh banana',
     category: 'fruits',
@@ -117,39 +42,30 @@ const mockRelatedProducts: ItemType[] = [
   },
 ];
 
-const defaultHookReturn: UseProductDetailReturn = {
-  product: mockProduct,
-  isLoadingProduct: false,
-  relatedProducts: mockRelatedProducts,
-  cartQuantity: 0,
-  error: null,
-  setError: jest.fn(),
-  snackbar: { open: false, message: '', severity: 'success' },
-  handleCloseSnackbar: jest.fn(),
-  handleAddToCart: jest.fn(),
-  handleQuantityChange: jest.fn(),
-  handleShare: jest.fn(),
-  isMobile: false,
-};
-
 describe('ProductDetail - Hooks', () => {
   beforeEach(() => {
-    jest.clearAllMocks();
+    vi.clearAllMocks();
+    vi.spyOn(NextRouter, 'useRouter').mockImplementation(() => {
+      type Return = ReturnType<typeof NextRouter.useRouter>;
+      return {
+        push: vi.fn(),
+        query: { id: '1' },
+      } as Partial<Return> as Return;
+    });
   });
 
   it('should fetch product by id from query', async () => {
-    const useQueryMock = useQuery as jest.Mock;
-    useQueryMock
-      .mockReturnValue({ data: undefined, isLoading: false })
-      .mockReturnValueOnce({ data: mockProduct, isLoading: false })
-      .mockReturnValueOnce({
-        data: mockRelatedProducts,
-        isLoading: false,
-      });
+    vi.spyOn(GetProductAPI, 'useGetProduct').mockReturnValue({
+      data: { data: { product: mockProduct } },
+      isLoading: false,
+    } as any);
+    vi.spyOn(GetRelatedProductsAPI, 'useGetRelatedProducts').mockReturnValue({
+      data: { data: { products: mockRelatedProducts } },
+      isLoading: false,
+    } as any);
 
-    const realHook = jest.requireActual(
-      './ProductDetail.hooks'
-    ).useProductDetail;
+    const realHook = ((await vi.importActual('./ProductDetail.hooks')) as any)
+      .useProductDetail;
     const { result } = renderHook(() => realHook());
 
     await waitFor(() => {
@@ -161,21 +77,17 @@ describe('ProductDetail - Hooks', () => {
   });
 
   it('should add to cart on handleAddToCart', async () => {
-    const useQueryMock = useQuery as jest.Mock;
-    useQueryMock
-      .mockReturnValue({ data: undefined, isLoading: false })
-      .mockReturnValueOnce({
-        data: { ...mockProduct, quantity: 5 },
-        isLoading: false,
-      })
-      .mockReturnValueOnce({
-        data: mockRelatedProducts,
-        isLoading: false,
-      });
+    vi.spyOn(GetProductAPI, 'useGetProduct').mockReturnValue({
+      data: { data: { product: { ...mockProduct, quantity: 5 } } },
+      isLoading: false,
+    } as any);
+    vi.spyOn(GetRelatedProductsAPI, 'useGetRelatedProducts').mockReturnValue({
+      data: { data: { products: mockRelatedProducts } },
+      isLoading: false,
+    } as any);
 
-    const realHook = jest.requireActual(
-      './ProductDetail.hooks'
-    ).useProductDetail;
+    const realHook = ((await vi.importActual('./ProductDetail.hooks')) as any)
+      .useProductDetail;
     const { result } = renderHook(() => realHook());
 
     await waitFor(() => {
@@ -191,21 +103,17 @@ describe('ProductDetail - Hooks', () => {
   });
 
   it('should set error when adding out-of-stock product', async () => {
-    const useQueryMock = useQuery as jest.Mock;
-    useQueryMock
-      .mockReturnValue({ data: undefined, isLoading: false })
-      .mockReturnValueOnce({
-        data: { ...mockProduct, quantity: 0 },
-        isLoading: false,
-      })
-      .mockReturnValueOnce({
-        data: mockRelatedProducts,
-        isLoading: false,
-      });
+    vi.spyOn(GetProductAPI, 'useGetProduct').mockReturnValue({
+      data: { data: { product: { ...mockProduct, stock: 0 } } },
+      isLoading: false,
+    } as any);
+    vi.spyOn(GetRelatedProductsAPI, 'useGetRelatedProducts').mockReturnValue({
+      data: { data: { products: mockRelatedProducts } },
+      isLoading: false,
+    } as any);
 
-    const realHook = jest.requireActual(
-      './ProductDetail.hooks'
-    ).useProductDetail;
+    const realHook = ((await vi.importActual('./ProductDetail.hooks')) as any)
+      .useProductDetail;
     const { result } = renderHook(() => realHook());
 
     await waitFor(() => {
@@ -221,23 +129,22 @@ describe('ProductDetail - Hooks', () => {
   });
 
   it('should copy link on handleShare', async () => {
-    const writeText = jest.fn().mockResolvedValue(undefined);
+    const writeText = vi.fn().mockResolvedValue(undefined);
     Object.assign(navigator, {
       clipboard: { writeText },
     });
 
-    const useQueryMock = useQuery as jest.Mock;
-    useQueryMock
-      .mockReturnValue({ data: undefined, isLoading: false })
-      .mockReturnValueOnce({ data: mockProduct, isLoading: false })
-      .mockReturnValueOnce({
-        data: mockRelatedProducts,
-        isLoading: false,
-      });
+    vi.spyOn(GetProductAPI, 'useGetProduct').mockReturnValue({
+      data: { data: { product: mockProduct } },
+      isLoading: false,
+    } as any);
+    vi.spyOn(GetRelatedProductsAPI, 'useGetRelatedProducts').mockReturnValue({
+      data: { data: { products: mockRelatedProducts } },
+      isLoading: false,
+    } as any);
 
-    const realHook = jest.requireActual(
-      './ProductDetail.hooks'
-    ).useProductDetail;
+    const realHook = ((await vi.importActual('./ProductDetail.hooks')) as any)
+      .useProductDetail;
     const { result } = renderHook(() => realHook());
 
     await waitFor(() => {
@@ -256,24 +163,119 @@ describe('ProductDetail - Hooks', () => {
 
 describe('ProductDetail - UI', () => {
   beforeEach(() => {
-    jest.clearAllMocks();
+    vi.clearAllMocks();
+    vi.spyOn(NextRouter, 'useRouter').mockImplementation(() => {
+      type Return = ReturnType<typeof NextRouter.useRouter>;
+      return {
+        push: vi.fn(),
+        query: { id: '1' },
+      } as Partial<Return> as Return;
+    });
   });
 
-  it('should render loading state', () => {
-    (useProductDetail as jest.Mock).mockReturnValue({
-      ...defaultHookReturn,
-      product: undefined,
-      isLoadingProduct: true,
+  describe('when rendered in web view', () => {
+    beforeEach(() => {
+      vi.spyOn(MaterialUI, 'useMediaQuery').mockReturnValue(false);
     });
 
-    renderWithTheme(<ProductDetail />);
-    expect(screen.getByTestId('loading-screen')).toBeInTheDocument();
+    it('should match snapshot when API is loading', () => {
+      vi.spyOn(GetProductAPI, 'useGetProduct').mockReturnValue({
+        data: undefined,
+        isLoading: true,
+        error: null,
+      } as any);
+      vi.spyOn(GetRelatedProductsAPI, 'useGetRelatedProducts').mockReturnValue({
+        data: undefined,
+        isLoading: true,
+        error: null,
+      } as any);
+
+      const { container } = render(<ProductDetail />);
+      expect(container).toMatchSnapshot();
+    });
+
+    it('should match snapshot when API is successful', async () => {
+      vi.spyOn(GetProductAPI, 'useGetProduct').mockReturnValue({
+        data: { data: { product: mockProduct } },
+        isLoading: false,
+      } as any);
+      vi.spyOn(GetRelatedProductsAPI, 'useGetRelatedProducts').mockReturnValue({
+        data: { data: { products: mockRelatedProducts } },
+        isLoading: false,
+      } as any);
+
+      const { container } = render(<ProductDetail />);
+
+      expect(container).toMatchSnapshot();
+    });
+
+    it('should match snapshot when API fails', () => {
+      vi.spyOn(GetProductAPI, 'useGetProduct').mockReturnValue({
+        data: undefined,
+        isLoading: false,
+        error: new Error('Failed to fetch details'),
+      } as any);
+      vi.spyOn(GetRelatedProductsAPI, 'useGetRelatedProducts').mockReturnValue({
+        data: undefined,
+        isLoading: false,
+        error: new Error('Failed to fetch details'),
+      } as any);
+
+      const { container } = render(<ProductDetail />);
+      expect(container).toMatchSnapshot();
+    });
   });
 
-  it('should match snapshot with product data', () => {
-    (useProductDetail as jest.Mock).mockReturnValue(defaultHookReturn);
+  describe('when rendered in mobile view', () => {
+    beforeEach(() => {
+      vi.spyOn(MaterialUI, 'useMediaQuery').mockReturnValue(true);
+    });
 
-    const { asFragment } = renderWithTheme(<ProductDetail />);
-    expect(asFragment()).toMatchSnapshot();
+    it('should match snapshot when API is loading', () => {
+      vi.spyOn(GetProductAPI, 'useGetProduct').mockReturnValue({
+        data: undefined,
+        isLoading: true,
+        error: null,
+      } as any);
+      vi.spyOn(GetRelatedProductsAPI, 'useGetRelatedProducts').mockReturnValue({
+        data: undefined,
+        isLoading: true,
+        error: null,
+      } as any);
+
+      const { container } = render(<ProductDetail />);
+      expect(container).toMatchSnapshot();
+    });
+
+    it('should match snapshot when API is successful', async () => {
+      vi.spyOn(GetProductAPI, 'useGetProduct').mockReturnValue({
+        data: { data: { product: mockProduct } },
+        isLoading: false,
+      } as any);
+      vi.spyOn(GetRelatedProductsAPI, 'useGetRelatedProducts').mockReturnValue({
+        data: { data: { products: mockRelatedProducts } },
+        isLoading: false,
+      } as any);
+
+      const { container } = render(<ProductDetail />);
+
+      expect(container).toMatchSnapshot();
+    });
+
+    it('should match snapshot when API fails', () => {
+      vi.spyOn(GetProductAPI, 'useGetProduct').mockReturnValue({
+        data: undefined,
+        isLoading: false,
+        error: new Error('Failed to fetch details'),
+      } as any);
+      vi.spyOn(GetRelatedProductsAPI, 'useGetRelatedProducts').mockReturnValue({
+        data: undefined,
+        isLoading: false,
+        error: new Error('Failed to fetch details'),
+      } as any);
+
+      const { container } = render(<ProductDetail />);
+      expect(container).toMatchSnapshot();
+    });
   });
 });

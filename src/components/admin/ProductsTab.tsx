@@ -1,5 +1,5 @@
 import { currency } from '@/constants';
-import { ItemType, ProductsTabProps } from '@/types/index';
+import { IProduct } from '@/types/index';
 import {
   Box,
   Button,
@@ -30,7 +30,7 @@ const ProductsTab: React.FC<ProductsTabProps> = ({
   onDeleteProduct,
 }) => {
   const filteredProducts = products?.filter(
-    (product: ItemType) =>
+    (product: IProduct) =>
       product.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
       product.description.toLowerCase().includes(searchQuery.toLowerCase()) ||
       product.category.toLowerCase().includes(searchQuery.toLowerCase())
@@ -94,7 +94,7 @@ const ProductsTab: React.FC<ProductsTabProps> = ({
                 </TableCell>
               </TableRow>
             ) : (filteredProducts?.length ?? 0) > 0 ? (
-              (filteredProducts ?? []).map((product: ItemType) => (
+              (filteredProducts ?? []).map((product: IProduct) => (
                 <TableRow key={product.id}>
                   <TableCell>
                     <Box
@@ -127,8 +127,8 @@ const ProductsTab: React.FC<ProductsTabProps> = ({
                   </TableCell>
                   <TableCell align="center">
                     <Chip
-                      label={product.quantity > 0 ? 'In Stock' : 'Out of Stock'}
-                      color={product.quantity > 0 ? 'success' : 'error'}
+                      label={product.stock > 0 ? 'In Stock' : 'Out of Stock'}
+                      color={product.stock > 0 ? 'success' : 'error'}
                       size="small"
                     />
                   </TableCell>
@@ -165,3 +165,14 @@ const ProductsTab: React.FC<ProductsTabProps> = ({
 };
 
 export default ProductsTab;
+
+export interface ProductsTabProps {
+  products: IProduct[];
+  isLoading: boolean;
+  error: string | null;
+  searchQuery: string;
+  onSearchChange: (query: string) => void;
+  onAddProduct: () => void;
+  onEditProduct: (product: IProduct) => void;
+  onDeleteProduct: (product: IProduct) => void;
+}

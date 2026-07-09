@@ -1,0 +1,1435 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`Products - UI > when rendered in mobile view > should match snapshot when API fails 1`] = `
+<div>
+  <div
+    class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-4 css-480o17-MuiGrid-root"
+  >
+    <div
+      class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-md-3 css-iv7vbz-MuiGrid-root"
+    >
+      <button
+        class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeMedium MuiButton-outlinedSizeMedium MuiButton-colorPrimary MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeMedium MuiButton-outlinedSizeMedium MuiButton-colorPrimary css-6q3cg8-MuiButtonBase-root-MuiButton-root"
+        tabindex="0"
+        type="button"
+      >
+        <span
+          class="MuiButton-icon MuiButton-startIcon MuiButton-iconSizeMedium css-1d6wzja-MuiButton-startIcon"
+        >
+          <svg
+            fill="none"
+            height="1em"
+            stroke="currentColor"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            viewBox="0 0 24 24"
+            width="1em"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <polygon
+              points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"
+            />
+          </svg>
+        </span>
+        Filters
+        <span
+          class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+        />
+      </button>
+    </div>
+    <div
+      class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-md-9 css-b1im03-MuiGrid-root"
+    >
+      <p
+        class="MuiTypography-root MuiTypography-body1 css-1nf1aje-MuiTypography-root"
+      >
+        Failed to load products. Please try again later.
+      </p>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Products - UI > when rendered in mobile view > should match snapshot when API is loading 1`] = `
+<div>
+  <div
+    class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-4 css-480o17-MuiGrid-root"
+  >
+    <div
+      class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-md-3 css-iv7vbz-MuiGrid-root"
+    >
+      <button
+        class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeMedium MuiButton-outlinedSizeMedium MuiButton-colorPrimary MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeMedium MuiButton-outlinedSizeMedium MuiButton-colorPrimary css-6q3cg8-MuiButtonBase-root-MuiButton-root"
+        tabindex="0"
+        type="button"
+      >
+        <span
+          class="MuiButton-icon MuiButton-startIcon MuiButton-iconSizeMedium css-1d6wzja-MuiButton-startIcon"
+        >
+          <svg
+            fill="none"
+            height="1em"
+            stroke="currentColor"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            viewBox="0 0 24 24"
+            width="1em"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <polygon
+              points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"
+            />
+          </svg>
+        </span>
+        Filters
+        <span
+          class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+        />
+      </button>
+    </div>
+    <div
+      class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-md-9 css-b1im03-MuiGrid-root"
+    >
+      <div
+        class="MuiBox-root css-zit58i"
+      >
+        <h6
+          class="MuiTypography-root MuiTypography-h6 MuiTypography-gutterBottom css-glud9z-MuiTypography-root"
+        >
+          Loading fresh fruits ...
+        </h6>
+        <span
+          class="MuiCircularProgress-root MuiCircularProgress-indeterminate MuiCircularProgress-colorPrimary css-18lrjg1-MuiCircularProgress-root"
+          role="progressbar"
+          style="width: 40px; height: 40px;"
+        >
+          <svg
+            class="MuiCircularProgress-svg css-1idz92c-MuiCircularProgress-svg"
+            viewBox="22 22 44 44"
+          >
+            <circle
+              class="MuiCircularProgress-circle MuiCircularProgress-circleIndeterminate css-176wh8e-MuiCircularProgress-circle"
+              cx="44"
+              cy="44"
+              fill="none"
+              r="20.2"
+              stroke-width="3.6"
+            />
+          </svg>
+        </span>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Products - UI > when rendered in mobile view > should match snapshot when API is successful 1`] = `
+<div>
+  <div
+    class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-4 css-480o17-MuiGrid-root"
+  >
+    <div
+      class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-md-3 css-iv7vbz-MuiGrid-root"
+    >
+      <button
+        class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeMedium MuiButton-outlinedSizeMedium MuiButton-colorPrimary MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeMedium MuiButton-outlinedSizeMedium MuiButton-colorPrimary css-6q3cg8-MuiButtonBase-root-MuiButton-root"
+        tabindex="0"
+        type="button"
+      >
+        <span
+          class="MuiButton-icon MuiButton-startIcon MuiButton-iconSizeMedium css-1d6wzja-MuiButton-startIcon"
+        >
+          <svg
+            fill="none"
+            height="1em"
+            stroke="currentColor"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            viewBox="0 0 24 24"
+            width="1em"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <polygon
+              points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"
+            />
+          </svg>
+        </span>
+        Filters
+        <span
+          class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+        />
+      </button>
+    </div>
+    <div
+      class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-md-9 css-b1im03-MuiGrid-root"
+    >
+      <div
+        class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-3 css-zow5z4-MuiGrid-root"
+        data-testid="product-grid"
+      >
+        <div
+          class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-6 MuiGrid-grid-md-4 MuiGrid-grid-lg-3 css-14j1sok-MuiGrid-root"
+        >
+          <div
+            class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation1 MuiCard-root css-1dc3bjb-MuiPaper-root-MuiCard-root"
+            transition="[object Object]"
+            whilehover="[object Object]"
+          >
+            <img
+              alt="Grapes"
+              class="MuiCardMedia-root MuiCardMedia-media MuiCardMedia-img css-6mo23z-MuiCardMedia-root"
+              height="160"
+              loading="lazy"
+              src="/grapes.jpg"
+            />
+            <div
+              class="MuiCardContent-root css-2r3irp-MuiCardContent-root"
+            >
+              <div
+                class="MuiBox-root css-69i1ev"
+              >
+                <h6
+                  class="MuiTypography-root MuiTypography-h6 MuiTypography-noWrap css-ddygbf-MuiTypography-root"
+                  title="Grapes"
+                >
+                  Grapes
+                </h6>
+              </div>
+              <div
+                class="MuiBox-root css-ohugnc"
+              >
+                <h6
+                  class="MuiTypography-root MuiTypography-h6 css-1d963ga-MuiTypography-root"
+                >
+                  ₹
+                  90.00
+                </h6>
+                <p
+                  class="MuiTypography-root MuiTypography-body2 css-13rm4i2-MuiTypography-root"
+                >
+                  ₹
+                  100.00
+                </p>
+              </div>
+              <p
+                class="MuiTypography-root MuiTypography-body2 css-1sbvnan-MuiTypography-root"
+                title="Fresh Grapes from Nashik."
+              >
+                Fresh Grapes from Nashik.
+              </p>
+            </div>
+            <div
+              class="MuiCardActions-root MuiCardActions-spacing css-1vua6p0-MuiCardActions-root"
+            >
+              <div
+                class="MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButton-colorPrimary MuiButton-fullWidth MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButton-colorPrimary MuiButton-fullWidth css-1fu7jd5-MuiButtonBase-root-MuiButton-root"
+                role="button"
+                tabindex="0"
+                whilehover="[object Object]"
+                whiletap="[object Object]"
+              >
+                <span
+                  class="MuiButton-icon MuiButton-startIcon MuiButton-iconSizeMedium css-1d6wzja-MuiButton-startIcon"
+                >
+                  <svg
+                    fill="none"
+                    height="1em"
+                    stroke="currentColor"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    viewBox="0 0 24 24"
+                    width="1em"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <circle
+                      cx="9"
+                      cy="21"
+                      r="1"
+                    />
+                    <circle
+                      cx="20"
+                      cy="21"
+                      r="1"
+                    />
+                    <path
+                      d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"
+                    />
+                  </svg>
+                </span>
+                Add to Cart
+                <span
+                  class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+        <div
+          class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-6 MuiGrid-grid-md-4 MuiGrid-grid-lg-3 css-14j1sok-MuiGrid-root"
+        >
+          <div
+            class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation1 MuiCard-root css-edic75-MuiPaper-root-MuiCard-root"
+            transition="[object Object]"
+            whilehover="[object Object]"
+          >
+            <img
+              alt="Apple"
+              class="MuiCardMedia-root MuiCardMedia-media MuiCardMedia-img css-6mo23z-MuiCardMedia-root"
+              height="160"
+              loading="lazy"
+              src="/apple.jpg"
+            />
+            <div
+              class="MuiCardContent-root css-2r3irp-MuiCardContent-root"
+            >
+              <div
+                class="MuiBox-root css-69i1ev"
+              >
+                <h6
+                  class="MuiTypography-root MuiTypography-h6 MuiTypography-noWrap css-ddygbf-MuiTypography-root"
+                  title="Apple"
+                >
+                  Apple
+                </h6>
+                <p
+                  class="MuiTypography-root MuiTypography-body2 css-1co9xw8-MuiTypography-root"
+                >
+                  Out of Stock
+                </p>
+              </div>
+              <div
+                class="MuiBox-root css-ohugnc"
+              >
+                <h6
+                  class="MuiTypography-root MuiTypography-h6 css-1d963ga-MuiTypography-root"
+                >
+                  ₹
+                  47.50
+                </h6>
+                <p
+                  class="MuiTypography-root MuiTypography-body2 css-13rm4i2-MuiTypography-root"
+                >
+                  ₹
+                  50.00
+                </p>
+              </div>
+              <p
+                class="MuiTypography-root MuiTypography-body2 css-1sbvnan-MuiTypography-root"
+                title="Organic Apples from Himachal."
+              >
+                Organic Apples from Himachal.
+              </p>
+            </div>
+            <div
+              class="MuiCardActions-root MuiCardActions-spacing css-1vua6p0-MuiCardActions-root"
+            >
+              <div
+                aria-disabled="true"
+                class="MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButton-colorPrimary MuiButton-fullWidth Mui-disabled MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButton-colorPrimary MuiButton-fullWidth css-1fu7jd5-MuiButtonBase-root-MuiButton-root"
+                role="button"
+                tabindex="-1"
+                whilehover="[object Object]"
+                whiletap="[object Object]"
+              >
+                <span
+                  class="MuiButton-icon MuiButton-startIcon MuiButton-iconSizeMedium css-1d6wzja-MuiButton-startIcon"
+                >
+                  <svg
+                    fill="none"
+                    height="1em"
+                    stroke="currentColor"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    viewBox="0 0 24 24"
+                    width="1em"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <circle
+                      cx="9"
+                      cy="21"
+                      r="1"
+                    />
+                    <circle
+                      cx="20"
+                      cy="21"
+                      r="1"
+                    />
+                    <path
+                      d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"
+                    />
+                  </svg>
+                </span>
+                Add to Cart
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Products - UI > when rendered in web view > should match snapshot when API fails 1`] = `
+<div>
+  <div
+    class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-4 css-480o17-MuiGrid-root"
+  >
+    <div
+      class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-md-3 css-iv7vbz-MuiGrid-root"
+    >
+      <div
+        class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation2 css-1vvhxi5-MuiPaper-root"
+        data-testid="filter-options"
+      >
+        <h6
+          class="MuiTypography-root MuiTypography-h6 css-1otc25a-MuiTypography-root"
+        >
+          Filter Products
+        </h6>
+        <hr
+          class="MuiDivider-root MuiDivider-fullWidth css-1o5hxn5-MuiDivider-root"
+        />
+        <div
+          class="MuiBox-root css-i3pbo"
+        >
+          <h6
+            class="MuiTypography-root MuiTypography-subtitle2 css-1kxm397-MuiTypography-root"
+          >
+            Price Range
+          </h6>
+          <span
+            class="MuiSlider-root MuiSlider-colorPrimary MuiSlider-sizeMedium css-188mx6n-MuiSlider-root"
+          >
+            <span
+              class="MuiSlider-rail css-7o8aqz-MuiSlider-rail"
+            />
+            <span
+              class="MuiSlider-track css-ttgsjq-MuiSlider-track"
+              style="left: 0%; width: 100%;"
+            />
+            <span
+              class="MuiSlider-thumb MuiSlider-thumbSizeMedium MuiSlider-thumbColorPrimary MuiSlider-thumb MuiSlider-thumbSizeMedium MuiSlider-thumbColorPrimary css-cp2j25-MuiSlider-thumb"
+              data-index="0"
+              style="left: 0%;"
+            >
+              <input
+                aria-orientation="horizontal"
+                aria-valuemax="100"
+                aria-valuemin="0"
+                aria-valuenow="0"
+                data-index="0"
+                max="100"
+                min="0"
+                step="1"
+                style="border: 0px; clip: rect(0px); height: 100%; margin: -1px; overflow: hidden; padding: 0px; position: absolute; white-space: nowrap; width: 100%; direction: ltr;"
+                type="range"
+                value="0"
+              />
+              <span
+                aria-hidden="true"
+                class="MuiSlider-valueLabel css-14gyywz-MuiSlider-valueLabel"
+              >
+                <span
+                  class="MuiSlider-valueLabelCircle"
+                >
+                  <span
+                    class="MuiSlider-valueLabelLabel"
+                  >
+                    0
+                  </span>
+                </span>
+              </span>
+            </span>
+            <span
+              class="MuiSlider-thumb MuiSlider-thumbSizeMedium MuiSlider-thumbColorPrimary MuiSlider-thumb MuiSlider-thumbSizeMedium MuiSlider-thumbColorPrimary css-cp2j25-MuiSlider-thumb"
+              data-index="1"
+              style="left: 100%;"
+            >
+              <input
+                aria-orientation="horizontal"
+                aria-valuemax="100"
+                aria-valuemin="0"
+                aria-valuenow="100"
+                data-index="1"
+                max="100"
+                min="0"
+                step="1"
+                style="border: 0px; clip: rect(0px); height: 100%; margin: -1px; overflow: hidden; padding: 0px; position: absolute; white-space: nowrap; width: 100%; direction: ltr;"
+                type="range"
+                value="100"
+              />
+              <span
+                aria-hidden="true"
+                class="MuiSlider-valueLabel css-14gyywz-MuiSlider-valueLabel"
+              >
+                <span
+                  class="MuiSlider-valueLabelCircle"
+                >
+                  <span
+                    class="MuiSlider-valueLabelLabel"
+                  >
+                    100
+                  </span>
+                </span>
+              </span>
+            </span>
+          </span>
+          <span
+            class="MuiTypography-root MuiTypography-caption css-ol7wxs-MuiTypography-root"
+          >
+            Rs.
+            0
+             - Rs.
+            100
+          </span>
+        </div>
+        <div
+          class="MuiFormControl-root MuiFormControl-fullWidth css-gjxexz-MuiFormControl-root"
+        >
+          <label
+            class="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-sizeMedium MuiInputLabel-outlined MuiFormLabel-colorPrimary MuiFormLabel-filled MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-sizeMedium MuiInputLabel-outlined css-1jy569b-MuiFormLabel-root-MuiInputLabel-root"
+            data-shrink="true"
+          >
+            Category
+          </label>
+          <div
+            class="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-colorPrimary MuiInputBase-formControl css-1yk1gt9-MuiInputBase-root-MuiOutlinedInput-root-MuiSelect-root"
+          >
+            <div
+              aria-controls=":r4:"
+              aria-expanded="false"
+              aria-haspopup="listbox"
+              class="MuiSelect-select MuiSelect-outlined MuiInputBase-input MuiOutlinedInput-input css-11u53oe-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input"
+              role="combobox"
+              tabindex="0"
+            >
+              All Categories
+            </div>
+            <input
+              aria-hidden="true"
+              aria-invalid="false"
+              class="MuiSelect-nativeInput css-yf8vq0-MuiSelect-nativeInput"
+              tabindex="-1"
+              value="all"
+            />
+            <svg
+              aria-hidden="true"
+              class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium MuiSelect-icon MuiSelect-iconOutlined css-hfutr2-MuiSvgIcon-root-MuiSelect-icon"
+              data-testid="ArrowDropDownIcon"
+              focusable="false"
+              viewBox="0 0 24 24"
+            >
+              <path
+                d="M7 10l5 5 5-5z"
+              />
+            </svg>
+            <fieldset
+              aria-hidden="true"
+              class="MuiOutlinedInput-notchedOutline css-r01yff-MuiNotchedOutlined-root-MuiOutlinedInput-notchedOutline"
+            >
+              <legend
+                class="css-sl37lx-MuiNotchedOutlined-root"
+              >
+                <span>
+                  Category
+                </span>
+              </legend>
+            </fieldset>
+          </div>
+        </div>
+        <div
+          class="MuiFormControl-root MuiFormControl-fullWidth css-gjxexz-MuiFormControl-root"
+        >
+          <label
+            class="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-sizeMedium MuiInputLabel-outlined MuiFormLabel-colorPrimary MuiFormLabel-filled MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-sizeMedium MuiInputLabel-outlined css-1jy569b-MuiFormLabel-root-MuiInputLabel-root"
+            data-shrink="true"
+          >
+            Sort By
+          </label>
+          <div
+            class="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-colorPrimary MuiInputBase-formControl css-1yk1gt9-MuiInputBase-root-MuiOutlinedInput-root-MuiSelect-root"
+          >
+            <div
+              aria-controls=":r5:"
+              aria-expanded="false"
+              aria-haspopup="listbox"
+              class="MuiSelect-select MuiSelect-outlined MuiInputBase-input MuiOutlinedInput-input css-11u53oe-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input"
+              role="combobox"
+              tabindex="0"
+            >
+              Default
+            </div>
+            <input
+              aria-hidden="true"
+              aria-invalid="false"
+              class="MuiSelect-nativeInput css-yf8vq0-MuiSelect-nativeInput"
+              tabindex="-1"
+              value="none"
+            />
+            <svg
+              aria-hidden="true"
+              class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium MuiSelect-icon MuiSelect-iconOutlined css-hfutr2-MuiSvgIcon-root-MuiSelect-icon"
+              data-testid="ArrowDropDownIcon"
+              focusable="false"
+              viewBox="0 0 24 24"
+            >
+              <path
+                d="M7 10l5 5 5-5z"
+              />
+            </svg>
+            <fieldset
+              aria-hidden="true"
+              class="MuiOutlinedInput-notchedOutline css-r01yff-MuiNotchedOutlined-root-MuiOutlinedInput-notchedOutline"
+            >
+              <legend
+                class="css-sl37lx-MuiNotchedOutlined-root"
+              >
+                <span>
+                  Sort By
+                </span>
+              </legend>
+            </fieldset>
+          </div>
+        </div>
+        <label
+          class="MuiFormControlLabel-root MuiFormControlLabel-labelPlacementEnd css-18yztu3-MuiFormControlLabel-root"
+        >
+          <span
+            class="MuiButtonBase-root MuiCheckbox-root MuiCheckbox-colorPrimary MuiCheckbox-sizeMedium PrivateSwitchBase-root MuiCheckbox-root MuiCheckbox-colorPrimary MuiCheckbox-sizeMedium MuiCheckbox-root MuiCheckbox-colorPrimary MuiCheckbox-sizeMedium css-p6iyue-MuiButtonBase-root-MuiSwitchBase-root-MuiCheckbox-root"
+          >
+            <input
+              class="PrivateSwitchBase-input css-1p3z7et-MuiSwitchBase-root"
+              data-indeterminate="false"
+              type="checkbox"
+            />
+            <svg
+              aria-hidden="true"
+              class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-i4bv87-MuiSvgIcon-root"
+              data-testid="CheckBoxOutlineBlankIcon"
+              focusable="false"
+              viewBox="0 0 24 24"
+            >
+              <path
+                d="M19 5v14H5V5h14m0-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2z"
+              />
+            </svg>
+            <span
+              class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+            />
+          </span>
+          <span
+            class="MuiTypography-root MuiTypography-body1 MuiFormControlLabel-label css-ahj2mt-MuiTypography-root"
+          >
+            In Stock Only
+          </span>
+        </label>
+        <button
+          class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedSecondary MuiButton-sizeMedium MuiButton-outlinedSizeMedium MuiButton-colorSecondary MuiButton-fullWidth MuiButton-root MuiButton-outlined MuiButton-outlinedSecondary MuiButton-sizeMedium MuiButton-outlinedSizeMedium MuiButton-colorSecondary MuiButton-fullWidth css-jc1r49-MuiButtonBase-root-MuiButton-root"
+          tabindex="0"
+          type="button"
+        >
+          Reset Filters
+          <span
+            class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+          />
+        </button>
+      </div>
+    </div>
+    <div
+      class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-md-9 css-b1im03-MuiGrid-root"
+    >
+      <p
+        class="MuiTypography-root MuiTypography-body1 css-1nf1aje-MuiTypography-root"
+      >
+        Failed to load products. Please try again later.
+      </p>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Products - UI > when rendered in web view > should match snapshot when API is loading 1`] = `
+<div>
+  <div
+    class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-4 css-480o17-MuiGrid-root"
+  >
+    <div
+      class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-md-3 css-iv7vbz-MuiGrid-root"
+    >
+      <div
+        class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation2 css-1vvhxi5-MuiPaper-root"
+        data-testid="filter-options"
+      >
+        <h6
+          class="MuiTypography-root MuiTypography-h6 css-1otc25a-MuiTypography-root"
+        >
+          Filter Products
+        </h6>
+        <hr
+          class="MuiDivider-root MuiDivider-fullWidth css-1o5hxn5-MuiDivider-root"
+        />
+        <div
+          class="MuiBox-root css-i3pbo"
+        >
+          <h6
+            class="MuiTypography-root MuiTypography-subtitle2 css-1kxm397-MuiTypography-root"
+          >
+            Price Range
+          </h6>
+          <span
+            class="MuiSlider-root MuiSlider-colorPrimary MuiSlider-sizeMedium css-188mx6n-MuiSlider-root"
+          >
+            <span
+              class="MuiSlider-rail css-7o8aqz-MuiSlider-rail"
+            />
+            <span
+              class="MuiSlider-track css-ttgsjq-MuiSlider-track"
+              style="left: 0%; width: 100%;"
+            />
+            <span
+              class="MuiSlider-thumb MuiSlider-thumbSizeMedium MuiSlider-thumbColorPrimary MuiSlider-thumb MuiSlider-thumbSizeMedium MuiSlider-thumbColorPrimary css-cp2j25-MuiSlider-thumb"
+              data-index="0"
+              style="left: 0%;"
+            >
+              <input
+                aria-orientation="horizontal"
+                aria-valuemax="100"
+                aria-valuemin="0"
+                aria-valuenow="0"
+                data-index="0"
+                max="100"
+                min="0"
+                step="1"
+                style="border: 0px; clip: rect(0px); height: 100%; margin: -1px; overflow: hidden; padding: 0px; position: absolute; white-space: nowrap; width: 100%; direction: ltr;"
+                type="range"
+                value="0"
+              />
+              <span
+                aria-hidden="true"
+                class="MuiSlider-valueLabel css-14gyywz-MuiSlider-valueLabel"
+              >
+                <span
+                  class="MuiSlider-valueLabelCircle"
+                >
+                  <span
+                    class="MuiSlider-valueLabelLabel"
+                  >
+                    0
+                  </span>
+                </span>
+              </span>
+            </span>
+            <span
+              class="MuiSlider-thumb MuiSlider-thumbSizeMedium MuiSlider-thumbColorPrimary MuiSlider-thumb MuiSlider-thumbSizeMedium MuiSlider-thumbColorPrimary css-cp2j25-MuiSlider-thumb"
+              data-index="1"
+              style="left: 100%;"
+            >
+              <input
+                aria-orientation="horizontal"
+                aria-valuemax="100"
+                aria-valuemin="0"
+                aria-valuenow="100"
+                data-index="1"
+                max="100"
+                min="0"
+                step="1"
+                style="border: 0px; clip: rect(0px); height: 100%; margin: -1px; overflow: hidden; padding: 0px; position: absolute; white-space: nowrap; width: 100%; direction: ltr;"
+                type="range"
+                value="100"
+              />
+              <span
+                aria-hidden="true"
+                class="MuiSlider-valueLabel css-14gyywz-MuiSlider-valueLabel"
+              >
+                <span
+                  class="MuiSlider-valueLabelCircle"
+                >
+                  <span
+                    class="MuiSlider-valueLabelLabel"
+                  >
+                    100
+                  </span>
+                </span>
+              </span>
+            </span>
+          </span>
+          <span
+            class="MuiTypography-root MuiTypography-caption css-ol7wxs-MuiTypography-root"
+          >
+            Rs.
+            0
+             - Rs.
+            100
+          </span>
+        </div>
+        <div
+          class="MuiFormControl-root MuiFormControl-fullWidth css-gjxexz-MuiFormControl-root"
+        >
+          <label
+            class="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-sizeMedium MuiInputLabel-outlined MuiFormLabel-colorPrimary MuiFormLabel-filled MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-sizeMedium MuiInputLabel-outlined css-1jy569b-MuiFormLabel-root-MuiInputLabel-root"
+            data-shrink="true"
+          >
+            Category
+          </label>
+          <div
+            class="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-colorPrimary MuiInputBase-formControl css-1yk1gt9-MuiInputBase-root-MuiOutlinedInput-root-MuiSelect-root"
+          >
+            <div
+              aria-controls=":r0:"
+              aria-expanded="false"
+              aria-haspopup="listbox"
+              class="MuiSelect-select MuiSelect-outlined MuiInputBase-input MuiOutlinedInput-input css-11u53oe-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input"
+              role="combobox"
+              tabindex="0"
+            >
+              All Categories
+            </div>
+            <input
+              aria-hidden="true"
+              aria-invalid="false"
+              class="MuiSelect-nativeInput css-yf8vq0-MuiSelect-nativeInput"
+              tabindex="-1"
+              value="all"
+            />
+            <svg
+              aria-hidden="true"
+              class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium MuiSelect-icon MuiSelect-iconOutlined css-hfutr2-MuiSvgIcon-root-MuiSelect-icon"
+              data-testid="ArrowDropDownIcon"
+              focusable="false"
+              viewBox="0 0 24 24"
+            >
+              <path
+                d="M7 10l5 5 5-5z"
+              />
+            </svg>
+            <fieldset
+              aria-hidden="true"
+              class="MuiOutlinedInput-notchedOutline css-r01yff-MuiNotchedOutlined-root-MuiOutlinedInput-notchedOutline"
+            >
+              <legend
+                class="css-sl37lx-MuiNotchedOutlined-root"
+              >
+                <span>
+                  Category
+                </span>
+              </legend>
+            </fieldset>
+          </div>
+        </div>
+        <div
+          class="MuiFormControl-root MuiFormControl-fullWidth css-gjxexz-MuiFormControl-root"
+        >
+          <label
+            class="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-sizeMedium MuiInputLabel-outlined MuiFormLabel-colorPrimary MuiFormLabel-filled MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-sizeMedium MuiInputLabel-outlined css-1jy569b-MuiFormLabel-root-MuiInputLabel-root"
+            data-shrink="true"
+          >
+            Sort By
+          </label>
+          <div
+            class="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-colorPrimary MuiInputBase-formControl css-1yk1gt9-MuiInputBase-root-MuiOutlinedInput-root-MuiSelect-root"
+          >
+            <div
+              aria-controls=":r1:"
+              aria-expanded="false"
+              aria-haspopup="listbox"
+              class="MuiSelect-select MuiSelect-outlined MuiInputBase-input MuiOutlinedInput-input css-11u53oe-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input"
+              role="combobox"
+              tabindex="0"
+            >
+              Default
+            </div>
+            <input
+              aria-hidden="true"
+              aria-invalid="false"
+              class="MuiSelect-nativeInput css-yf8vq0-MuiSelect-nativeInput"
+              tabindex="-1"
+              value="none"
+            />
+            <svg
+              aria-hidden="true"
+              class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium MuiSelect-icon MuiSelect-iconOutlined css-hfutr2-MuiSvgIcon-root-MuiSelect-icon"
+              data-testid="ArrowDropDownIcon"
+              focusable="false"
+              viewBox="0 0 24 24"
+            >
+              <path
+                d="M7 10l5 5 5-5z"
+              />
+            </svg>
+            <fieldset
+              aria-hidden="true"
+              class="MuiOutlinedInput-notchedOutline css-r01yff-MuiNotchedOutlined-root-MuiOutlinedInput-notchedOutline"
+            >
+              <legend
+                class="css-sl37lx-MuiNotchedOutlined-root"
+              >
+                <span>
+                  Sort By
+                </span>
+              </legend>
+            </fieldset>
+          </div>
+        </div>
+        <label
+          class="MuiFormControlLabel-root MuiFormControlLabel-labelPlacementEnd css-18yztu3-MuiFormControlLabel-root"
+        >
+          <span
+            class="MuiButtonBase-root MuiCheckbox-root MuiCheckbox-colorPrimary MuiCheckbox-sizeMedium PrivateSwitchBase-root MuiCheckbox-root MuiCheckbox-colorPrimary MuiCheckbox-sizeMedium MuiCheckbox-root MuiCheckbox-colorPrimary MuiCheckbox-sizeMedium css-p6iyue-MuiButtonBase-root-MuiSwitchBase-root-MuiCheckbox-root"
+          >
+            <input
+              class="PrivateSwitchBase-input css-1p3z7et-MuiSwitchBase-root"
+              data-indeterminate="false"
+              type="checkbox"
+            />
+            <svg
+              aria-hidden="true"
+              class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-i4bv87-MuiSvgIcon-root"
+              data-testid="CheckBoxOutlineBlankIcon"
+              focusable="false"
+              viewBox="0 0 24 24"
+            >
+              <path
+                d="M19 5v14H5V5h14m0-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2z"
+              />
+            </svg>
+            <span
+              class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+            />
+          </span>
+          <span
+            class="MuiTypography-root MuiTypography-body1 MuiFormControlLabel-label css-ahj2mt-MuiTypography-root"
+          >
+            In Stock Only
+          </span>
+        </label>
+        <button
+          class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedSecondary MuiButton-sizeMedium MuiButton-outlinedSizeMedium MuiButton-colorSecondary MuiButton-fullWidth MuiButton-root MuiButton-outlined MuiButton-outlinedSecondary MuiButton-sizeMedium MuiButton-outlinedSizeMedium MuiButton-colorSecondary MuiButton-fullWidth css-jc1r49-MuiButtonBase-root-MuiButton-root"
+          tabindex="0"
+          type="button"
+        >
+          Reset Filters
+          <span
+            class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+          />
+        </button>
+      </div>
+    </div>
+    <div
+      class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-md-9 css-b1im03-MuiGrid-root"
+    >
+      <div
+        class="MuiBox-root css-zit58i"
+      >
+        <h6
+          class="MuiTypography-root MuiTypography-h6 MuiTypography-gutterBottom css-glud9z-MuiTypography-root"
+        >
+          Loading fresh fruits ...
+        </h6>
+        <span
+          class="MuiCircularProgress-root MuiCircularProgress-indeterminate MuiCircularProgress-colorPrimary css-18lrjg1-MuiCircularProgress-root"
+          role="progressbar"
+          style="width: 40px; height: 40px;"
+        >
+          <svg
+            class="MuiCircularProgress-svg css-1idz92c-MuiCircularProgress-svg"
+            viewBox="22 22 44 44"
+          >
+            <circle
+              class="MuiCircularProgress-circle MuiCircularProgress-circleIndeterminate css-176wh8e-MuiCircularProgress-circle"
+              cx="44"
+              cy="44"
+              fill="none"
+              r="20.2"
+              stroke-width="3.6"
+            />
+          </svg>
+        </span>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Products - UI > when rendered in web view > should match snapshot when API is successful 1`] = `
+<div>
+  <div
+    class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-4 css-480o17-MuiGrid-root"
+  >
+    <div
+      class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-md-3 css-iv7vbz-MuiGrid-root"
+    >
+      <div
+        class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation2 css-1vvhxi5-MuiPaper-root"
+        data-testid="filter-options"
+      >
+        <h6
+          class="MuiTypography-root MuiTypography-h6 css-1otc25a-MuiTypography-root"
+        >
+          Filter Products
+        </h6>
+        <hr
+          class="MuiDivider-root MuiDivider-fullWidth css-1o5hxn5-MuiDivider-root"
+        />
+        <div
+          class="MuiBox-root css-i3pbo"
+        >
+          <h6
+            class="MuiTypography-root MuiTypography-subtitle2 css-1kxm397-MuiTypography-root"
+          >
+            Price Range
+          </h6>
+          <span
+            class="MuiSlider-root MuiSlider-colorPrimary MuiSlider-sizeMedium css-188mx6n-MuiSlider-root"
+          >
+            <span
+              class="MuiSlider-rail css-7o8aqz-MuiSlider-rail"
+            />
+            <span
+              class="MuiSlider-track css-ttgsjq-MuiSlider-track"
+              style="left: 0%; width: 100%;"
+            />
+            <span
+              class="MuiSlider-thumb MuiSlider-thumbSizeMedium MuiSlider-thumbColorPrimary MuiSlider-thumb MuiSlider-thumbSizeMedium MuiSlider-thumbColorPrimary css-cp2j25-MuiSlider-thumb"
+              data-index="0"
+              style="left: 0%;"
+            >
+              <input
+                aria-orientation="horizontal"
+                aria-valuemax="100"
+                aria-valuemin="50"
+                aria-valuenow="50"
+                data-index="0"
+                max="100"
+                min="50"
+                step="1"
+                style="border: 0px; clip: rect(0px); height: 100%; margin: -1px; overflow: hidden; padding: 0px; position: absolute; white-space: nowrap; width: 100%; direction: ltr;"
+                type="range"
+                value="50"
+              />
+              <span
+                aria-hidden="true"
+                class="MuiSlider-valueLabel css-14gyywz-MuiSlider-valueLabel"
+              >
+                <span
+                  class="MuiSlider-valueLabelCircle"
+                >
+                  <span
+                    class="MuiSlider-valueLabelLabel"
+                  >
+                    50
+                  </span>
+                </span>
+              </span>
+            </span>
+            <span
+              class="MuiSlider-thumb MuiSlider-thumbSizeMedium MuiSlider-thumbColorPrimary MuiSlider-thumb MuiSlider-thumbSizeMedium MuiSlider-thumbColorPrimary css-cp2j25-MuiSlider-thumb"
+              data-index="1"
+              style="left: 100%;"
+            >
+              <input
+                aria-orientation="horizontal"
+                aria-valuemax="100"
+                aria-valuemin="50"
+                aria-valuenow="100"
+                data-index="1"
+                max="100"
+                min="50"
+                step="1"
+                style="border: 0px; clip: rect(0px); height: 100%; margin: -1px; overflow: hidden; padding: 0px; position: absolute; white-space: nowrap; width: 100%; direction: ltr;"
+                type="range"
+                value="100"
+              />
+              <span
+                aria-hidden="true"
+                class="MuiSlider-valueLabel css-14gyywz-MuiSlider-valueLabel"
+              >
+                <span
+                  class="MuiSlider-valueLabelCircle"
+                >
+                  <span
+                    class="MuiSlider-valueLabelLabel"
+                  >
+                    100
+                  </span>
+                </span>
+              </span>
+            </span>
+          </span>
+          <span
+            class="MuiTypography-root MuiTypography-caption css-ol7wxs-MuiTypography-root"
+          >
+            Rs.
+            50
+             - Rs.
+            100
+          </span>
+        </div>
+        <div
+          class="MuiFormControl-root MuiFormControl-fullWidth css-gjxexz-MuiFormControl-root"
+        >
+          <label
+            class="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-sizeMedium MuiInputLabel-outlined MuiFormLabel-colorPrimary MuiFormLabel-filled MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-sizeMedium MuiInputLabel-outlined css-1jy569b-MuiFormLabel-root-MuiInputLabel-root"
+            data-shrink="true"
+          >
+            Category
+          </label>
+          <div
+            class="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-colorPrimary MuiInputBase-formControl css-1yk1gt9-MuiInputBase-root-MuiOutlinedInput-root-MuiSelect-root"
+          >
+            <div
+              aria-controls=":r2:"
+              aria-expanded="false"
+              aria-haspopup="listbox"
+              class="MuiSelect-select MuiSelect-outlined MuiInputBase-input MuiOutlinedInput-input css-11u53oe-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input"
+              role="combobox"
+              tabindex="0"
+            >
+              All Categories
+            </div>
+            <input
+              aria-hidden="true"
+              aria-invalid="false"
+              class="MuiSelect-nativeInput css-yf8vq0-MuiSelect-nativeInput"
+              tabindex="-1"
+              value="all"
+            />
+            <svg
+              aria-hidden="true"
+              class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium MuiSelect-icon MuiSelect-iconOutlined css-hfutr2-MuiSvgIcon-root-MuiSelect-icon"
+              data-testid="ArrowDropDownIcon"
+              focusable="false"
+              viewBox="0 0 24 24"
+            >
+              <path
+                d="M7 10l5 5 5-5z"
+              />
+            </svg>
+            <fieldset
+              aria-hidden="true"
+              class="MuiOutlinedInput-notchedOutline css-r01yff-MuiNotchedOutlined-root-MuiOutlinedInput-notchedOutline"
+            >
+              <legend
+                class="css-sl37lx-MuiNotchedOutlined-root"
+              >
+                <span>
+                  Category
+                </span>
+              </legend>
+            </fieldset>
+          </div>
+        </div>
+        <div
+          class="MuiFormControl-root MuiFormControl-fullWidth css-gjxexz-MuiFormControl-root"
+        >
+          <label
+            class="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-sizeMedium MuiInputLabel-outlined MuiFormLabel-colorPrimary MuiFormLabel-filled MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-sizeMedium MuiInputLabel-outlined css-1jy569b-MuiFormLabel-root-MuiInputLabel-root"
+            data-shrink="true"
+          >
+            Sort By
+          </label>
+          <div
+            class="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-colorPrimary MuiInputBase-formControl css-1yk1gt9-MuiInputBase-root-MuiOutlinedInput-root-MuiSelect-root"
+          >
+            <div
+              aria-controls=":r3:"
+              aria-expanded="false"
+              aria-haspopup="listbox"
+              class="MuiSelect-select MuiSelect-outlined MuiInputBase-input MuiOutlinedInput-input css-11u53oe-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input"
+              role="combobox"
+              tabindex="0"
+            >
+              Default
+            </div>
+            <input
+              aria-hidden="true"
+              aria-invalid="false"
+              class="MuiSelect-nativeInput css-yf8vq0-MuiSelect-nativeInput"
+              tabindex="-1"
+              value="none"
+            />
+            <svg
+              aria-hidden="true"
+              class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium MuiSelect-icon MuiSelect-iconOutlined css-hfutr2-MuiSvgIcon-root-MuiSelect-icon"
+              data-testid="ArrowDropDownIcon"
+              focusable="false"
+              viewBox="0 0 24 24"
+            >
+              <path
+                d="M7 10l5 5 5-5z"
+              />
+            </svg>
+            <fieldset
+              aria-hidden="true"
+              class="MuiOutlinedInput-notchedOutline css-r01yff-MuiNotchedOutlined-root-MuiOutlinedInput-notchedOutline"
+            >
+              <legend
+                class="css-sl37lx-MuiNotchedOutlined-root"
+              >
+                <span>
+                  Sort By
+                </span>
+              </legend>
+            </fieldset>
+          </div>
+        </div>
+        <label
+          class="MuiFormControlLabel-root MuiFormControlLabel-labelPlacementEnd css-18yztu3-MuiFormControlLabel-root"
+        >
+          <span
+            class="MuiButtonBase-root MuiCheckbox-root MuiCheckbox-colorPrimary MuiCheckbox-sizeMedium PrivateSwitchBase-root MuiCheckbox-root MuiCheckbox-colorPrimary MuiCheckbox-sizeMedium MuiCheckbox-root MuiCheckbox-colorPrimary MuiCheckbox-sizeMedium css-p6iyue-MuiButtonBase-root-MuiSwitchBase-root-MuiCheckbox-root"
+          >
+            <input
+              class="PrivateSwitchBase-input css-1p3z7et-MuiSwitchBase-root"
+              data-indeterminate="false"
+              type="checkbox"
+            />
+            <svg
+              aria-hidden="true"
+              class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-i4bv87-MuiSvgIcon-root"
+              data-testid="CheckBoxOutlineBlankIcon"
+              focusable="false"
+              viewBox="0 0 24 24"
+            >
+              <path
+                d="M19 5v14H5V5h14m0-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2z"
+              />
+            </svg>
+            <span
+              class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+            />
+          </span>
+          <span
+            class="MuiTypography-root MuiTypography-body1 MuiFormControlLabel-label css-ahj2mt-MuiTypography-root"
+          >
+            In Stock Only
+          </span>
+        </label>
+        <button
+          class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedSecondary MuiButton-sizeMedium MuiButton-outlinedSizeMedium MuiButton-colorSecondary MuiButton-fullWidth MuiButton-root MuiButton-outlined MuiButton-outlinedSecondary MuiButton-sizeMedium MuiButton-outlinedSizeMedium MuiButton-colorSecondary MuiButton-fullWidth css-jc1r49-MuiButtonBase-root-MuiButton-root"
+          tabindex="0"
+          type="button"
+        >
+          Reset Filters
+          <span
+            class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+          />
+        </button>
+      </div>
+    </div>
+    <div
+      class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-md-9 css-b1im03-MuiGrid-root"
+    >
+      <div
+        class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-3 css-zow5z4-MuiGrid-root"
+        data-testid="product-grid"
+      >
+        <div
+          class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-6 MuiGrid-grid-md-4 MuiGrid-grid-lg-3 css-14j1sok-MuiGrid-root"
+        >
+          <div
+            class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation1 MuiCard-root css-1dc3bjb-MuiPaper-root-MuiCard-root"
+            transition="[object Object]"
+            whilehover="[object Object]"
+          >
+            <img
+              alt="Grapes"
+              class="MuiCardMedia-root MuiCardMedia-media MuiCardMedia-img css-6mo23z-MuiCardMedia-root"
+              height="160"
+              loading="lazy"
+              src="/grapes.jpg"
+            />
+            <div
+              class="MuiCardContent-root css-2r3irp-MuiCardContent-root"
+            >
+              <div
+                class="MuiBox-root css-69i1ev"
+              >
+                <h6
+                  class="MuiTypography-root MuiTypography-h6 MuiTypography-noWrap css-ddygbf-MuiTypography-root"
+                  title="Grapes"
+                >
+                  Grapes
+                </h6>
+              </div>
+              <div
+                class="MuiBox-root css-ohugnc"
+              >
+                <h6
+                  class="MuiTypography-root MuiTypography-h6 css-1d963ga-MuiTypography-root"
+                >
+                  ₹
+                  90.00
+                </h6>
+                <p
+                  class="MuiTypography-root MuiTypography-body2 css-13rm4i2-MuiTypography-root"
+                >
+                  ₹
+                  100.00
+                </p>
+              </div>
+              <p
+                class="MuiTypography-root MuiTypography-body2 css-1sbvnan-MuiTypography-root"
+                title="Fresh Grapes from Nashik."
+              >
+                Fresh Grapes from Nashik.
+              </p>
+            </div>
+            <div
+              class="MuiCardActions-root MuiCardActions-spacing css-1vua6p0-MuiCardActions-root"
+            >
+              <div
+                class="MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButton-colorPrimary MuiButton-fullWidth MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButton-colorPrimary MuiButton-fullWidth css-1fu7jd5-MuiButtonBase-root-MuiButton-root"
+                role="button"
+                tabindex="0"
+                whilehover="[object Object]"
+                whiletap="[object Object]"
+              >
+                <span
+                  class="MuiButton-icon MuiButton-startIcon MuiButton-iconSizeMedium css-1d6wzja-MuiButton-startIcon"
+                >
+                  <svg
+                    fill="none"
+                    height="1em"
+                    stroke="currentColor"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    viewBox="0 0 24 24"
+                    width="1em"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <circle
+                      cx="9"
+                      cy="21"
+                      r="1"
+                    />
+                    <circle
+                      cx="20"
+                      cy="21"
+                      r="1"
+                    />
+                    <path
+                      d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"
+                    />
+                  </svg>
+                </span>
+                Add to Cart
+                <span
+                  class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+        <div
+          class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-6 MuiGrid-grid-md-4 MuiGrid-grid-lg-3 css-14j1sok-MuiGrid-root"
+        >
+          <div
+            class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation1 MuiCard-root css-edic75-MuiPaper-root-MuiCard-root"
+            transition="[object Object]"
+            whilehover="[object Object]"
+          >
+            <img
+              alt="Apple"
+              class="MuiCardMedia-root MuiCardMedia-media MuiCardMedia-img css-6mo23z-MuiCardMedia-root"
+              height="160"
+              loading="lazy"
+              src="/apple.jpg"
+            />
+            <div
+              class="MuiCardContent-root css-2r3irp-MuiCardContent-root"
+            >
+              <div
+                class="MuiBox-root css-69i1ev"
+              >
+                <h6
+                  class="MuiTypography-root MuiTypography-h6 MuiTypography-noWrap css-ddygbf-MuiTypography-root"
+                  title="Apple"
+                >
+                  Apple
+                </h6>
+                <p
+                  class="MuiTypography-root MuiTypography-body2 css-1co9xw8-MuiTypography-root"
+                >
+                  Out of Stock
+                </p>
+              </div>
+              <div
+                class="MuiBox-root css-ohugnc"
+              >
+                <h6
+                  class="MuiTypography-root MuiTypography-h6 css-1d963ga-MuiTypography-root"
+                >
+                  ₹
+                  47.50
+                </h6>
+                <p
+                  class="MuiTypography-root MuiTypography-body2 css-13rm4i2-MuiTypography-root"
+                >
+                  ₹
+                  50.00
+                </p>
+              </div>
+              <p
+                class="MuiTypography-root MuiTypography-body2 css-1sbvnan-MuiTypography-root"
+                title="Organic Apples from Himachal."
+              >
+                Organic Apples from Himachal.
+              </p>
+            </div>
+            <div
+              class="MuiCardActions-root MuiCardActions-spacing css-1vua6p0-MuiCardActions-root"
+            >
+              <div
+                aria-disabled="true"
+                class="MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButton-colorPrimary MuiButton-fullWidth Mui-disabled MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButton-colorPrimary MuiButton-fullWidth css-1fu7jd5-MuiButtonBase-root-MuiButton-root"
+                role="button"
+                tabindex="-1"
+                whilehover="[object Object]"
+                whiletap="[object Object]"
+              >
+                <span
+                  class="MuiButton-icon MuiButton-startIcon MuiButton-iconSizeMedium css-1d6wzja-MuiButton-startIcon"
+                >
+                  <svg
+                    fill="none"
+                    height="1em"
+                    stroke="currentColor"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    viewBox="0 0 24 24"
+                    width="1em"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <circle
+                      cx="9"
+                      cy="21"
+                      r="1"
+                    />
+                    <circle
+                      cx="20"
+                      cy="21"
+                      r="1"
+                    />
+                    <path
+                      d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"
+                    />
+                  </svg>
+                </span>
+                Add to Cart
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;
