@@ -1,11 +1,12 @@
-import { CartItem, ItemType, Order } from '@/types/index';
-import axios from 'axios';
+import { getOrderAPI } from '@/api/orders/getOrder';
+import { Order } from '@/entity/Orders/Orders';
+import { Product } from '@/entity/Products/Products';
+import { useQuery } from '@tanstack/react-query';
 import { useRouter } from 'next/router';
-import { useEffect, useState } from 'react';
 
 interface UseOrderWithProductsReturn {
-  order: Order | null;
-  products: (ItemType | undefined)[];
+  order?: Order | null;
+  products?: Product[];
   isLoading: boolean;
   error: string | null;
 }
@@ -13,37 +14,27 @@ interface UseOrderWithProductsReturn {
 export const useOrderWithProducts = (): UseOrderWithProductsReturn => {
   const router = useRouter();
   const { orderId } = router.query;
-  const [order, setOrder] = useState<Order | null>(null);
-  const [products, setProducts] = useState<(ItemType | undefined)[]>([]);
-  const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState<string | null>(null);
 
-  useEffect(() => {
-    if (orderId && typeof orderId === 'string') {
-      const fetchOrder = async () => {
-        setIsLoading(true);
-        setError(null);
-        try {
-          const { data } = await axios.get<Order>(`/api/orders/${orderId}`);
-          setOrder(data);
+  // 1. Fetch Order Details
+  const {
+    data: orderResponse,
+    isLoading,
+    error: orderError,
+  } = useQuery({
+    queryKey: ['order', orderId],
+    queryFn: () => getOrderAPI(orderId as string),
+    enabled: !!orderId && typeof orderId === 'string',
+  });
 
-          const productFetches = data.items.map((item: CartItem) =>
-            axios
-              .get<ItemType>(`/api/products/${item.id}`)
-              .then((res) => res.data)
-              .catch(() => undefined)
-          );
-          const fetchedProducts = await Promise.all(productFetches);
-          setProducts(fetchedProducts);
-        } catch (err: unknown) {
-          setError(err instanceof Error ? err.message : 'Failed to load order');
-        } finally {
-          setIsLoading(false);
-        }
-      };
-      fetchOrder();
-    }
-  }, [orderId]);
+  const order = orderResponse?.data;
+  const products = order?.items
+    ?.map((item) => (item.product ? new Product(item.product) : undefined))
+    .filter(Boolean) as Product[];
 
-  return { order, products, isLoading, error };
+  return {
+    order: order ?? null,
+    products,
+    isLoading,
+    error: orderError ? orderError.message : null,
+  };
 };

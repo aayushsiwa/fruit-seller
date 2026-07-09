@@ -1,5 +1,5 @@
 import { supabase } from '@/lib/supabase';
-import { CartItem, Address } from '@/types/index';
+import { Address, CartItem } from '@/types/index';
 import crypto from 'crypto';
 import type { NextApiRequest, NextApiResponse } from 'next';
 import { getServerSession } from 'next-auth/next';
@@ -117,11 +117,19 @@ export default async function handler(
       }
     }
 
+    const orderItems = cart.map((item) => {
+      const product = products.find((p) => p.id === item.id);
+      return {
+        quantity: item.quantity,
+        product,
+      };
+    });
+
     const { data: order, error: orderError } = await supabase
       .from('orders')
       .insert({
         user_email: session.user.email,
-        items: cart,
+        items: orderItems,
         total,
         created_at: new Date().toISOString(),
         payment_id: razorpay_payment_id,
