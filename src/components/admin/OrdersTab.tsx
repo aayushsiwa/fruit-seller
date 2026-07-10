@@ -14,13 +14,14 @@ import {
 } from '@mui/material';
 import dayjs from 'dayjs';
 import React from 'react';
-import { FiEdit2 } from 'react-icons/fi';
+import { FiEdit2, FiEye } from 'react-icons/fi';
 
 const OrdersTab: React.FC<OrdersTabProps> = ({
   orders,
   isLoading,
   error,
   onEditOrder,
+  onViewOrder,
 }) => {
   return (
     <TableContainer component={Paper}>
@@ -83,6 +84,14 @@ const OrdersTab: React.FC<OrdersTabProps> = ({
                   <IconButton
                     color="primary"
                     size="small"
+                    onClick={() => onViewOrder(order)}
+                    aria-label="View order details"
+                  >
+                    <FiEye />
+                  </IconButton>
+                  <IconButton
+                    color="primary"
+                    size="small"
                     onClick={() => onEditOrder(order)}
                   >
                     <FiEdit2 />
@@ -110,4 +119,5 @@ export interface OrdersTabProps {
   isLoading: boolean;
   error: string | null;
   onEditOrder: (order: Order) => void;
+  onViewOrder: (order: Order) => void;
 }
