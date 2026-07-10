@@ -5,6 +5,7 @@ import UsersTab from '@/src/components/admin/UsersTab';
 import ConfirmDeleteDialog from '@/src/components/admin/dialogs/ConfirmDeleteDialog';
 import ConfirmStatusDialog from '@/src/components/admin/dialogs/ConfirmStatusDialog';
 import OrderDialog from '@/src/components/admin/dialogs/OrderDialog';
+import OrderDetailsDialog from '@/src/components/admin/dialogs/OrderDetailsDialog';
 import ProductDialog from '@/src/components/admin/dialogs/ProductDialog';
 import UserDialog from '@/src/components/admin/dialogs/UserDialog';
 import { useAuth } from '@/src/contexts/AuthContext';
@@ -63,6 +64,8 @@ export default function AdminDashboard() {
     selectedProduct,
     selectedUser,
     selectedOrder,
+    openOrderDetailsDialog,
+    selectedOrderId,
     error,
     setError,
     isEditProduct,
@@ -77,6 +80,8 @@ export default function AdminDashboard() {
     handleCloseUserDeleteDialog,
     handleOpenOrderDialog,
     handleCloseOrderDialog,
+    handleOpenOrderDetailsDialog,
+    handleCloseOrderDetailsDialog,
     setSelectedOrder,
     openConfirmDialog,
     confirmStatus,
@@ -190,12 +195,13 @@ export default function AdminDashboard() {
       )}
 
       {activeTab === TabValue.ORDERS && (
-        <OrdersTab
-          orders={orders ?? []}
-          isLoading={isLoadingOrders}
-          error={transformError(ordersError)}
-          onEditOrder={handleOpenOrderDialog}
-        />
+          <OrdersTab
+            orders={orders ?? []}
+            isLoading={isLoadingOrders}
+            error={transformError(ordersError)}
+            onEditOrder={handleOpenOrderDialog}
+            onViewOrder={handleOpenOrderDetailsDialog}
+          />
       )}
 
       <ProductDialog
@@ -248,6 +254,12 @@ export default function AdminDashboard() {
         isLoading={updateOrderMutation.isPending}
         currentStatus={(selectedOrder?.status as string) || 'Processing'}
         newStatus={confirmStatus}
+      />
+
+      <OrderDetailsDialog
+        open={openOrderDetailsDialog}
+        orderId={selectedOrderId}
+        onClose={handleCloseOrderDetailsDialog}
       />
     </Container>
   );

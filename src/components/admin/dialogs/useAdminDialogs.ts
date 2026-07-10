@@ -9,6 +9,10 @@ export const useAdminDialogs = (): UseAdminDialogsReturn => {
   const [openUserDeleteDialog, setOpenUserDeleteDialog] = useState(false);
   const [openOrderDialog, setOpenOrderDialog] = useState(false);
   const [openConfirmDialog, setOpenConfirmDialog] = useState(false);
+  const [openOrderDetailsDialog, setOpenOrderDetailsDialog] = useState(false);
+  const [selectedOrderId, setSelectedOrderId] = useState<string | undefined>(
+    undefined
+  );
   const [confirmStatus, setConfirmStatus] = useState<OrderStatus>('Processing');
   const [selectedProduct, setSelectedProduct] = useState<Partial<IProduct>>({});
   const [selectedUser, setSelectedUser] = useState<Partial<User>>({});
@@ -83,6 +87,18 @@ export const useAdminDialogs = (): UseAdminDialogsReturn => {
     setError(null);
   };
 
+  const handleOpenOrderDetailsDialog = (order: Order) => {
+    setSelectedOrderId(order.id);
+    setOpenOrderDetailsDialog(true);
+    setError(null);
+  };
+
+  const handleCloseOrderDetailsDialog = () => {
+    setOpenOrderDetailsDialog(false);
+    setSelectedOrderId(undefined);
+    setError(null);
+  };
+
   const handleOpenConfirmDialog = (status: OrderStatus) => {
     setConfirmStatus(status);
     setOpenConfirmDialog(true);
@@ -102,10 +118,12 @@ export const useAdminDialogs = (): UseAdminDialogsReturn => {
     openUserDeleteDialog,
     openOrderDialog,
     openConfirmDialog,
+    openOrderDetailsDialog,
     confirmStatus,
     selectedProduct,
     selectedUser,
     selectedOrder,
+    selectedOrderId,
     error,
     setError,
     isEditProduct,
@@ -121,6 +139,8 @@ export const useAdminDialogs = (): UseAdminDialogsReturn => {
     handleCloseUserDeleteDialog,
     handleOpenOrderDialog,
     handleCloseOrderDialog,
+    handleOpenOrderDetailsDialog,
+    handleCloseOrderDetailsDialog,
     handleOpenConfirmDialog,
     handleCloseConfirmDialog,
   };
