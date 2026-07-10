@@ -7,6 +7,33 @@ exports[`ProductCard Snapshot > renders correctly and matches snapshot 1`] = `
     transition="[object Object]"
     whilehover="[object Object]"
   >
+    <button
+      aria-label="Add to favorites"
+      class="MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeMedium css-ap49w0-MuiButtonBase-root-MuiIconButton-root"
+      tabindex="0"
+      type="button"
+    >
+      <svg
+        color="rgba(0, 0, 0, 0.54)"
+        fill="transparent"
+        height="18"
+        stroke="currentColor"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        stroke-width="2"
+        style="color: rgba(0, 0, 0, 0.54);"
+        viewBox="0 0 24 24"
+        width="18"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"
+        />
+      </svg>
+      <span
+        class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+      />
+    </button>
     <img
       alt="Grapes"
       class="MuiCardMedia-root MuiCardMedia-media MuiCardMedia-img css-6mo23z-MuiCardMedia-root"
