@@ -367,7 +367,7 @@ exports[`Home Page > Home Page Snapshots > when rendered in mobile view > should
                     <input
                       aria-invalid="false"
                       class="MuiInputBase-input MuiOutlinedInput-input MuiInputBase-inputAdornedStart css-1o9s3wi-MuiInputBase-input-MuiOutlinedInput-input"
-                      id=":r8:"
+                      id=":r9:"
                       name="email"
                       placeholder="Enter your email"
                       type="text"
@@ -761,7 +761,7 @@ exports[`Home Page > Home Page Snapshots > when rendered in mobile view > should
                     <input
                       aria-invalid="false"
                       class="MuiInputBase-input MuiOutlinedInput-input MuiInputBase-inputAdornedStart css-1o9s3wi-MuiInputBase-input-MuiOutlinedInput-input"
-                      id=":r9:"
+                      id=":ra:"
                       name="email"
                       placeholder="Enter your email"
                       type="text"
@@ -1175,7 +1175,7 @@ exports[`Home Page > Home Page Snapshots > when rendered in web view > should ma
                     <input
                       aria-invalid="false"
                       class="MuiInputBase-input MuiOutlinedInput-input MuiInputBase-inputAdornedStart css-1o9s3wi-MuiInputBase-input-MuiOutlinedInput-input"
-                      id=":r6:"
+                      id=":r7:"
                       name="email"
                       placeholder="Enter your email"
                       type="text"
@@ -1569,7 +1569,7 @@ exports[`Home Page > Home Page Snapshots > when rendered in web view > should ma
                     <input
                       aria-invalid="false"
                       class="MuiInputBase-input MuiOutlinedInput-input MuiInputBase-inputAdornedStart css-1o9s3wi-MuiInputBase-input-MuiOutlinedInput-input"
-                      id=":r7:"
+                      id=":r8:"
                       name="email"
                       placeholder="Enter your email"
                       type="text"

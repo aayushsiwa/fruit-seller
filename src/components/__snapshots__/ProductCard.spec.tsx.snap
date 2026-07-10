@@ -8,20 +8,20 @@ exports[`ProductCard Snapshot > renders correctly and matches snapshot 1`] = `
     whilehover="[object Object]"
   >
     <button
-      aria-label="Add to favorites"
+      aria-label="Remove from favorites"
       class="MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeMedium css-ap49w0-MuiButtonBase-root-MuiIconButton-root"
       tabindex="0"
       type="button"
     >
       <svg
-        color="rgba(0, 0, 0, 0.54)"
-        fill="transparent"
+        color="#e53935"
+        fill="#e53935"
         height="18"
         stroke="currentColor"
         stroke-linecap="round"
         stroke-linejoin="round"
         stroke-width="2"
-        style="color: rgba(0, 0, 0, 0.54);"
+        style="color: rgb(229, 57, 53);"
         viewBox="0 0 24 24"
         width="18"
         xmlns="http://www.w3.org/2000/svg"

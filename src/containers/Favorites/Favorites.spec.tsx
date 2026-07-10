@@ -5,7 +5,7 @@ import * as MaterialUI from '@mui/material';
 import * as NextRouter from 'next/router';
 
 import Favorites from './Favorites';
-import { useFavoritesPage } from './Favorites.hooks';
+import * as FavoritesHooks from './Favorites.hooks';
 
 describe('Favorites - Hooks', () => {
   let mockPush: any;
@@ -29,7 +29,7 @@ describe('Favorites - Hooks', () => {
   });
 
   it('should fetch favorites on mount and set them', async () => {
-    const { result } = renderHook(() => useFavoritesPage());
+    const { result } = renderHook(() => FavoritesHooks.useFavoritesPage());
 
     await waitFor(() => {
       expect(result.current.isLoading).toBe(false);
@@ -47,7 +47,7 @@ describe('Favorites - Hooks', () => {
       error: new Error('Network Error') as any,
     } as unknown as ReturnType<typeof GetFavoritesAPI.useGetFavorites>);
 
-    const { result } = renderHook(() => useFavoritesPage());
+    const { result } = renderHook(() => FavoritesHooks.useFavoritesPage());
 
     await waitFor(() => {
       expect(result.current.isLoading).toBe(false);
@@ -58,7 +58,7 @@ describe('Favorites - Hooks', () => {
   });
 
   it('should navigate on handleContinueShopping', async () => {
-    const { result } = renderHook(() => useFavoritesPage());
+    const { result } = renderHook(() => FavoritesHooks.useFavoritesPage());
 
     await waitFor(() => {
       expect(result.current.isLoading).toBe(false);
