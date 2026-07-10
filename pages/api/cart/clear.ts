@@ -2,15 +2,14 @@ import { supabase } from '@/lib/supabase';
 import { NextApiRequest, NextApiResponse } from 'next';
 import { getServerSession } from 'next-auth/next';
 
-import Nextauth from '../auth/[...nextauth]';
+import { authOptions } from '../auth/[...nextauth]';
 
 export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
-  const session = (await getServerSession(req, res, Nextauth.authOptions)) as {
-    user?: { id?: string };
-  } | null;
+  const session = await getServerSession(req, res, authOptions);
+
   const userId = session?.user?.id;
 
   if (!userId) {
@@ -19,7 +18,7 @@ export default async function handler(
 
   if (req.method === 'DELETE') {
     const { error } = await supabase
-      .from('cart_items')
+      .from('fruitsellercarts')
       .delete()
       .eq('user_id', userId);
 
