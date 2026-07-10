@@ -1,0 +1,9 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`ErrorBoundary > matches snapshot 1`] = `
+<div>
+  <div>
+    Safe content
+  </div>
+</div>
+`;

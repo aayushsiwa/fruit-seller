@@ -2,15 +2,13 @@ import { supabase } from '@/lib/supabase';
 import { NextApiRequest, NextApiResponse } from 'next';
 import { getServerSession } from 'next-auth/next';
 
-import Nextauth from '../auth/[...nextauth]';
+import { authOptions } from '../auth/[...nextauth]';
 
 export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
-  const session = (await getServerSession(req, res, Nextauth.authOptions)) as {
-    user?: { id?: string };
-  } | null;
+  const session = await getServerSession(req, res, authOptions);
   const userId = session?.user?.id;
 
   if (!userId && req.method !== 'GET') {
@@ -23,7 +21,7 @@ export default async function handler(
     }
 
     const { data, error } = await supabase
-      .from('cart_items')
+      .from('fruitsellercarts')
       .select('*, fruitsellerproducts(*)')
       .eq('user_id', userId);
 
@@ -61,7 +59,7 @@ export default async function handler(
     }
 
     const { data: existingItem, error: fetchError } = await supabase
-      .from('cart_items')
+      .from('fruitsellercarts')
       .select('*')
       .eq('user_id', userId)
       .eq('product_id', product_id)
@@ -79,7 +77,7 @@ export default async function handler(
       }
 
       const { data, error } = await supabase
-        .from('cart_items')
+        .from('fruitsellercarts')
         .update({ quantity: newQuantity })
         .eq('id', existingItem.id)
         .select()
@@ -92,7 +90,7 @@ export default async function handler(
       return res.status(200).json(data);
     } else {
       const { data, error } = await supabase
-        .from('cart_items')
+        .from('fruitsellercarts')
         .insert({ user_id: userId, product_id, quantity })
         .select()
         .single();
@@ -126,7 +124,7 @@ export default async function handler(
     }
 
     const { data, error } = await supabase
-      .from('cart_items')
+      .from('fruitsellercarts')
       .update({ quantity })
       .eq('user_id', userId)
       .eq('product_id', product_id)
@@ -148,7 +146,7 @@ export default async function handler(
     }
 
     const { error } = await supabase
-      .from('cart_items')
+      .from('fruitsellercarts')
       .delete()
       .eq('user_id', userId)
       .eq('product_id', product_id);
