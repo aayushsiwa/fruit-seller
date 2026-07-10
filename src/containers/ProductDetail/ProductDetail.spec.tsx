@@ -224,6 +224,25 @@ describe('ProductDetail - UI', () => {
       const { container } = render(<ProductDetail />);
       expect(container).toMatchSnapshot();
     });
+
+    it('should show a not-found message when the product 404s', () => {
+      vi.spyOn(GetProductAPI, 'useGetProduct').mockReturnValue({
+        data: undefined,
+        isLoading: false,
+        isError: true,
+        error: new Error('Request failed with status code 404'),
+      } as any);
+      vi.spyOn(GetRelatedProductsAPI, 'useGetRelatedProducts').mockReturnValue({
+        data: undefined,
+        isLoading: false,
+        isError: true,
+      } as any);
+
+      const { getByText } = render(<ProductDetail />);
+
+      expect(getByText('Product not found')).toBeInTheDocument();
+      expect(getByText('Browse products')).toBeInTheDocument();
+    });
   });
 
   describe('when rendered in mobile view', () => {
