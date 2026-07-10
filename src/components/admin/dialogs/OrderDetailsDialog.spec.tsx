@@ -1,5 +1,6 @@
 import { Order } from '@/entity/Orders/Orders';
 import { MockOrders } from '@/entity/Orders/Orders.mock';
+import { useGetAdminOrder } from '@/lib/api/admin/getAdminOrder';
 import { render, screen } from '@/src/utils/test';
 import React from 'react';
 
@@ -8,8 +9,6 @@ import OrderDetailsDialog from './OrderDetailsDialog';
 vi.mock('@/lib/api/admin/getAdminOrder', () => ({
   useGetAdminOrder: vi.fn(),
 }));
-
-import { useGetAdminOrder } from '@/lib/api/admin/getAdminOrder';
 
 const mockUseGetAdminOrder = vi.mocked(useGetAdminOrder);
 
@@ -28,7 +27,9 @@ describe('OrderDetailsDialog', () => {
       error: null,
     } as any);
 
-    render(<OrderDetailsDialog open={false} orderId="order-1" onClose={onClose} />);
+    render(
+      <OrderDetailsDialog open={false} orderId="order-1" onClose={onClose} />
+    );
 
     expect(screen.queryByText('Order Details')).not.toBeInTheDocument();
   });
@@ -41,7 +42,9 @@ describe('OrderDetailsDialog', () => {
       error: null,
     } as any);
 
-    render(<OrderDetailsDialog open={true} orderId="order-1" onClose={onClose} />);
+    render(
+      <OrderDetailsDialog open={true} orderId="order-1" onClose={onClose} />
+    );
 
     expect(screen.getByText('Loading order details...')).toBeInTheDocument();
   });
@@ -54,7 +57,9 @@ describe('OrderDetailsDialog', () => {
       error: new Error('boom'),
     } as any);
 
-    render(<OrderDetailsDialog open={true} orderId="order-1" onClose={onClose} />);
+    render(
+      <OrderDetailsDialog open={true} orderId="order-1" onClose={onClose} />
+    );
 
     expect(screen.getByText(/Failed to load order: boom/)).toBeInTheDocument();
   });
@@ -67,7 +72,9 @@ describe('OrderDetailsDialog', () => {
       error: null,
     } as any);
 
-    render(<OrderDetailsDialog open={true} orderId="order-1" onClose={onClose} />);
+    render(
+      <OrderDetailsDialog open={true} orderId="order-1" onClose={onClose} />
+    );
 
     expect(screen.getByText('Order #order-1')).toBeInTheDocument();
     expect(screen.getByText('Total')).toBeInTheDocument();

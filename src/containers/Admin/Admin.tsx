@@ -4,8 +4,8 @@ import ProductsTab from '@/src/components/admin/ProductsTab';
 import UsersTab from '@/src/components/admin/UsersTab';
 import ConfirmDeleteDialog from '@/src/components/admin/dialogs/ConfirmDeleteDialog';
 import ConfirmStatusDialog from '@/src/components/admin/dialogs/ConfirmStatusDialog';
-import OrderDialog from '@/src/components/admin/dialogs/OrderDialog';
 import OrderDetailsDialog from '@/src/components/admin/dialogs/OrderDetailsDialog';
+import OrderDialog from '@/src/components/admin/dialogs/OrderDialog';
 import ProductDialog from '@/src/components/admin/dialogs/ProductDialog';
 import UserDialog from '@/src/components/admin/dialogs/UserDialog';
 import { useAuth } from '@/src/contexts/AuthContext';
@@ -195,13 +195,13 @@ export default function AdminDashboard() {
       )}
 
       {activeTab === TabValue.ORDERS && (
-          <OrdersTab
-            orders={orders ?? []}
-            isLoading={isLoadingOrders}
-            error={transformError(ordersError)}
-            onEditOrder={handleOpenOrderDialog}
-            onViewOrder={handleOpenOrderDetailsDialog}
-          />
+        <OrdersTab
+          orders={orders ?? []}
+          isLoading={isLoadingOrders}
+          error={transformError(ordersError)}
+          onEditOrder={handleOpenOrderDialog}
+          onViewOrder={handleOpenOrderDetailsDialog}
+        />
       )}
 
       <ProductDialog
