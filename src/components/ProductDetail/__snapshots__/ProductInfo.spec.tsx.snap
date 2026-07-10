@@ -1,0 +1,239 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`ProductInfo > matches snapshot 1`] = `
+<div>
+  <div
+    class="MuiBox-root css-5kz7rn"
+  >
+    <div
+      class="MuiBox-root css-1gt30r3"
+    >
+      <div
+        animate="[object Object]"
+        class="MuiBox-root css-lj8do"
+        initial="[object Object]"
+        transition="[object Object]"
+      >
+        <img
+          alt="Grapes"
+          data-nimg="1"
+          decoding="async"
+          height="400"
+          loading="lazy"
+          src="/_next/image?url=%2Fgrapes.jpg&w=828&q=75"
+          srcset="/_next/image?url=%2Fgrapes.jpg&w=640&q=75 1x, /_next/image?url=%2Fgrapes.jpg&w=828&q=75 2x"
+          style="color: transparent; object-fit: cover;"
+          width="400"
+        />
+      </div>
+    </div>
+    <div
+      animate="[object Object]"
+      class="MuiBox-root css-1gt30r3"
+      initial="[object Object]"
+      transition="[object Object]"
+    >
+      <h1
+        class="MuiTypography-root MuiTypography-h4 MuiTypography-gutterBottom css-18dekmd-MuiTypography-root"
+      >
+        Grapes
+      </h1>
+      <div
+        class="MuiBox-root css-lakumo"
+      >
+        <h5
+          class="MuiTypography-root MuiTypography-h5 css-1u32wzb-MuiTypography-root"
+        >
+          ₹
+           
+          90.00
+        </h5>
+        <span
+          class="MuiTypography-root MuiTypography-body2 css-13rm4i2-MuiTypography-root"
+        >
+          M.R.P.: 
+          ₹
+          100.00
+        </span>
+      </div>
+      <p
+        class="MuiTypography-root MuiTypography-body1 MuiTypography-paragraph css-z2eky3-MuiTypography-root"
+      >
+        Fresh Grapes from Nashik.
+      </p>
+      <hr
+        class="MuiDivider-root MuiDivider-fullWidth css-ctpjxq-MuiDivider-root"
+      />
+      <div
+        class="MuiBox-root css-1i5b2bs"
+      >
+        <div
+          class="MuiBox-root css-ece9u5"
+        >
+          <p
+            class="MuiTypography-root MuiTypography-body2 css-r40f8v-MuiTypography-root"
+          >
+            Category
+          </p>
+          <p
+            class="MuiTypography-root MuiTypography-body1 css-ahj2mt-MuiTypography-root"
+          >
+            berries
+          </p>
+        </div>
+        <div
+          class="MuiBox-root css-ece9u5"
+        >
+          <p
+            class="MuiTypography-root MuiTypography-body2 css-r40f8v-MuiTypography-root"
+          >
+            Availability
+          </p>
+          <p
+            class="MuiTypography-root MuiTypography-body1 css-18todbp-MuiTypography-root"
+          >
+            In Stock (20)
+          </p>
+        </div>
+        <div
+          class="MuiBox-root css-ece9u5"
+        >
+          <p
+            class="MuiTypography-root MuiTypography-body2 css-r40f8v-MuiTypography-root"
+          >
+            Seasonal
+          </p>
+          <p
+            class="MuiTypography-root MuiTypography-body1 css-ahj2mt-MuiTypography-root"
+          >
+            Yes
+          </p>
+        </div>
+      </div>
+      <hr
+        class="MuiDivider-root MuiDivider-fullWidth css-ctpjxq-MuiDivider-root"
+      />
+      <div
+        class="MuiBox-root css-13v4qt8"
+      >
+        <div
+          class="MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeLarge MuiButton-containedSizeLarge MuiButton-colorPrimary MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeLarge MuiButton-containedSizeLarge MuiButton-colorPrimary css-b9pnv8-MuiButtonBase-root-MuiButton-root"
+          role="button"
+          tabindex="0"
+          whilehover="[object Object]"
+          whiletap="[object Object]"
+        >
+          <span
+            class="MuiButton-icon MuiButton-startIcon MuiButton-iconSizeLarge css-htszrh-MuiButton-startIcon"
+          >
+            <svg
+              fill="none"
+              height="1em"
+              stroke="currentColor"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              viewBox="0 0 24 24"
+              width="1em"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <circle
+                cx="9"
+                cy="21"
+                r="1"
+              />
+              <circle
+                cx="20"
+                cy="21"
+                r="1"
+              />
+              <path
+                d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"
+              />
+            </svg>
+          </span>
+          Add to Cart
+          <span
+            class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+          />
+        </div>
+        <div
+          class="MuiButtonBase-root MuiIconButton-root MuiIconButton-colorPrimary MuiIconButton-sizeMedium css-1ugjb1i-MuiButtonBase-root-MuiIconButton-root"
+          role="button"
+          tabindex="0"
+          whilehover="[object Object]"
+        >
+          <svg
+            fill="none"
+            height="1em"
+            stroke="currentColor"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            viewBox="0 0 24 24"
+            width="1em"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <circle
+              cx="18"
+              cy="5"
+              r="3"
+            />
+            <circle
+              cx="6"
+              cy="12"
+              r="3"
+            />
+            <circle
+              cx="18"
+              cy="19"
+              r="3"
+            />
+            <line
+              x1="8.59"
+              x2="15.42"
+              y1="13.51"
+              y2="17.49"
+            />
+            <line
+              x1="15.41"
+              x2="8.59"
+              y1="6.51"
+              y2="10.49"
+            />
+          </svg>
+          <span
+            class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+          />
+        </div>
+        <div
+          aria-label="Add to favorites"
+          class="MuiButtonBase-root MuiIconButton-root MuiIconButton-colorPrimary MuiIconButton-sizeMedium css-1jn8s3o-MuiButtonBase-root-MuiIconButton-root"
+          role="button"
+          tabindex="0"
+          whilehover="[object Object]"
+        >
+          <svg
+            fill="transparent"
+            height="1em"
+            stroke="currentColor"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            viewBox="0 0 24 24"
+            width="1em"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"
+            />
+          </svg>
+          <span
+            class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+          />
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;

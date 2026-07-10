@@ -37,4 +37,9 @@ describe('CartItems', () => {
     expect(screen.getByTestId('cart-items')).toBeInTheDocument();
     expect(screen.getByText(MockProducts[0].name)).toBeInTheDocument();
   });
+
+  it('matches snapshot', () => {
+    const { container } = render(<CartItems {...defaultProps} />);
+    expect(container).toMatchSnapshot();
+  });
 });
