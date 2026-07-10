@@ -1,18 +1,17 @@
+import { queryClient } from '@/lib/api';
 import { ThemeSwitchProvider } from '@/src/ThemeProvider';
 import ErrorBoundary from '@/src/components/ErrorBoundary';
 import Layout from '@/src/components/Layout';
 import { AuthProvider } from '@/src/contexts/AuthContext';
 import { CartProvider } from '@/src/contexts/CartContext';
 import { SnackbarProvider } from '@/src/contexts/SnackBarContext';
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { QueryClientProvider } from '@tanstack/react-query';
 import { SessionProvider } from 'next-auth/react';
 import type { AppProps } from 'next/app';
 import Head from 'next/head';
-import { useState } from 'react';
 
 export default function App(props: AppProps) {
   const { Component, pageProps } = props;
-  const [queryClient] = useState(() => new QueryClient());
 
   return (
     <>

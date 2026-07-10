@@ -1,19 +1,16 @@
+import AddressForm from '@/src/components/AddressForm/AddressForm';
 import { EmptyCheckout } from '@/src/components/Checkout/EmptyCheckout';
 import { OrderSummary } from '@/src/components/Checkout/OrderSummary';
 import { LoadingScreen } from '@/src/components/LoadingScreen';
 import {
   Box,
-  Checkbox,
   Container,
   FormControl,
   FormControlLabel,
   Grid,
-  MenuItem,
   Paper,
   Radio,
   RadioGroup,
-  Select,
-  TextField,
   Typography,
 } from '@mui/material';
 import { motion } from 'framer-motion';
@@ -146,143 +143,16 @@ export default function Checkout() {
                 )}
 
                 {selectedAddressId === 'new' && (
-                  <Box sx={{ mt: 1 }}>
-                    <TextField
-                      fullWidth
-                      label="Country"
-                      value={newAddress.country}
-                      disabled
-                      sx={{ mb: 2 }}
-                      variant="outlined"
-                      size="small"
-                      required
-                    />
-
-                    <TextField
-                      fullWidth
-                      label="Address Line 1 (Street, Company, C/O)"
-                      value={newAddress.street}
-                      onChange={(e) =>
-                        setNewAddress({ ...newAddress, street: e.target.value })
-                      }
-                      sx={{ mb: 2 }}
-                      variant="outlined"
-                      size="small"
-                      required
-                    />
-
-                    <TextField
-                      fullWidth
-                      label="Address Line 2 (Apartment, Suite, Unit, Building, Floor)"
-                      value={newAddress.street2}
-                      onChange={(e) =>
-                        setNewAddress({
-                          ...newAddress,
-                          street2: e.target.value,
-                        })
-                      }
-                      sx={{ mb: 2 }}
-                      variant="outlined"
-                      size="small"
-                    />
-
-                    <TextField
-                      fullWidth
-                      label="Mobile Number"
-                      value={newAddress.phone}
-                      onChange={(e) =>
-                        setNewAddress({
-                          ...newAddress,
-                          phone: e.target.value,
-                        })
-                      }
-                      sx={{ mb: 2 }}
-                      variant="outlined"
-                      size="small"
-                      required
-                    />
-
-                    <TextField
-                      fullWidth
-                      label="Pin Code"
-                      value={newAddress.postal_code}
-                      onChange={(e) =>
-                        setNewAddress({
-                          ...newAddress,
-                          postal_code: e.target.value,
-                        })
-                      }
-                      sx={{ mb: 2 }}
-                      variant="outlined"
-                      size="small"
-                      required
-                    />
-
-                    <FormControl fullWidth sx={{ mb: 2 }} size="small">
-                      <Select
-                        displayEmpty
-                        disabled={offices.length === 0}
-                        value={selectedOffice?.officeName ?? ''}
-                        onChange={(e) => {
-                          const office = offices.find(
-                            (o) => o.officeName === e.target.value
-                          );
-                          handleSelectOffice(office ?? null);
-                        }}
-                        renderValue={(value) => {
-                          if (!value) {
-                            return (
-                              <Typography color="text.secondary">
-                                {offices.length === 0
-                                  ? 'Enter Pin Code first'
-                                  : 'Select Locality'}
-                              </Typography>
-                            );
-                          }
-                          return value;
-                        }}
-                      >
-                        {offices.map((office) => (
-                          <MenuItem
-                            key={office.officeName}
-                            value={office.officeName}
-                          >
-                            {office.officeName}
-                          </MenuItem>
-                        ))}
-                      </Select>
-                    </FormControl>
-
-                    <Box sx={{ display: 'flex', gap: 2, mb: 3 }}>
-                      <TextField
-                        fullWidth
-                        label="City"
-                        value={newAddress.city}
-                        disabled
-                        variant="outlined"
-                        size="small"
-                        required
-                      />
-                      <TextField
-                        fullWidth
-                        label="State"
-                        value={newAddress.state}
-                        disabled
-                        variant="outlined"
-                        size="small"
-                        required
-                      />
-                    </Box>
-
-                    <FormControlLabel
-                      control={
-                        <Checkbox
-                          checked={saveToProfile}
-                          onChange={(e) => setSaveToProfile(e.target.checked)}
-                          color="primary"
-                        />
-                      }
-                      label="Save this address to my profile"
+                  <Box>
+                    <AddressForm
+                      address={newAddress}
+                      onChange={setNewAddress}
+                      offices={offices}
+                      selectedOffice={selectedOffice}
+                      onSelectOffice={handleSelectOffice}
+                      showSaveCheckbox
+                      saveToProfile={saveToProfile}
+                      onSaveToProfileChange={setSaveToProfile}
                     />
                   </Box>
                 )}
