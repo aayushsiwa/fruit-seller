@@ -1,0 +1,212 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`CartItems > matches snapshot 1`] = `
+<div>
+  <div
+    class="MuiBox-root css-5i2lth"
+    data-testid="cart-items"
+  >
+    <div
+      animate="[object Object]"
+      class="MuiBox-root css-1uibpwp"
+      exit="[object Object]"
+      initial="[object Object]"
+      transition="[object Object]"
+    >
+      <div
+        class="MuiBox-root css-1kukc4r"
+      >
+        <img
+          alt="Grapes"
+          data-nimg="1"
+          decoding="async"
+          height="80"
+          loading="lazy"
+          src="/_next/image?url=%2Fgrapes.jpg&w=256&q=75"
+          srcset="/_next/image?url=%2Fgrapes.jpg&w=96&q=75 1x, /_next/image?url=%2Fgrapes.jpg&w=256&q=75 2x"
+          style="color: transparent; object-fit: cover; border-radius: 4px; margin-right: 16px;"
+          width="80"
+        />
+        <div
+          class="MuiBox-root css-i9gxme"
+        >
+          <h6
+            class="MuiTypography-root MuiTypography-subtitle1 css-5amadx-MuiTypography-root"
+          >
+            Grapes
+          </h6>
+          <p
+            class="MuiTypography-root MuiTypography-body2 MuiTypography-gutterBottom css-186q1z4-MuiTypography-root"
+          >
+            ₹
+            100.00
+             per kg
+          </p>
+          <p
+            class="MuiTypography-root MuiTypography-body2 MuiTypography-gutterBottom css-186q1z4-MuiTypography-root"
+          >
+            Discount: 
+            10
+            % (Now 
+            ₹
+            90.00
+             per kg)
+          </p>
+          <p
+            class="MuiTypography-root MuiTypography-body2 css-ngc1bc-MuiTypography-root"
+          >
+            Subtotal: 
+            ₹
+            180.00
+          </p>
+        </div>
+      </div>
+      <div
+        class="MuiBox-root css-69i1ev"
+      >
+        <div
+          class="MuiBox-root css-70qvj9"
+        >
+          <div
+            aria-label="Decrease quantity"
+            class="MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeSmall css-1pe4mpk-MuiButtonBase-root-MuiIconButton-root"
+            role="button"
+            tabindex="0"
+            whilehover="[object Object]"
+          >
+            <svg
+              fill="none"
+              height="16"
+              stroke="currentColor"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              viewBox="0 0 24 24"
+              width="16"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <line
+                x1="5"
+                x2="19"
+                y1="12"
+                y2="12"
+              />
+            </svg>
+            <span
+              class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+            />
+          </div>
+          <div
+            class="MuiFormControl-root MuiTextField-root css-1rsdrlu-MuiFormControl-root-MuiTextField-root"
+          >
+            <div
+              class="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-colorPrimary MuiInputBase-formControl MuiInputBase-sizeSmall css-9ddj71-MuiInputBase-root-MuiOutlinedInput-root"
+            >
+              <input
+                aria-invalid="false"
+                aria-label="Cart quantity"
+                class="MuiInputBase-input MuiOutlinedInput-input MuiInputBase-inputSizeSmall css-1n4twyu-MuiInputBase-input-MuiOutlinedInput-input"
+                id=":r1:"
+                min="0"
+                style="text-align: center;"
+                type="text"
+                value="2"
+              />
+              <fieldset
+                aria-hidden="true"
+                class="MuiOutlinedInput-notchedOutline css-r01yff-MuiNotchedOutlined-root-MuiOutlinedInput-notchedOutline"
+              >
+                <legend
+                  class="css-1whs34k-MuiNotchedOutlined-root"
+                >
+                  <span
+                    class="notranslate"
+                  >
+                    ​
+                  </span>
+                </legend>
+              </fieldset>
+            </div>
+          </div>
+          <div
+            aria-label="Increase quantity"
+            class="MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeSmall css-1pe4mpk-MuiButtonBase-root-MuiIconButton-root"
+            role="button"
+            tabindex="0"
+            whilehover="[object Object]"
+          >
+            <svg
+              fill="none"
+              height="16"
+              stroke="currentColor"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              viewBox="0 0 24 24"
+              width="16"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <line
+                x1="12"
+                x2="12"
+                y1="5"
+                y2="19"
+              />
+              <line
+                x1="5"
+                x2="19"
+                y1="12"
+                y2="12"
+              />
+            </svg>
+            <span
+              class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+            />
+          </div>
+        </div>
+        <div
+          aria-label="Remove Grapes from cart"
+          class="MuiButtonBase-root MuiIconButton-root MuiIconButton-colorError MuiIconButton-sizeMedium css-1jo1f9u-MuiButtonBase-root-MuiIconButton-root"
+          role="button"
+          tabindex="0"
+          whilehover="[object Object]"
+        >
+          <svg
+            fill="none"
+            height="1em"
+            stroke="currentColor"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            viewBox="0 0 24 24"
+            width="1em"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <polyline
+              points="3 6 5 6 21 6"
+            />
+            <path
+              d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"
+            />
+            <line
+              x1="10"
+              x2="10"
+              y1="11"
+              y2="17"
+            />
+            <line
+              x1="14"
+              x2="14"
+              y1="11"
+              y2="17"
+            />
+          </svg>
+          <span
+            class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+          />
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;

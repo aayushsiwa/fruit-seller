@@ -1,0 +1,154 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`Checkout OrderSummary > matches snapshot 1`] = `
+<div>
+  <div
+    animate="[object Object]"
+    class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation3 css-ruejad-MuiPaper-root"
+    data-testid="order-summary"
+    initial="[object Object]"
+    transition="[object Object]"
+  >
+    <h6
+      class="MuiTypography-root MuiTypography-h6 MuiTypography-gutterBottom css-1oh0c0-MuiTypography-root"
+    >
+      Order Summary
+    </h6>
+    <div
+      class="MuiBox-root css-1xl5avl"
+    >
+      <div
+        animate="[object Object]"
+        class="MuiBox-root css-1uibpwp"
+        initial="[object Object]"
+        transition="[object Object]"
+      >
+        <div
+          class="MuiBox-root css-70qvj9"
+        >
+          <img
+            alt="Grapes"
+            data-nimg="1"
+            decoding="async"
+            height="60"
+            loading="lazy"
+            src="/_next/image?url=%2Fgrapes.jpg&w=128&q=75"
+            srcset="/_next/image?url=%2Fgrapes.jpg&w=64&q=75 1x, /_next/image?url=%2Fgrapes.jpg&w=128&q=75 2x"
+            style="color: transparent; object-fit: cover; border-radius: 4px; margin-right: 16px;"
+            width="60"
+          />
+          <div
+            class="MuiBox-root css-i9gxme"
+          >
+            <h6
+              class="MuiTypography-root MuiTypography-subtitle2 css-ati914-MuiTypography-root"
+            >
+              Grapes
+            </h6>
+            <p
+              class="MuiTypography-root MuiTypography-body2 css-r40f8v-MuiTypography-root"
+            >
+              Qty: 
+              2
+            </p>
+            <p
+              class="MuiTypography-root MuiTypography-body2 css-r40f8v-MuiTypography-root"
+            >
+              Discount: 
+              10
+              % (Now 
+              ₹
+              90.00
+               each)
+            </p>
+          </div>
+          <h6
+            class="MuiTypography-root MuiTypography-subtitle2 css-ati914-MuiTypography-root"
+          >
+            ₹
+            180.00
+          </h6>
+        </div>
+      </div>
+    </div>
+    <hr
+      class="MuiDivider-root MuiDivider-fullWidth css-ctpjxq-MuiDivider-root"
+    />
+    <div
+      class="MuiBox-root css-3mllz6"
+    >
+      <p
+        class="MuiTypography-root MuiTypography-body2 css-e784if-MuiTypography-root"
+      >
+        Subtotal
+      </p>
+      <p
+        class="MuiTypography-root MuiTypography-body2 css-e784if-MuiTypography-root"
+      >
+        ₹
+        100.00
+      </p>
+    </div>
+    <div
+      class="MuiBox-root css-3mllz6"
+    >
+      <p
+        class="MuiTypography-root MuiTypography-body2 css-e784if-MuiTypography-root"
+      >
+        Shipping
+      </p>
+      <p
+        class="MuiTypography-root MuiTypography-body2 css-e784if-MuiTypography-root"
+      >
+        Free
+      </p>
+    </div>
+    <div
+      class="MuiBox-root css-3mllz6"
+    >
+      <p
+        class="MuiTypography-root MuiTypography-body2 css-e784if-MuiTypography-root"
+      >
+        Tax (10%)
+      </p>
+      <p
+        class="MuiTypography-root MuiTypography-body2 css-e784if-MuiTypography-root"
+      >
+        ₹
+        10.00
+      </p>
+    </div>
+    <hr
+      class="MuiDivider-root MuiDivider-fullWidth css-ctpjxq-MuiDivider-root"
+    />
+    <div
+      class="MuiBox-root css-gg4vpm"
+    >
+      <h6
+        class="MuiTypography-root MuiTypography-subtitle1 css-5amadx-MuiTypography-root"
+      >
+        Total
+      </h6>
+      <h6
+        class="MuiTypography-root MuiTypography-subtitle1 css-1786zc4-MuiTypography-root"
+      >
+        ₹
+        110.00
+      </h6>
+    </div>
+    <div
+      aria-label="Pay now"
+      class="MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeLarge MuiButton-containedSizeLarge MuiButton-colorPrimary MuiButton-fullWidth MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeLarge MuiButton-containedSizeLarge MuiButton-colorPrimary MuiButton-fullWidth css-1mjnc2s-MuiButtonBase-root-MuiButton-root"
+      role="button"
+      tabindex="0"
+      whilehover="[object Object]"
+      whiletap="[object Object]"
+    >
+      Pay Now
+      <span
+        class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+      />
+    </div>
+  </div>
+</div>
+`;
