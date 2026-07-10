@@ -1,3 +1,4 @@
+import { forgotPasswordSchema } from './forgotPasswordSchema';
 import { loginSchema } from './loginSchema';
 import { NewsletterSchema } from './newsletterSchema';
 import { registerSchema } from './registerSchema';
@@ -18,6 +19,22 @@ describe('Yup Validation Schemas', () => {
         password: 'Password123',
       };
       await expect(loginSchema.validate(invalid)).rejects.toThrow(
+        'Invalid email address'
+      );
+    });
+  });
+
+  describe('forgotPasswordSchema', () => {
+    it('should validate valid email address', async () => {
+      const valid = { email: 'test@example.com' };
+      await expect(forgotPasswordSchema.validate(valid)).resolves.toEqual(
+        valid
+      );
+    });
+
+    it('should reject invalid email format', async () => {
+      const invalid = { email: 'invalid-email' };
+      await expect(forgotPasswordSchema.validate(invalid)).rejects.toThrow(
         'Invalid email address'
       );
     });

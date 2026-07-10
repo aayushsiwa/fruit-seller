@@ -150,10 +150,8 @@ exports[`Login - UI > should match snapshot 1`] = `
                 class="MuiBox-root css-1bvc4cc"
               >
                 <a
-                  href="/forgot-password"
-                />
-                <a
                   class="MuiTypography-root MuiTypography-body2 MuiLink-root MuiLink-underlineHover css-1ksp1na-MuiTypography-root-MuiLink-root"
+                  href="/forgot-password"
                 >
                   Forgot password?
                 </a>
@@ -183,10 +181,8 @@ exports[`Login - UI > should match snapshot 1`] = `
           >
             Don't have an account? 
             <a
-              href="/register"
-            />
-            <a
               class="MuiTypography-root MuiTypography-body2 MuiLink-root MuiLink-underlineHover css-1e34cm-MuiTypography-root-MuiLink-root"
+              href="/register"
             >
               Sign up
             </a>

@@ -102,7 +102,16 @@ export default function Login() {
 
               <Grid item xs={12}>
                 <Box sx={{ display: 'flex', justifyContent: 'flex-end' }}>
-                  <Link href="/forgot-password" passHref>
+                  <Link
+                    href={{
+                      pathname: '/forgot-password',
+                      query: formik.values.email
+                        ? { email: formik.values.email }
+                        : {},
+                    }}
+                    passHref
+                    legacyBehavior
+                  >
                     <MuiLink variant="body2" underline="hover">
                       Forgot password?
                     </MuiLink>
@@ -128,7 +137,7 @@ export default function Login() {
           <Box sx={{ mt: 3, textAlign: 'center' }}>
             <Typography variant="body2">
               Don&apos;t have an account?{' '}
-              <Link href="/register" passHref>
+              <Link href="/register" passHref legacyBehavior>
                 <MuiLink
                   variant="body2"
                   underline="hover"
