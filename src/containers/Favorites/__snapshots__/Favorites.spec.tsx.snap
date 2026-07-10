@@ -1,0 +1,451 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`Favorites - UI > when rendered in web view > should match snapshot when API fails 1`] = `
+<div>
+  <div
+    class="MuiContainer-root MuiContainer-maxWidthLg css-qhibcd-MuiContainer-root"
+  >
+    <div
+      class="MuiBox-root css-72r0nb"
+    >
+      <svg
+        color="#e53935"
+        fill="none"
+        height="48"
+        stroke="currentColor"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        stroke-width="2"
+        style="color: rgb(229, 57, 53);"
+        viewBox="0 0 24 24"
+        width="48"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"
+        />
+      </svg>
+      <h6
+        class="MuiTypography-root MuiTypography-h6 MuiTypography-gutterBottom css-cxt706-MuiTypography-root"
+      >
+        Failed to load favorites
+      </h6>
+      <p
+        class="MuiTypography-root MuiTypography-body1 MuiTypography-paragraph css-120mgm7-MuiTypography-root"
+      >
+        Network Error
+      </p>
+      <button
+        class="MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButton-colorPrimary MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButton-colorPrimary css-sghohy-MuiButtonBase-root-MuiButton-root"
+        tabindex="0"
+        type="button"
+      >
+        Continue Shopping
+        <span
+          class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+        />
+      </button>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Favorites - UI > when rendered in web view > should match snapshot when API is empty 1`] = `
+<div>
+  <div
+    class="MuiContainer-root MuiContainer-maxWidthLg css-qhibcd-MuiContainer-root"
+  >
+    <div
+      class="MuiBox-root css-ua6fsr"
+    >
+      <h1
+        class="MuiTypography-root MuiTypography-h4 MuiTypography-gutterBottom css-1np0xvr-MuiTypography-root"
+      >
+        My Favorites
+      </h1>
+    </div>
+    <div
+      class="MuiBox-root css-ukvsxa"
+    >
+      <div
+        class="MuiBox-root css-vlv1aq"
+      >
+        <svg
+          color="#e53935"
+          fill="none"
+          height="40"
+          stroke="currentColor"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="2"
+          style="color: rgb(229, 57, 53);"
+          viewBox="0 0 24 24"
+          width="40"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"
+          />
+        </svg>
+      </div>
+      <h5
+        class="MuiTypography-root MuiTypography-h5 MuiTypography-gutterBottom css-1n80bwy-MuiTypography-root"
+      >
+        Your favorites list is empty
+      </h5>
+      <p
+        class="MuiTypography-root MuiTypography-body1 MuiTypography-paragraph css-td175h-MuiTypography-root"
+      >
+        Explore our wide variety of fresh, organic fruits and save your preferred items here for quick access later!
+      </p>
+      <button
+        class="MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeLarge MuiButton-containedSizeLarge MuiButton-colorPrimary MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeLarge MuiButton-containedSizeLarge MuiButton-colorPrimary css-w7d89l-MuiButtonBase-root-MuiButton-root"
+        tabindex="0"
+        type="button"
+      >
+        Start Exploring
+        <span
+          class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+        />
+      </button>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Favorites - UI > when rendered in web view > should match snapshot when API is loading 1`] = `
+<div>
+  <div
+    animate="[object Object]"
+    class="MuiBox-root css-pydr4d"
+    initial="[object Object]"
+    transition="[object Object]"
+  >
+    <div
+      animate="[object Object]"
+      transition="[object Object]"
+    >
+      <span
+        aria-label="Loading fresh fruits"
+        class="MuiCircularProgress-root MuiCircularProgress-indeterminate MuiCircularProgress-colorPrimary css-yeb4xq-MuiCircularProgress-root"
+        role="progressbar"
+        style="width: 60px; height: 60px;"
+      >
+        <svg
+          class="MuiCircularProgress-svg css-1idz92c-MuiCircularProgress-svg"
+          viewBox="22 22 44 44"
+        >
+          <circle
+            class="MuiCircularProgress-circle MuiCircularProgress-circleIndeterminate css-176wh8e-MuiCircularProgress-circle"
+            cx="44"
+            cy="44"
+            fill="none"
+            r="20"
+            stroke-width="4"
+          />
+        </svg>
+      </span>
+    </div>
+    <h5
+      class="MuiTypography-root MuiTypography-h5 css-a75hxv-MuiTypography-root"
+    >
+      Loading Fresh Fruits...
+    </h5>
+    <p
+      class="MuiTypography-root MuiTypography-body2 css-t8k1ig-MuiTypography-root"
+    >
+      Getting the freshest picks ready for you!
+    </p>
+  </div>
+</div>
+`;
+
+exports[`Favorites - UI > when rendered in web view > should match snapshot when API is successful 1`] = `
+<div>
+  <div
+    class="MuiContainer-root MuiContainer-maxWidthLg css-n9njem-MuiContainer-root"
+  >
+    <div
+      class="MuiBox-root css-ua6fsr"
+    >
+      <h1
+        class="MuiTypography-root MuiTypography-h4 MuiTypography-gutterBottom css-1np0xvr-MuiTypography-root"
+      >
+        My Favorites
+      </h1>
+      <p
+        class="MuiTypography-root MuiTypography-body1 css-1pnmrwp-MuiTypography-root"
+      >
+        Easily access and shop your saved items (
+        2
+         
+        items
+        )
+      </p>
+    </div>
+    <div
+      class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-3 css-zow5z4-MuiGrid-root"
+    >
+      <div
+        animate="[object Object]"
+        class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-6 MuiGrid-grid-md-4 MuiGrid-grid-lg-3 css-14j1sok-MuiGrid-root"
+        initial="[object Object]"
+        transition="[object Object]"
+      >
+        <div
+          class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation1 MuiCard-root css-1dc3bjb-MuiPaper-root-MuiCard-root"
+          transition="[object Object]"
+          whilehover="[object Object]"
+        >
+          <button
+            aria-label="Remove from favorites"
+            class="MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeMedium css-ap49w0-MuiButtonBase-root-MuiIconButton-root"
+            tabindex="0"
+            type="button"
+          >
+            <svg
+              color="#e53935"
+              fill="#e53935"
+              height="18"
+              stroke="currentColor"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              style="color: rgb(229, 57, 53);"
+              viewBox="0 0 24 24"
+              width="18"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"
+              />
+            </svg>
+            <span
+              class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+            />
+          </button>
+          <img
+            alt="Grapes"
+            class="MuiCardMedia-root MuiCardMedia-media MuiCardMedia-img css-6mo23z-MuiCardMedia-root"
+            height="160"
+            loading="lazy"
+            src="/grapes.jpg"
+          />
+          <div
+            class="MuiCardContent-root css-2r3irp-MuiCardContent-root"
+          >
+            <div
+              class="MuiBox-root css-69i1ev"
+            >
+              <h6
+                class="MuiTypography-root MuiTypography-h6 MuiTypography-noWrap css-ddygbf-MuiTypography-root"
+                title="Grapes"
+              >
+                Grapes
+              </h6>
+            </div>
+            <div
+              class="MuiBox-root css-ohugnc"
+            >
+              <h6
+                class="MuiTypography-root MuiTypography-h6 css-1d963ga-MuiTypography-root"
+              >
+                ₹
+                90.00
+              </h6>
+              <p
+                class="MuiTypography-root MuiTypography-body2 css-13rm4i2-MuiTypography-root"
+              >
+                ₹
+                100.00
+              </p>
+            </div>
+            <p
+              class="MuiTypography-root MuiTypography-body2 css-1sbvnan-MuiTypography-root"
+              title="Fresh Grapes from Nashik."
+            >
+              Fresh Grapes from Nashik.
+            </p>
+          </div>
+          <div
+            class="MuiCardActions-root MuiCardActions-spacing css-1vua6p0-MuiCardActions-root"
+          >
+            <div
+              class="MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButton-colorPrimary MuiButton-fullWidth MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButton-colorPrimary MuiButton-fullWidth css-1fu7jd5-MuiButtonBase-root-MuiButton-root"
+              role="button"
+              tabindex="0"
+              whilehover="[object Object]"
+              whiletap="[object Object]"
+            >
+              <span
+                class="MuiButton-icon MuiButton-startIcon MuiButton-iconSizeMedium css-1d6wzja-MuiButton-startIcon"
+              >
+                <svg
+                  fill="none"
+                  height="1em"
+                  stroke="currentColor"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  viewBox="0 0 24 24"
+                  width="1em"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <circle
+                    cx="9"
+                    cy="21"
+                    r="1"
+                  />
+                  <circle
+                    cx="20"
+                    cy="21"
+                    r="1"
+                  />
+                  <path
+                    d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"
+                  />
+                </svg>
+              </span>
+              Add to Cart
+              <span
+                class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+      <div
+        animate="[object Object]"
+        class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-6 MuiGrid-grid-md-4 MuiGrid-grid-lg-3 css-14j1sok-MuiGrid-root"
+        initial="[object Object]"
+        transition="[object Object]"
+      >
+        <div
+          class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation1 MuiCard-root css-edic75-MuiPaper-root-MuiCard-root"
+          transition="[object Object]"
+          whilehover="[object Object]"
+        >
+          <button
+            aria-label="Remove from favorites"
+            class="MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeMedium css-ap49w0-MuiButtonBase-root-MuiIconButton-root"
+            tabindex="0"
+            type="button"
+          >
+            <svg
+              color="#e53935"
+              fill="#e53935"
+              height="18"
+              stroke="currentColor"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              style="color: rgb(229, 57, 53);"
+              viewBox="0 0 24 24"
+              width="18"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"
+              />
+            </svg>
+            <span
+              class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+            />
+          </button>
+          <img
+            alt="Apple"
+            class="MuiCardMedia-root MuiCardMedia-media MuiCardMedia-img css-6mo23z-MuiCardMedia-root"
+            height="160"
+            loading="lazy"
+            src="/apple.jpg"
+          />
+          <div
+            class="MuiCardContent-root css-2r3irp-MuiCardContent-root"
+          >
+            <div
+              class="MuiBox-root css-69i1ev"
+            >
+              <h6
+                class="MuiTypography-root MuiTypography-h6 MuiTypography-noWrap css-ddygbf-MuiTypography-root"
+                title="Apple"
+              >
+                Apple
+              </h6>
+              <p
+                class="MuiTypography-root MuiTypography-body2 css-1co9xw8-MuiTypography-root"
+              >
+                Out of Stock
+              </p>
+            </div>
+            <div
+              class="MuiBox-root css-ohugnc"
+            >
+              <h6
+                class="MuiTypography-root MuiTypography-h6 css-1d963ga-MuiTypography-root"
+              >
+                ₹
+                47.50
+              </h6>
+              <p
+                class="MuiTypography-root MuiTypography-body2 css-13rm4i2-MuiTypography-root"
+              >
+                ₹
+                50.00
+              </p>
+            </div>
+            <p
+              class="MuiTypography-root MuiTypography-body2 css-1sbvnan-MuiTypography-root"
+              title="Organic Apples from Himachal."
+            >
+              Organic Apples from Himachal.
+            </p>
+          </div>
+          <div
+            class="MuiCardActions-root MuiCardActions-spacing css-1vua6p0-MuiCardActions-root"
+          >
+            <div
+              aria-disabled="true"
+              class="MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButton-colorPrimary MuiButton-fullWidth Mui-disabled MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButton-colorPrimary MuiButton-fullWidth css-1fu7jd5-MuiButtonBase-root-MuiButton-root"
+              role="button"
+              tabindex="-1"
+              whilehover="[object Object]"
+              whiletap="[object Object]"
+            >
+              <span
+                class="MuiButton-icon MuiButton-startIcon MuiButton-iconSizeMedium css-1d6wzja-MuiButton-startIcon"
+              >
+                <svg
+                  fill="none"
+                  height="1em"
+                  stroke="currentColor"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  viewBox="0 0 24 24"
+                  width="1em"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <circle
+                    cx="9"
+                    cy="21"
+                    r="1"
+                  />
+                  <circle
+                    cx="20"
+                    cy="21"
+                    r="1"
+                  />
+                  <path
+                    d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"
+                  />
+                </svg>
+              </span>
+              Add to Cart
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;

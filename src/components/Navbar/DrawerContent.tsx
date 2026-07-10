@@ -20,6 +20,7 @@ import React from 'react';
 import {
   FiChevronDown,
   FiChevronUp,
+  FiHeart,
   FiHome,
   FiLogIn,
   FiLogOut,
@@ -199,6 +200,33 @@ export const DrawerContent: React.FC<DrawerContentProps> = ({
         </Collapse>
 
         <Divider sx={{ my: 1 }} />
+
+        {user && (
+          <>
+            <ListItem disablePadding>
+              <ListItemButton
+                onClick={() => handleNavigation('/favorites')}
+                sx={{ py: 1.5 }}
+              >
+                <ListItemIcon>
+                  <FiHeart size={20} />
+                </ListItemIcon>
+                <ListItemText primary="Favorites" />
+              </ListItemButton>
+            </ListItem>
+            <ListItem disablePadding>
+              <ListItemButton
+                onClick={() => handleNavigation('/orders')}
+                sx={{ py: 1.5 }}
+              >
+                <ListItemIcon>
+                  <FiPackage size={20} />
+                </ListItemIcon>
+                <ListItemText primary="My Orders" />
+              </ListItemButton>
+            </ListItem>
+          </>
+        )}
 
         {isAdmin && (
           <ListItem disablePadding>

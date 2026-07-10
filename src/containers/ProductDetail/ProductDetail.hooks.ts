@@ -1,8 +1,12 @@
+import { useAddFavorite } from '@/lib/api/favorites/addFavorite';
+import { useGetFavorites } from '@/lib/api/favorites/getFavorites';
+import { useRemoveFavorite } from '@/lib/api/favorites/removeFavorite';
 import { useGetProduct } from '@/lib/api/products/getProduct';
 import { useGetRelatedProducts } from '@/lib/api/products/getRelatedProducts';
 import { useCart } from '@/src/contexts/CartContext';
 import { IProduct } from '@/types/index';
 import { SnackbarCloseReason } from '@mui/material';
+import { useSession } from 'next-auth/react';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
 
@@ -16,6 +20,16 @@ export const useProductDetail = (): UseProductDetailReturn => {
     message: string;
     severity: 'success' | 'error';
   }>({ open: false, message: '', severity: 'success' });
+
+  const { status } = useSession();
+  const isLoggedIn = status === 'authenticated';
+
+  const { data: favoritesRes } = useGetFavorites({ enabled: isLoggedIn });
+  const favorites = favoritesRes?.data || [];
+  const isFavorite = favorites.some((fav) => fav.id === (id as string));
+
+  const addFavoriteMutation = useAddFavorite();
+  const removeFavoriteMutation = useRemoveFavorite();
 
   const { data: getProductResponse, isLoading: isLoadingProduct } =
     useGetProduct(id as string);
@@ -72,6 +86,20 @@ export const useProductDetail = (): UseProductDetailReturn => {
     setSnackbar((prev) => ({ ...prev, open: false }));
   };
 
+  const handleToggleFavorite = async () => {
+    if (!isLoggedIn) {
+      router.push(`/login?callbackUrl=${encodeURIComponent(router.asPath)}`);
+      return;
+    }
+    if (!id || typeof id !== 'string') return;
+
+    if (isFavorite) {
+      await removeFavoriteMutation.mutateAsync(id);
+    } else {
+      await addFavoriteMutation.mutateAsync(id);
+    }
+  };
+
   return {
     product,
     isLoadingProduct,
@@ -85,6 +113,8 @@ export const useProductDetail = (): UseProductDetailReturn => {
     handleQuantityChange,
     handleShare,
     isMobile: false,
+    isFavorite,
+    handleToggleFavorite,
   };
 };
 
@@ -108,4 +138,6 @@ export interface UseProductDetailReturn {
   handleQuantityChange: (newQuantity: number) => void;
   handleShare: () => void;
   isMobile: boolean;
+  isFavorite: boolean;
+  handleToggleFavorite: () => void;
 }

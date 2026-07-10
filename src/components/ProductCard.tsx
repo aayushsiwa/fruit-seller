@@ -13,7 +13,7 @@ import {
   Typography,
 } from '@mui/material';
 import { motion } from 'framer-motion';
-import { FiMinus, FiPlus, FiShoppingCart } from 'react-icons/fi';
+import { FiHeart, FiMinus, FiPlus, FiShoppingCart } from 'react-icons/fi';
 
 const ProductCard = ({ product }: { product: IProduct }) => {
   const {
@@ -24,6 +24,8 @@ const ProductCard = ({ product }: { product: IProduct }) => {
     handleInputChange,
     cartQuantity,
     discountedPrice,
+    isFavorite,
+    handleToggleFavorite,
   } = useProductCard(product);
 
   return (
@@ -47,6 +49,31 @@ const ProductCard = ({ product }: { product: IProduct }) => {
       whileHover={{ scale: isOutOfStock ? 1 : 1.02 }}
       transition={{ duration: 0.2 }}
     >
+      <IconButton
+        onClick={handleToggleFavorite}
+        sx={{
+          position: 'absolute',
+          top: 8,
+          right: 8,
+          backgroundColor: 'rgba(255, 255, 255, 0.85)',
+          backdropFilter: 'blur(4px)',
+          '&:hover': {
+            backgroundColor: 'rgba(255, 255, 255, 1)',
+            transform: 'scale(1.15)',
+          },
+          transition: 'all 0.2s ease',
+          zIndex: 2,
+          boxShadow: '0 2px 8px rgba(0, 0, 0, 0.12)',
+        }}
+        aria-label={isFavorite ? 'Remove from favorites' : 'Add to favorites'}
+      >
+        <FiHeart
+          fill={isFavorite ? '#e53935' : 'transparent'}
+          color={isFavorite ? '#e53935' : 'rgba(0, 0, 0, 0.54)'}
+          size={18}
+        />
+      </IconButton>
+
       <CardMedia
         component="img"
         height="160"

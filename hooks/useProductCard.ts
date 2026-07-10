@@ -1,5 +1,9 @@
+import { useAddFavorite } from '@/lib/api/favorites/addFavorite';
+import { useGetFavorites } from '@/lib/api/favorites/getFavorites';
+import { useRemoveFavorite } from '@/lib/api/favorites/removeFavorite';
 import { useCart } from '@/src/contexts/CartContext';
 import { IProduct } from '@/types/index';
+import { useSession } from 'next-auth/react';
 import { useRouter } from 'next/router';
 import { ChangeEvent } from 'react';
 import { MouseEvent } from 'react';
@@ -7,6 +11,15 @@ import { MouseEvent } from 'react';
 const useProductCard = (product: IProduct): UseProductCardReturn => {
   const router = useRouter();
   const { cart, addToCart, updateQuantity, removeFromCart } = useCart();
+  const { status } = useSession();
+  const isLoggedIn = status === 'authenticated';
+
+  const { data: favoritesRes } = useGetFavorites({ enabled: isLoggedIn });
+  const favorites = favoritesRes?.data || [];
+  const isFavorite = favorites.some((fav) => fav.id === product.id);
+
+  const addFavoriteMutation = useAddFavorite();
+  const removeFavoriteMutation = useRemoveFavorite();
 
   const cartItem = cart.find((item) => item.id === product.id);
   const cartQuantity = cartItem ? cartItem.quantity : 0;
@@ -49,14 +62,30 @@ const useProductCard = (product: IProduct): UseProductCardReturn => {
     }
   };
 
+  const handleToggleFavorite = async (e: MouseEvent) => {
+    e.stopPropagation();
+    if (!isLoggedIn) {
+      router.push(`/login?callbackUrl=${encodeURIComponent(router.asPath)}`);
+      return;
+    }
+
+    if (isFavorite) {
+      await removeFavoriteMutation.mutateAsync(product.id);
+    } else {
+      await addFavoriteMutation.mutateAsync(product.id);
+    }
+  };
+
   return {
     cartQuantity,
     discountedPrice,
     isOutOfStock,
+    isFavorite,
     handleAddToCart,
     handleQuantityChange,
     handleViewDetails,
     handleInputChange,
+    handleToggleFavorite,
   };
 };
 
@@ -66,10 +95,12 @@ export type UseProductCardReturn = {
   cartQuantity: number;
   discountedPrice: number | null;
   isOutOfStock: boolean;
+  isFavorite: boolean;
   handleAddToCart: (e: MouseEvent) => void;
   handleQuantityChange: (e: MouseEvent, newQuantity: number) => void;
   handleViewDetails: () => void;
   handleInputChange: (
     e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => void;
+  handleToggleFavorite: (e: MouseEvent) => void;
 };

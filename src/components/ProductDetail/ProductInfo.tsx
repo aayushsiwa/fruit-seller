@@ -11,7 +11,13 @@ import {
 } from '@mui/material';
 import { motion } from 'framer-motion';
 import Image from 'next/image';
-import { FiMinus, FiPlus, FiShare2, FiShoppingCart } from 'react-icons/fi';
+import {
+  FiHeart,
+  FiMinus,
+  FiPlus,
+  FiShare2,
+  FiShoppingCart,
+} from 'react-icons/fi';
 
 export const ProductInfo: React.FC<ProductInfoProps> = ({
   product,
@@ -22,6 +28,8 @@ export const ProductInfo: React.FC<ProductInfoProps> = ({
   handleAddToCart,
   handleQuantityChange,
   handleShare,
+  isFavorite,
+  handleToggleFavorite,
 }) => {
   return (
     <>
@@ -230,6 +238,33 @@ export const ProductInfo: React.FC<ProductInfoProps> = ({
             >
               <FiShare2 />
             </IconButton>
+            <IconButton
+              color={isFavorite ? 'error' : 'primary'}
+              sx={{
+                border: 1,
+                borderColor: isFavorite ? 'error.light' : 'divider',
+                backgroundColor: isFavorite
+                  ? 'rgba(229, 57, 53, 0.04)'
+                  : 'transparent',
+                '&:hover': {
+                  backgroundColor: isFavorite
+                    ? 'rgba(229, 57, 53, 0.1)'
+                    : 'rgba(0,0,0,0.04)',
+                },
+                transition: 'all 0.2s ease',
+              }}
+              component={motion.div}
+              whileHover={{ scale: 1.1 }}
+              onClick={handleToggleFavorite}
+              aria-label={
+                isFavorite ? 'Remove from favorites' : 'Add to favorites'
+              }
+            >
+              <FiHeart
+                fill={isFavorite ? '#e53935' : 'transparent'}
+                color={isFavorite ? '#e53935' : undefined}
+              />
+            </IconButton>
           </Box>
         </Box>
       </Box>
@@ -246,4 +281,6 @@ export interface ProductInfoProps {
   handleAddToCart: () => void;
   handleQuantityChange: (quantity: number) => void;
   handleShare: () => void;
+  isFavorite: boolean;
+  handleToggleFavorite: () => void;
 }

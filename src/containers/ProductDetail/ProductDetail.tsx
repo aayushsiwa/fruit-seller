@@ -24,6 +24,8 @@ export default function ProductDetail() {
     handleAddToCart,
     handleQuantityChange,
     handleShare,
+    isFavorite,
+    handleToggleFavorite,
   } = useProductDetail();
 
   if (isLoadingProduct || !product) {
@@ -71,6 +73,8 @@ export default function ProductDetail() {
           handleAddToCart={handleAddToCart}
           handleQuantityChange={handleQuantityChange}
           handleShare={handleShare}
+          isFavorite={isFavorite}
+          handleToggleFavorite={handleToggleFavorite}
         />
         <RelatedProducts relatedProducts={relatedProducts ?? []} />
         <Snackbar
