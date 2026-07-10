@@ -93,10 +93,12 @@ export type UseAdminDialogsReturn = {
   openUserDeleteDialog: boolean;
   openOrderDialog: boolean;
   openConfirmDialog: boolean;
+  openOrderDetailsDialog: boolean;
   confirmStatus: OrderStatus;
   selectedProduct: Partial<IProduct>;
   selectedUser: Partial<User>;
   selectedOrder: Partial<Order>;
+  selectedOrderId: string | undefined;
   error: string | null;
   setError: (err: string | null) => void;
   isEditProduct: boolean;
@@ -112,6 +114,8 @@ export type UseAdminDialogsReturn = {
   handleCloseUserDeleteDialog: () => void;
   handleOpenOrderDialog: (order: Order) => void;
   handleCloseOrderDialog: () => void;
+  handleOpenOrderDetailsDialog: (order: Order) => void;
+  handleCloseOrderDetailsDialog: () => void;
   handleOpenConfirmDialog: (status: OrderStatus) => void;
   handleCloseConfirmDialog: () => void;
 };
