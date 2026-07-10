@@ -1,4 +1,3 @@
-import { getProductAPI } from '@/lib/api/products/getProduct';
 import { useSnackbar } from '@/src/contexts/SnackBarContext';
 import { CartItem, IProduct, LayoutProps } from '@/types/index';
 import { createContext, useContext, useEffect, useState } from 'react';
@@ -31,51 +30,6 @@ export function CartProvider({ children }: LayoutProps) {
     setLoading(false);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-
-  useEffect(() => {
-    const cleanCart = async () => {
-      const validCart: LocalCartItem[] = [];
-      let hasInvalidItems = false;
-      for (const item of cart) {
-        try {
-          const response = await getProductAPI(item.id);
-          if (response.status === 200 && response.data?.product) {
-            const product = response.data.product;
-            if (item.quantity > product.stock) {
-              if (product.stock === 0) {
-                hasInvalidItems = true;
-                continue;
-              }
-              validCart.push({
-                ...item,
-                quantity: product.stock,
-              });
-              hasInvalidItems = true;
-            } else {
-              validCart.push(item);
-            }
-          } else {
-            hasInvalidItems = true;
-          }
-        } catch {
-          console.log(`Product ${item.id} not found, removing from cart.`);
-          hasInvalidItems = true;
-        }
-      }
-      if (hasInvalidItems) {
-        setCart(validCart);
-        showSnackbar(
-          'Adjusted cart: removed or updated unavailable items.',
-          'warning'
-        );
-      }
-    };
-    if (!loading && cart.length > 0) {
-      cleanCart();
-    }
-
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [loading]);
 
   useEffect(() => {
     if (!loading) {
