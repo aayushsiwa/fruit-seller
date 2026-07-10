@@ -22,11 +22,7 @@ export const useProfilePage = (): UseProfilePageReturn => {
   const { data: session, update } = useSession();
   const { showSnackbar } = useSnackbar();
 
-  const {
-    data: profileResponse,
-    isLoading,
-    error,
-  } = useGetProfile();
+  const { data: profileResponse, isLoading, error } = useGetProfile();
   const user = profileResponse?.data || null;
 
   const updateProfileMutation = useUpdateProfile();
@@ -93,7 +89,10 @@ export const useProfilePage = (): UseProfilePageReturn => {
   const pin = newAddress.postal_code.trim();
   const isPinValid = pin.length === 6 && /^\d+$/.test(pin);
 
-  const { data: pincodeResponse } = useGetPincode(pin, isPinValid && addressDialogOpen);
+  const { data: pincodeResponse } = useGetPincode(
+    pin,
+    isPinValid && addressDialogOpen
+  );
   const pincodeData = pincodeResponse?.data;
 
   useEffect(() => {
@@ -122,19 +121,16 @@ export const useProfilePage = (): UseProfilePageReturn => {
     }
   }, [pincodeData]);
 
-  const handleSelectOffice = useCallback(
-    (office: PincodeOffice | null) => {
-      setSelectedOffice(office);
-      if (office) {
-        setNewAddress((prev) => ({
-          ...prev,
-          city: office.district,
-          state: office.state,
-        }));
-      }
-    },
-    []
-  );
+  const handleSelectOffice = useCallback((office: PincodeOffice | null) => {
+    setSelectedOffice(office);
+    if (office) {
+      setNewAddress((prev) => ({
+        ...prev,
+        city: office.district,
+        state: office.state,
+      }));
+    }
+  }, []);
 
   const saveAddressMutation = useSaveAddress();
 

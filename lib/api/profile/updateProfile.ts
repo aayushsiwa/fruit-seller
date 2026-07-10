@@ -18,7 +18,6 @@ export const useUpdateProfile = () => {
   const queryClient = useQueryClient();
   return useMutation({
     mutationFn: updateProfileAPI,
-    onSuccess: () =>
-      queryClient.invalidateQueries({ queryKey: ['profile'] }),
+    onSuccess: () => queryClient.invalidateQueries({ queryKey: ['profile'] }),
   });
 };

@@ -1,7 +1,4 @@
-import {
-  changePasswordSchema,
-  profileSchema,
-} from './profile';
+import { changePasswordSchema, profileSchema } from './profile';
 
 describe('profileSchema', () => {
   it('should validate valid profile data', async () => {

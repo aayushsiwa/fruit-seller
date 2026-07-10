@@ -40,10 +40,14 @@ export default async function handler(
     const { firstName, lastName } = req.body;
 
     if (!firstName || !lastName) {
-      return res.status(400).json({ error: 'First name and last name are required' });
+      return res
+        .status(400)
+        .json({ error: 'First name and last name are required' });
     }
     if (firstName.length < 2) {
-      return res.status(400).json({ error: 'First name must be at least 2 characters' });
+      return res
+        .status(400)
+        .json({ error: 'First name must be at least 2 characters' });
     }
     if (lastName.length < 1) {
       return res.status(400).json({ error: 'Last name is required' });

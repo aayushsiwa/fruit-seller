@@ -27,7 +27,9 @@ export default async function handler(
   const { currentPassword, newPassword } = req.body;
 
   if (!currentPassword || !newPassword) {
-    return res.status(400).json({ error: 'Current password and new password are required' });
+    return res
+      .status(400)
+      .json({ error: 'Current password and new password are required' });
   }
 
   if (!PASSWORD_REGEX.test(newPassword)) {

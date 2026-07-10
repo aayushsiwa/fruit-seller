@@ -406,7 +406,7 @@ export default function Profile() {
         </motion.div>
       </motion.div>
 
-      <Dialog 
+      <Dialog
         open={addressDialogOpen}
         onClose={() => setAddressDialogOpen(false)}
         maxWidth="sm"
