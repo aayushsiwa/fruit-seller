@@ -31,8 +31,11 @@ export const useProductDetail = (): UseProductDetailReturn => {
   const addFavoriteMutation = useAddFavorite();
   const removeFavoriteMutation = useRemoveFavorite();
 
-  const { data: getProductResponse, isLoading: isLoadingProduct } =
-    useGetProduct(id as string);
+  const {
+    data: getProductResponse,
+    isLoading: isLoadingProduct,
+    isError: isProductError,
+  } = useGetProduct(id as string);
   const product = getProductResponse?.data?.product;
 
   const { data: getRelatedProductsResponse } = useGetRelatedProducts(
@@ -103,6 +106,7 @@ export const useProductDetail = (): UseProductDetailReturn => {
   return {
     product,
     isLoadingProduct,
+    isProductError,
     relatedProducts,
     cartQuantity,
     error,
@@ -121,6 +125,7 @@ export const useProductDetail = (): UseProductDetailReturn => {
 export interface UseProductDetailReturn {
   product: IProduct | undefined;
   isLoadingProduct: boolean;
+  isProductError: boolean;
   relatedProducts: IProduct[] | undefined;
   cartQuantity: number;
   error: string | null;

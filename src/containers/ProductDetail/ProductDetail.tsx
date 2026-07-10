@@ -2,10 +2,11 @@ import { LoadingScreen } from '@/src/components/LoadingScreen';
 import { BreadcrumbsNav } from '@/src/components/ProductDetail/BreadcrumbsNav';
 import { ProductInfo } from '@/src/components/ProductDetail/ProductInfo';
 import { RelatedProducts } from '@/src/components/ProductDetail/RelatedProducts';
-import { Alert, Container, Snackbar } from '@mui/material';
+import { Alert, Button, Container, Snackbar, Typography } from '@mui/material';
 import { useMediaQuery } from '@mui/material';
 import { useTheme } from '@mui/material/styles';
 import Head from 'next/head';
+import Link from 'next/link';
 
 import { useProductDetail } from './ProductDetail.hooks';
 
@@ -15,6 +16,7 @@ export default function ProductDetail() {
   const {
     product,
     isLoadingProduct,
+    isProductError,
     relatedProducts,
     cartQuantity,
     error,
@@ -27,6 +29,23 @@ export default function ProductDetail() {
     isFavorite,
     handleToggleFavorite,
   } = useProductDetail();
+
+  if (isProductError) {
+    return (
+      <Container maxWidth="sm" sx={{ py: 10, textAlign: 'center' }}>
+        <Typography variant="h5" gutterBottom>
+          Product not found
+        </Typography>
+        <Typography variant="body1" color="text.secondary" paragraph>
+          The product you are looking for does not exist or may have been
+          removed.
+        </Typography>
+        <Button variant="contained" component={Link} href="/products">
+          Browse products
+        </Button>
+      </Container>
+    );
+  }
 
   if (isLoadingProduct || !product) {
     return <LoadingScreen />;

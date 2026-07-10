@@ -102,21 +102,6 @@ export default async function handler(
       }
     }
 
-    for (const item of cart) {
-      const product = products.find((p) => p.id === item.id)!;
-      const newQuantity = product.quantity - item.quantity;
-      const { error: updateError } = await supabase
-        .from('fruitsellerproducts')
-        .update({ quantity: newQuantity })
-        .eq('id', item.id);
-
-      if (updateError) {
-        return res
-          .status(500)
-          .json({ error: `Failed to update stock for ${product.name}` });
-      }
-    }
-
     const orderItems = cart.map((item) => {
       const product = products.find((p) => p.id === item.id);
       return {
@@ -125,6 +110,8 @@ export default async function handler(
       };
     });
 
+    // Insert the order first so stock is only ever decremented after the
+    // order is committed. If the insert fails, stock is left untouched.
     const { data: order, error: orderError } = await supabase
       .from('orders')
       .insert({
@@ -150,9 +137,53 @@ export default async function handler(
       return res.status(500).json({ error: 'Order creation returned no data' });
     }
 
+    // Decrement stock only after the order exists. Track every successful
+    // update so we can compensate (restore stock + delete order) if a later
+    // update fails, keeping the two operations consistent.
+    const decremented = new Set<string>();
+
+    for (const item of cart) {
+      const product = products.find((p) => p.id === item.id)!;
+      const newQuantity = product.quantity - item.quantity;
+      const { error: updateError } = await supabase
+        .from('fruitsellerproducts')
+        .update({ quantity: newQuantity })
+        .eq('id', item.id);
+
+      if (updateError) {
+        await compensate(order.id, products, decremented);
+        return res
+          .status(500)
+          .json({ error: `Failed to update stock for ${product.name}` });
+      }
+
+      decremented.add(item.id);
+    }
+
     return res.status(200).json({ order });
   } catch (error) {
     console.error('Order creation error:', error);
     return res.status(500).json({ error: 'Internal server error' });
   }
+}
+
+// Roll back a partially-completed order: restore stock for products that were
+// already decremented, then delete the order so the two operations stay
+// consistent when stock update fails after the order was inserted.
+async function compensate(
+  orderId: string,
+  products: Record<string, unknown>[],
+  decremented: Set<string>
+) {
+  const ids = Array.from(decremented);
+  for (const id of ids) {
+    const product = products.find((p) => p.id === id);
+    if (!product) continue;
+    await supabase
+      .from('fruitsellerproducts')
+      .update({ quantity: product.quantity })
+      .eq('id', id);
+  }
+
+  await supabase.from('orders').delete().eq('id', orderId);
 }

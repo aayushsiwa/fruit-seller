@@ -29,6 +29,7 @@ export const useGetProduct = (
     queryKey: ['product', id],
     queryFn: () => getProductAPI(id!),
     enabled: !!id,
+    retry: false,
     ...options,
   });
 };
