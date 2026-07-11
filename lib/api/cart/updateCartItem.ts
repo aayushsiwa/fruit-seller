@@ -1,7 +1,7 @@
 import { CartItem } from '@/types/index';
 import axios from 'axios';
 
-export type UpdateCartItemPayload = { product_id: string; quantity: number };
+export type UpdateCartItemPayload = { productID: string; quantity: number };
 
 export const updateCartItemAPI = async (
   payload: UpdateCartItemPayload

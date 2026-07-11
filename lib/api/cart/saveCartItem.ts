@@ -1,7 +1,7 @@
 import { CartItem } from '@/types/index';
 import axios from 'axios';
 
-export type SaveCartItemPayload = { product_id: string; quantity: number };
+export type SaveCartItemPayload = { productID: string; quantity: number };
 
 export const saveCartItemAPI = async (
   payload: SaveCartItemPayload

@@ -3,7 +3,7 @@ import { useMutation } from '@tanstack/react-query';
 import axios, { AxiosResponse } from 'axios';
 
 export type InitPaymentResponse = {
-  razorpay_order_id: string;
+  razorpayOrderID: string;
   amount: number;
   key_id: string;
 };

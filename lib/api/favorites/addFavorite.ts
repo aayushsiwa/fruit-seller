@@ -2,7 +2,7 @@ import { useMutation, useQueryClient } from '@tanstack/react-query';
 import axios from 'axios';
 
 export const addFavoriteAPI = async (productId: string) =>
-  axios.post('/api/favorites', { product_id: productId });
+  axios.post('/api/favorites', { productID: productId });
 
 export const useAddFavorite = () => {
   const queryClient = useQueryClient();

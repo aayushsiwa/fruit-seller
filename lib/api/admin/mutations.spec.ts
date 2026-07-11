@@ -21,7 +21,8 @@ describe('saveProductAPI()', () => {
         isEdit: false,
       });
 
-      expect(axios.post).toHaveBeenCalledWith('/api/products', MockProducts[0]);
+      const expected = { ...MockProducts[0] };
+      expect(axios.post).toHaveBeenCalledWith('/api/products', expected);
       expect(result).toEqual(MockProducts[0]);
     });
   });
@@ -36,9 +37,10 @@ describe('saveProductAPI()', () => {
         id: 'prod-1',
       });
 
+      const expected = { ...MockProducts[0] };
       expect(axios.put).toHaveBeenCalledWith(
         '/api/products/prod-1',
-        MockProducts[0]
+        expected
       );
       expect(result).toEqual(MockProducts[0]);
     });
@@ -122,13 +124,13 @@ describe('updateOrderStatusAPI()', () => {
 
     const result = await updateOrderStatusAPI({
       id: 'order-1',
-      status: 'Shipped',
-      shipped_at: '2024-01-01T00:00:00Z',
+      status: 'SHIPPED',
+      shippedAt: '2024-01-01T00:00:00Z',
     });
 
     expect(axios.put).toHaveBeenCalledWith('/api/admin/orders/order-1', {
-      status: 'Shipped',
-      shipped_at: '2024-01-01T00:00:00Z',
+      status: 'SHIPPED',
+      shippedAt: '2024-01-01T00:00:00Z',
     });
     expect(result).toEqual(rawOrder);
   });
@@ -137,7 +139,7 @@ describe('updateOrderStatusAPI()', () => {
     vi.spyOn(axios, 'put').mockRejectedValue(new Error('Network error'));
 
     await expect(
-      updateOrderStatusAPI({ id: 'order-1', status: 'Shipped' })
+      updateOrderStatusAPI({ id: 'order-1', status: 'SHIPPED' })
     ).rejects.toThrow('Network error');
   });
 });

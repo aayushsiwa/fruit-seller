@@ -6,10 +6,10 @@ import axios, { AxiosResponse } from 'axios';
 export type CreateOrderPayload = {
   cart: CartItem[];
   total: number;
-  razorpay_payment_id: string;
-  razorpay_order_id: string;
-  razorpay_signature: string;
-  shipping_address: Address;
+  razorpayPaymentID: string;
+  razorpayOrderID: string;
+  razorpaySignature: string;
+  shippingAddress: Address;
 };
 
 export type CreateOrderResponse = AxiosResponse<{ order: Order }>;
