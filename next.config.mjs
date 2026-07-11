@@ -3,7 +3,12 @@ const nextConfig = {
   reactStrictMode: true,
   //  add image from image.pexels.com
   images: {
-    domains: ['images.pexels.com'],
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'images.pexels.com',
+      },
+    ],
   },
 };
 
