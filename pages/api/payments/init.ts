@@ -33,22 +33,22 @@ export default async function handler(
   }
 
   try {
-    const ids = cart.map((item) => item.id);
+    const ids = cart.map((item) => item.productID);
     const { data: products, error: fetchError } = await supabase
-      .from('fruitsellerproducts')
+      .from('products')
       .select('*')
-      .in('id', ids);
+      .in('ID', ids);
 
     if (fetchError || !products) {
       return res.status(500).json({ error: 'Failed to fetch products' });
     }
 
     for (const item of cart) {
-      const product = products.find((p) => p.id === item.id);
+      const product = products.find((p) => p.ID === item.productID);
       if (!product) {
-        return res.status(400).json({ error: `Product ${item.id} not found` });
+        return res.status(400).json({ error: `Product ${item.productID} not found` });
       }
-      if (product.quantity < item.quantity) {
+      if (product.stock < item.quantity) {
         return res
           .status(400)
           .json({ error: `Insufficient stock for ${product.name}` });
@@ -61,11 +61,11 @@ export default async function handler(
       amount: amountInPaise,
       currency: 'INR',
       receipt: `receipt_${Date.now()}`,
-      notes: { user_email: session.user.email },
+      notes: { userEmail: session.user.email },
     });
 
     return res.status(200).json({
-      razorpay_order_id: razorpayOrder.id,
+      razorpayOrderID: razorpayOrder.id,
       amount: razorpayOrder.amount,
       key_id: process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID,
     });

@@ -17,7 +17,7 @@ export default async function handler(
 
   if (
     !session ||
-    !['admin'].includes(
+    !['ADMIN'].includes(
       typeof session.user.role === 'string' ? session.user.role : ''
     )
   ) {
@@ -31,16 +31,16 @@ export default async function handler(
   const { data, error } = await supabase
     .from('orders')
     .select('*')
-    .order('created_at', { ascending: false });
+    .order('createdAt', { ascending: false });
 
   if (error) return res.status(500).json({ error: error.message });
 
   const orders = (data ?? []).map((order: Record<string, unknown>) => ({
     ...order,
-    userName: order.user_email,
+    userName: order.userEmail,
     items: order.items,
-    status: (order.status as string) || 'Processing',
-    createdAt: order.created_at,
+    status: (order.status as string) || 'PROCESSING',
+    createdAt: order.createdAt,
   }));
 
   return res.status(200).json(orders);

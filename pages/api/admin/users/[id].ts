@@ -18,7 +18,7 @@ export default async function handler(
 
   if (
     !session ||
-    !['admin'].includes(
+      !['ADMIN'].includes(
       typeof session.user.role === 'string' ? session.user.role : ''
     )
   ) {
@@ -38,16 +38,16 @@ export default async function handler(
     }
 
     const updateData = {
-      first_name: firstName,
-      last_name: lastName,
+      firstName,
+      lastName,
       email,
       role,
     };
 
     const { data, error } = await supabase
-      .from('fruitsellerusers')
+      .from('users')
       .update(updateData)
-      .eq('id', id)
+      .eq('ID', id)
       .select();
 
     if (error) {
@@ -55,21 +55,15 @@ export default async function handler(
     }
 
     const updatedUser = data?.[0];
-    if (updatedUser) {
-      updatedUser.firstName = updatedUser.first_name;
-      updatedUser.lastName = updatedUser.last_name;
-      delete updatedUser.first_name;
-      delete updatedUser.last_name;
-    }
 
     return res.status(200).json(updatedUser);
   }
 
   if (req.method === 'DELETE') {
     const { error } = await supabase
-      .from('fruitsellerusers')
+      .from('users')
       .delete()
-      .eq('id', id);
+      .eq('ID', id);
 
     if (error) {
       return res.status(500).json({ error: error.message });

@@ -57,7 +57,7 @@ export default async function handler(
   try {
     // Check if user exists
     const { data: user, error: userError } = await supabase
-      .from('fruitsellerusers')
+      .from('users')
       .select('email')
       .eq('email', email)
       .single();

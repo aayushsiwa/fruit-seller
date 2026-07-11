@@ -9,6 +9,7 @@ export default async function handler(
   res: NextApiResponse
 ) {
   const session = await getServerSession(req, res, authOptions);
+
   const userId = session?.user?.id;
 
   if (!userId) {
@@ -18,8 +19,8 @@ export default async function handler(
   if (req.method === 'GET') {
     const { data, error } = await supabase
       .from('favorites')
-      .select('*, fruitsellerproducts(*)')
-      .eq('user_id', userId);
+      .select('*, products(*)')
+      .eq('userID', userId);
 
     if (error) {
       console.error('Supabase GET favorites error:', error);
@@ -27,25 +28,23 @@ export default async function handler(
     }
 
     // Remap data to return an array of products
-    const favorites = data
-      .map((item) => item.fruitsellerproducts)
-      .filter(Boolean);
+    const favorites = data.map((item) => item.products).filter(Boolean);
 
     return res.status(200).json(favorites);
   }
 
   if (req.method === 'POST') {
-    const { product_id } = req.body;
+    const { productID } = req.body;
 
-    if (!product_id) {
+    if (!productID) {
       return res.status(400).json({ error: 'Product ID is required' });
     }
 
     // Verify if product exists
     const { data: product, error: productError } = await supabase
-      .from('fruitsellerproducts')
-      .select('id')
-      .eq('id', product_id)
+      .from('products')
+      .select('ID')
+      .eq('ID', productID)
       .single();
 
     if (productError || !product) {
@@ -56,8 +55,8 @@ export default async function handler(
     const { data: existingFavorite, error: fetchError } = await supabase
       .from('favorites')
       .select('*')
-      .eq('user_id', userId)
-      .eq('product_id', product_id)
+      .eq('userID', userId)
+      .eq('productID', productID)
       .single();
 
     if (fetchError && fetchError.code !== 'PGRST116') {
@@ -72,7 +71,7 @@ export default async function handler(
     // Insert new favorite
     const { data, error } = await supabase
       .from('favorites')
-      .insert({ user_id: userId, product_id })
+      .insert({ userID: userId, productID })
       .select()
       .single();
 

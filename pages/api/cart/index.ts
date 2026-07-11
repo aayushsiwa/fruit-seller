@@ -21,9 +21,9 @@ export default async function handler(
     }
 
     const { data, error } = await supabase
-      .from('fruitsellercarts')
-      .select('*, fruitsellerproducts(*)')
-      .eq('user_id', userId);
+      .from('carts')
+      .select('*, products(*)')
+      .eq('userID', userId);
 
     if (error) {
       console.error('Supabase GET error:', error);
@@ -31,7 +31,7 @@ export default async function handler(
     }
 
     const cart = data.map((item) => ({
-      ...item.fruitsellerproducts,
+      ...item.products,
       quantity: item.quantity,
     }));
 
@@ -39,30 +39,30 @@ export default async function handler(
   }
 
   if (req.method === 'POST') {
-    const { product_id, quantity } = req.body;
+    const { productID, quantity } = req.body;
 
-    if (!product_id || !Number.isInteger(quantity) || quantity < 1) {
+    if (!productID || !Number.isInteger(quantity) || quantity < 1) {
       return res.status(400).json({ error: 'Invalid product ID or quantity' });
     }
 
     const { data: product, error: productError } = await supabase
-      .from('fruitsellerproducts')
-      .select('quantity')
-      .eq('id', product_id)
+      .from('products')
+      .select('stock')
+      .eq('ID', productID)
       .single();
 
     if (productError || !product) {
       return res.status(404).json({ error: 'Product not found' });
     }
-    if (product.quantity < quantity) {
+    if (product.stock < quantity) {
       return res.status(400).json({ error: 'Insufficient stock' });
     }
 
     const { data: existingItem, error: fetchError } = await supabase
-      .from('fruitsellercarts')
+      .from('carts')
       .select('*')
-      .eq('user_id', userId)
-      .eq('product_id', product_id)
+      .eq('userID', userId)
+      .eq('productID', productID)
       .single();
 
     if (fetchError && fetchError.code !== 'PGRST116') {
@@ -72,14 +72,14 @@ export default async function handler(
 
     if (existingItem) {
       const newQuantity = existingItem.quantity + quantity;
-      if (newQuantity > product.quantity) {
+      if (newQuantity > product.stock) {
         return res.status(400).json({ error: 'Total quantity exceeds stock' });
       }
 
       const { data, error } = await supabase
-        .from('fruitsellercarts')
+        .from('carts')
         .update({ quantity: newQuantity })
-        .eq('id', existingItem.id)
+         .eq('ID', existingItem.ID)
         .select()
         .single();
 
@@ -90,8 +90,8 @@ export default async function handler(
       return res.status(200).json(data);
     } else {
       const { data, error } = await supabase
-        .from('fruitsellercarts')
-        .insert({ user_id: userId, product_id, quantity })
+        .from('carts')
+        .insert({ userID: userId, productID, quantity })
         .select()
         .single();
 
@@ -104,30 +104,30 @@ export default async function handler(
   }
 
   if (req.method === 'PUT') {
-    const { product_id, quantity } = req.body;
+    const { productID, quantity } = req.body;
 
-    if (!product_id || !Number.isInteger(quantity) || quantity < 1) {
+    if (!productID || !Number.isInteger(quantity) || quantity < 1) {
       return res.status(400).json({ error: 'Invalid product ID or quantity' });
     }
 
     const { data: product, error: productError } = await supabase
-      .from('fruitsellerproducts')
-      .select('quantity')
-      .eq('id', product_id)
+      .from('products')
+      .select('stock')
+      .eq('ID', productID)
       .single();
 
     if (productError || !product) {
       return res.status(404).json({ error: 'Product not found' });
     }
-    if (product.quantity < quantity) {
+    if (product.stock < quantity) {
       return res.status(400).json({ error: 'Insufficient stock' });
     }
 
     const { data, error } = await supabase
-      .from('fruitsellercarts')
+      .from('carts')
       .update({ quantity })
-      .eq('user_id', userId)
-      .eq('product_id', product_id)
+      .eq('userID', userId)
+      .eq('productID', productID)
       .select()
       .single();
 
@@ -139,17 +139,17 @@ export default async function handler(
   }
 
   if (req.method === 'DELETE') {
-    const { product_id } = req.query;
+    const { productID } = req.query;
 
-    if (!product_id) {
+    if (!productID) {
       return res.status(400).json({ error: 'Product ID is required' });
     }
 
     const { error } = await supabase
-      .from('fruitsellercarts')
+      .from('carts')
       .delete()
-      .eq('user_id', userId)
-      .eq('product_id', product_id);
+      .eq('userID', userId)
+      .eq('productID', productID);
 
     if (error) {
       console.error('Supabase delete error:', error);

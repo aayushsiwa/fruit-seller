@@ -19,7 +19,7 @@ export default async function handler(
 
   try {
     const { data: existing, error: existingError } = await supabase
-      .from('fruitsellerusers')
+      .from('users')
       .select('email')
       .eq('email', email)
       .single();
@@ -36,15 +36,13 @@ export default async function handler(
 
     const hashed = await hashPassword(password);
 
-    const { error: insertError } = await supabase
-      .from('fruitsellerusers')
-      .insert({
-        email,
-        password: hashed,
-        first_name: firstName,
-        last_name: lastName,
-        role: role || 'buyer',
-      });
+    const { error: insertError } = await supabase.from('users').insert({
+      email,
+      password: hashed,
+      firstName,
+      lastName,
+      role: role || 'USER',
+    });
 
     if (insertError) {
       return res
@@ -57,7 +55,7 @@ export default async function handler(
     return res.status(201).json({
       success: true,
       token: token,
-      user: { email, firstName, lastName, role: role || 'buyer' },
+      user: { email, firstName, lastName, role: role || 'USER' },
     });
   } catch (error) {
     console.error('Registration error:', error);

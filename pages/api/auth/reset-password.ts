@@ -35,7 +35,7 @@ export default async function handler(
     const hashedPassword = await hashPassword(password);
 
     const { error: updateError } = await supabase
-      .from('fruitsellerusers')
+      .from('users')
       .update({ password: hashedPassword })
       .eq('email', email);
 

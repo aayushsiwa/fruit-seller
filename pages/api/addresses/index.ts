@@ -9,21 +9,21 @@ export default async function handler(
   res: NextApiResponse
 ) {
   const session = (await getServerSession(req, res, Nextauth.authOptions)) as {
-    user?: { email?: string };
+    user?: { id?: string };
   } | null;
 
-  if (!session || !session.user || !session.user.email) {
+  if (!session || !session.user || !session.user.id) {
     return res.status(401).json({ error: 'Unauthorized' });
   }
 
-  const userEmail = session.user.email;
+  const userID = session.user.id;
 
   if (req.method === 'GET') {
     const { data, error } = await supabase
       .from('addresses')
       .select('*')
-      .eq('user_email', userEmail)
-      .order('created_at', { ascending: false });
+      .eq('userID', userID)
+      .order('createdAt', { ascending: false });
 
     if (error) {
       return res.status(500).json({ error: error.message });
@@ -33,24 +33,35 @@ export default async function handler(
   }
 
   if (req.method === 'POST') {
-    const { street, street2, city, state, postal_code, country, phone } =
-      req.body;
+    const {
+      label,
+      street,
+      street2,
+      city,
+      state,
+      postalCode,
+      country,
+      phone,
+      isDefault,
+    } = req.body;
 
-    if (!street || !city || !state || !postal_code || !country || !phone) {
+    if (!street || !city || !state || !postalCode || !country || !phone) {
       return res.status(400).json({ error: 'All fields are required' });
     }
 
     const { data, error } = await supabase
       .from('addresses')
       .insert({
-        user_email: userEmail,
+        userID,
+        label: label || '',
         street,
         street2,
         city,
         state,
-        postal_code,
+        postalCode,
         country,
         phone,
+        isDefault: isDefault || false,
       })
       .select()
       .single();

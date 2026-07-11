@@ -18,9 +18,9 @@ export default async function handler(
 
   if (req.method === 'GET') {
     const { data, error } = await supabase
-      .from('fruitsellerproducts')
+      .from('products')
       .select('*')
-      .eq('id', id)
+      .eq('ID', id)
       .single();
 
     if (error || !data) {
@@ -36,7 +36,7 @@ export default async function handler(
       res,
       authOptions
     )) as SessionUser;
-    if (!session || !['admin', 'seller'].includes(session.user.role || '')) {
+    if (!session || !['ADMIN'].includes(session.user.role || '')) {
       return res.status(403).json({ error: 'Unauthorized' });
     }
   }
@@ -44,13 +44,14 @@ export default async function handler(
   if (req.method === 'PUT') {
     const {
       name,
+      slug,
       price,
       description,
-      image,
+      images,
       category,
       stock,
       discount,
-      is_seasonal,
+      isSeasonal,
     } = req.body;
 
     const validation = validateProductData({
@@ -65,18 +66,19 @@ export default async function handler(
     }
 
     const { data, error } = await supabase
-      .from('fruitsellerproducts')
+      .from('products')
       .update({
         name,
+        slug,
         price,
         description,
-        image,
+        images,
         category,
-        quantity: stock,
+        stock,
         discount: discount || 0,
-        is_seasonal: is_seasonal || false,
+        isSeasonal: isSeasonal || false,
       })
-      .eq('id', id)
+      .eq('ID', id)
       .select()
       .single();
 
@@ -89,9 +91,9 @@ export default async function handler(
 
   if (req.method === 'DELETE') {
     const { error } = await supabase
-      .from('fruitsellerproducts')
+      .from('products')
       .delete()
-      .eq('id', id);
+      .eq('ID', id);
 
     if (error) {
       console.error('Supabase DELETE error:', error);
