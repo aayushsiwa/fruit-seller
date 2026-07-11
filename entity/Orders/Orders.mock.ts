@@ -4,7 +4,7 @@ import { Order } from './Orders';
 
 export const MockOrders: Order[] = [
   {
-    id: 'order-1',
+    ID: 'order-1',
     userName: 'John Doe',
     items: [
       { quantity: 2, product: MockProducts[0] },
@@ -12,14 +12,14 @@ export const MockOrders: Order[] = [
     ],
     total: 250.5,
     createdAt: '2025-06-01T10:00:00Z',
-    status: 'Processing',
+    status: 'PROCESSING',
   },
   {
-    id: 'order-2',
+    ID: 'order-2',
     userName: 'Jane Doe',
     items: [{ quantity: 1, product: MockProducts[0] }],
     total: 99.99,
     createdAt: '2025-05-15T08:30:00Z',
-    status: 'Delivered',
+    status: 'DELIVERED',
   },
 ];

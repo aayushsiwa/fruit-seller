@@ -1,9 +1,10 @@
 export interface IProduct {
-  id: string;
+  ID: string;
   name: string;
+  slug?: string;
   price: number;
   stock: number;
-  image: string;
+  images: string[];
   description: string;
   category: string;
   discount: number;
@@ -12,11 +13,12 @@ export interface IProduct {
 }
 
 export class Product implements IProduct {
-  id: string;
+  ID: string;
   name: string;
+  slug?: string;
   price: number;
   stock: number;
-  image: string;
+  images: string[];
   description: string;
   category: string;
   discount: number;
@@ -26,18 +28,17 @@ export class Product implements IProduct {
   constructor(
     data:
       | IProduct
-      | (Omit<IProduct, 'stock'> & { quantity?: number; stock?: number })
+      | (Omit<IProduct, 'stock'> & { stock?: number; images?: string[] | string })
   ) {
-    this.id = data.id;
+    this.ID = data.ID;
     this.name = data.name;
+    this.slug = data.slug;
     this.price = data.price;
     this.stock =
       'stock' in data && data.stock != null
         ? data.stock
-        : 'quantity' in data && data.quantity != null
-          ? data.quantity
-          : 0;
-    this.image = data.image;
+        : 0;
+    this.images = Array.isArray(data.images) ? data.images : data.images ? [data.images] : [];
     this.description = data.description;
     this.category = data.category;
     this.discount = data.discount;

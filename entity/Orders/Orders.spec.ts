@@ -15,22 +15,22 @@ const mockItems: OrderItem[] = [
 ];
 
 const mockAddress: Address = {
-  id: 'addr-1',
+  ID: 'addr-1',
   street: '123 Mango Lane',
   city: 'Mumbai',
   state: 'Maharashtra',
-  postal_code: '400001',
+  postalCode: '400001',
   country: 'India',
   phone: '9876543210',
 };
 
 const requiredOrderData: OrderType = {
-  id: 'order-1',
+  ID: 'order-1',
   userName: 'John Doe',
   items: mockItems,
   total: 360,
   createdAt: '2024-06-01T08:00:00.000Z',
-  status: 'Processing' as OrderStatus,
+  status: 'PROCESSING' as OrderStatus,
 };
 
 describe('Order entity', () => {
@@ -43,62 +43,62 @@ describe('Order entity', () => {
     it('maps all required fields correctly', () => {
       const order = new Order(requiredOrderData);
 
-      expect(order.id).toBe('order-1');
+      expect(order.ID).toBe('order-1');
       expect(order.userName).toBe('John Doe');
       expect(order.items).toEqual(mockItems);
       expect(order.total).toBe(360);
       expect(order.createdAt).toBe('2024-06-01T08:00:00.000Z');
-      expect(order.status).toBe('Processing');
+      expect(order.status).toBe('PROCESSING');
     });
 
     it('leaves optional fields undefined when omitted', () => {
       const order = new Order(requiredOrderData);
 
-      expect(order.payment_id).toBeUndefined();
-      expect(order.razorpay_order_id).toBeUndefined();
-      expect(order.shipped_at).toBeUndefined();
-      expect(order.delivered_at).toBeUndefined();
-      expect(order.cancelled_at).toBeUndefined();
-      expect(order.shipping_address).toBeUndefined();
+      expect(order.paymentID).toBeUndefined();
+      expect(order.razorpayOrderID).toBeUndefined();
+      expect(order.shippedAt).toBeUndefined();
+      expect(order.deliveredAt).toBeUndefined();
+      expect(order.cancelledAt).toBeUndefined();
+      expect(order.shippingAddress).toBeUndefined();
     });
   });
 
   describe('with optional fields provided', () => {
     const fullOrderData: OrderType = {
       ...requiredOrderData,
-      payment_id: 'pay_abc123',
-      razorpay_order_id: 'order_xyz456',
-      shipped_at: '2024-06-02T10:00:00.000Z',
-      delivered_at: '2024-06-05T15:30:00.000Z',
-      cancelled_at: undefined,
-      shipping_address: mockAddress,
+      paymentID: 'pay_abc123',
+      razorpayOrderID: 'order_xyz456',
+      shippedAt: '2024-06-02T10:00:00.000Z',
+      deliveredAt: '2024-06-05T15:30:00.000Z',
+      cancelledAt: undefined,
+      shippingAddress: mockAddress,
     };
 
-    it('maps payment_id and razorpay_order_id', () => {
+    it('maps paymentID and razorpayOrderID', () => {
       const order = new Order(fullOrderData);
-      expect(order.payment_id).toBe('pay_abc123');
-      expect(order.razorpay_order_id).toBe('order_xyz456');
+      expect(order.paymentID).toBe('pay_abc123');
+      expect(order.razorpayOrderID).toBe('order_xyz456');
     });
 
-    it('maps shipped_at and delivered_at', () => {
+    it('maps shippedAt and deliveredAt', () => {
       const order = new Order(fullOrderData);
-      expect(order.shipped_at).toBe('2024-06-02T10:00:00.000Z');
-      expect(order.delivered_at).toBe('2024-06-05T15:30:00.000Z');
+      expect(order.shippedAt).toBe('2024-06-02T10:00:00.000Z');
+      expect(order.deliveredAt).toBe('2024-06-05T15:30:00.000Z');
     });
 
-    it('maps shipping_address with all address fields', () => {
+    it('maps shippingAddress with all address fields', () => {
       const order = new Order(fullOrderData);
-      expect(order.shipping_address).toEqual(mockAddress);
-      expect(order.shipping_address?.city).toBe('Mumbai');
+      expect(order.shippingAddress).toEqual(mockAddress);
+      expect(order.shippingAddress?.city).toBe('Mumbai');
     });
 
-    it('maps cancelled_at when set', () => {
+    it('maps cancelledAt when set', () => {
       const cancelledOrder = new Order({
         ...requiredOrderData,
-        status: 'Cancelled',
-        cancelled_at: '2024-06-03T09:00:00.000Z',
+        status: 'CANCELLED',
+        cancelledAt: '2024-06-03T09:00:00.000Z',
       });
-      expect(cancelledOrder.cancelled_at).toBe('2024-06-03T09:00:00.000Z');
+      expect(cancelledOrder.cancelledAt).toBe('2024-06-03T09:00:00.000Z');
     });
   });
 });
