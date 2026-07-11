@@ -24,7 +24,7 @@ const ProductDialog: React.FC<ProductDialogProps> = ({
   return (
     <Dialog open={open} onClose={onClose} maxWidth="sm" fullWidth>
       <DialogTitle>
-        {product.id ? 'Edit Product' : 'Add New Product'}
+        {product.ID ? 'Edit Product' : 'Add New Product'}
       </DialogTitle>
       <form onSubmit={onSave}>
         <DialogContent>
@@ -115,7 +115,7 @@ const ProductDialog: React.FC<ProductDialogProps> = ({
               <FormControl fullWidth margin="normal">
                 <InputLabel>Seasonal</InputLabel>
                 <Select
-                  name="is_seasonal"
+                  name="isSeasonal"
                   defaultValue={product.isSeasonal ? 'true' : 'false'}
                   label="Seasonal"
                   required
@@ -135,7 +135,7 @@ const ProductDialog: React.FC<ProductDialogProps> = ({
             color="primary"
             disabled={isLoading}
           >
-            {isLoading ? 'Saving...' : product.id ? 'Update' : 'Create'}
+            {isLoading ? 'Saving...' : product.ID ? 'Update' : 'Create'}
           </Button>
         </DialogActions>
       </form>

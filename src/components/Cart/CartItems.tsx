@@ -52,7 +52,7 @@ export const CartItems: React.FC<CartItemsProps> = ({
             : product.price;
           return (
             <Box
-              key={item.id}
+              key={item.productID}
               sx={{
                 p: 2,
                 border: 1,
@@ -68,7 +68,7 @@ export const CartItems: React.FC<CartItemsProps> = ({
             >
               <Box sx={{ display: 'flex', mb: 2 }}>
                 <Image
-                  src={product.image || defaultImage}
+                  src={product.images?.[0] || defaultImage}
                   alt={product.name}
                   width={80}
                   height={80}
@@ -127,7 +127,7 @@ export const CartItems: React.FC<CartItemsProps> = ({
                     size="small"
                     onClick={() =>
                       handleQuantityChange(
-                        item.id,
+                        item.productID,
                         item.quantity - 1,
                         product.stock
                       )
@@ -144,7 +144,7 @@ export const CartItems: React.FC<CartItemsProps> = ({
                     onChange={(e) => {
                       const value = Number.parseInt(e.target.value);
                       if (!isNaN(value)) {
-                        handleQuantityChange(item.id, value, product.stock);
+                        handleQuantityChange(item.productID, value, product.stock);
                       }
                     }}
                     inputProps={{
@@ -159,7 +159,7 @@ export const CartItems: React.FC<CartItemsProps> = ({
                     size="small"
                     onClick={() =>
                       handleQuantityChange(
-                        item.id,
+                        item.productID,
                         item.quantity + 1,
                         product.stock
                       )
@@ -174,7 +174,7 @@ export const CartItems: React.FC<CartItemsProps> = ({
                 </Box>
                 <IconButton
                   color="error"
-                  onClick={() => handleRemoveItem(item.id)}
+                  onClick={() => handleRemoveItem(item.productID)}
                   component={motion.div}
                   whileHover={{ scale: 1.1 }}
                   aria-label={`Remove ${product.name} from cart`}

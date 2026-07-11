@@ -35,7 +35,7 @@ describe('Orders - Hooks', () => {
     });
 
     expect(result.current.orders).toHaveLength(2);
-    expect(result.current.orders[0].id).toBe('order-1');
+    expect(result.current.orders[0].ID).toBe('order-1');
     expect(result.current.error).toBeNull();
   });
 

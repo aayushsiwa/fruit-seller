@@ -78,13 +78,13 @@ const UsersTab: React.FC<UsersTabProps> = ({
               </TableRow>
             ) : (users?.length ?? 0) > 0 ? (
               (users ?? []).map((user: User) => (
-                <TableRow key={user.id}>
+                <TableRow key={user.ID}>
                   <TableCell>{user.email}</TableCell>
                   <TableCell>{`${user.firstName} ${user.lastName}`}</TableCell>
                   <TableCell>
                     <Chip
                       label={user.role}
-                      color={user.role === 'admin' ? 'primary' : 'default'}
+                      color={user.role === 'ADMIN' ? 'primary' : 'default'}
                       size="small"
                     />
                   </TableCell>

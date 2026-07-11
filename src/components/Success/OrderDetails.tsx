@@ -15,7 +15,7 @@ export const OrderDetails: React.FC<OrderDetailsProps> = ({ order }) => {
       transition={{ duration: 0.5 }}
     >
       <Typography variant="h6" gutterBottom sx={{ fontWeight: 600 }}>
-        Order Details (ID: {order.id})
+        Order Details (ID: {order.ID})
       </Typography>
       <Box
         sx={{
@@ -32,7 +32,7 @@ export const OrderDetails: React.FC<OrderDetailsProps> = ({ order }) => {
             : product.price;
           return (
             <Box
-              key={product.id}
+              key={product.ID}
               sx={{
                 p: 2,
                 border: 1,
@@ -47,7 +47,7 @@ export const OrderDetails: React.FC<OrderDetailsProps> = ({ order }) => {
             >
               <Box sx={{ display: 'flex', alignItems: 'center' }}>
                 <Image
-                  src={product.image || defaultImage}
+                  src={product.images?.[0] || defaultImage}
                   alt={product.name}
                   width={60}
                   height={60}

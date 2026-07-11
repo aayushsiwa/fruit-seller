@@ -26,11 +26,11 @@ function renderWithProviders(ui: ReactNode) {
 }
 
 const product = {
-  id: 'p1',
+  ID: 'p1',
   name: 'Apple',
   price: 1,
   stock: 10,
-  image: '',
+  images: [],
   description: '',
   category: '',
   discount: 0,
@@ -57,11 +57,11 @@ describe('CartProvider - server sync', () => {
     localStorage.clear();
     vi.spyOn(CartGetAPI, 'getCartAPI').mockResolvedValue([]);
     vi.spyOn(CartAPI, 'saveCartItemAPI').mockResolvedValue({
-      id: 'p1',
+      productID: 'p1',
       quantity: 1,
     });
     vi.spyOn(CartUpdateAPI, 'updateCartItemAPI').mockResolvedValue({
-      id: 'p1',
+      productID: 'p1',
       quantity: 3,
     });
     vi.spyOn(CartRemoveAPI, 'removeCartItemAPI').mockResolvedValue(undefined);
@@ -75,22 +75,22 @@ describe('CartProvider - server sync', () => {
   it('pushes the logged-out localStorage cart to the server on login', async () => {
     localStorage.setItem(
       'cart',
-      JSON.stringify([{ id: 'local-1', quantity: 2 }])
+      JSON.stringify([{ productID: 'local-1', quantity: 2 }])
     );
 
     renderWithProviders(<TestComponent />);
 
     expect(await screen.findByTestId('cart-length')).toHaveTextContent('1');
     expect(CartAPI.saveCartItemAPI).toHaveBeenCalledWith({
-      product_id: 'local-1',
+      productID: 'local-1',
       quantity: 2,
     });
   });
 
   it('keeps the higher quantity when the same product is on both sides', async () => {
-    localStorage.setItem('cart', JSON.stringify([{ id: 'p1', quantity: 2 }]));
+    localStorage.setItem('cart', JSON.stringify([{ productID: 'p1', quantity: 2 }]));
     vi.spyOn(CartGetAPI, 'getCartAPI').mockResolvedValue([
-      { id: 'p1', quantity: 3 },
+      { productID: 'p1', quantity: 3 },
     ]);
 
     renderWithProviders(<TestComponent />);
@@ -98,7 +98,7 @@ describe('CartProvider - server sync', () => {
     // Server has more (3) than local (2) -> server wins, PUT with max (3)
     expect(await screen.findByTestId('cart-length')).toHaveTextContent('1');
     expect(CartUpdateAPI.updateCartItemAPI).toHaveBeenCalledWith({
-      product_id: 'p1',
+      productID: 'p1',
       quantity: 3,
     });
   });
@@ -107,18 +107,18 @@ describe('CartProvider - server sync', () => {
     localStorage.setItem(
       'cart',
       JSON.stringify([
-        { id: 'ok-1', quantity: 1 },
-        { id: 'bad-2', quantity: 1 },
+        { productID: 'ok-1', quantity: 1 },
+        { productID: 'bad-2', quantity: 1 },
       ])
     );
     vi.spyOn(CartAPI, 'saveCartItemAPI').mockImplementation(
-      async ({ product_id }: { product_id: string; quantity: number }) => {
-        if (product_id === 'bad-2') {
+      async ({ productID }: { productID: string; quantity: number }) => {
+        if (productID === 'bad-2') {
           throw Object.assign(new Error('Not found'), {
             response: { status: 404 },
           });
         }
-        return { id: product_id, quantity: 1 };
+        return { productID: productID, quantity: 1 };
       }
     );
 
@@ -127,14 +127,14 @@ describe('CartProvider - server sync', () => {
     // bad-2 is not found -> dropped; ok-1 remains
     expect(await screen.findByTestId('cart-length')).toHaveTextContent('1');
     expect(CartAPI.saveCartItemAPI).toHaveBeenCalledWith({
-      product_id: 'bad-2',
+      productID: 'bad-2',
       quantity: 1,
     });
   });
 
   it('merges the server cart into local on login', async () => {
     vi.spyOn(CartGetAPI, 'getCartAPI').mockResolvedValue([
-      { id: 'server-1', quantity: 2 },
+      { productID: 'server-1', quantity: 2 },
     ]);
 
     renderWithProviders(<TestComponent />);
@@ -148,7 +148,7 @@ describe('CartProvider - server sync', () => {
     await userEvent.click(screen.getByText('Add'));
 
     expect(CartAPI.saveCartItemAPI).toHaveBeenCalledWith({
-      product_id: 'p1',
+      productID: 'p1',
       quantity: 1,
     });
   });
@@ -159,7 +159,7 @@ describe('CartProvider - server sync', () => {
     await userEvent.click(screen.getByText('Update'));
 
     expect(CartUpdateAPI.updateCartItemAPI).toHaveBeenCalledWith({
-      product_id: 'p1',
+      productID: 'p1',
       quantity: 3,
     });
   });

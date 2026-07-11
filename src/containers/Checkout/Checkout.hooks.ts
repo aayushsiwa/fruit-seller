@@ -49,7 +49,7 @@ export const useCheckout = (): UseCheckoutReturn => {
     street2: '',
     city: '',
     state: '',
-    postal_code: '',
+    postalCode: '',
     country: 'India',
     phone: '',
   });
@@ -77,12 +77,12 @@ export const useCheckout = (): UseCheckoutReturn => {
       !initialDefaultSet &&
       selectedAddressId === 'new'
     ) {
-      setSelectedAddressId(savedAddresses[0].id || 'new');
+      setSelectedAddressId(savedAddresses[0].ID || 'new');
       setInitialDefaultSet(true);
     }
   }, [savedAddresses, selectedAddressId, initialDefaultSet]);
 
-  const pin = newAddress.postal_code.trim();
+  const pin = newAddress.postalCode.trim();
   const isPinValid = pin.length === 6 && /^\d+$/.test(pin);
 
   const { data: pincodeResponse } = useGetPincode(pin, isPinValid);
@@ -133,9 +133,9 @@ export const useCheckout = (): UseCheckoutReturn => {
 
   const productQueries = useQueries({
     queries: cart.map((item) => ({
-      queryKey: ['product', item.id],
+      queryKey: ['product', item.productID],
       queryFn: async () => {
-        const response = await getProductAPI(item.id);
+        const response = await getProductAPI(item.productID);
         return response.data.product;
       },
       enabled: !cartLoading,
@@ -166,15 +166,15 @@ export const useCheckout = (): UseCheckoutReturn => {
 
     let shippingAddress: Address;
     if (selectedAddressId === 'new') {
-      const { street, city, state, postal_code, country, phone } = newAddress;
-      if (!street || !city || !state || !postal_code || !country || !phone) {
+      const { street, city, state, postalCode, country, phone } = newAddress;
+      if (!street || !city || !state || !postalCode || !country || !phone) {
         showSnackbar('Please fill in all shipping address fields.', 'error');
         return;
       }
       shippingAddress = newAddress;
     } else {
       const selected = savedAddresses.find(
-        (addr) => addr.id === selectedAddressId
+        (addr) => addr.ID === selectedAddressId
       );
       if (!selected) {
         showSnackbar('Selected address not found.', 'error');
@@ -187,7 +187,7 @@ export const useCheckout = (): UseCheckoutReturn => {
       const item = cart[i];
       const product = products[i];
       if (!product) {
-        showSnackbar(`Product ${item.id} not found or invalid.`, 'error');
+        showSnackbar(`Product ${item.productID} not found or invalid.`, 'error');
         return;
       }
       if (product.stock < item.quantity) {
@@ -206,7 +206,7 @@ export const useCheckout = (): UseCheckoutReturn => {
         try {
           const addrRes = await saveAddressMutation.mutateAsync(newAddress);
           finalAddress = addrRes.data;
-          setSelectedAddressId(finalAddress.id || 'new');
+          setSelectedAddressId(finalAddress.ID || 'new');
         } catch (addrErr) {
           console.error('Failed to save address to profile', addrErr);
         }
@@ -216,7 +216,7 @@ export const useCheckout = (): UseCheckoutReturn => {
         cart,
         total,
       });
-      const { razorpay_order_id, amount, key_id } = initResponse.data;
+      const { razorpayOrderID, amount, key_id } = initResponse.data;
 
       const options = {
         key: key_id,
@@ -224,7 +224,7 @@ export const useCheckout = (): UseCheckoutReturn => {
         currency: 'INR',
         name: 'Fruit Seller',
         description: 'Fresh Fruits Delivered',
-        order_id: razorpay_order_id,
+        order_id: razorpayOrderID,
         prefill: {
           email: session.user?.email || '',
         },
@@ -238,14 +238,16 @@ export const useCheckout = (): UseCheckoutReturn => {
             const orderResponse = await createOrderMutation.mutateAsync({
               cart,
               total,
-              ...response,
-              shipping_address: finalAddress,
+              razorpayPaymentID: response.razorpay_payment_id,
+              razorpayOrderID: response.razorpay_order_id,
+              razorpaySignature: response.razorpay_signature,
+              shippingAddress: finalAddress,
             });
 
             const order = orderResponse.data.order;
             clearCart();
             showSnackbar('Order placed successfully!', 'success');
-            router.push(`/success?orderId=${order.id}`);
+            router.push(`/success?orderId=${order.ID}`);
           } catch (err) {
             const msg = axios.isAxiosError(err)
               ? err.response?.data?.details ||

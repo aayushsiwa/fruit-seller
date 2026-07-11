@@ -140,7 +140,7 @@ export default function Profile() {
                 <Chip
                   label={user.role}
                   size="small"
-                  color={user.role === 'admin' ? 'error' : 'primary'}
+                  color={user.role === 'ADMIN' ? 'error' : 'primary'}
                   variant="outlined"
                 />
                 <Typography variant="caption" color="text.secondary">
@@ -261,7 +261,7 @@ export default function Profile() {
             ) : (
               <Grid container spacing={2}>
                 {savedAddresses.map((addr) => (
-                  <Grid item xs={12} sm={6} key={addr.id}>
+                  <Grid item xs={12} sm={6} key={addr.ID}>
                     <Paper variant="outlined" sx={{ p: 2, borderRadius: 2 }}>
                       <Typography variant="body2" fontWeight={600}>
                         {addr.street}
@@ -272,7 +272,7 @@ export default function Profile() {
                         </Typography>
                       )}
                       <Typography variant="body2" color="text.secondary">
-                        {addr.city}, {addr.state} - {addr.postal_code}
+                        {addr.city}, {addr.state} - {addr.postalCode}
                       </Typography>
                       <Typography variant="body2" color="text.secondary">
                         {addr.country}

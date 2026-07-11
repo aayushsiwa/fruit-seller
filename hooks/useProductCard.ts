@@ -16,12 +16,12 @@ const useProductCard = (product: IProduct): UseProductCardReturn => {
 
   const { data: favoritesRes } = useGetFavorites({ enabled: isLoggedIn });
   const favorites = favoritesRes?.data || [];
-  const isFavorite = favorites.some((fav) => fav.id === product.id);
+  const isFavorite = favorites.some((fav) => fav.ID === product.ID);
 
   const addFavoriteMutation = useAddFavorite();
   const removeFavoriteMutation = useRemoveFavorite();
 
-  const cartItem = cart.find((item) => item.id === product.id);
+  const cartItem = cart.find((item) => item.productID === product.ID);
   const cartQuantity = cartItem ? cartItem.quantity : 0;
 
   const discountedPrice = product.discount
@@ -38,14 +38,14 @@ const useProductCard = (product: IProduct): UseProductCardReturn => {
   const handleQuantityChange = (e: MouseEvent, newQuantity: number) => {
     e.stopPropagation();
     if (newQuantity <= 0) {
-      removeFromCart(product.id);
+      removeFromCart(product.ID);
     } else if (newQuantity <= product.stock) {
-      updateQuantity(product.id, newQuantity, product.stock);
+      updateQuantity(product.ID, newQuantity, product.stock);
     }
   };
 
   const handleViewDetails = () => {
-    router.push(`/products/${product.id}`);
+    router.push(`/products/${product.ID}`);
   };
 
   const handleInputChange = (
@@ -55,9 +55,9 @@ const useProductCard = (product: IProduct): UseProductCardReturn => {
     const value = Number.parseInt(e.target.value);
     if (!isNaN(value) && value >= 0 && value <= product.stock) {
       if (value === 0) {
-        removeFromCart(product.id);
+        removeFromCart(product.ID);
       } else {
-        updateQuantity(product.id, value, product.stock);
+        updateQuantity(product.ID, value, product.stock);
       }
     }
   };
@@ -70,9 +70,9 @@ const useProductCard = (product: IProduct): UseProductCardReturn => {
     }
 
     if (isFavorite) {
-      await removeFavoriteMutation.mutateAsync(product.id);
+      await removeFavoriteMutation.mutateAsync(product.ID);
     } else {
-      await addFavoriteMutation.mutateAsync(product.id);
+      await addFavoriteMutation.mutateAsync(product.ID);
     }
   };
 

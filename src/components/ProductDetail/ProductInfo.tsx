@@ -58,7 +58,7 @@ export const ProductInfo: React.FC<ProductInfoProps> = ({
             transition={{ duration: 0.5 }}
           >
             <Image
-              src={product.image || defaultImage}
+              src={product.images?.[0] || defaultImage}
               alt={product.name}
               width={400}
               height={400}

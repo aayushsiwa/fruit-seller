@@ -169,8 +169,8 @@ exports[`ProductDetail - UI > when rendered in mobile view > should match snapsh
             decoding="async"
             height="400"
             loading="lazy"
-            src="/_next/image?url=%2Fapple.jpg&w=828&q=75"
-            srcset="/_next/image?url=%2Fapple.jpg&w=640&q=75 1x, /_next/image?url=%2Fapple.jpg&w=828&q=75 2x"
+            src="/_next/image?url=https%3A%2F%2Fimages.pexels.com%2Fphotos%2F5946103%2Fpexels-photo-5946103.jpeg%3Fauto%3Dcompress%26cs%3Dtinysrgb%26w%3D80&w=828&q=75"
+            srcset="/_next/image?url=https%3A%2F%2Fimages.pexels.com%2Fphotos%2F5946103%2Fpexels-photo-5946103.jpeg%3Fauto%3Dcompress%26cs%3Dtinysrgb%26w%3D80&w=640&q=75 1x, /_next/image?url=https%3A%2F%2Fimages.pexels.com%2Fphotos%2F5946103%2Fpexels-photo-5946103.jpeg%3Fauto%3Dcompress%26cs%3Dtinysrgb%26w%3D80&w=828&q=75 2x"
             style="color: transparent; object-fit: cover;"
             width="400"
           />
@@ -442,7 +442,7 @@ exports[`ProductDetail - UI > when rendered in mobile view > should match snapsh
               class="MuiCardMedia-root MuiCardMedia-media MuiCardMedia-img css-6mo23z-MuiCardMedia-root"
               height="160"
               loading="lazy"
-              src="/banana.jpg"
+              src="https://images.pexels.com/photos/5946103/pexels-photo-5946103.jpeg?auto=compress&cs=tinysrgb&w=80"
             />
             <div
               class="MuiCardContent-root css-2r3irp-MuiCardContent-root"
@@ -692,8 +692,8 @@ exports[`ProductDetail - UI > when rendered in web view > should match snapshot 
             decoding="async"
             height="400"
             loading="lazy"
-            src="/_next/image?url=%2Fapple.jpg&w=828&q=75"
-            srcset="/_next/image?url=%2Fapple.jpg&w=640&q=75 1x, /_next/image?url=%2Fapple.jpg&w=828&q=75 2x"
+            src="/_next/image?url=https%3A%2F%2Fimages.pexels.com%2Fphotos%2F5946103%2Fpexels-photo-5946103.jpeg%3Fauto%3Dcompress%26cs%3Dtinysrgb%26w%3D80&w=828&q=75"
+            srcset="/_next/image?url=https%3A%2F%2Fimages.pexels.com%2Fphotos%2F5946103%2Fpexels-photo-5946103.jpeg%3Fauto%3Dcompress%26cs%3Dtinysrgb%26w%3D80&w=640&q=75 1x, /_next/image?url=https%3A%2F%2Fimages.pexels.com%2Fphotos%2F5946103%2Fpexels-photo-5946103.jpeg%3Fauto%3Dcompress%26cs%3Dtinysrgb%26w%3D80&w=828&q=75 2x"
             style="color: transparent; object-fit: cover;"
             width="400"
           />
@@ -965,7 +965,7 @@ exports[`ProductDetail - UI > when rendered in web view > should match snapshot 
               class="MuiCardMedia-root MuiCardMedia-media MuiCardMedia-img css-6mo23z-MuiCardMedia-root"
               height="160"
               loading="lazy"
-              src="/banana.jpg"
+              src="https://images.pexels.com/photos/5946103/pexels-photo-5946103.jpeg?auto=compress&cs=tinysrgb&w=80"
             />
             <div
               class="MuiCardContent-root css-2r3irp-MuiCardContent-root"

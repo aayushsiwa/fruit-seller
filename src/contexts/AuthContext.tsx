@@ -30,7 +30,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
   const { data: session, status } = useSession();
   const [error, setError] = useState<string | null>(null);
 
-  const isAdmin = () => session?.user?.role === 'admin';
+  const isAdmin = () => session?.user?.role === 'ADMIN';
 
   const registerUser = async (userData: RegisterData) => {
     try {

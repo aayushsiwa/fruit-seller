@@ -13,11 +13,11 @@ import { IProduct } from '@/types/index';
 import useProductCard from './useProductCard';
 
 const mockProduct: IProduct = {
-  id: 'p1',
+  ID: 'p1',
   name: 'Apple',
   price: 100,
   stock: 10,
-  image: '/apple.jpg',
+  images: ['/apple.jpg'],
   description: 'Fresh apple',
   category: 'Fruit',
   discount: 20,
@@ -27,12 +27,12 @@ const mockProduct: IProduct = {
 
 const mockProductNoDiscount: IProduct = {
   ...mockProduct,
-  id: 'p2',
+  ID: 'p2',
   discount: 0,
 };
 const mockProductOutOfStock: IProduct = {
   ...mockProduct,
-  id: 'p3',
+  ID: 'p3',
   stock: 0,
 };
 
@@ -84,7 +84,7 @@ describe('useProductCard', () => {
   it('reads cartQuantity from cart context', () => {
     (mockUseCart as any).mockReturnValue({
       ...cartMock,
-      cart: [{ id: 'p1', quantity: 3 }] as any,
+      cart: [{ productID: 'p1', quantity: 3 }] as any,
     });
     const { result } = renderHook(() => useProductCard(mockProduct));
     expect(result.current.cartQuantity).toBe(3);

@@ -63,43 +63,43 @@ export function CartProvider({ children }: LayoutProps) {
     getCartAPI()
       .then((serverItems) => {
         const serverItemMap = new Map(
-          serverItems.map((item) => [item.id, item])
+          serverItems.map((item) => [item.productID, item])
         );
 
         cart.forEach((item) => {
-          const serverItem = serverItemMap.get(item.id);
+          const serverItem = serverItemMap.get(item.productID);
           const quantity = serverItem
             ? Math.max(item.quantity, serverItem.quantity)
             : item.quantity;
           const push = serverItem
-            ? updateCartItemAPI({ product_id: item.id, quantity })
-            : saveCartItemAPI({ product_id: item.id, quantity });
+            ? updateCartItemAPI({ productID: item.productID, quantity })
+            : saveCartItemAPI({ productID: item.productID, quantity });
           push.catch((err) => {
             // Only drop the item if it isn't on the server (e.g. no longer
             // exists). Items already on the server keep their server copy.
             if (!serverItem) {
-              console.error(`Skipping cart item ${item.id}, not found:`, err);
-              setCart((prev) => prev.filter((c) => c.id !== item.id));
+              console.error(`Skipping cart item ${item.productID}, not found:`, err);
+              setCart((prev) => prev.filter((c) => c.productID !== item.productID));
             } else {
-              console.error(`Could not sync cart item ${item.id}:`, err);
+              console.error(`Could not sync cart item ${item.productID}:`, err);
             }
           });
         });
 
         setCart((prev) => {
           const merged = new Map<string, CartItem>();
-          prev.forEach((item) => merged.set(item.id, { ...item }));
+          prev.forEach((item) => merged.set(item.productID, { ...item }));
           serverItems.forEach((serverItem) => {
-            const localItem = merged.get(serverItem.id);
+            const localItem = merged.get(serverItem.productID);
             if (localItem) {
               if (serverItem.quantity > localItem.quantity) {
-                merged.set(serverItem.id, {
-                  id: serverItem.id,
+                merged.set(serverItem.productID, {
+                  productID: serverItem.productID,
                   quantity: serverItem.quantity,
                 });
               }
             } else {
-              merged.set(serverItem.id, serverItem);
+              merged.set(serverItem.productID, serverItem);
             }
           });
           return Array.from(merged.values());
@@ -115,7 +115,7 @@ export function CartProvider({ children }: LayoutProps) {
       return;
     }
 
-    const existingItem = cart.find((item) => item.id === product.id);
+    const existingItem = cart.find((item) => item.productID === product.ID);
 
     if (existingItem) {
       const newQuantity = existingItem.quantity + quantity;
@@ -126,14 +126,14 @@ export function CartProvider({ children }: LayoutProps) {
       showSnackbar(`${product.name} updated in cart.`, 'success');
       setCart((prevCart) =>
         prevCart.map((item) =>
-          item.id === product.id ? { ...item, quantity: newQuantity } : item
+          item.productID === product.ID ? { ...item, quantity: newQuantity } : item
         )
       );
-      syncCart(() => saveCartItemAPI({ product_id: product.id, quantity }));
+      syncCart(() => saveCartItemAPI({ productID: product.ID, quantity }));
     } else {
       showSnackbar(`${product.name} added to cart.`, 'success');
-      setCart((prevCart) => [...prevCart, { id: product.id, quantity }]);
-      syncCart(() => saveCartItemAPI({ product_id: product.id, quantity }));
+      setCart((prevCart) => [...prevCart, { productID: product.ID, quantity }]);
+      syncCart(() => saveCartItemAPI({ productID: product.ID, quantity }));
     }
   };
 
@@ -153,14 +153,14 @@ export function CartProvider({ children }: LayoutProps) {
     }
 
     setCart((prevCart) =>
-      prevCart.map((item) => (item.id === id ? { ...item, quantity } : item))
+      prevCart.map((item) => (item.productID === id ? { ...item, quantity } : item))
     );
     showSnackbar('Cart updated.', 'success');
-    syncCart(() => updateCartItemAPI({ product_id: id, quantity }));
+    syncCart(() => updateCartItemAPI({ productID: id, quantity }));
   };
 
   const removeFromCart = (id: string) => {
-    setCart((prevCart) => prevCart.filter((item) => item.id !== id));
+    setCart((prevCart) => prevCart.filter((item) => item.productID !== id));
     showSnackbar('Item removed from cart.', 'success');
     syncCart(() => removeCartItemAPI(id));
   };
@@ -218,6 +218,6 @@ export interface CartContextType {
 }
 
 export interface LocalCartItem {
-  id: string;
+  productID: string;
   quantity: number;
 }

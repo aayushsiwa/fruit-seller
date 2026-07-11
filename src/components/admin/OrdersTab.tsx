@@ -55,8 +55,8 @@ const OrdersTab: React.FC<OrdersTabProps> = ({
             </TableRow>
           ) : (orders?.length ?? 0) > 0 ? (
             (orders ?? []).map((order: Order) => (
-              <TableRow key={order.id}>
-                <TableCell>{order.id}</TableCell>
+              <TableRow key={order.ID}>
+                <TableCell>{order.ID}</TableCell>
                 <TableCell>{order.userName}</TableCell>
                 <TableCell align="center">{order.items.length}</TableCell>
                 <TableCell align="right">₹{order.total.toFixed(2)}</TableCell>
@@ -64,13 +64,13 @@ const OrdersTab: React.FC<OrdersTabProps> = ({
                   <Chip
                     label={order.status}
                     color={
-                      order.status === 'Delivered'
+                      order.status === 'DELIVERED'
                         ? 'success'
-                        : order.status === 'Shipped'
+                        : order.status === 'SHIPPED'
                           ? 'info'
-                          : order.status === 'Processing'
+                          : order.status === 'PROCESSING'
                             ? 'warning'
-                            : order.status === 'Cancelled'
+                            : order.status === 'CANCELLED'
                               ? 'error'
                               : 'default'
                     }

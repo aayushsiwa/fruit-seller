@@ -76,7 +76,7 @@ describe('AuthProvider', () => {
   it('provides user data and admin check when authenticated', async () => {
     vi.spyOn(nextAuth, 'useSession').mockReturnValue({
       data: {
-        user: { email: 'admin@example.com', role: 'admin' },
+          user: { email: 'admin@example.com', role: 'ADMIN' },
         expires: new Date(Date.now() + 1000 * 60 * 60).toString(),
       },
       status: 'authenticated',
@@ -86,7 +86,7 @@ describe('AuthProvider', () => {
     render(
       <Wrapper
         session={{
-          user: { email: 'admin@example.com', role: 'admin' },
+        user: { email: 'admin@example.com', role: 'ADMIN' },
         }}
         status="authenticated"
       >

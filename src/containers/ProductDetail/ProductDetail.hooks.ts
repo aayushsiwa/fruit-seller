@@ -26,7 +26,7 @@ export const useProductDetail = (): UseProductDetailReturn => {
 
   const { data: favoritesRes } = useGetFavorites({ enabled: isLoggedIn });
   const favorites = favoritesRes?.data || [];
-  const isFavorite = favorites.some((fav) => fav.id === (id as string));
+  const isFavorite = favorites.some((fav) => fav.ID === (id as string));
 
   const addFavoriteMutation = useAddFavorite();
   const removeFavoriteMutation = useRemoveFavorite();
@@ -59,9 +59,9 @@ export const useProductDetail = (): UseProductDetailReturn => {
     if (!product) return;
 
     if (newQuantity <= 0) {
-      removeFromCart(product.id);
+      removeFromCart(product.ID);
     } else {
-      updateQuantity(product.id, newQuantity, product.stock);
+      updateQuantity(product.ID, newQuantity, product.stock);
     }
   };
 

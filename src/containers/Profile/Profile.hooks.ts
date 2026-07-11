@@ -77,7 +77,7 @@ export const useProfilePage = (): UseProfilePageReturn => {
     street2: '',
     city: '',
     state: '',
-    postal_code: '',
+    postalCode: '',
     country: 'India',
     phone: '',
   });
@@ -86,7 +86,7 @@ export const useProfilePage = (): UseProfilePageReturn => {
     null
   );
 
-  const pin = newAddress.postal_code.trim();
+  const pin = newAddress.postalCode.trim();
   const isPinValid = pin.length === 6 && /^\d+$/.test(pin);
 
   const { data: pincodeResponse } = useGetPincode(
@@ -135,8 +135,8 @@ export const useProfilePage = (): UseProfilePageReturn => {
   const saveAddressMutation = useSaveAddress();
 
   const handleSaveAddress = async () => {
-    const { street, city, state, postal_code, country, phone } = newAddress;
-    if (!street || !city || !state || !postal_code || !country || !phone) {
+      const { street, city, state, postalCode, country, phone } = newAddress;
+      if (!street || !city || !state || !postalCode || !country || !phone) {
       showSnackbar('Please fill in all required fields', 'error');
       return;
     }
@@ -150,7 +150,7 @@ export const useProfilePage = (): UseProfilePageReturn => {
         street2: '',
         city: '',
         state: '',
-        postal_code: '',
+        postalCode: '',
         country: 'India',
         phone: '',
       });

@@ -23,10 +23,11 @@ const statusConfig: Record<
   OrderStatus,
   { color: 'warning' | 'info' | 'success' | 'error'; border: string }
 > = {
-  Processing: { color: 'warning', border: '#ed6c02' },
-  Shipped: { color: 'info', border: '#0288d1' },
-  Delivered: { color: 'success', border: '#2e7d32' },
-  Cancelled: { color: 'error', border: '#d32f2f' },
+  PROCESSING: { color: 'warning', border: '#ed6c02' },
+  PAID: { color: 'info', border: '#0288d1' },
+  SHIPPED: { color: 'info', border: '#0288d1' },
+  DELIVERED: { color: 'success', border: '#2e7d32' },
+  CANCELLED: { color: 'error', border: '#d32f2f' },
 };
 
 export default function Orders() {
@@ -95,14 +96,14 @@ export default function Orders() {
         const cfg = statusConfig[order.status] || statusConfig.Processing;
         return (
           <motion.div
-            key={order.id}
+            key={order.ID}
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.3, delay: i * 0.05 }}
           >
             <Paper
               elevation={1}
-              onClick={() => handleViewOrder(order.id)}
+              onClick={() => handleViewOrder(order.ID)}
               sx={{
                 p: 2.5,
                 mb: 2,
@@ -142,7 +143,7 @@ export default function Orders() {
                       letterSpacing: '0.02em',
                     }}
                   >
-                    Order #{order.id.slice(0, 8)}
+                    Order #{order.ID.slice(0, 8)}
                   </Typography>
                   <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
                     <Chip
@@ -168,8 +169,8 @@ export default function Orders() {
                 >
                   <Typography variant="body2" color="text.secondary">
                     {dayjs(order.createdAt).fromNow()}
-                    {order.delivered_at
-                      ? ` • Delivered ${dayjs(order.delivered_at).fromNow()}`
+                    {order.deliveredAt
+                      ? ` • Delivered ${dayjs(order.deliveredAt).fromNow()}`
                       : ` • ${order.items.length} item${order.items.length !== 1 ? 's' : ''}`}
                   </Typography>
                   <Typography variant="subtitle1" fontWeight={700}>

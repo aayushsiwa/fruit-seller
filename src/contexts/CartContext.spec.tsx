@@ -26,7 +26,7 @@ function TestComponent() {
   return (
     <div>
       <button onClick={() => addToCart(mockProducts[0])}>Add</button>
-      <button onClick={() => removeFromCart(mockProducts[0].id)}>Remove</button>
+      <button onClick={() => removeFromCart(mockProducts[0].ID)}>Remove</button>
       <button onClick={clearCart}>Clear</button>
       <div data-testid="cart-length">{cart.length}</div>
     </div>
@@ -37,7 +37,7 @@ describe('CartProvider', () => {
   beforeEach(() => {
     vi.spyOn(GetProductAPI, 'getProductAPI').mockImplementation(
       (id: string) => {
-        const product = mockProducts.find((p) => p.id === id);
+        const product = mockProducts.find((p) => p.ID === id);
         if (product) {
           return Promise.resolve({
             status: 200,
