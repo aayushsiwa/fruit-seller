@@ -35,9 +35,9 @@ export interface AdminActionsProps {
     {
       id: string;
       status: OrderStatus;
-      shipped_at?: string;
-      delivered_at?: string;
-      cancelled_at?: string;
+      shippedAt?: string;
+      deliveredAt?: string;
+      cancelledAt?: string;
     },
     unknown
   >;
@@ -78,9 +78,9 @@ export type UseAdminMutationsReturn = {
     {
       id: string;
       status: OrderStatus;
-      shipped_at?: string;
-      delivered_at?: string;
-      cancelled_at?: string;
+      shippedAt?: string;
+      deliveredAt?: string;
+      cancelledAt?: string;
     },
     unknown
   >;
