@@ -9,7 +9,7 @@ export default async function handler(
   res: NextApiResponse
 ) {
   const session = await getServerSession(req, res, authOptions);
-
+  console.log(session);
   const userId = session?.user?.id;
 
   if (!userId) {

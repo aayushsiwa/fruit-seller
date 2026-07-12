@@ -17,7 +17,7 @@ const mockProduct: IProduct = {
   name: 'Apple',
   price: 100,
   stock: 10,
-  images: ['/apple.jpg'],
+  images: [{ url: '/apple.jpg', altText: 'Apple' }],
   description: 'Fresh apple',
   category: 'Fruit',
   discount: 20,

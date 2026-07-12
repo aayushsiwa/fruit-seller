@@ -1,4 +1,5 @@
 import { AuthProvider, useAuth } from '@/src/contexts/AuthContext';
+import type { UserRole } from '@/types';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
@@ -26,7 +27,7 @@ const queryClient = new QueryClient({
 
 const Wrapper: React.FC<{
   children: React.ReactNode;
-  session?: { user: { email: string; role: string } } | null;
+  session?: { user: { email: string; role: UserRole } } | null;
   status?: 'authenticated' | 'loading' | 'unauthenticated';
 }> = ({ children, session = null }) => {
   const sessionWithExpires = session

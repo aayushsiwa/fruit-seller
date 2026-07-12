@@ -1,10 +1,12 @@
+import { ProductImage } from '@/types/index';
+
 export interface IProduct {
   ID: string;
   name: string;
   slug?: string;
   price: number;
   stock: number;
-  images: string[];
+  images: ProductImage[];
   description: string;
   category: string;
   discount: number;
@@ -18,7 +20,7 @@ export class Product implements IProduct {
   slug?: string;
   price: number;
   stock: number;
-  images: string[];
+  images: ProductImage[];
   description: string;
   category: string;
   discount: number;
@@ -38,7 +40,7 @@ export class Product implements IProduct {
       'stock' in data && data.stock != null
         ? data.stock
         : 0;
-    this.images = Array.isArray(data.images) ? data.images : data.images ? [data.images] : [];
+    this.images = Array.isArray(data.images) ? data.images : [];
     this.description = data.description;
     this.category = data.category;
     this.discount = data.discount;

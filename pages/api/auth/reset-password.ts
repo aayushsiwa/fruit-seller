@@ -1,4 +1,4 @@
-import { hashPassword, verifyResetToken } from '@/lib/auth';
+import { hashPassword, verifyResetToken } from '@/lib/api/auth/auth';
 import { supabase } from '@/lib/supabase';
 import { NextApiRequest, NextApiResponse } from 'next';
 

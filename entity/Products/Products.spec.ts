@@ -8,7 +8,7 @@ const mockProductData: IProduct = {
   slug: 'mango',
   price: 120,
   stock: 50,
-  images: ['https://example.com/mango.jpg'],
+  images: [{ url: 'https://example.com/mango.jpg', altText: 'Fresh Alphonso mangoes' }],
   description: 'Fresh Alphonso mangoes',
   category: 'Tropical',
   discount: 10,
@@ -29,7 +29,7 @@ describe('Product entity', () => {
     expect(product.name).toBe('Mango');
     expect(product.price).toBe(120);
     expect(product.stock).toBe(50);
-    expect(product.images).toEqual(['https://example.com/mango.jpg']);
+    expect(product.images).toEqual([{ url: 'https://example.com/mango.jpg', altText: 'Fresh Alphonso mangoes' }]);
     expect(product.description).toBe('Fresh Alphonso mangoes');
     expect(product.category).toBe('Tropical');
     expect(product.discount).toBe(10);

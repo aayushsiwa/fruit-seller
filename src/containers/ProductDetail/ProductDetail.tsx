@@ -79,7 +79,7 @@ export default function ProductDetail() {
           content={`https://fruitseller.com/products/${product.ID}`}
         />
         <meta property="og:type" content="product" />
-        {product.images?.[0] && <meta property="og:image" content={product.images[0]} />}
+        {product.images?.[0] && <meta property="og:image" content={product.images[0].url} />}
       </Head>
       <Container maxWidth="lg">
         <BreadcrumbsNav productName={product.name} />

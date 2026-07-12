@@ -68,7 +68,7 @@ export const CartItems: React.FC<CartItemsProps> = ({
             >
               <Box sx={{ display: 'flex', mb: 2 }}>
                 <Image
-                  src={product.images?.[0] || defaultImage}
+                  src={product.images?.[0]?.url || defaultImage}
                   alt={product.name}
                   width={80}
                   height={80}

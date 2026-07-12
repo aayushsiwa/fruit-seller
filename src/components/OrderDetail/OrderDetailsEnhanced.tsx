@@ -290,7 +290,7 @@ export const OrderDetailsEnhanced: React.FC<OrderDetailsProps> = ({
                   }}
                 >
                   <Image
-                    src={product.images?.[0] || defaultImage}
+                    src={product.images?.[0]?.url || defaultImage}
                     alt={product.name}
                     width={60}
                     height={60}

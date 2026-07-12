@@ -1,7 +1,7 @@
 import { validateProductData, validateUserData } from '@/lib/validation/admin';
 import { useSnackbar } from '@/src/contexts/SnackBarContext';
 import { AdminActionsProps, UseAdminActionsReturn } from '@/types/admin';
-import { IProduct, OrderStatus, User } from '@/types/index';
+import { IProduct, OrderStatus, ProductImage, User, UserRole } from '@/types/index';
 import { UseMutationResult } from '@tanstack/react-query';
 import { useCallback, useMemo } from 'react';
 
@@ -72,6 +72,7 @@ const useAdminActions = ({
     async (event: React.FormEvent<HTMLFormElement>) => {
       event.preventDefault();
       const formData = new FormData(event.currentTarget);
+      const imagesRaw = formData.get('images') as string;
       const productData: Partial<IProduct> = {
         name: formData.get('name') as string,
         price: parseFloat(formData.get('price') as string),
@@ -80,7 +81,7 @@ const useAdminActions = ({
         isSeasonal: formData.get('isSeasonal') === 'true',
         category: formData.get('category') as string,
         stock: parseInt(formData.get('stock') as string, 10) || 0,
-        images: formData.get('images') as string || undefined,
+        images: imagesRaw ? (JSON.parse(imagesRaw) as ProductImage[]) : [],
       };
 
       const { isValid, error } = validateProductData(productData);
@@ -120,7 +121,7 @@ const useAdminActions = ({
         firstName: formData.get('firstName') as string,
         lastName: formData.get('lastName') as string,
         email: formData.get('email') as string,
-        role: formData.get('role') as string,
+        role: formData.get('role') as UserRole,
       };
 
       const { isValid, error } = validateUserData(userData);

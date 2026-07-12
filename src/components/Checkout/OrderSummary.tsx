@@ -67,7 +67,7 @@ export const OrderSummary: React.FC<OrderSummaryProps> = ({
             >
               <Box sx={{ display: 'flex', alignItems: 'center' }}>
                 <Image
-                  src={product.images?.[0] || defaultImage}
+                  src={product.images?.[0]?.url || defaultImage}
                   alt={product.name}
                   width={60}
                   height={60}

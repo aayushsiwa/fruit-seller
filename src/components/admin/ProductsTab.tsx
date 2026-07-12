@@ -99,7 +99,7 @@ const ProductsTab: React.FC<ProductsTabProps> = ({
                   <TableCell>
                     <Box
                       component="img"
-                      src={product.images?.[0]}
+                      src={product.images?.[0]?.url}
                       alt={product.name}
                       sx={{
                         width: 50,

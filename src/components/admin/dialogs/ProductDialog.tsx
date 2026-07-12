@@ -1,4 +1,6 @@
-import { IProduct } from '@/types/index';
+import { IProduct, ProductImage } from '@/types/index';
+import AddIcon from '@mui/icons-material/Add';
+import RemoveCircleIcon from '@mui/icons-material/RemoveCircle';
 import {
   Button,
   Dialog,
@@ -7,12 +9,15 @@ import {
   DialogTitle,
   FormControl,
   Grid,
+  IconButton,
   InputLabel,
   MenuItem,
   Select,
   TextField,
 } from '@mui/material';
-import React from 'react';
+import React, { useCallback, useState } from 'react';
+
+const MAX_IMAGES = 5;
 
 const ProductDialog: React.FC<ProductDialogProps> = ({
   open,
@@ -21,6 +26,31 @@ const ProductDialog: React.FC<ProductDialogProps> = ({
   onSave,
   isLoading,
 }) => {
+  const initialImages = product.images?.length
+    ? product.images.map((img) => ({ url: img.url, altText: img.altText }))
+    : [{ url: '', altText: '' }];
+
+  const [images, setImages] = useState<ProductImage[]>(initialImages);
+
+  const handleImageChange = useCallback(
+    (index: number, field: 'url' | 'altText', value: string) => {
+      setImages((prev) => {
+        const next = [...prev];
+        next[index] = { ...next[index], [field]: value };
+        return next;
+      });
+    },
+    []
+  );
+
+  const handleAddImage = useCallback(() => {
+    setImages((prev) => [...prev, { url: '', altText: '' }]);
+  }, []);
+
+  const handleRemoveImage = useCallback((index: number) => {
+    setImages((prev) => prev.filter((_, i) => i !== index));
+  }, []);
+
   return (
     <Dialog open={open} onClose={onClose} maxWidth="sm" fullWidth>
       <DialogTitle>
@@ -102,16 +132,6 @@ const ProductDialog: React.FC<ProductDialogProps> = ({
               />
             </Grid>
             <Grid item xs={12}>
-              <TextField
-                name="image"
-                label="Image URL"
-                defaultValue={product.image}
-                fullWidth
-                margin="normal"
-                required
-              />
-            </Grid>
-            <Grid item xs={12}>
               <FormControl fullWidth margin="normal">
                 <InputLabel>Seasonal</InputLabel>
                 <Select
@@ -124,6 +144,73 @@ const ProductDialog: React.FC<ProductDialogProps> = ({
                   <MenuItem value="false">No</MenuItem>
                 </Select>
               </FormControl>
+            </Grid>
+            <Grid item xs={12}>
+              <InputLabel sx={{ mb: 1, mt: 1 }}>Images</InputLabel>
+              {images.map((img, index) => (
+                <Grid container spacing={1} key={index} sx={{ mb: 1 }}>
+                  <Grid item xs={5}>
+                    <TextField
+                      name={`imageUrl-${index}`}
+                      label="Image URL"
+                      value={img.url}
+                      onChange={(e) =>
+                        handleImageChange(index, 'url', e.target.value)
+                      }
+                      fullWidth
+                      size="small"
+                    />
+                  </Grid>
+                  <Grid item xs={5}>
+                    <TextField
+                      name={`imageAlt-${index}`}
+                      label="Alt Text"
+                      value={img.altText}
+                      onChange={(e) =>
+                        handleImageChange(index, 'altText', e.target.value)
+                      }
+                      fullWidth
+                      size="small"
+                    />
+                  </Grid>
+                  <Grid
+                    item
+                    xs={2}
+                    sx={{
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                    }}
+                  >
+                    {images.length > 1 && (
+                      <IconButton
+                        onClick={() => handleRemoveImage(index)}
+                        size="small"
+                        color="error"
+                      >
+                        <RemoveCircleIcon />
+                      </IconButton>
+                    )}
+                  </Grid>
+                </Grid>
+              ))}
+              {images.length < MAX_IMAGES && (
+                <Button
+                  startIcon={<AddIcon />}
+                  onClick={handleAddImage}
+                  size="small"
+                  sx={{ mt: 1 }}
+                >
+                  Add Image
+                </Button>
+              )}
+              <input
+                type="hidden"
+                name="images"
+                value={JSON.stringify(
+                  images.filter((img) => img.url.trim() !== '')
+                )}
+              />
             </Grid>
           </Grid>
         </DialogContent>

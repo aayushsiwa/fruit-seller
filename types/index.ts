@@ -50,12 +50,16 @@ export interface Order {
   shippingAddress?: Address;
 }
 
+export type UserRole = 'USER' | 'ADMIN';
+
+export const USER_ROLES: UserRole[] = ['USER', 'ADMIN'];
+
 export interface User {
   ID: string;
   firstName: string;
   lastName: string;
   email: string;
-  role: string;
+  role: UserRole;
   createdAt: string;
 }
 
@@ -71,14 +75,14 @@ export interface SessionUser {
     name?: string | null;
     email?: string | null;
     image?: string | null;
-    role?: string;
+    role?: UserRole;
   };
 }
 
 declare module 'next-auth/jwt' {
   interface JWT {
     id?: string;
-    role?: string;
+    role?: UserRole;
   }
 }
 
@@ -86,7 +90,7 @@ declare module 'next-auth' {
   interface Session {
     user: DefaultSession['user'] & {
       id?: string;
-      role: string;
+      role: UserRole;
     };
   }
 }
@@ -96,6 +100,11 @@ export interface RegisterData {
   lastName: string;
   email: string;
   password: string;
+}
+
+export interface ProductImage {
+  url: string;
+  altText: string;
 }
 
 export type { IProduct };

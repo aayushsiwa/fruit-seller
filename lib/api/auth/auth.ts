@@ -1,3 +1,4 @@
+import { UserRole } from '@/types';
 import bcrypt from 'bcryptjs';
 import { decode, encode } from 'next-auth/jwt';
 
@@ -8,7 +9,7 @@ export const hashPassword = (password: string) => bcrypt.hash(password, 10);
 export const comparePassword = (password: string, hash: string) =>
   bcrypt.compare(password, hash);
 
-export const generateJWT = async (email: string, role: string) => {
+export const generateJWT = async (email: string, role: UserRole) => {
   const token = await encode({
     token: { email, role },
     secret: JWT_SECRET,

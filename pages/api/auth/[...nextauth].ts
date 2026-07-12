@@ -1,5 +1,6 @@
-import { comparePassword } from '@/lib/auth';
+import { comparePassword } from '@/lib/api/auth/auth';
 import { supabase } from '@/lib/supabase';
+import type { UserRole } from '@/types';
 import NextAuth from 'next-auth';
 import type { AuthOptions } from 'next-auth';
 import CredentialsProvider from 'next-auth/providers/credentials';
@@ -127,7 +128,7 @@ export const authOptions: AuthOptions = {
     async session({ session, token }) {
       if (token && session.user) {
         session.user.id = token.id as string;
-        session.user.role = token.role as string;
+        session.user.role = token.role as UserRole;
       }
       return session;
     },

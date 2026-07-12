@@ -7,7 +7,7 @@ import { authOptions } from '../api/auth/[...nextauth]';
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
   const session = await getServerSession(context.req, context.res, authOptions);
-  if (!session || (session.user as { role?: string })?.role !== 'admin') {
+  if (!session || session.user.role !== 'ADMIN') {
     return {
       redirect: { destination: '/login', permanent: false },
     };

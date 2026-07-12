@@ -1,5 +1,5 @@
-import { hashPassword } from '@/lib/auth';
-import { generateJWT } from '@/lib/auth';
+import { hashPassword } from '@/lib/api/auth/auth';
+import { generateJWT } from '@/lib/api/auth/auth';
 import { supabase } from '@/lib/supabase';
 import { NextApiRequest, NextApiResponse } from 'next';
 

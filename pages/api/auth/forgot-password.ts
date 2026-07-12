@@ -1,4 +1,4 @@
-import { generateResetToken } from '@/lib/auth';
+import { generateResetToken } from '@/lib/api/auth/auth';
 import { sendEmail } from '@/lib/email';
 import { supabase } from '@/lib/supabase';
 import fs from 'fs';

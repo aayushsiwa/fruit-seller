@@ -63,7 +63,7 @@ export const useNavbar = (): UseNavbarReturn => {
     [router]
   );
 
-  const isAdmin = user?.role === 'admin';
+  const isAdmin = user?.role === 'ADMIN';
 
   return {
     user,

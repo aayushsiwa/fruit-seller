@@ -1,4 +1,4 @@
-import { comparePassword, hashPassword } from '@/lib/auth';
+import { comparePassword, hashPassword } from '@/lib/api/auth/auth';
 import { supabase } from '@/lib/supabase';
 import type { NextApiRequest, NextApiResponse } from 'next';
 import { getServerSession } from 'next-auth/next';
