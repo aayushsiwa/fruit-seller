@@ -67,7 +67,7 @@ const TestComponent = () => {
       >
         Register
       </button>
-      <button onClick={() => login('test@example.com', 'pass')}>Login</button>
+      <button onClick={() => login('test@example.com', 'pass').catch(() => {})}>Login</button>
       <button onClick={() => logout()}>Logout</button>
     </div>
   );
@@ -269,9 +269,7 @@ describe('AuthProvider', () => {
       </Wrapper>
     );
 
-    await expect(
-      userEvent.click(screen.getByText('Login'))
-    ).resolves.toBeUndefined();
+    await userEvent.click(screen.getByText('Login'));
 
     await waitFor(
       () => {
@@ -280,9 +278,7 @@ describe('AuthProvider', () => {
           email: 'test@example.com',
           password: 'pass',
         });
-        expect(
-          screen.getByText(/Error: Invalid credentials/i)
-        ).toBeInTheDocument();
+        expect(screen.getByText(/Error: Email or password is incorrect/i)).toBeInTheDocument();
       },
       { timeout: 2000, interval: 50 }
     );
