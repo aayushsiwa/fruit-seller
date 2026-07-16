@@ -54,12 +54,12 @@ const useRegister = (): UseRegisterReturn => {
     validationSchema: registerSchema,
     onSubmit: async (values, { setSubmitting }) => {
       try {
-        await register({
-          firstName: values.firstName,
-          lastName: values.lastName,
-          email: values.email,
-          password: values.password,
-        });
+    await registerMutation.mutateAsync({
+      firstName: values.firstName,
+      lastName: values.lastName,
+      email: values.email,
+      password: values.password,
+    });
       } catch {
       } finally {
         setSubmitting(false);
