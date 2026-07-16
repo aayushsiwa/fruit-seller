@@ -162,6 +162,24 @@ export const ProfileMenu: React.FC<ProfileMenuProps> = ({
                 Admin Dashboard
               </MenuItem>
             )}
+            <MenuItem
+              onClick={handleThemeMenuOpen}
+              sx={{ py: 1.5, display: 'flex', justifyContent: 'space-between' }}
+            >
+              <Box sx={{ display: 'flex', alignItems: 'center' }}>
+                <ListItemIcon>
+                  {themeMode === 'light' && <FiSun size={18} />}
+                  {themeMode === 'dark' && <FiMoon size={18} />}
+                  {themeMode === 'system' && <FiMonitor size={18} />}
+                </ListItemIcon>
+                Theme
+              </Box>
+              {Boolean(themeMenuAnchorEl) ? (
+                <FiChevronDown size={14} color="action.active" />
+              ) : (
+                <FiChevronRight size={14} color="action.active" />
+              )}
+            </MenuItem>
             <Divider />
             <MenuItem onClick={handleLogout} sx={{ py: 1.5 }}>
               <ListItemIcon>
@@ -193,26 +211,30 @@ export const ProfileMenu: React.FC<ProfileMenuProps> = ({
           </>
         )}
 
-        <Divider />
+        {!user && (
+          <>
+            <Divider />
 
-        <MenuItem
-          onClick={handleThemeMenuOpen}
-          sx={{ py: 1.5, display: 'flex', justifyContent: 'space-between' }}
-        >
-          <Box sx={{ display: 'flex', alignItems: 'center' }}>
-            <ListItemIcon>
-              {themeMode === 'light' && <FiSun size={18} />}
-              {themeMode === 'dark' && <FiMoon size={18} />}
-              {themeMode === 'system' && <FiMonitor size={18} />}
-            </ListItemIcon>
-            Theme
-          </Box>
-          {Boolean(themeMenuAnchorEl) ? (
-            <FiChevronDown size={14} color="action.active" />
-          ) : (
-            <FiChevronRight size={14} color="action.active" />
-          )}
-        </MenuItem>
+            <MenuItem
+              onClick={handleThemeMenuOpen}
+              sx={{ py: 1.5, display: 'flex', justifyContent: 'space-between' }}
+            >
+              <Box sx={{ display: 'flex', alignItems: 'center' }}>
+                <ListItemIcon>
+                  {themeMode === 'light' && <FiSun size={18} />}
+                  {themeMode === 'dark' && <FiMoon size={18} />}
+                  {themeMode === 'system' && <FiMonitor size={18} />}
+                </ListItemIcon>
+                Theme
+              </Box>
+              {Boolean(themeMenuAnchorEl) ? (
+                <FiChevronDown size={14} color="action.active" />
+              ) : (
+                <FiChevronRight size={14} color="action.active" />
+              )}
+            </MenuItem>
+          </>
+        )}
       </Menu>
 
       <Menu

@@ -112,6 +112,32 @@ export const DrawerContent: React.FC<DrawerContentProps> = ({
       </Box>
 
       <List sx={{ pt: 0 }}>
+        {user && (
+          <>
+            <ListItem disablePadding>
+              <ListItemButton
+                onClick={() => handleNavigation('/favorites')}
+                sx={{ py: 1.5 }}
+              >
+                <ListItemIcon>
+                  <FiHeart size={20} />
+                </ListItemIcon>
+                <ListItemText primary="Favorites" />
+              </ListItemButton>
+            </ListItem>
+            <ListItem disablePadding>
+              <ListItemButton
+                onClick={() => handleNavigation('/orders')}
+                sx={{ py: 1.5 }}
+              >
+                <ListItemIcon>
+                  <FiPackage size={20} />
+                </ListItemIcon>
+                <ListItemText primary="My Orders" />
+              </ListItemButton>
+            </ListItem>
+          </>
+        )}
         <ListItem disablePadding>
           <ListItemButton
             onClick={() => handleNavigation('/')}
@@ -149,6 +175,22 @@ export const DrawerContent: React.FC<DrawerContentProps> = ({
             <ListItemText primary="Cart" />
           </ListItemButton>
         </ListItem>
+
+        {isAdmin && (
+          <ListItem disablePadding>
+            <ListItemButton
+              onClick={() => handleNavigation('/admin')}
+              sx={{ py: 1.5 }}
+            >
+              <ListItemIcon>
+                <FiShield size={20} />
+              </ListItemIcon>
+              <ListItemText primary="Admin Dashboard" />
+            </ListItemButton>
+          </ListItem>
+        )}
+
+        <Divider sx={{ my: 1 }} />
 
         <ListItem disablePadding>
           <ListItemButton
@@ -199,48 +241,6 @@ export const DrawerContent: React.FC<DrawerContentProps> = ({
           </List>
         </Collapse>
 
-        <Divider sx={{ my: 1 }} />
-
-        {user && (
-          <>
-            <ListItem disablePadding>
-              <ListItemButton
-                onClick={() => handleNavigation('/favorites')}
-                sx={{ py: 1.5 }}
-              >
-                <ListItemIcon>
-                  <FiHeart size={20} />
-                </ListItemIcon>
-                <ListItemText primary="Favorites" />
-              </ListItemButton>
-            </ListItem>
-            <ListItem disablePadding>
-              <ListItemButton
-                onClick={() => handleNavigation('/orders')}
-                sx={{ py: 1.5 }}
-              >
-                <ListItemIcon>
-                  <FiPackage size={20} />
-                </ListItemIcon>
-                <ListItemText primary="My Orders" />
-              </ListItemButton>
-            </ListItem>
-          </>
-        )}
-
-        {isAdmin && (
-          <ListItem disablePadding>
-            <ListItemButton
-              onClick={() => handleNavigation('/admin')}
-              sx={{ py: 1.5 }}
-            >
-              <ListItemIcon>
-                <FiShield size={20} />
-              </ListItemIcon>
-              <ListItemText primary="Admin Dashboard" />
-            </ListItemButton>
-          </ListItem>
-        )}
         {user && (
           <ListItem disablePadding>
             <ListItemButton onClick={handleLogout} sx={{ py: 1.5 }}>
