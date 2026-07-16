@@ -2,7 +2,8 @@ import { IProduct } from '@/entity/Products/Products';
 import { DefaultSession } from 'next-auth';
 import React from 'react';
 
-export type OrderStatus = 'PROCESSING' | 'PAID' | 'SHIPPED' | 'DELIVERED' | 'CANCELLED';
+export type OrderStatus =
+  'PROCESSING' | 'PAID' | 'SHIPPED' | 'DELIVERED' | 'CANCELLED';
 
 export const ORDER_STATUSES: OrderStatus[] = [
   'PROCESSING',

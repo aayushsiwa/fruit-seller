@@ -1,6 +1,6 @@
 import { IProduct, ProductImage } from '@/types/index';
 import AddIcon from '@mui/icons-material/Add';
-import RemoveCircleIcon from '@mui/icons-material/RemoveCircle';
+import RemoveIcon from '@mui/icons-material/Remove';
 import {
   Button,
   Dialog,
@@ -149,7 +149,7 @@ const ProductDialog: React.FC<ProductDialogProps> = ({
               <InputLabel sx={{ mb: 1, mt: 1 }}>Images</InputLabel>
               {images.map((img, index) => (
                 <Grid container spacing={1} key={index} sx={{ mb: 1 }}>
-                  <Grid item xs={5}>
+                  <Grid item xs={5.5}>
                     <TextField
                       name={`imageUrl-${index}`}
                       label="Image URL"
@@ -161,7 +161,7 @@ const ProductDialog: React.FC<ProductDialogProps> = ({
                       size="small"
                     />
                   </Grid>
-                  <Grid item xs={5}>
+                  <Grid item xs={5.5}>
                     <TextField
                       name={`imageAlt-${index}`}
                       label="Alt Text"
@@ -175,7 +175,7 @@ const ProductDialog: React.FC<ProductDialogProps> = ({
                   </Grid>
                   <Grid
                     item
-                    xs={2}
+                    xs={1}
                     sx={{
                       display: 'flex',
                       alignItems: 'center',
@@ -186,9 +186,11 @@ const ProductDialog: React.FC<ProductDialogProps> = ({
                       <IconButton
                         onClick={() => handleRemoveImage(index)}
                         size="small"
-                        color="error"
+                        sx={{
+                          color: 'primary.main',
+                        }}
                       >
-                        <RemoveCircleIcon />
+                        <RemoveIcon />
                       </IconButton>
                     )}
                   </Grid>

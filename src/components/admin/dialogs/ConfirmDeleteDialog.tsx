@@ -22,7 +22,7 @@ const ConfirmDeleteDialog: React.FC<ConfirmDeleteDialogProps> = ({
       <DialogTitle>Confirm Delete</DialogTitle>
       <DialogContent>
         <DialogContentText>
-          Are you sure you want to delete the {entityType}
+          Are you sure you want to delete the {entityType}{' '}
           {entityType === 'product'
             ? (entity as IProduct).name
             : `${(entity as User).firstName} ${(entity as User).lastName}`}

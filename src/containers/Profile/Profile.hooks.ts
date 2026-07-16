@@ -11,7 +11,7 @@ import {
   profileSchema,
 } from '@/lib/validation/profile';
 import { useSnackbar } from '@/src/contexts/SnackBarContext';
-import { Address } from '@/types/index';
+import { Address, UserRole } from '@/types/index';
 import { useFormik } from 'formik';
 import { useSession } from 'next-auth/react';
 import { useRouter } from 'next/router';
@@ -135,8 +135,8 @@ export const useProfilePage = (): UseProfilePageReturn => {
   const saveAddressMutation = useSaveAddress();
 
   const handleSaveAddress = async () => {
-      const { street, city, state, postalCode, country, phone } = newAddress;
-      if (!street || !city || !state || !postalCode || !country || !phone) {
+    const { street, city, state, postalCode, country, phone } = newAddress;
+    if (!street || !city || !state || !postalCode || !country || !phone) {
       showSnackbar('Please fill in all required fields', 'error');
       return;
     }
@@ -189,11 +189,11 @@ export const useProfilePage = (): UseProfilePageReturn => {
 
 export type UseProfilePageReturn = {
   user: {
-    id: string;
+    ID: string;
     firstName: string;
     lastName: string;
     email: string;
-    role: string;
+    role: UserRole;
     createdAt: string;
   } | null;
   isLoading: boolean;

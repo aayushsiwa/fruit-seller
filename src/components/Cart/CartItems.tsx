@@ -144,7 +144,11 @@ export const CartItems: React.FC<CartItemsProps> = ({
                     onChange={(e) => {
                       const value = Number.parseInt(e.target.value);
                       if (!isNaN(value)) {
-                        handleQuantityChange(item.productID, value, product.stock);
+                        handleQuantityChange(
+                          item.productID,
+                          value,
+                          product.stock
+                        );
                       }
                     }}
                     inputProps={{

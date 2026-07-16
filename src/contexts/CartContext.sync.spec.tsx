@@ -88,7 +88,10 @@ describe('CartProvider - server sync', () => {
   });
 
   it('keeps the higher quantity when the same product is on both sides', async () => {
-    localStorage.setItem('cart', JSON.stringify([{ productID: 'p1', quantity: 2 }]));
+    localStorage.setItem(
+      'cart',
+      JSON.stringify([{ productID: 'p1', quantity: 2 }])
+    );
     vi.spyOn(CartGetAPI, 'getCartAPI').mockResolvedValue([
       { productID: 'p1', quantity: 3 },
     ]);

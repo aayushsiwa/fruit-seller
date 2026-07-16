@@ -46,7 +46,9 @@ export default async function handler(
     for (const item of cart) {
       const product = products.find((p) => p.ID === item.productID);
       if (!product) {
-        return res.status(400).json({ error: `Product ${item.productID} not found` });
+        return res
+          .status(400)
+          .json({ error: `Product ${item.productID} not found` });
       }
       if (product.stock < item.quantity) {
         return res

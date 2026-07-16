@@ -85,8 +85,8 @@ export default function AddressForm({
       <TextField
         fullWidth
         label="Pin Code"
-          value={address.postalCode}
-          onChange={(e) => onChange({ ...address, postalCode: e.target.value })}
+        value={address.postalCode}
+        onChange={(e) => onChange({ ...address, postalCode: e.target.value })}
         variant="outlined"
         size="small"
         required

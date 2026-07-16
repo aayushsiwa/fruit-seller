@@ -6,10 +6,23 @@ import { AppBar, Box, Container, Toolbar, Typography } from '@mui/material';
 import { useRouter } from 'next/router';
 import React from 'react';
 
-const AUTH_ROUTES = ['/login', '/register', '/forgot-password', '/reset-password'];
+const AUTH_ROUTES = [
+  '/login',
+  '/register',
+  '/forgot-password',
+  '/reset-password',
+];
 
 const AuthNavbar = () => (
-  <AppBar position="sticky" elevation={0} sx={{ bgcolor: 'background.paper', borderBottom: 1, borderColor: 'divider' }}>
+  <AppBar
+    position="sticky"
+    elevation={0}
+    sx={{
+      bgcolor: 'background.paper',
+      borderBottom: 1,
+      borderColor: 'divider',
+    }}
+  >
     <Toolbar sx={{ justifyContent: 'center' }}>
       <Typography variant="h6" sx={{ fontWeight: 700, color: 'primary.main' }}>
         Fruit Seller

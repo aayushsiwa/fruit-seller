@@ -1,7 +1,13 @@
 import { validateProductData, validateUserData } from '@/lib/validation/admin';
 import { useSnackbar } from '@/src/contexts/SnackBarContext';
 import { AdminActionsProps, UseAdminActionsReturn } from '@/types/admin';
-import { IProduct, OrderStatus, ProductImage, User, UserRole } from '@/types/index';
+import {
+  IProduct,
+  OrderStatus,
+  ProductImage,
+  User,
+  UserRole,
+} from '@/types/index';
 import { UseMutationResult } from '@tanstack/react-query';
 import { useCallback, useMemo } from 'react';
 
@@ -159,7 +165,7 @@ const useAdminActions = ({
 
     await handleMutation(
       deleteProductMutation,
-      selectedProduct.id,
+      selectedProduct.ID,
       handleCloseDeleteDialog,
       'Product deleted successfully'
     );
@@ -182,7 +188,7 @@ const useAdminActions = ({
 
     await handleMutation(
       deleteUserMutation,
-      selectedUser.id,
+      selectedUser.ID,
       handleCloseUserDeleteDialog,
       'User deleted successfully'
     );

@@ -1,4 +1,4 @@
-import { User as UserType, UserRole } from '@/types/index';
+import { UserRole, User as UserType } from '@/types/index';
 
 export class User implements UserType {
   ID: string;

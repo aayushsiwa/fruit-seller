@@ -93,7 +93,7 @@ export default function Orders() {
       </Box>
 
       {orders.map((order, i) => {
-        const cfg = statusConfig[order.status] || statusConfig.Processing;
+        const cfg = statusConfig[order.status] || statusConfig.PROCESSING;
         return (
           <motion.div
             key={order.ID}

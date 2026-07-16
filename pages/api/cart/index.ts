@@ -79,7 +79,7 @@ export default async function handler(
       const { data, error } = await supabase
         .from('carts')
         .update({ quantity: newQuantity })
-         .eq('ID', existingItem.ID)
+        .eq('ID', existingItem.ID)
         .select()
         .single();
 

@@ -52,7 +52,7 @@ export const OrderSummary: React.FC<OrderSummaryProps> = ({
             : product.price;
           return (
             <Box
-              key={item.id}
+              key={item.productID}
               sx={{
                 p: 2,
                 border: 1,

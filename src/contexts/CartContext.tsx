@@ -78,8 +78,13 @@ export function CartProvider({ children }: LayoutProps) {
             // Only drop the item if it isn't on the server (e.g. no longer
             // exists). Items already on the server keep their server copy.
             if (!serverItem) {
-              console.error(`Skipping cart item ${item.productID}, not found:`, err);
-              setCart((prev) => prev.filter((c) => c.productID !== item.productID));
+              console.error(
+                `Skipping cart item ${item.productID}, not found:`,
+                err
+              );
+              setCart((prev) =>
+                prev.filter((c) => c.productID !== item.productID)
+              );
             } else {
               console.error(`Could not sync cart item ${item.productID}:`, err);
             }
@@ -126,7 +131,9 @@ export function CartProvider({ children }: LayoutProps) {
       showSnackbar(`${product.name} updated in cart.`, 'success');
       setCart((prevCart) =>
         prevCart.map((item) =>
-          item.productID === product.ID ? { ...item, quantity: newQuantity } : item
+          item.productID === product.ID
+            ? { ...item, quantity: newQuantity }
+            : item
         )
       );
       syncCart(() => saveCartItemAPI({ productID: product.ID, quantity }));
@@ -153,7 +160,9 @@ export function CartProvider({ children }: LayoutProps) {
     }
 
     setCart((prevCart) =>
-      prevCart.map((item) => (item.productID === id ? { ...item, quantity } : item))
+      prevCart.map((item) =>
+        item.productID === id ? { ...item, quantity } : item
+      )
     );
     showSnackbar('Cart updated.', 'success');
     syncCart(() => updateCartItemAPI({ productID: id, quantity }));

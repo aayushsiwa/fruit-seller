@@ -38,10 +38,7 @@ describe('saveProductAPI()', () => {
       });
 
       const expected = { ...MockProducts[0] };
-      expect(axios.put).toHaveBeenCalledWith(
-        '/api/products/prod-1',
-        expected
-      );
+      expect(axios.put).toHaveBeenCalledWith('/api/products/prod-1', expected);
       expect(result).toEqual(MockProducts[0]);
     });
   });

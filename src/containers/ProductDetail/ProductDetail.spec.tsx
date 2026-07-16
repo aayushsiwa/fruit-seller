@@ -15,11 +15,11 @@ import React from 'react';
 import ProductDetail from './ProductDetail';
 
 const mockProduct: IProduct = {
-  id: '1',
+  ID: '1',
   name: 'Apple',
   price: 50,
   stock: 10,
-  image: '/apple.jpg',
+  images: [{ url: '/apple.jpg', altText: 'Apple' }],
   description: 'Fresh apple from farm',
   category: 'fruits',
   discount: 5,
@@ -29,11 +29,11 @@ const mockProduct: IProduct = {
 
 const mockRelatedProducts: IProduct[] = [
   {
-    id: '2',
+    ID: '2',
     name: 'Banana',
     price: 30,
     stock: 10,
-    image: '/banana.jpg',
+    images: [{ url: '/banana.jpg', altText: 'Banana' }],
     description: 'Fresh banana',
     category: 'fruits',
     discount: 0,

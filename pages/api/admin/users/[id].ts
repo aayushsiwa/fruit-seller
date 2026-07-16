@@ -18,7 +18,7 @@ export default async function handler(
 
   if (
     !session ||
-      !['ADMIN'].includes(
+    !['ADMIN'].includes(
       typeof session.user.role === 'string' ? session.user.role : ''
     )
   ) {
@@ -60,10 +60,7 @@ export default async function handler(
   }
 
   if (req.method === 'DELETE') {
-    const { error } = await supabase
-      .from('users')
-      .delete()
-      .eq('ID', id);
+    const { error } = await supabase.from('users').delete().eq('ID', id);
 
     if (error) {
       return res.status(500).json({ error: error.message });

@@ -187,7 +187,10 @@ export const useCheckout = (): UseCheckoutReturn => {
       const item = cart[i];
       const product = products[i];
       if (!product) {
-        showSnackbar(`Product ${item.productID} not found or invalid.`, 'error');
+        showSnackbar(
+          `Product ${item.productID} not found or invalid.`,
+          'error'
+        );
         return;
       }
       if (product.stock < item.quantity) {

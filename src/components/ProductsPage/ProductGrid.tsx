@@ -39,7 +39,7 @@ export const ProductGrid: React.FC<ProductGridProps> = ({
     <Grid data-testid="product-grid" container spacing={3}>
       {filteredProducts.length ? (
         filteredProducts.map((product) => (
-          <Grid item key={product.id} xs={12} sm={6} md={4} lg={3}>
+          <Grid item key={product.ID} xs={12} sm={6} md={4} lg={3}>
             <ProductCard product={product} />
           </Grid>
         ))

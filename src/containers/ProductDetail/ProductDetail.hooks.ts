@@ -43,7 +43,7 @@ export const useProductDetail = (): UseProductDetailReturn => {
   );
   const relatedProducts = getRelatedProductsResponse?.data?.products;
 
-  const cartItem = cart.find((item) => item.id === (id as string));
+  const cartItem = cart.find((item) => item.productID === (id as string));
   const cartQuantity = cartItem ? cartItem.quantity : 0;
 
   const handleAddToCart = () => {
