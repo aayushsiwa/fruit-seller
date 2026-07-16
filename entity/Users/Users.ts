@@ -7,6 +7,7 @@ export class User implements UserType {
   email: string;
   role: UserRole;
   createdAt: string;
+  image?: string | null;
 
   constructor(data: UserType) {
     this.ID = data.ID;
@@ -15,5 +16,6 @@ export class User implements UserType {
     this.email = data.email;
     this.role = data.role;
     this.createdAt = data.createdAt;
+    this.image = data.image ?? null;
   }
 }

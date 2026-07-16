@@ -62,6 +62,7 @@ export interface User {
   email: string;
   role: UserRole;
   createdAt: string;
+  image?: string | null;
 }
 
 export enum TabValue {

@@ -24,6 +24,10 @@ export default async function handler(
       .eq('email', email)
       .single();
 
+    // Generate default avatar using ui-avatars
+    const encodedName = encodeURIComponent(`${firstName} ${lastName}`.trim());
+    const image = `https://ui-avatars.com/api/?name=${encodedName}&background=random`;
+
     if (existing) {
       return res.status(409).json({ message: 'User already exists' });
     }
@@ -42,6 +46,7 @@ export default async function handler(
       firstName,
       lastName,
       role: role || 'USER',
+      image,
     });
 
     if (insertError) {
@@ -55,7 +60,7 @@ export default async function handler(
     return res.status(201).json({
       success: true,
       token: token,
-      user: { email, firstName, lastName, role: role || 'USER' },
+      user: { email, firstName, lastName, role: role || 'USER', image },
     });
   } catch (error) {
     console.error('Registration error:', error);
