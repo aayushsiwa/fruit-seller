@@ -10,7 +10,6 @@ CREATE TYPE userRole AS ENUM (
 
 CREATE TYPE orderStatus AS ENUM (
     'PROCESSING',
-    'PAID',
     'SHIPPED',
     'DELIVERED',
     'CANCELLED'
