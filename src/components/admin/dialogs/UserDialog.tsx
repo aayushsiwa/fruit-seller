@@ -23,7 +23,7 @@ const UserDialog: React.FC<UserDialogProps> = ({
 }) => {
   return (
     <Dialog open={open} onClose={onClose} maxWidth="sm" fullWidth>
-      <DialogTitle>{user.id ? 'Edit User' : 'Add New User'}</DialogTitle>
+      <DialogTitle>{user.ID ? 'Edit User' : 'Add New User'}</DialogTitle>
       <form onSubmit={onSave}>
         <DialogContent>
           <Grid container spacing={2}>
@@ -67,9 +67,8 @@ const UserDialog: React.FC<UserDialogProps> = ({
                   label="Role"
                   required
                 >
-                  <MenuItem value="buyer">Buyer</MenuItem>
-                  <MenuItem value="admin">Admin</MenuItem>
-                  <MenuItem value="seller">Seller</MenuItem>
+                  <MenuItem value="USER">User</MenuItem>
+                  <MenuItem value="ADMIN">Admin</MenuItem>
                 </Select>
               </FormControl>
             </Grid>

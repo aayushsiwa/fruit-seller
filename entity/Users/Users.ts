@@ -1,19 +1,21 @@
-import { User as UserType } from '@/types/index';
+import { UserRole, User as UserType } from '@/types/index';
 
 export class User implements UserType {
-  id: string;
+  ID: string;
   firstName: string;
   lastName: string;
   email: string;
-  role: string;
+  role: UserRole;
   createdAt: string;
+  image?: string | null;
 
   constructor(data: UserType) {
-    this.id = data.id;
+    this.ID = data.ID;
     this.firstName = data.firstName;
     this.lastName = data.lastName;
     this.email = data.email;
     this.role = data.role;
     this.createdAt = data.createdAt;
+    this.image = data.image ?? null;
   }
 }

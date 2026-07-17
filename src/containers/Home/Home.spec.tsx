@@ -61,11 +61,11 @@ describe('Home Page', () => {
     it('renders featured products after successful fetch', async () => {
       const mockProducts: IProduct[] = [
         {
-          id: '1',
+          ID: '1',
           name: 'Apple',
           stock: 10,
           price: 1.99,
-          image: 'apple.jpg',
+          images: [{ url: 'apple.jpg', altText: 'Apple' }],
           description: 'Fresh apple',
           category: 'Fruit',
           discount: 0,
@@ -73,11 +73,11 @@ describe('Home Page', () => {
           createdAt: new Date().toISOString(),
         },
         {
-          id: '2',
+          ID: '2',
           name: 'Banana',
           stock: 5,
           price: 0.99,
-          image: 'banana.jpg',
+          images: [{ url: 'banana.jpg', altText: 'Banana' }],
           description: 'Fresh banana',
           category: 'Fruit',
           discount: 10,

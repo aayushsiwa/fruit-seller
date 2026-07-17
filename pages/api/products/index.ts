@@ -18,7 +18,7 @@ export default async function handler(
 
   if (req.method === 'GET') {
     const { featured, category, sort, related, search } = req.query;
-    let query = supabase.from('fruitsellerproducts').select('*');
+    let query = supabase.schema('fruitSeller').from('products').select('*');
 
     if (featured) {
       query = query.eq('featured', true);
@@ -41,9 +41,9 @@ export default async function handler(
 
     if (related && typeof related === 'string') {
       const { data: relatedProduct, error: relatedError } = await supabase
-        .from('fruitsellerproducts')
+        .from('products')
         .select('category')
-        .eq('id', related)
+        .eq('ID', related)
         .single();
 
       if (relatedError || !relatedProduct) {
@@ -51,7 +51,7 @@ export default async function handler(
       }
 
       query = query.eq('category', relatedProduct.category);
-      query = query.not('id', 'eq', related);
+      query = query.not('ID', 'eq', related);
     }
 
     const { data, error } = await query;
@@ -64,19 +64,20 @@ export default async function handler(
   }
 
   if (req.method === 'POST') {
-    if (!session || !['admin', 'seller'].includes(session.user.role || '')) {
+    if (!session || !['ADMIN'].includes(session.user.role || '')) {
       return res.status(403).json({ error: 'Unauthorized' });
     }
 
     const {
       name,
+      slug,
       price,
       description,
-      image,
+      images,
       category,
       stock,
       discount,
-      is_seasonal,
+      isSeasonal,
     } = req.body;
 
     const validation = validateProductData({
@@ -91,16 +92,17 @@ export default async function handler(
     }
 
     const { data, error } = await supabase
-      .from('fruitsellerproducts')
+      .from('products')
       .insert({
         name,
+        slug,
         price,
         description,
-        image,
+        images,
         category,
-        quantity: stock,
+        stock,
         discount: discount || 0,
-        is_seasonal: is_seasonal || false,
+        isSeasonal: isSeasonal || false,
       })
       .select()
       .single();
@@ -113,20 +115,21 @@ export default async function handler(
   }
 
   if (req.method === 'PUT') {
-    if (!session || !['admin', 'seller'].includes(session.user?.role || '')) {
+    if (!session || !['ADMIN'].includes(session.user?.role || '')) {
       return res.status(403).json({ error: 'Unauthorized' });
     }
 
     const {
       id,
       name,
+      slug,
       price,
       description,
-      image,
+      images,
       category,
       stock,
       discount,
-      is_seasonal,
+      isSeasonal,
     } = req.body;
 
     if (!id) {
@@ -147,18 +150,19 @@ export default async function handler(
     }
 
     const { data, error } = await supabase
-      .from('fruitsellerproducts')
+      .from('products')
       .update({
         name,
+        slug,
         price,
         description,
-        image,
+        images,
         category,
-        quantity: stock,
+        stock,
         discount: discount || 0,
-        is_seasonal: is_seasonal || false,
+        isSeasonal: isSeasonal || false,
       })
-      .eq('id', id)
+      .eq('ID', id)
       .select()
       .single();
 

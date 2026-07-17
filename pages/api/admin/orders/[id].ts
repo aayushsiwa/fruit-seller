@@ -18,7 +18,7 @@ export default async function handler(
 
   if (
     !session ||
-    !['admin'].includes(
+    !['ADMIN'].includes(
       typeof session.user.role === 'string' ? session.user.role : ''
     )
   ) {
@@ -28,11 +28,11 @@ export default async function handler(
   const { id } = req.query;
 
   if (req.method === 'PUT') {
-    const { status, shipped_at, delivered_at, cancelled_at } = req.body as {
+    const { status, shippedAt, deliveredAt, cancelledAt } = req.body as {
       status: string;
-      shipped_at?: string;
-      delivered_at?: string;
-      cancelled_at?: string;
+      shippedAt?: string;
+      deliveredAt?: string;
+      cancelledAt?: string;
     };
 
     if (!ORDER_STATUSES.includes(status as OrderStatus)) {
@@ -42,7 +42,7 @@ export default async function handler(
     const { data: currentOrder, error: fetchError } = await supabase
       .from('orders')
       .select('status')
-      .eq('id', id)
+      .eq('ID', id)
       .single();
 
     if (fetchError || !currentOrder) {
@@ -58,14 +58,14 @@ export default async function handler(
     }
 
     const updatePayload: Record<string, string> = { status };
-    if (shipped_at) updatePayload.shipped_at = shipped_at;
-    if (delivered_at) updatePayload.delivered_at = delivered_at;
-    if (cancelled_at) updatePayload.cancelled_at = cancelled_at;
+    if (shippedAt) updatePayload.shippedAt = shippedAt;
+    if (deliveredAt) updatePayload.deliveredAt = deliveredAt;
+    if (cancelledAt) updatePayload.cancelledAt = cancelledAt;
 
     const { data, error } = await supabase
       .from('orders')
       .update(updatePayload)
-      .eq('id', id)
+      .eq('ID', id)
       .select()
       .single();
 
@@ -79,8 +79,8 @@ export default async function handler(
 
     return res.status(200).json({
       ...data,
-      userName: data.user_email,
-      createdAt: data.created_at,
+      userName: data.userEmail,
+      createdAt: data.createdAt,
     });
   }
 
@@ -88,7 +88,7 @@ export default async function handler(
     const { data, error } = await supabase
       .from('orders')
       .select('*')
-      .eq('id', id)
+      .eq('ID', id)
       .single();
 
     if (error) {
@@ -101,8 +101,8 @@ export default async function handler(
 
     return res.status(200).json({
       ...data,
-      userName: data.user_email,
-      createdAt: data.created_at,
+      userName: data.userEmail,
+      createdAt: data.createdAt,
     });
   }
 

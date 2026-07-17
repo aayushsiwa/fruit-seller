@@ -1,4 +1,4 @@
-import { generateResetToken } from '@/lib/auth';
+import { generateResetToken } from '@/lib/api/auth/auth';
 import { sendEmail } from '@/lib/email';
 import { supabase } from '@/lib/supabase';
 import fs from 'fs';
@@ -57,7 +57,7 @@ export default async function handler(
   try {
     // Check if user exists
     const { data: user, error: userError } = await supabase
-      .from('fruitsellerusers')
+      .from('users')
       .select('email')
       .eq('email', email)
       .single();

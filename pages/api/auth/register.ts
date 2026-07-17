@@ -1,5 +1,5 @@
-import { hashPassword } from '@/lib/auth';
-import { generateJWT } from '@/lib/auth';
+import { hashPassword } from '@/lib/api/auth/auth';
+import { generateJWT } from '@/lib/api/auth/auth';
 import { supabase } from '@/lib/supabase';
 import { NextApiRequest, NextApiResponse } from 'next';
 
@@ -19,10 +19,14 @@ export default async function handler(
 
   try {
     const { data: existing, error: existingError } = await supabase
-      .from('fruitsellerusers')
+      .from('users')
       .select('email')
       .eq('email', email)
       .single();
+
+    // Generate default avatar using ui-avatars
+    const encodedName = encodeURIComponent(`${firstName} ${lastName}`.trim());
+    const image = `https://ui-avatars.com/api/?name=${encodedName}&background=random`;
 
     if (existing) {
       return res.status(409).json({ message: 'User already exists' });
@@ -36,15 +40,14 @@ export default async function handler(
 
     const hashed = await hashPassword(password);
 
-    const { error: insertError } = await supabase
-      .from('fruitsellerusers')
-      .insert({
-        email,
-        password: hashed,
-        first_name: firstName,
-        last_name: lastName,
-        role: role || 'buyer',
-      });
+    const { error: insertError } = await supabase.from('users').insert({
+      email,
+      password: hashed,
+      firstName,
+      lastName,
+      role: role || 'USER',
+      image,
+    });
 
     if (insertError) {
       return res
@@ -57,7 +60,7 @@ export default async function handler(
     return res.status(201).json({
       success: true,
       token: token,
-      user: { email, firstName, lastName, role: role || 'buyer' },
+      user: { email, firstName, lastName, role: role || 'USER', image },
     });
   } catch (error) {
     console.error('Registration error:', error);

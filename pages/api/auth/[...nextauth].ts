@@ -1,5 +1,6 @@
-import { comparePassword } from '@/lib/auth';
+import { comparePassword } from '@/lib/api/auth/auth';
 import { supabase } from '@/lib/supabase';
+import type { UserRole } from '@/types';
 import NextAuth from 'next-auth';
 import type { AuthOptions } from 'next-auth';
 import CredentialsProvider from 'next-auth/providers/credentials';
@@ -30,7 +31,7 @@ export const authOptions: AuthOptions = {
 
         try {
           const { data: user, error } = await supabase
-            .from('fruitsellerusers')
+            .from('users')
             .select('*')
             .eq('email', credentials.email)
             .single();
@@ -67,7 +68,7 @@ export const authOptions: AuthOptions = {
         if (account?.provider === 'google') {
           console.log('Google Sign-In: Checking user', user.email);
           const { data: existingUser, error } = await supabase
-            .from('fruitsellerusers')
+            .from('users')
             .select('*')
             .eq('email', user.email!)
             .single();
@@ -80,16 +81,14 @@ export const authOptions: AuthOptions = {
           const userExists = !!existingUser;
 
           if (!userExists) {
-            const { error: userError } = await supabase
-              .from('fruitsellerusers')
-              .insert({
-                email: user.email,
-                first_name: user.name?.split(' ')[0] || '',
-                last_name: user.name?.split(' ').slice(1).join(' ') || '',
-                role: 'buyer',
-                provider: 'google',
-                provider_id: user.id,
-              });
+            const { error: userError } = await supabase.from('users').insert({
+              email: user.email,
+              firstName: user.name?.split(' ')[0] || '',
+              lastName: user.name?.split(' ').slice(1).join(' ') || '',
+              role: 'USER',
+              provider: 'google',
+              providerID: user.id,
+            });
 
             if (userError) {
               console.error('Failed to create user:', userError);
@@ -108,7 +107,7 @@ export const authOptions: AuthOptions = {
       if (user && account) {
         console.log('JWT callback: Fetching user', user.email);
         const { data: supabaseUser, error } = await supabase
-          .from('fruitsellerusers')
+          .from('users')
           .select('*')
           .eq('email', user.email!)
           .single();
@@ -116,12 +115,11 @@ export const authOptions: AuthOptions = {
         if (error) {
           console.error('JWT callback error:', error);
         } else if (supabaseUser) {
-          token.id = supabaseUser.id;
+          token.id = supabaseUser.ID;
           token.role = supabaseUser.role;
-          token.cart_id = supabaseUser.cart_id;
           token.email = supabaseUser.email;
           token.name =
-            `${supabaseUser.first_name} ${supabaseUser.last_name}`.trim();
+            `${supabaseUser.firstName} ${supabaseUser.lastName}`.trim();
         }
       }
       return token;
@@ -130,8 +128,7 @@ export const authOptions: AuthOptions = {
     async session({ session, token }) {
       if (token && session.user) {
         session.user.id = token.id as string;
-        session.user.role = token.role as string;
-        session.user.cart_id = token.cart_id as string;
+        session.user.role = token.role as UserRole;
       }
       return session;
     },

@@ -95,11 +95,11 @@ const ProductsTab: React.FC<ProductsTabProps> = ({
               </TableRow>
             ) : (filteredProducts?.length ?? 0) > 0 ? (
               (filteredProducts ?? []).map((product: IProduct) => (
-                <TableRow key={product.id}>
+                <TableRow key={product.ID}>
                   <TableCell>
                     <Box
                       component="img"
-                      src={product.image}
+                      src={product.images?.[0]?.url}
                       alt={product.name}
                       sx={{
                         width: 50,

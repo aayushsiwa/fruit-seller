@@ -63,7 +63,12 @@ export const productSchema = Yup.object({
     .integer('Stock must be a whole number')
     .min(0, 'Stock cannot be negative')
     .required('Stock is required'),
-  image: Yup.string().url('Must be a valid URL').nullable(),
+  images: Yup.array().of(
+    Yup.object({
+      url: Yup.string().url('Must be a valid URL').required(),
+      altText: Yup.string().required(),
+    })
+  ),
 });
 
 export const userSchema = Yup.object({

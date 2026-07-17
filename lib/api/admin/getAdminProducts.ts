@@ -4,11 +4,8 @@ import { UseQueryOptions, useQuery } from '@tanstack/react-query';
 import axios from 'axios';
 
 export const getAdminProductsAPI = async () => {
-  const response = await axios.get<IProduct[]>('/api/products');
-  if (response.status !== 200) {
-    throw new Error(`Failed to fetch products: ${response.statusText}`);
-  }
-  return response.data.map((p) => new Product(p));
+  const response = await axios.get<{ products: IProduct[] }>('/api/products');
+  return (response.data.products ?? []).map((p) => new Product(p));
 };
 
 export const useGetAdminProducts = (

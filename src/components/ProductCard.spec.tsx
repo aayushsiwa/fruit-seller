@@ -18,12 +18,12 @@ vi.mock('@/src/contexts/CartContext', () => ({
 }));
 
 const sampleProduct: IProduct = {
-  id: '1',
+  ID: '1',
   name: 'Grapes',
   price: 100,
   discount: 10,
   stock: 20,
-  image: '/grapes.jpg',
+  images: [{ url: '/grapes.jpg', altText: 'Fresh Grapes' }],
   description: 'Fresh Grapes from Nashik.',
   createdAt: '2025-05-01T00:00:00Z',
   category: 'fruits',

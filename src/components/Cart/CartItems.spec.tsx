@@ -5,7 +5,7 @@ import React from 'react';
 
 import { CartItems } from './CartItems';
 
-const cart: CartItem[] = [{ id: '1', quantity: 2 }];
+const cart: CartItem[] = [{ productID: '1', quantity: 2 }];
 
 const defaultProps = {
   cart,

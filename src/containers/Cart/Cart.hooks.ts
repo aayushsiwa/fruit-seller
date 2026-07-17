@@ -20,9 +20,9 @@ export const useCartPage = (): UseCartPageReturn => {
 
   const productQueries = useQueries({
     queries: cart.map((item: CartItem) => ({
-      queryKey: ['product', item.id],
+      queryKey: ['product', item.productID],
       queryFn: async () => {
-        const response = await getProductAPI(item.id);
+        const response = await getProductAPI(item.productID);
         return response.data.product;
       },
       enabled: !cartLoading,

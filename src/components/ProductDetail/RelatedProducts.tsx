@@ -25,7 +25,7 @@ export const RelatedProducts: React.FC<RelatedProductsProps> = ({
         <AnimatePresence>
           {relatedProducts.map((relatedProduct, index) => (
             <Box
-              key={relatedProduct.id}
+              key={relatedProduct.ID}
               sx={{
                 width: {
                   xs: '100%',

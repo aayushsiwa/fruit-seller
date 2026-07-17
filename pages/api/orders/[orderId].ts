@@ -21,8 +21,8 @@ export default async function handler(
     const { data: order, error } = await supabase
       .from('orders')
       .select('*')
-      .eq('id', orderId)
-      .eq('user_email', session.user.email)
+      .eq('ID', orderId)
+      .eq('userEmail', session.user.email)
       .single();
 
     if (error || !order) {
@@ -31,13 +31,11 @@ export default async function handler(
 
     return res.status(200).json({
       ...order,
-      userName: order.user_email,
-      createdAt: order.created_at,
-      shipped_at: order.shipped_at,
-      delivered_at: order.delivered_at,
-      cancelled_at: order.cancelled_at,
-      user_email: undefined,
-      created_at: undefined,
+      userName: order.userEmail,
+      createdAt: order.createdAt,
+      shippedAt: order.shippedAt,
+      deliveredAt: order.deliveredAt,
+      cancelledAt: order.cancelledAt,
     });
   } catch (error) {
     console.error('Fetch order error:', error);

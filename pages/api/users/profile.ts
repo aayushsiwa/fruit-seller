@@ -17,9 +17,9 @@ export default async function handler(
 
   if (req.method === 'GET') {
     const { data, error } = await supabase
-      .from('fruitsellerusers')
-      .select('id, first_name, last_name, email, role, created_at')
-      .eq('id', userId)
+      .from('users')
+      .select('ID, firstName, lastName, email, role, createdAt')
+      .eq('ID', userId)
       .single();
 
     if (error || !data) {
@@ -27,12 +27,12 @@ export default async function handler(
     }
 
     return res.status(200).json({
-      id: data.id,
-      firstName: data.first_name,
-      lastName: data.last_name,
+      ID: data.ID,
+      firstName: data.firstName,
+      lastName: data.lastName,
       email: data.email,
       role: data.role,
-      createdAt: data.created_at,
+      createdAt: data.createdAt,
     });
   }
 
@@ -54,10 +54,10 @@ export default async function handler(
     }
 
     const { data, error } = await supabase
-      .from('fruitsellerusers')
-      .update({ first_name: firstName, last_name: lastName })
-      .eq('id', userId)
-      .select('id, first_name, last_name, email, role, created_at')
+      .from('users')
+      .update({ firstName, lastName })
+      .eq('ID', userId)
+      .select('ID, firstName, lastName, email, role, createdAt')
       .single();
 
     if (error) {
@@ -65,12 +65,12 @@ export default async function handler(
     }
 
     return res.status(200).json({
-      id: data.id,
-      firstName: data.first_name,
-      lastName: data.last_name,
+      ID: data.ID,
+      firstName: data.firstName,
+      lastName: data.lastName,
       email: data.email,
       role: data.role,
-      createdAt: data.created_at,
+      createdAt: data.createdAt,
     });
   }
 

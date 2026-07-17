@@ -30,7 +30,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
   const { data: session, status } = useSession();
   const [error, setError] = useState<string | null>(null);
 
-  const isAdmin = () => session?.user?.role === 'admin';
+  const isAdmin = () => session?.user?.role === 'ADMIN';
 
   const registerUser = async (userData: RegisterData) => {
     try {
@@ -64,27 +64,16 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
 
   const login = async (email: string, password: string) => {
     setError(null);
-    try {
-      const result = await nextAuthSignIn('credentials', {
-        redirect: false,
-        email,
-        password,
-      });
+    const result = await nextAuthSignIn('credentials', {
+      redirect: false,
+      email,
+      password,
+    });
 
-      if (result?.error) {
-        const errorMessage =
-          result.error.toLowerCase() === 'invalid credentials'
-            ? 'Invalid credentials'
-            : result.error;
-        setError(errorMessage);
-      }
-    } catch (err: unknown) {
-      if (err instanceof Error) {
-        setError(err.message);
-      } else {
-        const fallback = 'An unknown error occurred';
-        setError(fallback);
-      }
+    if (result?.error) {
+      const errorMessage = 'Email or password is incorrect';
+      setError(errorMessage);
+      throw new Error(errorMessage);
     }
   };
 

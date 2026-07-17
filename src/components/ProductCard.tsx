@@ -77,7 +77,7 @@ const ProductCard = ({ product }: { product: IProduct }) => {
       <CardMedia
         component="img"
         height="160"
-        image={product.image || defaultImage}
+        image={product.images?.[0]?.url || defaultImage}
         alt={product.name}
         loading="lazy"
         sx={{ objectFit: 'cover' }}

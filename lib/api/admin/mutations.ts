@@ -4,6 +4,16 @@ import { Order, OrderStatus, User as UserType } from '@/types/index';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import axios from 'axios';
 
+function toSlug(name: string): string {
+  return name
+    .toLowerCase()
+    .trim()
+    .replace(/\s+/g, '-')
+    .replace(/[^a-z0-9-]/g, '')
+    .replace(/-+/g, '-')
+    .replace(/^-|-$/g, '');
+}
+
 // --- Products ---
 
 export type SaveProductVars = {
@@ -15,10 +25,14 @@ export type SaveProductVars = {
 export const saveProductAPI = async (
   vars: SaveProductVars
 ): Promise<IProduct> => {
+  const data = { ...vars.productData };
+  if (data.name) {
+    data.slug = toSlug(data.name);
+  }
   const url = vars.isEdit ? `/api/products/${vars.id}` : '/api/products';
   const response = vars.isEdit
-    ? await axios.put<IProduct>(url, vars.productData)
-    : await axios.post<IProduct>(url, vars.productData);
+    ? await axios.put<IProduct>(url, data)
+    : await axios.post<IProduct>(url, data);
   return response.data;
 };
 
@@ -87,9 +101,9 @@ export const useDeleteUser = () => {
 export type UpdateOrderVars = {
   id: string;
   status: OrderStatus;
-  shipped_at?: string;
-  delivered_at?: string;
-  cancelled_at?: string;
+  shippedAt?: string;
+  deliveredAt?: string;
+  cancelledAt?: string;
 };
 
 export const updateOrderStatusAPI = async (
@@ -97,9 +111,9 @@ export const updateOrderStatusAPI = async (
 ): Promise<Order> => {
   const response = await axios.put<Order>(`/api/admin/orders/${vars.id}`, {
     status: vars.status,
-    ...(vars.shipped_at && { shipped_at: vars.shipped_at }),
-    ...(vars.delivered_at && { delivered_at: vars.delivered_at }),
-    ...(vars.cancelled_at && { cancelled_at: vars.cancelled_at }),
+    ...(vars.shippedAt && { shippedAt: vars.shippedAt }),
+    ...(vars.deliveredAt && { deliveredAt: vars.deliveredAt }),
+    ...(vars.cancelledAt && { cancelledAt: vars.cancelledAt }),
   });
   return response.data;
 };

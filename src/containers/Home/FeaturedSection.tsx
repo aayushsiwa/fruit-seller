@@ -58,7 +58,7 @@ export const FeaturedSection: React.FC<FeaturedSectionProps> = ({
             product.stock > 0 ? (
               <Grid
                 item
-                key={product.id}
+                key={product.ID}
                 component={motion.div}
                 initial={{ opacity: 0, scale: 0.9 }}
                 whileInView={{ opacity: 1, scale: 1 }}

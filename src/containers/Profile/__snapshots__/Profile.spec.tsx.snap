@@ -145,7 +145,7 @@ exports[`Profile - UI > when rendered in web view > should match snapshot when p
                 <span
                   class="MuiChip-label MuiChip-labelSmall css-rrn746-MuiChip-label"
                 >
-                  admin
+                  ADMIN
                 </span>
               </div>
               <span

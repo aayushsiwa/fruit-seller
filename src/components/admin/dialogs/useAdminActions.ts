@@ -1,21 +1,27 @@
 import { validateProductData, validateUserData } from '@/lib/validation/admin';
 import { useSnackbar } from '@/src/contexts/SnackBarContext';
 import { AdminActionsProps, UseAdminActionsReturn } from '@/types/admin';
-import { IProduct, OrderStatus, User } from '@/types/index';
+import {
+  IProduct,
+  OrderStatus,
+  ProductImage,
+  User,
+  UserRole,
+} from '@/types/index';
 import { UseMutationResult } from '@tanstack/react-query';
 import { useCallback, useMemo } from 'react';
 
-const STATUS_ORDER: OrderStatus[] = ['Processing', 'Shipped', 'Delivered'];
+const STATUS_ORDER: OrderStatus[] = ['PROCESSING', 'SHIPPED', 'DELIVERED'];
 
 function validateTransition(
   current: OrderStatus,
   next: OrderStatus
 ): string | null {
   if (current === next) return null;
-  if (current === 'Delivered' || current === 'Cancelled') {
+  if (current === 'DELIVERED' || current === 'CANCELLED') {
     return `Cannot change status from "${current}" — it is a terminal state`;
   }
-  if (next === 'Processing') return 'Cannot revert to Processing';
+  if (next === 'PROCESSING') return 'Cannot revert to PROCESSING';
   const currentIdx = STATUS_ORDER.indexOf(current);
   const nextIdx = STATUS_ORDER.indexOf(next);
   if (nextIdx >= 0 && nextIdx <= currentIdx) {
@@ -72,6 +78,7 @@ const useAdminActions = ({
     async (event: React.FormEvent<HTMLFormElement>) => {
       event.preventDefault();
       const formData = new FormData(event.currentTarget);
+      const imagesRaw = formData.get('images') as string;
       const productData: Partial<IProduct> = {
         name: formData.get('name') as string,
         price: parseFloat(formData.get('price') as string),
@@ -80,7 +87,7 @@ const useAdminActions = ({
         isSeasonal: formData.get('isSeasonal') === 'true',
         category: formData.get('category') as string,
         stock: parseInt(formData.get('stock') as string, 10) || 0,
-        image: (formData.get('image') as string) || undefined,
+        images: imagesRaw ? (JSON.parse(imagesRaw) as ProductImage[]) : [],
       };
 
       const { isValid, error } = validateProductData(productData);
@@ -92,7 +99,7 @@ const useAdminActions = ({
 
       await handleMutation(
         saveProductMutation,
-        { productData, isEdit: isEditProduct, id: selectedProduct?.id },
+        { productData, isEdit: isEditProduct, id: selectedProduct?.ID },
         handleCloseProductDialog,
         isEditProduct
           ? 'Product updated successfully'
@@ -102,7 +109,7 @@ const useAdminActions = ({
     [
       saveProductMutation,
       isEditProduct,
-      selectedProduct?.id,
+      selectedProduct?.ID,
       handleCloseProductDialog,
       handleMutation,
       setError,
@@ -120,7 +127,7 @@ const useAdminActions = ({
         firstName: formData.get('firstName') as string,
         lastName: formData.get('lastName') as string,
         email: formData.get('email') as string,
-        role: formData.get('role') as string,
+        role: formData.get('role') as UserRole,
       };
 
       const { isValid, error } = validateUserData(userData);
@@ -132,7 +139,7 @@ const useAdminActions = ({
 
       await handleMutation(
         saveUserMutation,
-        { userData, isEdit: isEditUser, id: selectedUser?.id },
+        { userData, isEdit: isEditUser, id: selectedUser?.ID },
         handleCloseUserDialog,
         isEditUser ? 'User updated successfully' : 'User added successfully'
       );
@@ -140,7 +147,7 @@ const useAdminActions = ({
     [
       saveUserMutation,
       isEditUser,
-      selectedUser?.id,
+      selectedUser?.ID,
       handleCloseUserDialog,
       handleMutation,
       setError,
@@ -149,7 +156,7 @@ const useAdminActions = ({
   );
 
   const handleDeleteProduct = useCallback(async () => {
-    if (!selectedProduct?.id) {
+    if (!selectedProduct?.ID) {
       const error = 'No product selected';
       setError(error);
       showSnackbar(error, 'error');
@@ -158,12 +165,12 @@ const useAdminActions = ({
 
     await handleMutation(
       deleteProductMutation,
-      selectedProduct.id,
+      selectedProduct.ID,
       handleCloseDeleteDialog,
       'Product deleted successfully'
     );
   }, [
-    selectedProduct?.id,
+    selectedProduct?.ID,
     handleMutation,
     deleteProductMutation,
     handleCloseDeleteDialog,
@@ -172,7 +179,7 @@ const useAdminActions = ({
   ]);
 
   const handleDeleteUser = useCallback(async () => {
-    if (!selectedUser?.id) {
+    if (!selectedUser?.ID) {
       const error = 'No user selected';
       setError(error);
       showSnackbar(error, 'error');
@@ -181,12 +188,12 @@ const useAdminActions = ({
 
     await handleMutation(
       deleteUserMutation,
-      selectedUser.id,
+      selectedUser.ID,
       handleCloseUserDeleteDialog,
       'User deleted successfully'
     );
   }, [
-    selectedUser?.id,
+    selectedUser?.ID,
     handleMutation,
     deleteUserMutation,
     handleCloseUserDeleteDialog,
@@ -217,7 +224,7 @@ const useAdminActions = ({
   );
 
   const handleConfirmOrderStatus = useCallback(async () => {
-    if (!selectedOrder?.id) {
+    if (!selectedOrder?.ID) {
       const error = 'No order selected';
       setError(error);
       showSnackbar(error, 'error');
@@ -228,11 +235,11 @@ const useAdminActions = ({
     await handleMutation(
       updateOrderMutation,
       {
-        id: selectedOrder.id.toString(),
+        id: selectedOrder.ID.toString(),
         status: confirmStatus,
-        shipped_at: confirmStatus === 'Shipped' ? now : undefined,
-        delivered_at: confirmStatus === 'Delivered' ? now : undefined,
-        cancelled_at: confirmStatus === 'Cancelled' ? now : undefined,
+        shippedAt: confirmStatus === 'SHIPPED' ? now : undefined,
+        deliveredAt: confirmStatus === 'DELIVERED' ? now : undefined,
+        cancelledAt: confirmStatus === 'CANCELLED' ? now : undefined,
       },
       () => {
         handleCloseConfirmDialog();
@@ -241,7 +248,7 @@ const useAdminActions = ({
       'Order status updated successfully'
     );
   }, [
-    selectedOrder?.id,
+    selectedOrder?.ID,
     updateOrderMutation,
     confirmStatus,
     handleMutation,

@@ -25,8 +25,8 @@ export default async function handler(
     const { error } = await supabase
       .from('favorites')
       .delete()
-      .eq('user_id', userId)
-      .eq('product_id', productId);
+      .eq('userID', userId)
+      .eq('productID', productId);
 
     if (error) {
       console.error('Supabase DELETE favorite error:', error);

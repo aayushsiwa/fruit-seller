@@ -1,4 +1,5 @@
 import {
+  Alert,
   Box,
   Button,
   Container,
@@ -56,6 +57,14 @@ export default function Login() {
 
           <form onSubmit={formik.handleSubmit}>
             <Grid container spacing={3}>
+              {formik.status && (
+                <Grid item xs={12}>
+                  <Alert severity="error" sx={{ borderRadius: 1 }}>
+                    {formik.status}
+                  </Alert>
+                </Grid>
+              )}
+
               <Grid item xs={12}>
                 <TextField
                   fullWidth

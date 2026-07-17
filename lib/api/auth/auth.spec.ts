@@ -29,7 +29,7 @@ describe('Auth Helpers - Passwords', () => {
 describe('Auth Helpers - JWTs', () => {
   it('should generate and verify a valid JWT with correct claims', async () => {
     const email = 'user@example.com';
-    const role = 'seller';
+    const role = 'USER';
     const token = await generateJWT(email, role);
 
     expect(token).toBeDefined();

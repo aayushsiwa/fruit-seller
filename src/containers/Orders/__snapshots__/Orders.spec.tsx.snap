@@ -163,7 +163,7 @@ exports[`Orders - UI > when rendered in mobile view > should match snapshot when
                 <span
                   class="MuiChip-label MuiChip-labelSmall css-wjsjww-MuiChip-label"
                 >
-                  Processing
+                  PROCESSING
                 </span>
               </div>
               <svg
@@ -239,7 +239,7 @@ exports[`Orders - UI > when rendered in mobile view > should match snapshot when
                 <span
                   class="MuiChip-label MuiChip-labelSmall css-wjsjww-MuiChip-label"
                 >
-                  Delivered
+                  DELIVERED
                 </span>
               </div>
               <svg
@@ -450,7 +450,7 @@ exports[`Orders - UI > when rendered in web view > should match snapshot when AP
                 <span
                   class="MuiChip-label MuiChip-labelSmall css-wjsjww-MuiChip-label"
                 >
-                  Processing
+                  PROCESSING
                 </span>
               </div>
               <svg
@@ -526,7 +526,7 @@ exports[`Orders - UI > when rendered in web view > should match snapshot when AP
                 <span
                   class="MuiChip-label MuiChip-labelSmall css-wjsjww-MuiChip-label"
                 >
-                  Delivered
+                  DELIVERED
                 </span>
               </div>
               <svg

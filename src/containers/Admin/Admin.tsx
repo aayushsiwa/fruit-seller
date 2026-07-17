@@ -252,7 +252,7 @@ export default function AdminDashboard() {
         onClose={handleCloseConfirmDialog}
         onConfirm={handleConfirmOrderStatus}
         isLoading={updateOrderMutation.isPending}
-        currentStatus={(selectedOrder?.status as string) || 'Processing'}
+        currentStatus={(selectedOrder?.status as string) || 'PROCESSING'}
         newStatus={confirmStatus}
       />
 

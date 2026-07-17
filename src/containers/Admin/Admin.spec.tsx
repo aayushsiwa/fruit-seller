@@ -18,9 +18,9 @@ describe('Admin - Hooks', () => {
         saveUserMutation: { mutateAsync } as unknown as UseMutationResult,
         deleteUserMutation: {} as UseMutationResult,
         updateOrderMutation: {} as UseMutationResult,
-        selectedProduct: { id: '1' },
-        selectedUser: { id: 'user123' },
-        selectedOrder: { id: 'order123' },
+        selectedProduct: { ID: '1' },
+        selectedUser: { ID: 'user123' },
+        selectedOrder: { ID: 'order123' },
         isEditProduct: false,
         isEditUser: false,
         handleCloseProductDialog: vi.fn(),
@@ -31,7 +31,7 @@ describe('Admin - Hooks', () => {
         setError,
         handleOpenConfirmDialog: vi.fn(),
         handleCloseConfirmDialog: vi.fn(),
-        confirmStatus: 'Processing' as const,
+        confirmStatus: 'PROCESSING' as const,
       };
 
       const { result } = renderHook(() =>
@@ -48,7 +48,7 @@ describe('Admin - Hooks', () => {
       addInput('firstName', 'John');
       addInput('lastName', 'Doe');
       addInput('email', 'john@example.com');
-      addInput('role', 'admin');
+      addInput('role', 'ADMIN');
 
       const formEvent = {
         preventDefault: vi.fn(),
@@ -62,7 +62,7 @@ describe('Admin - Hooks', () => {
           firstName: 'John',
           lastName: 'Doe',
           email: 'john@example.com',
-          role: 'admin',
+          role: 'ADMIN',
         },
         isEdit: false,
         id: 'user123',

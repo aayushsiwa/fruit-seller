@@ -1,4 +1,4 @@
-import { comparePassword, hashPassword } from '@/lib/auth';
+import { comparePassword, hashPassword } from '@/lib/api/auth/auth';
 import { supabase } from '@/lib/supabase';
 import type { NextApiRequest, NextApiResponse } from 'next';
 import { getServerSession } from 'next-auth/next';
@@ -40,9 +40,9 @@ export default async function handler(
   }
 
   const { data: user, error: fetchError } = await supabase
-    .from('fruitsellerusers')
+    .from('users')
     .select('password')
-    .eq('id', userId)
+    .eq('ID', userId)
     .single();
 
   if (fetchError || !user) {
@@ -58,9 +58,9 @@ export default async function handler(
   const hashed = await hashPassword(newPassword);
 
   const { error: updateError } = await supabase
-    .from('fruitsellerusers')
+    .from('users')
     .update({ password: hashed })
-    .eq('id', userId);
+    .eq('ID', userId);
 
   if (updateError) {
     return res.status(500).json({ error: 'Failed to update password' });

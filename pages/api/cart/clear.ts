@@ -18,9 +18,9 @@ export default async function handler(
 
   if (req.method === 'DELETE') {
     const { error } = await supabase
-      .from('fruitsellercarts')
+      .from('carts')
       .delete()
-      .eq('user_id', userId);
+      .eq('userID', userId);
 
     if (error) {
       console.error('Supabase delete error:', error);

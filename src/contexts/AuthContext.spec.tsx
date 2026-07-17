@@ -1,4 +1,5 @@
 import { AuthProvider, useAuth } from '@/src/contexts/AuthContext';
+import type { UserRole } from '@/types';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
@@ -26,7 +27,7 @@ const queryClient = new QueryClient({
 
 const Wrapper: React.FC<{
   children: React.ReactNode;
-  session?: { user: { email: string; role: string } } | null;
+  session?: { user: { email: string; role: UserRole } } | null;
   status?: 'authenticated' | 'loading' | 'unauthenticated';
 }> = ({ children, session = null }) => {
   const sessionWithExpires = session
@@ -66,7 +67,7 @@ const TestComponent = () => {
       >
         Register
       </button>
-      <button onClick={() => login('test@example.com', 'pass')}>Login</button>
+      <button onClick={() => login('test@example.com', 'pass').catch(() => {})}>Login</button>
       <button onClick={() => logout()}>Logout</button>
     </div>
   );
@@ -76,7 +77,7 @@ describe('AuthProvider', () => {
   it('provides user data and admin check when authenticated', async () => {
     vi.spyOn(nextAuth, 'useSession').mockReturnValue({
       data: {
-        user: { email: 'admin@example.com', role: 'admin' },
+        user: { email: 'admin@example.com', role: 'ADMIN' },
         expires: new Date(Date.now() + 1000 * 60 * 60).toString(),
       },
       status: 'authenticated',
@@ -86,7 +87,7 @@ describe('AuthProvider', () => {
     render(
       <Wrapper
         session={{
-          user: { email: 'admin@example.com', role: 'admin' },
+          user: { email: 'admin@example.com', role: 'ADMIN' },
         }}
         status="authenticated"
       >
@@ -268,9 +269,7 @@ describe('AuthProvider', () => {
       </Wrapper>
     );
 
-    await expect(
-      userEvent.click(screen.getByText('Login'))
-    ).resolves.toBeUndefined();
+    await userEvent.click(screen.getByText('Login'));
 
     await waitFor(
       () => {
@@ -279,9 +278,7 @@ describe('AuthProvider', () => {
           email: 'test@example.com',
           password: 'pass',
         });
-        expect(
-          screen.getByText(/Error: Invalid credentials/i)
-        ).toBeInTheDocument();
+        expect(screen.getByText(/Error: Email or password is incorrect/i)).toBeInTheDocument();
       },
       { timeout: 2000, interval: 50 }
     );

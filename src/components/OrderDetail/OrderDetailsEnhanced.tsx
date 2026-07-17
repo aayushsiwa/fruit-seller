@@ -48,17 +48,17 @@ function CopyId({ id }: { id: string }) {
 const steps = ['Placed', 'Shipped', 'Delivered'];
 
 function isShipped(status: string): boolean {
-  return status === 'Shipped' || status === 'Delivered';
+  return status === 'SHIPPED' || status === 'DELIVERED';
 }
 
 function isDelivered(status: string): boolean {
-  return status === 'Delivered';
+  return status === 'DELIVERED';
 }
 
 export const OrderDetailsEnhanced: React.FC<OrderDetailsProps> = ({
   order,
 }) => {
-  const isCancelled = order.status === 'Cancelled';
+  const isCancelled = order.status === 'CANCELLED';
 
   function stepTooltip(index: number): string {
     const stepDone =
@@ -70,15 +70,15 @@ export const OrderDetailsEnhanced: React.FC<OrderDetailsProps> = ({
     }
     if (index === 1) {
       if (!stepDone) return 'Yet to be shipped';
-      if (order.shipped_at) {
-        return `Shipped ${dayjs(order.shipped_at).fromNow()}`;
+      if (order.shippedAt) {
+        return `Shipped ${dayjs(order.shippedAt).fromNow()}`;
       }
       return 'Shipped';
     }
     if (index === 2) {
       if (!stepDone) return 'Yet to be delivered';
-      if (order.delivered_at) {
-        return `Delivered ${dayjs(order.delivered_at).fromNow()}`;
+      if (order.deliveredAt) {
+        return `Delivered ${dayjs(order.deliveredAt).fromNow()}`;
       }
       return 'Delivered';
     }
@@ -109,9 +109,9 @@ export const OrderDetailsEnhanced: React.FC<OrderDetailsProps> = ({
     >
       <Box sx={{ display: 'flex', alignItems: 'center', mb: 2 }}>
         <Typography variant="h6" sx={{ fontWeight: 600 }}>
-          Order #{order.id.slice(0, 8)}
+          Order #{order.ID.slice(0, 8)}
         </Typography>
-        <CopyId id={order.id} />
+        <CopyId id={order.ID} />
       </Box>
 
       {!isCancelled && (
@@ -191,54 +191,54 @@ export const OrderDetailsEnhanced: React.FC<OrderDetailsProps> = ({
         >
           <Typography variant="body2" fontWeight={600} color="error.dark">
             Order Cancelled
-            {order.cancelled_at && ` ${dayjs(order.cancelled_at).fromNow()}`}
+            {order.cancelledAt && ` ${dayjs(order.cancelledAt).fromNow()}`}
           </Typography>
         </Box>
       )}
 
-      {order.payment_id && (
+      {order.paymentID && (
         <Box sx={{ display: 'flex', alignItems: 'center' }}>
           <Typography variant="body2" color="text.secondary">
-            Payment ID: <strong>{order.payment_id.slice(0, 16)}...</strong>
+            Payment ID: <strong>{order.paymentID.slice(0, 16)}...</strong>
           </Typography>
-          <CopyId id={order.payment_id} />
+          <CopyId id={order.paymentID} />
         </Box>
       )}
-      {order.razorpay_order_id && (
+      {order.razorpayOrderID && (
         <Box sx={{ display: 'flex', alignItems: 'center' }}>
           <Typography variant="body2" color="text.secondary">
-            Razorpay Order ID: <strong>{order.razorpay_order_id}</strong>
+            Razorpay Order ID: <strong>{order.razorpayOrderID}</strong>
           </Typography>
-          <CopyId id={order.razorpay_order_id} />
+          <CopyId id={order.razorpayOrderID} />
         </Box>
       )}
 
-      {order.shipping_address && (
+      {order.shippingAddress && (
         <Box sx={{ mt: 2, textAlign: 'left' }}>
           <Typography variant="subtitle2" sx={{ fontWeight: 600, mb: 0.5 }}>
             Shipping Address
           </Typography>
           <Typography variant="body2" color="text.secondary">
-            {order.shipping_address.street}
+            {order.shippingAddress.street}
           </Typography>
-          {order.shipping_address.street2 && (
+          {order.shippingAddress.street2 && (
             <Typography variant="body2" color="text.secondary">
-              {order.shipping_address.street2}
+              {order.shippingAddress.street2}
             </Typography>
           )}
           <Typography variant="body2" color="text.secondary">
-            {order.shipping_address.city}, {order.shipping_address.state} -{' '}
-            {order.shipping_address.postal_code}
+            {order.shippingAddress.city}, {order.shippingAddress.state} -{' '}
+            {order.shippingAddress.postalCode}
           </Typography>
           <Typography variant="body2" color="text.secondary">
-            {order.shipping_address.country}
+            {order.shippingAddress.country}
           </Typography>
           <Typography
             variant="caption"
             color="text.secondary"
             sx={{ display: 'block', mt: 0.5 }}
           >
-            Phone: {order.shipping_address.phone}
+            Phone: {order.shippingAddress.phone}
           </Typography>
         </Box>
       )}
@@ -263,8 +263,8 @@ export const OrderDetailsEnhanced: React.FC<OrderDetailsProps> = ({
             : product.price;
           return (
             <NextLink
-              key={product.id}
-              href={`/products/${product.id}`}
+              key={product.ID}
+              href={`/products/${product.ID}`}
               passHref
               legacyBehavior
             >
@@ -290,7 +290,7 @@ export const OrderDetailsEnhanced: React.FC<OrderDetailsProps> = ({
                   }}
                 >
                   <Image
-                    src={product.image || defaultImage}
+                    src={product.images?.[0]?.url || defaultImage}
                     alt={product.name}
                     width={60}
                     height={60}

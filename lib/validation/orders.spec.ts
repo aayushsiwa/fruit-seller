@@ -3,46 +3,46 @@ import { validTargets, validateTransition } from './orders';
 describe('Orders Transition Validation', () => {
   describe('validateTransition()', () => {
     it('should return null for identical current and next state', () => {
-      expect(validateTransition('Processing', 'Processing')).toBeNull();
-      expect(validateTransition('Shipped', 'Shipped')).toBeNull();
+      expect(validateTransition('PROCESSING', 'PROCESSING')).toBeNull();
+      expect(validateTransition('SHIPPED', 'SHIPPED')).toBeNull();
     });
 
-    it('should block transition out of terminal states (Delivered, Cancelled)', () => {
-      expect(validateTransition('Delivered', 'Shipped')).toBe(
-        'Cannot change status from "Delivered" — it is a terminal state'
+    it('should block transition out of terminal states (DELIVERED, CANCELLED)', () => {
+      expect(validateTransition('DELIVERED', 'SHIPPED')).toBe(
+        'Cannot change status from "DELIVERED" — it is a terminal state'
       );
-      expect(validateTransition('Cancelled', 'Processing')).toBe(
-        'Cannot change status from "Cancelled" — it is a terminal state'
-      );
-    });
-
-    it('should block transition back to Processing', () => {
-      expect(validateTransition('Shipped', 'Processing')).toBe(
-        'Cannot revert to Processing'
+      expect(validateTransition('CANCELLED', 'PROCESSING')).toBe(
+        'Cannot change status from "CANCELLED" — it is a terminal state'
       );
     });
 
-    it('should allow transition to Shipped', () => {
-      expect(validateTransition('Processing', 'Shipped')).toBeNull();
+    it('should block transition back to PROCESSING', () => {
+      expect(validateTransition('SHIPPED', 'PROCESSING')).toBe(
+        'Cannot revert to PROCESSING'
+      );
+    });
+
+    it('should allow transition to SHIPPED', () => {
+      expect(validateTransition('PROCESSING', 'SHIPPED')).toBeNull();
     });
   });
 
   describe('validTargets()', () => {
-    it('should return correct targets for Processing', () => {
-      expect(validTargets('Processing')).toEqual([
-        'Shipped',
-        'Delivered',
-        'Cancelled',
+    it('should return correct targets for PROCESSING', () => {
+      expect(validTargets('PROCESSING')).toEqual([
+        'SHIPPED',
+        'DELIVERED',
+        'CANCELLED',
       ]);
     });
 
-    it('should return correct targets for Shipped', () => {
-      expect(validTargets('Shipped')).toEqual(['Delivered', 'Cancelled']);
+    it('should return correct targets for SHIPPED', () => {
+      expect(validTargets('SHIPPED')).toEqual(['DELIVERED', 'CANCELLED']);
     });
 
     it('should return empty list for terminal states', () => {
-      expect(validTargets('Delivered')).toEqual([]);
-      expect(validTargets('Cancelled')).toEqual([]);
+      expect(validTargets('DELIVERED')).toEqual([]);
+      expect(validTargets('CANCELLED')).toEqual([]);
     });
   });
 });

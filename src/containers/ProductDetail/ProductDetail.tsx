@@ -64,7 +64,7 @@ export default function ProductDetail() {
         />
         <link
           rel="canonical"
-          href={`https://fruitseller.com/products/${product.id}`}
+          href={`https://fruitseller.com/products/${product.ID}`}
         />
         <meta property="og:title" content={`${product.name} | Fruit Seller`} />
         <meta
@@ -76,10 +76,12 @@ export default function ProductDetail() {
         />
         <meta
           property="og:url"
-          content={`https://fruitseller.com/products/${product.id}`}
+          content={`https://fruitseller.com/products/${product.ID}`}
         />
         <meta property="og:type" content="product" />
-        {product.image && <meta property="og:image" content={product.image} />}
+        {product.images?.[0] && (
+          <meta property="og:image" content={product.images[0].url} />
+        )}
       </Head>
       <Container maxWidth="lg">
         <BreadcrumbsNav productName={product.name} />

@@ -68,6 +68,7 @@ export default function Profile() {
     handleSelectOffice,
     handleSaveAddress,
     handleNavigation,
+    session,
   } = useProfilePage();
 
   const [showCurrent, setShowCurrent] = useState(false);
@@ -117,15 +118,16 @@ export default function Profile() {
             }}
           >
             <Avatar
+              src={session?.user?.image || undefined}
               sx={{
                 width: 72,
                 height: 72,
-                bgcolor: stringToColor(user.email),
+                bgcolor: session?.user?.image ? 'transparent' : stringToColor(user.email),
                 fontSize: 28,
                 fontWeight: 700,
               }}
             >
-              {getInitials(user.firstName, user.lastName)}
+              {!session?.user?.image && getInitials(user.firstName, user.lastName)}
             </Avatar>
             <Box sx={{ flex: 1 }}>
               <Typography variant="h5" fontWeight={600}>
@@ -137,12 +139,14 @@ export default function Profile() {
               <Box
                 sx={{ display: 'flex', alignItems: 'center', gap: 1, mt: 0.5 }}
               >
-                <Chip
-                  label={user.role}
-                  size="small"
-                  color={user.role === 'admin' ? 'error' : 'primary'}
-                  variant="outlined"
-                />
+                {user.role === 'ADMIN' && (
+                  <Chip
+                    label="ADMIN"
+                    size="small"
+                    color="error"
+                    variant="outlined"
+                  />
+                )}
                 <Typography variant="caption" color="text.secondary">
                   Member since {dayjs(user.createdAt).format('MMM D, YYYY')}
                 </Typography>
@@ -261,7 +265,7 @@ export default function Profile() {
             ) : (
               <Grid container spacing={2}>
                 {savedAddresses.map((addr) => (
-                  <Grid item xs={12} sm={6} key={addr.id}>
+                  <Grid item xs={12} sm={6} key={addr.ID}>
                     <Paper variant="outlined" sx={{ p: 2, borderRadius: 2 }}>
                       <Typography variant="body2" fontWeight={600}>
                         {addr.street}
@@ -272,7 +276,7 @@ export default function Profile() {
                         </Typography>
                       )}
                       <Typography variant="body2" color="text.secondary">
-                        {addr.city}, {addr.state} - {addr.postal_code}
+                        {addr.city}, {addr.state} - {addr.postalCode}
                       </Typography>
                       <Typography variant="body2" color="text.secondary">
                         {addr.country}

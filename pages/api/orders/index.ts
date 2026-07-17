@@ -21,8 +21,8 @@ export default async function handler(
     const { data, error } = await supabase
       .from('orders')
       .select('*')
-      .eq('user_email', session.user.email)
-      .order('created_at', { ascending: false });
+      .eq('userEmail', session.user.email)
+      .order('createdAt', { ascending: false });
 
     if (error) {
       return res.status(500).json({ error: error.message });
@@ -30,8 +30,7 @@ export default async function handler(
 
     const orders = (data || []).map((order: Record<string, unknown>) => ({
       ...order,
-      userName: order.user_email,
-      createdAt: order.created_at,
+      userName: order.userEmail,
     }));
 
     return res.status(200).json(orders);
@@ -44,58 +43,60 @@ export default async function handler(
   const {
     cart,
     total,
-    razorpay_payment_id,
-    razorpay_order_id,
-    razorpay_signature,
-    shipping_address,
+    razorpayPaymentID,
+    razorpayOrderID,
+    razorpaySignature,
+    shippingAddress,
   }: {
     cart: CartItem[];
     total: number;
-    razorpay_payment_id: string;
-    razorpay_order_id: string;
-    razorpay_signature: string;
-    shipping_address: Address;
+    razorpayPaymentID: string;
+    razorpayOrderID: string;
+    razorpaySignature: string;
+    shippingAddress: Address;
   } = req.body;
 
   if (!cart || !Array.isArray(cart) || cart.length === 0 || !total) {
     return res.status(400).json({ error: 'Invalid cart or total' });
   }
 
-  if (!shipping_address) {
+  if (!shippingAddress) {
     return res.status(400).json({ error: 'Shipping address is required' });
   }
 
-  if (!razorpay_payment_id || !razorpay_order_id || !razorpay_signature) {
+  if (!razorpayPaymentID || !razorpayOrderID || !razorpaySignature) {
     return res.status(400).json({ error: 'Missing payment verification data' });
   }
 
-  const body = razorpay_order_id + '|' + razorpay_payment_id;
+  const body = razorpayOrderID + '|' + razorpayPaymentID;
   const expectedSignature = crypto
     .createHmac('sha256', process.env.RAZORPAY_KEY_SECRET!)
     .update(body)
     .digest('hex');
 
-  if (expectedSignature !== razorpay_signature) {
+  if (expectedSignature !== razorpaySignature) {
     return res.status(400).json({ error: 'Payment verification failed' });
   }
 
   try {
-    const ids = cart.map((item) => item.id);
+    const ids = cart.map((item) => item.productID);
     const { data: products, error: fetchError } = await supabase
-      .from('fruitsellerproducts')
+      .from('products')
       .select('*')
-      .in('id', ids);
+      .in('ID', ids);
 
     if (fetchError || !products) {
       return res.status(500).json({ error: 'Failed to fetch products' });
     }
 
     for (const item of cart) {
-      const product = products.find((p) => p.id === item.id);
+      const product = products.find((p) => p.ID === item.productID);
       if (!product) {
-        return res.status(400).json({ error: `Product ${item.id} not found` });
+        return res
+          .status(400)
+          .json({ error: `Product ${item.productID} not found` });
       }
-      if (product.quantity < item.quantity) {
+      if (product.stock < item.quantity) {
         return res
           .status(400)
           .json({ error: `Insufficient stock for ${product.name}` });
@@ -103,7 +104,7 @@ export default async function handler(
     }
 
     const orderItems = cart.map((item) => {
-      const product = products.find((p) => p.id === item.id);
+      const product = products.find((p) => p.ID === item.productID);
       return {
         quantity: item.quantity,
         product,
@@ -115,13 +116,12 @@ export default async function handler(
     const { data: order, error: orderError } = await supabase
       .from('orders')
       .insert({
-        user_email: session.user.email,
+        userEmail: session.user.email,
         items: orderItems,
         total,
-        created_at: new Date().toISOString(),
-        payment_id: razorpay_payment_id,
-        razorpay_order_id,
-        shipping_address,
+        paymentID: razorpayPaymentID,
+        razorpayOrderID: razorpayOrderID,
+        shippingAddress: shippingAddress,
       })
       .select()
       .single();
@@ -143,21 +143,21 @@ export default async function handler(
     const decremented = new Set<string>();
 
     for (const item of cart) {
-      const product = products.find((p) => p.id === item.id)!;
-      const newQuantity = product.quantity - item.quantity;
+      const product = products.find((p) => p.ID === item.productID)!;
+      const newStock = product.stock - item.quantity;
       const { error: updateError } = await supabase
-        .from('fruitsellerproducts')
-        .update({ quantity: newQuantity })
-        .eq('id', item.id);
+        .from('products')
+        .update({ stock: newStock })
+        .eq('ID', item.productID);
 
       if (updateError) {
-        await compensate(order.id, products, decremented);
+        await compensate(order.ID, products, decremented);
         return res
           .status(500)
           .json({ error: `Failed to update stock for ${product.name}` });
       }
 
-      decremented.add(item.id);
+      decremented.add(item.productID);
     }
 
     return res.status(200).json({ order });
@@ -177,13 +177,13 @@ async function compensate(
 ) {
   const ids = Array.from(decremented);
   for (const id of ids) {
-    const product = products.find((p) => p.id === id);
+    const product = products.find((p) => p.ID === id);
     if (!product) continue;
     await supabase
-      .from('fruitsellerproducts')
-      .update({ quantity: product.quantity })
-      .eq('id', id);
+      .from('products')
+      .update({ stock: product.stock })
+      .eq('ID', id);
   }
 
-  await supabase.from('orders').delete().eq('id', orderId);
+  await supabase.from('orders').delete().eq('ID', orderId);
 }

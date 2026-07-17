@@ -149,7 +149,7 @@ describe('Checkout - Hooks', () => {
     act(() => {
       result.current.setNewAddress((prev) => ({
         ...prev,
-        postal_code: '110001',
+        postalCode: '110001',
       }));
     });
 
@@ -199,7 +199,7 @@ describe('Checkout - Hooks', () => {
     act(() => {
       result.current.setNewAddress((prev) => ({
         ...prev,
-        postal_code: '400001',
+        postalCode: '400001',
       }));
     });
 
@@ -247,7 +247,7 @@ describe('Checkout - UI', () => {
       } as any);
       vi.spyOn(GetProductAPI, 'getProductAPI').mockImplementation(
         (id: string) => {
-          const product = mockProducts.find((p) => p.id === id);
+          const product = mockProducts.find((p) => p.ID === id);
           return Promise.resolve({ data: { product } } as any);
         }
       );
@@ -294,7 +294,7 @@ describe('Checkout - UI', () => {
       } as any);
       vi.spyOn(GetProductAPI, 'getProductAPI').mockImplementation(
         (id: string) => {
-          const product = mockProducts.find((p) => p.id === id);
+          const product = mockProducts.find((p) => p.ID === id);
           return Promise.resolve({ data: { product } } as any);
         }
       );

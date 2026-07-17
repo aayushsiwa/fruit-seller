@@ -95,8 +95,8 @@ export default function Checkout() {
                     >
                       {savedAddresses.map((addr) => (
                         <FormControlLabel
-                          key={addr.id}
-                          value={addr.id}
+                          key={addr.ID}
+                          value={addr.ID}
                           control={<Radio color="primary" />}
                           label={
                             <Box sx={{ py: 1 }}>
@@ -110,7 +110,7 @@ export default function Checkout() {
                                 variant="body2"
                                 color="text.secondary"
                               >
-                                {addr.city}, {addr.state} - {addr.postal_code},{' '}
+                                {addr.city}, {addr.state} - {addr.postalCode},{' '}
                                 {addr.country}
                               </Typography>
                               <Typography

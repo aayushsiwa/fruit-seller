@@ -10,7 +10,7 @@ describe('getAdminProductsAPI()', () => {
       it('should not throw any error', async () => {
         vi.spyOn(axios, 'get').mockResolvedValue({
           status: 200,
-          data: MockProducts,
+          data: { products: MockProducts },
         });
 
         const response = await getAdminProductsAPI();
@@ -22,7 +22,10 @@ describe('getAdminProductsAPI()', () => {
 
     describe('When Products are not present', () => {
       it('should not throw any error', async () => {
-        vi.spyOn(axios, 'get').mockResolvedValue({ status: 200, data: [] });
+        vi.spyOn(axios, 'get').mockResolvedValue({
+          status: 200,
+          data: { products: [] },
+        });
 
         const response = await getAdminProductsAPI();
 
@@ -33,10 +36,7 @@ describe('getAdminProductsAPI()', () => {
 
   describe('When API call fails', () => {
     it('should throw error', async () => {
-      vi.spyOn(axios, 'get').mockResolvedValue({
-        status: 500,
-        statusText: 'Internal Server Error',
-      });
+      vi.spyOn(axios, 'get').mockRejectedValue(new Error('Failed to fetch'));
 
       await expect(getAdminProductsAPI()).rejects.toThrow('Failed to fetch');
     });

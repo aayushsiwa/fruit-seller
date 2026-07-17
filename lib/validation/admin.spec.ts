@@ -83,7 +83,7 @@ describe('Admin Validation Helpers', () => {
         firstName: 'John',
         lastName: 'Doe',
         email: 'john@example.com',
-        role: 'user',
+        role: 'USER',
       });
       expect(result.isValid).toBe(true);
       expect(result.error).toBeUndefined();
@@ -93,7 +93,7 @@ describe('Admin Validation Helpers', () => {
       const result = validateUserData({
         lastName: 'Doe',
         email: 'john@example.com',
-        role: 'user',
+        role: 'USER',
       });
       expect(result.isValid).toBe(false);
       expect(result.error).toBe('First name is required');
@@ -103,7 +103,7 @@ describe('Admin Validation Helpers', () => {
       const result = validateUserData({
         firstName: 'John',
         email: 'john@example.com',
-        role: 'user',
+        role: 'USER',
       });
       expect(result.isValid).toBe(false);
       expect(result.error).toBe('Last name is required');
@@ -114,7 +114,7 @@ describe('Admin Validation Helpers', () => {
         firstName: 'John',
         lastName: 'Doe',
         email: 'invalid-email',
-        role: 'user',
+        role: 'USER',
       });
       expect(result.isValid).toBe(false);
       expect(result.error).toBe('Valid email is required');
@@ -153,7 +153,7 @@ describe('Admin Validation Helpers', () => {
         firstName: 'John',
         lastName: 'Doe',
         email: 'john@example.com',
-        role: 'admin',
+        role: 'ADMIN',
       };
       await expect(userSchema.validate(validUser)).resolves.toEqual(validUser);
     });

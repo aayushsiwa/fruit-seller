@@ -19,7 +19,7 @@ export default function App(props: AppProps) {
         <meta name="viewport" content="initial-scale=1, width=device-width" />
         <title>Fruit Seller - Fresh Fruits Delivered</title>
       </Head>
-      <SessionProvider session={pageProps.session}>
+      <SessionProvider>
         <QueryClientProvider client={queryClient}>
           <SnackbarProvider>
             <AuthProvider>

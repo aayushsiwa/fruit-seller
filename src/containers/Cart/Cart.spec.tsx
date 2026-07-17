@@ -98,11 +98,11 @@ describe('Cart - Hooks', () => {
 describe('Cart - UI', () => {
   const mockProducts: IProduct[] = [
     {
-      id: '1',
+      ID: '1',
       name: 'Apple',
       price: 100,
       stock: 10,
-      image: '/apple.jpg',
+      images: [{ url: '/apple.jpg', altText: 'Apple' }],
       description: 'Fresh apple',
       category: 'Fruit',
       discount: 0,
@@ -110,11 +110,11 @@ describe('Cart - UI', () => {
       createdAt: '2025-01-01',
     },
     {
-      id: '2',
+      ID: '2',
       name: 'Banana',
       price: 50,
       stock: 20,
-      image: '/banana.jpg',
+      images: [{ url: '/banana.jpg', altText: 'Banana' }],
       description: 'Fresh banana',
       category: 'Fruit',
       discount: 5,
@@ -124,8 +124,8 @@ describe('Cart - UI', () => {
   ];
 
   const mockCart: CartItem[] = [
-    { id: '1', quantity: 2 },
-    { id: '2', quantity: 1 },
+    { productID: '1', quantity: 2 },
+    { productID: '2', quantity: 1 },
   ];
 
   beforeEach(() => {
@@ -171,7 +171,7 @@ describe('Cart - UI', () => {
       } as any);
       vi.spyOn(GetProductAPI, 'getProductAPI').mockImplementation(
         (id: string) => {
-          const product = mockProducts.find((p) => p.id === id);
+          const product = mockProducts.find((p) => p.ID === id);
           return Promise.resolve({ data: { product } } as any);
         }
       );
@@ -211,7 +211,7 @@ describe('Cart - UI', () => {
       } as any);
       vi.spyOn(GetProductAPI, 'getProductAPI').mockImplementation(
         (id: string) => {
-          const product = mockProducts.find((p) => p.id === id);
+          const product = mockProducts.find((p) => p.ID === id);
           return Promise.resolve({ data: { product } } as any);
         }
       );

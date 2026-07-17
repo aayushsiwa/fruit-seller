@@ -25,22 +25,22 @@ const OrderDialog: React.FC<OrderDialogProps> = ({
   isLoading,
 }) => {
   const currentStatus = useMemo(
-    () => (order.status as OrderStatus) || 'Processing',
+    () => (order.status as OrderStatus) || 'PROCESSING',
     [order.status]
   );
 
   const targets = useMemo(() => validTargets(currentStatus), [currentStatus]);
-  const selectedStatus = (order.status as OrderStatus) || 'Processing';
+  const selectedStatus = (order.status as OrderStatus) || 'PROCESSING';
 
   const timestampLabel = useMemo(() => {
-    if (selectedStatus === 'Shipped') return 'Shipped At';
-    if (selectedStatus === 'Delivered') return 'Delivered At';
-    if (selectedStatus === 'Cancelled') return 'Cancelled At';
+    if (selectedStatus === 'SHIPPED') return 'Shipped At';
+    if (selectedStatus === 'DELIVERED') return 'Delivered At';
+    if (selectedStatus === 'CANCELLED') return 'Cancelled At';
     return null;
   }, [selectedStatus]);
 
   const timestampValue = useMemo(() => {
-    if (selectedStatus === 'Processing') return null;
+    if (selectedStatus === 'PROCESSING') return null;
     return dayjs().format('MMMM D, YYYY h:mm A');
   }, [selectedStatus]);
 
@@ -49,7 +49,7 @@ const OrderDialog: React.FC<OrderDialogProps> = ({
       <DialogTitle>Update Order Status</DialogTitle>
       <DialogContent>
         <DialogContentText sx={{ mb: 3 }}>
-          Order ID: {order.id}
+          Order ID: {order.ID}
           <br />
           Customer: {order.userName}
           <br />

@@ -1,6 +1,5 @@
 import { loginInitialValues, loginSchema } from '@/lib/validation/loginSchema';
 import { useAuth } from '@/src/contexts/AuthContext';
-import { useSnackbar } from '@/src/contexts/SnackBarContext';
 import { FormikProps, useFormik } from 'formik';
 import { signIn, useSession } from 'next-auth/react';
 import { useRouter } from 'next/router';
@@ -10,7 +9,6 @@ const useLogin = (): UseLoginReturn => {
   const router = useRouter();
   const { data: session, status } = useSession();
   const [showPassword, setShowPassword] = useState(false);
-  const { showSnackbar } = useSnackbar();
   const { login } = useAuth();
 
   useEffect(() => {
@@ -22,16 +20,12 @@ const useLogin = (): UseLoginReturn => {
   const formik = useFormik({
     initialValues: loginInitialValues,
     validationSchema: loginSchema,
-    onSubmit: async (values) => {
+    onSubmit: async (values, { setStatus }) => {
       try {
         await login(values.email, values.password);
         router.push('/');
-      } catch (error: unknown) {
-        const errorMessage =
-          error instanceof Error
-            ? error.message
-            : 'An unexpected error occurred';
-        showSnackbar(errorMessage, 'error');
+      } catch {
+        setStatus('Email or password is incorrect');
       }
     },
   });

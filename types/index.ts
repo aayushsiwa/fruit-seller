@@ -2,17 +2,19 @@ import { IProduct } from '@/entity/Products/Products';
 import { DefaultSession } from 'next-auth';
 import React from 'react';
 
-export type OrderStatus = 'Processing' | 'Shipped' | 'Delivered' | 'Cancelled';
+export type OrderStatus =
+  'PROCESSING' | 'PAID' | 'SHIPPED' | 'DELIVERED' | 'CANCELLED';
 
 export const ORDER_STATUSES: OrderStatus[] = [
-  'Processing',
-  'Shipped',
-  'Delivered',
-  'Cancelled',
+  'PROCESSING',
+  'PAID',
+  'SHIPPED',
+  'DELIVERED',
+  'CANCELLED',
 ];
 
 export interface CartItem {
-  id: string;
+  productID: string;
   quantity: number;
 }
 
@@ -22,38 +24,45 @@ export interface OrderItem {
 }
 
 export interface Address {
-  id?: string;
+  ID?: string;
+  label?: string;
   street: string;
   street2?: string;
   city: string;
   state: string;
-  postal_code: string;
+  postalCode: string;
   country: string;
   phone: string;
+  isDefault?: boolean;
 }
 
 export interface Order {
-  id: string;
+  ID: string;
   userName: string;
   items: OrderItem[];
   total: number;
   createdAt: string;
   status: OrderStatus;
-  payment_id?: string;
-  razorpay_order_id?: string;
-  shipped_at?: string;
-  delivered_at?: string;
-  cancelled_at?: string;
-  shipping_address?: Address;
+  paymentID?: string;
+  razorpayOrderID?: string;
+  shippedAt?: string;
+  deliveredAt?: string;
+  cancelledAt?: string;
+  shippingAddress?: Address;
 }
 
+export type UserRole = 'USER' | 'ADMIN';
+
+export const USER_ROLES: UserRole[] = ['USER', 'ADMIN'];
+
 export interface User {
-  id: string;
+  ID: string;
   firstName: string;
   lastName: string;
   email: string;
-  role: string;
+  role: UserRole;
   createdAt: string;
+  image?: string | null;
 }
 
 export enum TabValue {
@@ -68,16 +77,14 @@ export interface SessionUser {
     name?: string | null;
     email?: string | null;
     image?: string | null;
-    role?: string;
-    cart_id?: string;
+    role?: UserRole;
   };
 }
 
 declare module 'next-auth/jwt' {
   interface JWT {
     id?: string;
-    role?: string;
-    cart_id?: string;
+    role?: UserRole;
   }
 }
 
@@ -85,8 +92,7 @@ declare module 'next-auth' {
   interface Session {
     user: DefaultSession['user'] & {
       id?: string;
-      role: string;
-      cart_id?: string;
+      role: UserRole;
     };
   }
 }
@@ -96,6 +102,11 @@ export interface RegisterData {
   lastName: string;
   email: string;
   password: string;
+}
+
+export interface ProductImage {
+  url: string;
+  altText: string;
 }
 
 export type { IProduct };

@@ -9,10 +9,10 @@ import { CreateOrderPayload, createOrderAPI } from './createOrder';
 const mockPayload: CreateOrderPayload = {
   cart: MockCartItems,
   total: 50,
-  razorpay_payment_id: 'pay_123',
-  razorpay_order_id: 'order_123',
-  razorpay_signature: 'sig_123',
-  shipping_address: MockAddress,
+  razorpayPaymentID: 'pay_123',
+  razorpayOrderID: 'order_123',
+  razorpaySignature: 'sig_123',
+  shippingAddress: MockAddress,
 };
 
 describe('createOrderAPI()', () => {

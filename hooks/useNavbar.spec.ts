@@ -49,7 +49,7 @@ describe('useNavbar', () => {
 
   it('sets isAdmin true when user role is admin', () => {
     (mockUseSession as any).mockReturnValue({
-      data: { user: { name: 'Admin', email: 'a@a.com', role: 'admin' } } as any,
+      data: { user: { name: 'Admin', email: 'a@a.com', role: 'ADMIN' } } as any,
       status: 'authenticated',
     });
     const { result } = renderHook(() => useNavbar());

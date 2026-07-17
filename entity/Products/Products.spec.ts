@@ -3,11 +3,14 @@ import { describe, expect, it } from 'vitest';
 import { IProduct, Product } from './Products';
 
 const mockProductData: IProduct = {
-  id: 'prod-1',
+  ID: 'prod-1',
   name: 'Mango',
+  slug: 'mango',
   price: 120,
   stock: 50,
-  image: 'https://example.com/mango.jpg',
+  images: [
+    { url: 'https://example.com/mango.jpg', altText: 'Fresh Alphonso mangoes' },
+  ],
   description: 'Fresh Alphonso mangoes',
   category: 'Tropical',
   discount: 10,
@@ -24,11 +27,16 @@ describe('Product entity', () => {
   it('maps all IProduct fields correctly', () => {
     const product = new Product(mockProductData);
 
-    expect(product.id).toBe('prod-1');
+    expect(product.ID).toBe('prod-1');
     expect(product.name).toBe('Mango');
     expect(product.price).toBe(120);
     expect(product.stock).toBe(50);
-    expect(product.image).toBe('https://example.com/mango.jpg');
+    expect(product.images).toEqual([
+      {
+        url: 'https://example.com/mango.jpg',
+        altText: 'Fresh Alphonso mangoes',
+      },
+    ]);
     expect(product.description).toBe('Fresh Alphonso mangoes');
     expect(product.category).toBe('Tropical');
     expect(product.discount).toBe(10);

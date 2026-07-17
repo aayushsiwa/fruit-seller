@@ -62,20 +62,20 @@ export default async function handler(
 
   try {
     const { data: cached } = await supabase
-      .from('pincode_cache')
-      .select('office_name, district, state, block, delivery')
-      .eq('pincode', pin);
+      .from('pinCodes')
+      .select('officeName, district, state, block, delivery')
+      .eq('pinCode', pin);
 
     if (cached && cached.length > 0) {
       const offices: PincodeOffice[] = cached.map(
         (row: {
-          office_name: string;
+          officeName: string;
           district: string;
           state: string;
           block: string | null;
           delivery: boolean;
         }) => ({
-          officeName: row.office_name,
+          officeName: row.officeName,
           district: row.district,
           state: row.state,
           block: row.block,
@@ -106,15 +106,15 @@ export default async function handler(
     }
 
     const rows = offices.map((o) => ({
-      pincode: pin,
-      office_name: o.officeName,
+      pinCode: pin,
+      officeName: o.officeName,
       district: o.district,
       state: o.state,
       block: o.block,
       delivery: o.delivery,
     }));
 
-    await supabase.from('pincode_cache').insert(rows);
+    await supabase.from('pinCodes').insert(rows);
 
     return res.status(200).json({ offices });
   } catch (error) {

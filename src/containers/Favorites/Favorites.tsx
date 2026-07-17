@@ -107,7 +107,7 @@ export default function Favorites() {
         {favorites.map((product, i) => (
           <Grid
             item
-            key={product.id}
+            key={product.ID}
             xs={12}
             sm={6}
             md={4}
